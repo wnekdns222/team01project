@@ -86,13 +86,21 @@
 											class="feather icon-chevron-right"></i>
 									</a>
 										<ul class="vertical-submenu">
-											<li><a href="icon-svg.html">SVG</a></li>
-											<li><a href="icon-feather.html">Feather</a></li>
-											<li><a href="icon-flag.html">Flag</a></li>
+											<li><a href="icon-svg.html">서식</a></li>
+											<li><a href="icon-feather.html">결재</a></li>
+											<li><a href="icon-flag.html">기안함</a></li>
+											<li><a href="icon-flag.html">수신함</a></li>
+											<li><a href="icon-flag.html">참조함</a></li>
+											<li><a href="icon-flag.html">회람함</a></li>
+											<li><a href="icon-flag.html">반려함</a></li>
+											<li><a href="icon-flag.html">결재함</a></li>
+											<li><a href="icon-flag.html">결재완료함</a></li>
+											<li><a href="icon-flag.html">근태</a></li>
+											<li><a href="icon-flag.html">전결/대결</a></li>
 										</ul></li>
 									<li><a href="javaScript:void();"> <img
 											src="/assets/images/svg-icon/tables.svg" class="img-fluid"
-											alt="tables"><span></span><i
+											alt="tables"><span>메신저</span><i
 											class="feather icon-chevron-right"></i>
 									</a>
 										<ul class="vertical-submenu">
@@ -100,35 +108,93 @@
 										</ul></li>
 									<li><a href="javaScript:void();"> <img
 											src="/assets/images/svg-icon/maps.svg" class="img-fluid"
-											alt="maps"><span>Maps</span><i
+											alt="maps"><span>파일공유</span><i
 											class="feather icon-chevron-right"></i>
 									</a>
 										<ul class="vertical-submenu">
 											<li><a href="map-google.html">Google</a></li>
 											<li><a href="map-vector.html">Vector</a></li>
 										</ul></li>
+									<li><a href="javaScript:void();"> <img
+											src="/assets/images/svg-icon/maps.svg" class="img-fluid"
+											alt="maps"><span>채용</span><i
+											class="feather icon-chevron-right"></i>
+									</a>
+										<ul class="vertical-submenu">
+											<li><a href="map-google.html">Google</a></li>
+											<li><a href="map-vector.html">Vector</a></li>
+									</ul></li>
 								</ul>
 							</div>
 							<div class="tab-pane fade" id="v-pills-pages" role="tabpanel"
 								aria-labelledby="v-pills-pages-tab">
+								
+								<!-- 사이드바 큰메뉴 3번째 관리 메뉴 -->
 								<ul class="vertical-menu">
-									<li><h5 class="menu-title">Pages</h5></li>
+									<!-- 사이드바 큰메뉴 타이틀 -->
+									<li><h5 class="menu-title">관리자메뉴</h5></li>
+									
+											<!-- 사이드바 큰메뉴 3번째내에 1번째 프로젝트 메뉴  -->
 									<li><a href="javaScript:void();"> <img
 											src="/assets/images/svg-icon/basic_page.svg" class="img-fluid"
-											alt="basic_page"><span>Basic</span><i
+											alt="basic_page">
+											<span>프로젝트 관리</span><i
 											class="feather icon-chevron-right"></i>
 									</a>
+										<!-- 사이드바 큰메뉴 3번째내에 1번째 프로젝트 디테일 메뉴 -->
 										<ul class="vertical-submenu">
-											<li><a href="page-starter.html">Starter</a></li>
+										<!-- 메인페이지 관리에 넣을것 
+										1.전체 메인프로젝트 삭제 수정 관리
+										2.프로젝트내 전체 게시글 삭제 수정 관리
+										3.프로젝트내 전체 업무요청 삭제 수정 관리
+										4.프로젝트내 전체 업무진행 삭제 수정 관리
+										5.프로젝트내 통합 댓글 삭제 수정 관리
+										6.프로젝트내 첨부파일 삭제 수정 관리-->
+											<li><a href="page-starter.html">프로젝트 관리</a></li>
+											
+											<!-- 참여인원관리 넣을것
+											1.전체 메인 프로젝트 참여인원 삭제 추가 수정 관리
+											2.전체 메인 프로젝트 단위업무 참여 인원 추가 수정 관리
+											-->
+											<li><a href="page-starter.html">참여인원 관리</a></li>
+											
+											<!--캘린더 관리에 넣을것 
+											1.프로젝트내 캘린더 삭제 수정 관리
+											2.프로젝트내 캘린터 참서자 관리 -->
+											<li><a href="page-starter.html">캘린더 관리</a></li>
 										</ul></li>
+										
+										<!-- 사이드바 큰메뉴 3번째내에 2번째 사원관리 -->
 									<li><a href="javaScript:void();"> <img
 											src="/assets/images/svg-icon/authentication.svg"
-											class="img-fluid" alt="authentication"><span>Authentications</span><i
+											class="img-fluid" alt="authentication"><span>사원관리</span><i
 											class="feather icon-chevron-right"></i>
 									</a>
+									<!-- 사이드바 큰메뉴 3번째내에 2번째 사원관리 디테일 메뉴 -->
 										<ul class="vertical-submenu">
-											<li><a href="user-login.html">Login</a></li>
-											<li><a href="error-404.html">Error 404</a></li>
+											<!-- 로그인 일시관리
+												1.시간별 사원 접속 일시 확인 -->
+											<li><a href="user-login.html">로그인 일시관리</a></li>
+											
+											<!-- 사용자 권환관리
+												2.사용자별 관리자 권한 수정 등록 -->
+											<li><a href="error-404.html">사용자 권환관리</a></li>
+											
+											<!-- 사용자 등록관리
+												1.사원 입사시 정보 입력하면 아이디 비번 생성 및 정보 입력 최종 승인 관리 -->
+											<li><a href="error-404.html">사용자 등록</a></li>
+											
+											<!-- 사용자 정보관리
+												1.사용자 직급 부서 개인정보 전체 변경 수정 관리 -->
+											<li><a href="error-404.html">사용자 정보관리</a></li>
+											
+											<!-- 직급관리
+												1.직급명 수정 및 삭제 관리 -->
+											<li><a href="error-404.html">직급관리</a></li>
+											
+											<!-- 부서관리
+												1.부서명 수정 및 삭제 관리 -->
+											<li><a href="error-404.html">부서관리</a></li>
 										</ul></li>
 								</ul>
 							</div>
