@@ -50,17 +50,22 @@
 								aria-labelledby="v-pills-uikits-tab">
 								<ul class="vertical-menu">
 									<li><h5 class="menu-title">UI Kits</h5></li>
+									<!-- 1뎁스 근태관리메뉴 -->
 									<li><a href="javaScript:void();"> <img
 											src="/assets/images/svg-icon/basic.svg" class="img-fluid"
-											alt="basic"><span>근태</span><i
+											alt="basic"><span>근태관리</span><i
 											class="feather icon-chevron-right"></i>
 									</a>
 										<ul class="vertical-submenu">
-											<li><a href="basic-ui-kits-alerts.html">Alerts</a></li>
-											<li><a href="basic-ui-kits-badges.html">Badges</a></li>
-											<li><a href="basic-ui-kits-buttons.html">Buttons</a></li>
-											<li><a href="basic-ui-kits-cards.html">Cards</a></li>
-											<li><a href="basic-ui-kits-typography.html">Typography</a></li>
+										<!-- 2뎁스 근태메뉴 -->
+											<li><a href="work/workInsert">근태입력</a></li>
+											<li><a href="work/workList">근태내역조회</a></li>
+											<li><a href="work/workDepartmentList">부서근태내역조회</a></li>
+											<li><a href="work/workAllList">전사원근태내역조회</a></li>
+											<li><a href="work/workAuthorityInsert">비정상근태권한입력</a></li>
+											<li><a href="vacation/vacationInfoList">연차조회</a></li>
+											<li><a href="vacation/vacationInfoDepartmentList">부서연차조회</a></li>
+											<li><a href="vacation/vacationInfoAllList">전사원연차조회</a></li>
 										</ul></li>
 									<li><a href="javaScript:void();"> <img
 											src="/assets/images/svg-icon/forms.svg" class="img-fluid"
@@ -128,7 +133,6 @@
 							</div>
 							<div class="tab-pane fade" id="v-pills-pages" role="tabpanel"
 								aria-labelledby="v-pills-pages-tab">
-								
 								<!-- 사이드바 큰메뉴 3번째 관리 메뉴 -->
 								<ul class="vertical-menu">
 									<!-- 사이드바 큰메뉴 타이틀 -->
@@ -196,15 +200,20 @@
 												1.부서명 수정 및 삭제 관리 -->
 											<li><a href="error-404.html">부서관리</a></li>
 										</ul></li>
+										<!-- 관리자설정-근태 -->
+									<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/authentication.svg"
+										class="img-fluid" alt="authentication"><span>근태관리설정</span><i
+										class="feather icon-chevron-right"></i>
+									</a>
+										<ul class="vertical-submenu">
+											<li><a href="settings/workTypeList">사원 근무유형</a></li>
+											<li><a href="settings/vacationInsert">사원 휴가부여</a></li>
+											<li><a href="settings/vacationVarietyList">휴가설정</a></li>
+										</ul></li>
 								</ul>
 							</div>
 						</div>
 	
 					</div>
 				</div>
-				<!-- End Navigationbar -->
-			</div>
-			<!-- End Sidebar -->
-		</div>
-	</th:block>
-</html>
