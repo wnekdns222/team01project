@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head th:replace="~{fragments/head :: headFragment}">
+	</head>
+	<body class="vertical-layout">
+		<div id="containerbar">
+			<!-- navibar(상단메뉴) start -->
+			<!-- 조각의 문법 ~{조각 경로 :: 조각이름} -->
+			<div th:replace="~{fragments/sideBar :: sideBarFragment}"></div>
+				<div class="rightbar">
+					<div th:replace="~{fragments/top :: topFragment}"></div>
+					<!-- <div th:replace="~{fragments/breadCrumbBar :: breadFragment}"></div> -->
+					<div class="breadcrumbbar">
+						<th:block layout:fragment="customCrumbbar"></th:block>
+					</div>
+					<div class="contentbar">
+						<th:block layout:fragment="customContents"></th:block>
+					</div>
+				</div>
+			</div>
+		<div th:replace="~{fragments/footer :: footerFragment}"></div>	
+		<div th:replace="~{fragments/footerScript :: footerScriptFragment}"></div>	
+	</body>
+</html>
