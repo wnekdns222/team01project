@@ -13,7 +13,7 @@ public class AdminReservationController {
 	
 	
 	@PostMapping("/meetingroomInsert")
-	public String addMeetingroom() {
+	public String addMeetingroom() {  
 		
 		
 		return "redirect:/Meetingroom/MeetingroomList";
