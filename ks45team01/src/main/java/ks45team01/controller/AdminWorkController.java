@@ -15,7 +15,7 @@ public class AdminWorkController {
 
 	//전사원 근무내역 조회
 	@GetMapping("work/workAllList")
-	public String getAllWorkInfo() {
+	public String getAllWorkInfo() {   
 		
 		return "work/work_all_list";
 	}
