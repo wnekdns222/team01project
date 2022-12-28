@@ -80,5 +80,67 @@ public class projectController {
 	return "project/project_member";
 	}
 	
+	
+	@GetMapping("/projectMemberInsert")
+	public String GetProjectMemberInsert(Model model) {
+		model.addAttribute("projectMemberInsert","프로젝트멤버리스트등록화면");
+	return "project/project_member_insert";
+	}
+	
+	
+	@GetMapping("/projectMemberModify")
+	public String GetProjectMemberModify(Model model) {
+		model.addAttribute("projectMemberModify","프로젝트멤버리스트수정화면");
+	return "project/project_member_modify";
+	}
+	
+	@GetMapping("/projectUnit")
+	public String GetProjectUnit(Model model) {
+		model.addAttribute("projectUnit","프로젝트단위업무화면");
+	return "project/project_unit";
+	}
+	
+	@GetMapping("/projectUnitInsert")
+	public String GetProjectUnitInsert(Model model) {
+		model.addAttribute("projectUnitInsert","프로젝트단위업무등록화면");
+	return "project/project_unit_insert";
+	}
+	
+	@GetMapping("/projectUnitModify")
+	public String GetProjectUnitModify(Model model) {
+		model.addAttribute("projectUnitModify","프로젝트단위업무수정화면");
+	return "project/project_unit_Modify";
+	}
+	
+	@GetMapping("/projectUnitMemberInsert")
+	public String GetProjectUnitMemberInsert(Model model) {
+		model.addAttribute("projectUnitMemberInsert","프로젝트단위업무인원배정화면");
+	return "project/project_unit_member_insert";
+	}
+	
+	@GetMapping("/projectUnitMemberModify")
+	public String GetProjectUnitMemberModify(Model model) {
+		model.addAttribute("projectUnitMemberModify","프로젝트단위업무인원배정수정화면");
+	return "project/project_unit_member_modify";
+	}
+	
+	@GetMapping("/projectDetail")
+	public String GetProjectDetail(Model model) {
+		model.addAttribute("projectDetail","프로젝트내부 홈 화면");
+	return "project/project_detail";
+	}
+	
+	@GetMapping("/projectBoardInsert")
+	public String projectBoardInsert(Model model) {
+		model.addAttribute("projectBoardInsert","프로젝트내부 게시글 생성화면");
+	return "project/project_board_insert";
+	}
+	
+	@GetMapping("/projectBoardModify")
+	public String projectBoardModify(Model model) {
+		model.addAttribute("projectBoardModify","프로젝트내부 게시글 수정화면");
+	return "project/project_board_modify";
+	}
+	
 }
 
