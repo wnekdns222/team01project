@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.mapper.FormBoardMapper">
+	<resultMap type="FormBoard" 				id="formResultMap">
+		<id 	property="formNum" 				column="form_num"/>
+		<result property="formName" 			column="form_name"/>
+		<result property="formContents" 		column="form_contents"/>
+		<result property="formAddFile" 			column="form_addfile"/>
+		<result property="formFilePath" 		column="form_file_path"/>
+		<result property="formRegiStrant" 		column="form_registrant"/>
+		<result property="formCommentRegDate" 	column="form_comment_reg_date"/>
+		<result property="formModificationDate" column="form_modification_date"/>
+		<result property="formModifier" 		column="form_modifier"/>
+	</resultMap>
+	<select id="formInfoByNum" ></select>
+	<update id="updateFormBoard" parameterType="FormBoard">
+		UPDATE tb_form
+		SET
+			form_name=#{formName},
+			form_contents=#{formContents},
+			form_modification_date=NOW(),
+			form_modifier=#{formModifier}
+		WHERE form_num = #{form_num};
+	</update>
+	<insert id="addFormBoard" parameterType="FormBoard">
+		INSERT INTO tb_form
+		(form_name, form_contents, form_registrant, form_comment_reg_date)
+		VALUES (#{formName}, #{formContents}, #{formRegiStrant}, NOW());
+	</insert>
+	
+	<select id="getFormBoard" parameterType="int" resultMap="formResultMap">
+		SELECT
+			*
+		FROM
+			tb_form
+		WHERE form_num = #{formNum};
+	</select>
+	
+	<select id="formBoardCount" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			tb_form;
+	</select>
+		
+	<select id="formList" resultMap="formResultMap">
+		SELECT 
+			*
+		FROM 
+			tb_form;
+	</select>
+</mapper>
