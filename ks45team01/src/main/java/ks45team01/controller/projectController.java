@@ -22,7 +22,7 @@ public class projectController {
 	
 	
 	@GetMapping("/projectList")
-	public String GetMemberList(Model model) {
+	public String GetProjectList(Model model) {
 		model.addAttribute("project","프로젝트메인화면");
 		/**
 		 *객체 만들어서 서비스랑 연결하기  
@@ -46,7 +46,7 @@ public class projectController {
 	 */
 	
 	@GetMapping("/projectInsert")
-	public String GetMemberInsert(Model model) {
+	public String GetProjectInsert(Model model) {
 		model.addAttribute("projectInsert","프로젝트등록화면");
 		/**모델 프로젝트 인서트 등록 가져오기
 		 * model.addAttribute("projectInsert",projectInsert);
@@ -56,7 +56,7 @@ public class projectController {
 	
 	
 	@GetMapping("/projectModify")
-	public String GetMemberModify(/* 등록자 아이디에 따른 수정권한 하기
+	public String GetProjectModify(/* 등록자 아이디에 따른 수정권한 하기
 			 */Model model) {
 		
 		/**
@@ -74,7 +74,11 @@ public class projectController {
 		return "project/project_modify";
 	}
 	
-	
+	@GetMapping("/projectMember")
+	public String GetProjectMemberList(Model model) {
+		model.addAttribute("projectMember","프로젝트멤버리스트화면");
+	return "project/project_member";
+	}
 	
 }
 
