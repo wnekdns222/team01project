@@ -19,6 +19,8 @@ public class projectController {
 	 */
 	
 	
+	
+	
 	@GetMapping("/projectList")
 	public String GetMemberList(Model model) {
 		model.addAttribute("project","프로젝트메인화면");
@@ -53,7 +55,26 @@ public class projectController {
 	}
 	
 	
+	@GetMapping("/projectModify")
+	public String GetMemberModify(/* 등록자 아이디에 따른 수정권한 하기
+			 */Model model) {
+		
+		/**
+		 *객체 만들어서 서비스랑 연결하기  
+		 *Member memberInfo = memberService.getMemberInfoById(memberId);
+		 *ex)List<Member> memberList = memberService.getMemberList();
+		 * 
+		 * 모델 프로젝트 리스트 가져오기
+		 * model.addAttribute("projectList",projectList);
+		 * model.addAttribute("memberInfo", memberInfo);
+		 * model.addAttribute("memberLevelList", memberLevelList);		
+		 */
+		
+		model.addAttribute("projectModify","프로젝트수정화면");
+		return "project/project_modify";
+	}
 	
 	
 	
 }
+
