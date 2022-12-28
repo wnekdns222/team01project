@@ -142,5 +142,46 @@ public class projectController {
 	return "project/project_board_modify";
 	}
 	
+	@GetMapping("/projectTaskInsert")
+	public String projectTaskInsert(Model model) {
+		model.addAttribute("projectTaskInsert","프로젝트내부 업무요청 등록화면");
+	return "project/project_task_insert";
+	}
+	
+	@GetMapping("/projectTaskModify")
+	public String projectTaskModify(Model model) {
+		model.addAttribute("projectTaskModify","프로젝트내부 업무요청 수정화면");
+	return "project/project_task_modify";
+	}
+	
+	@GetMapping("/projectCalender")
+	public String projectCalender(Model model) {
+		model.addAttribute("projectCalender","프로젝트내부 캘린더 화면");
+	return "project/project_calender";
+	}
+	
+	@GetMapping("/projectCalenderInsert")
+	public String projectCalenderInsert(Model model) {
+		model.addAttribute("projectCalenderInsert","프로젝트내부 캘린더 입력 화면");
+	return "project/project_calender_insert";
+	}
+	
+	@GetMapping("/projectCalenderModify")
+	public String projectCalenderModify(Model model) {
+		model.addAttribute("projectCalenderModify","프로젝트내부 캘린더 수정 화면");
+	return "project/project_calender_modify";
+	}
+	
+	@GetMapping("/projectFiles")
+	public String projectFiles(Model model) {
+		model.addAttribute("projectFiles","프로젝트 첨부파일 화면");
+	return "project/project_files";
+	}
+	
+	@GetMapping("/projectFilesInsert")
+	public String projectFilesInsert(Model model) {
+		model.addAttribute("projectFilesInsert","프로젝트 첨부파일 등록화면");
+	return "project/project_files_insert";
+	}
 }
 
