@@ -25,6 +25,22 @@
 			</div>
 		</div>
 	<th:block layout:fragment="customContents">
-		<h1>전결/대결 리스트 보여줄 화면입니다.</h1>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>전결/대결 번호</th>
+					<th>전결/대결 사원번호</th>
+					<th>부서</th>
+					<th>직급</th>
+					<th>전결/대결 위임날짜</th>
+					<th>전결/대결 유지날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="6">등록된 전결/대결자가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
 	</th:block>
 </html>

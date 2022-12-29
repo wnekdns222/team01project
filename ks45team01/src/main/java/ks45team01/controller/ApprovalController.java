@@ -9,6 +9,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/approval")
 public class ApprovalController {
 	
+	@GetMapping("workCorrectInsert")
+	public String workCorrectInsert(Model model) {
+		
+		model.addAttribute("title", "근태정정신청");
+		
+		return "approval/workCorrectInsert";
+	}
+	
+	/**
+	 * 휴가 신청
+	 * @param model
+	 * @return
+	 */
+	
+	@GetMapping("vacationInsert")
+	public String vacationInsert(Model model) {
+		
+		model.addAttribute("title", "휴가신청");
+		
+		return "approval/vacationInsert";
+	}
+	
 	/**
 	 * 전결/대결 리스트
 	 * @param model
@@ -74,7 +96,7 @@ public class ApprovalController {
 		
 		model.addAttribute("title", "반려함");
 		
-		return "approval/circularList";
+		return "approval/rejectList";
 	}
 	
 	/**

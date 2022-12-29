@@ -25,6 +25,20 @@
 			</div>
 		</div>
 	<th:block layout:fragment="customContents">
-		<h1>결재함 리스트 보여줄 화면입니다.</h1>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>기안문서번호</th>
+					<th>제목</th>
+					<th>상신일자</th>
+					<th>기한시점</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="4">진행중인 결재가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
 	</th:block>
 </html>
