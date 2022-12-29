@@ -21,6 +21,19 @@ public class ApprovalController {
 		
 		return "approval/finalApproverList";
 	}
+	/**
+	 * 기안 작성 페이지
+	 * @param model
+	 * @return
+	 */
+	
+	@GetMapping("draftInsert")
+	public String approvalInsert(Model model) {
+		
+		model.addAttribute("title", "기안작성");
+		
+		return "approval/draftInsert";
+	}
 	
 	/**
 	 * 결재완료함 
