@@ -1,4 +1,4 @@
-package ks45team01.controller;
+package ks45team01.unity.worker.controller;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ks45team01.dto.FormBoard;
-import ks45team01.service.FormBoardService;
+import ks45team01.unity.dto.FormBoard;
+import ks45team01.unity.service.FormBoardService;
 
 @Controller
 @RequestMapping("/form")

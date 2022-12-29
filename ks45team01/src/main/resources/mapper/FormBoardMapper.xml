@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ks45team01.mapper.FormBoardMapper">
+<mapper namespace="ks45team01.unity.mapper.FormBoardMapper">
 	<resultMap type="FormBoard" 				id="formResultMap">
 		<id 	property="formNum" 				column="form_num"/>
 		<result property="formName" 			column="form_name"/>

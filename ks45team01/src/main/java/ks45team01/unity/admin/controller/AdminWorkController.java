@@ -1,4 +1,4 @@
-package ks45team01.controller;
+package ks45team01.unity.admin.controller;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ks45team01.dto.WorkType;
-import ks45team01.service.WorkTypeService;
+import ks45team01.unity.dto.WorkType;
+import ks45team01.unity.service.WorkTypeService;
 
 /**
  * 관리자 전사원 근태 조회

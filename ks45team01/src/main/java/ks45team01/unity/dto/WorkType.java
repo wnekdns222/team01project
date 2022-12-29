@@ -1,4 +1,4 @@
-package ks45team01.dto;
+package ks45team01.unity.dto;
 
 //근무유형 dto
 public class WorkType {
