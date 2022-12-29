@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	  
 	<th:block layout:fragment="customCrumbbar">
 		<div class="breadcrumbbar">
 			<div class="row align-items-center">
 				<div class="col-md-8 col-lg-8">
-					<h4 class="page-title">서식등록</h4>
+					<h4 class="page-title">[[${formUpdate.formNum}]]</h4>
 					<div class="breadcrumb-list">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="/">Home</a></li>
 							<li class="breadcrumb-item"><a href="/form/formList">서식목록</a></li>
-							<li class="breadcrumb-item active" aria-current="page">서식등록</li>
+							<li class="breadcrumb-item active" aria-current="page">[[${formUpdate.formName}]]</li>
 						</ol>
 					</div>
 				</div>
@@ -26,17 +27,18 @@
 		</div>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<form id="addForm" th:action="@{/form/addForm}" method="post">
+		<form id="formUpdate" th:action="@{/form/formUpdate}" method="post">
+			<input type="hidden" name="formNum" th:value="${formUpdate.formNum}" />
 			<label for="formName">서식명</label>
 			<div style="width: 800px;">
-			<input type="text" class="form-control" id="formName" name="formName" placeholder="서식명을 입력해주세요" />
+			<input type="text" class="form-control" id="formName" name="formName" th:value="${formUpdate.formName}" />
 			</div>
-			<label for="formRegiStrant">작성자</label>
+			<label for="formModifier">수정자</label>
 			<div style="width: 800px;">
-			<input type="text" class="form-control" id="formRegiStrant" name="formRegiStrant" placeholder="작성자를 입력해주세요" />
+			<input type="text" class="form-control" id="formModifier" name="formModifier" th:placeholder="${formUpdate.formModifier}"  />
 			</div>
 			<label for="formContents">내용</label>
-			<textarea class="form-control" name="formContents" id="formContents" placeholder="내용을 입력해주세요" style="height: 250px; width: 800px;"></textarea>
+			<textarea th:text="${formUpdate.formContents}" class="form-control" name="formContents" id="formContents" style="height: 300px; width: 800px;"></textarea>
 			<button type="submit">등록</button>
 			<button type="button" onclick="location.href='/form/formList';">취소</button>
 		</form>
