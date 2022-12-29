@@ -14,23 +14,40 @@
 		<result property="formModificationDate" column="form_modification_date"/>
 		<result property="formModifier" 		column="form_modifier"/>
 	</resultMap>
-	<select id="formInfoByNum" ></select>
+	<delete id="deleteFormBoard" parameterType="int">
+		DELETE 
+			FROM tb_form 
+		WHERE form_num = #{formNum};
+	</delete>
 	<update id="updateFormBoard" parameterType="FormBoard">
+		/* 서식 수정 */
 		UPDATE tb_form
-		SET
-			form_name=#{formName},
-			form_contents=#{formContents},
-			form_modification_date=NOW(),
-			form_modifier=#{formModifier}
-		WHERE form_num = #{form_num};
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="formName != null and formName != '' ">
+			 	,form_name = #{formName} 
+			</if>		
+			<if test="formContents != null and formContents != '' ">
+				,form_contents = #{formContents} 
+			</if>
+			<if test="formModifier != null and formModifier != '' ">
+				,form_modifier = #{formModifier} 
+			</if>
+			<if test="formModificationDate != null and formModificationDate != '' ">
+				,form_modification_date = NOW()
+			</if>
+		</trim>
+		WHERE 
+			form_num = #{formNum};
 	</update>
 	<insert id="addFormBoard" parameterType="FormBoard">
+		/* 서식 등록 */
 		INSERT INTO tb_form
-		(form_name, form_contents, form_registrant, form_comment_reg_date)
-		VALUES (#{formName}, #{formContents}, #{formRegiStrant}, NOW());
+		(form_name, form_contents, form_registrant, form_addfile, form_file_path, form_comment_reg_date)
+		VALUES (#{formName}, #{formContents}, #{formRegiStrant}, #{formAddFile}, #{formFilePath}, NOW());
 	</insert>
 	
 	<select id="getFormBoard" parameterType="int" resultMap="formResultMap">
+		/* 서식 상세보기 */
 		SELECT
 			*
 		FROM
@@ -39,6 +56,7 @@
 	</select>
 	
 	<select id="formBoardCount" resultType="int">
+		/* 서식 개수 */
 		SELECT 
 			COUNT(*)
 		FROM 
@@ -46,6 +64,7 @@
 	</select>
 		
 	<select id="formList" resultMap="formResultMap">
+		/* 서식 목록 */
 		SELECT 
 			*
 		FROM 

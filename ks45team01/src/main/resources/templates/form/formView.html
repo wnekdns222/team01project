@@ -54,8 +54,8 @@
 			</tr>
 			<tr style="text-align:right;">
 				<td>
-					<a th:href="@{#}">[수정]</a>
-					<a th:href="@{#}">[삭제]</a>
+					<a th:href="@{/form/formUpdate(formNum=${formView.formNum})}">[수정]</a>
+					<a th:href="@{/form/formDelete(formNum=${formView.formNum})}">[삭제]</a>
 					<a th:href="@{/form/formList}">[목록]</a>
 				</td>
 			</tr>
