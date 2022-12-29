@@ -17,7 +17,7 @@
 				</div>
 				<div class="col-md-4 col-lg-4">
 					<div class="widgetbar">
-						<button class="btn btn-outline-success" onclick="location.href='#';">
+						<button class="btn btn-outline-success" onclick="location.href='/file/addFile';">
 							<i class="feather icon-plus mr-2"></i>파일등록
 						</button>
 					</div>
@@ -25,7 +25,29 @@
 			</div>
 		</div>
 	<th:block layout:fragment="customContents">
-		<h1>파일목록을 보여줄 화면입니다.</h1>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>파일번호</th>
+					<th>파일명</th>
+					<th>작성자</th>
+					<th>부서명</th>
+					<th>직급명</th>
+					<th>작성일자</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>file1</td>
+					<td>
+						<a th:href="@{/file/fileView}">나만의 파일</a>
+					</td>
+					<td>id001</td>
+					<td>인사과</td>
+					<td>부장</td>
+					<td>2022-12-29</td>
+				</tr>
+			</tbody>
+		</table>
 	</th:block>
-</body>
 </html>
