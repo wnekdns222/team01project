@@ -7,12 +7,12 @@
 		<div class="breadcrumbbar">
 			<div class="row align-items-center">
 				<div class="col-md-8 col-lg-8">
-					<h4 class="page-title">회의실 목록</h4>
+					<h4 class="page-title">회의실 수정</h4>
 					<div class="breadcrumb-list">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="/">Home</a></li>
 							<li class="breadcrumb-item active" aria-current="page">예약</li>
-							<li class="breadcrumb-item active" aria-current="page">회의실 목록</li>
+							<li class="breadcrumb-item active" aria-current="page">회의실 수정</li>
 						</ol>
 					</div>
 				</div>
@@ -35,6 +35,8 @@
                           <th scope="col">회의실 위치</th>
                           <th scope="col">회의실 수용인원</th>
                           <th scope="col">회의실 상세정보</th>
+                          <th scope="col">수정</th>
+                          <th scope="col">삭제</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -46,7 +48,12 @@
 					<td th:text="${l.meetLocation}"></td>
 					<td th:text="${l.meetCapacity}"></td>
 					<td th:text="${l.meetDetail}"></td>
-					
+					<td>
+						<a th:href="@{/reservation/meetingroomModify(meetName=${l.meetName})}">수정</a>
+					</td>
+					<td>					
+						<a th:href="#">삭제</a>
+					</td>
 				</tr>
                   </tbody>
               </table>
