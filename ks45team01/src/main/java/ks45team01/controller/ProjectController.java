@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //리퀘스트메핑 /project로 잡음
 @RequestMapping("/project")
 
-public class projectController {
+public class ProjectController {
 
 	/**
 	 *  http://localhost/project/projectList접속시  
