@@ -23,10 +23,48 @@
 				</div>
 			</div>
 		</div>
-		<br><br>
+		<button type="button" class="btn btn-outline-primary"
+					onclick="location.href='/member/MemberDepartmentInsert'">부서메뉴 추가</button>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<h1>부서 목록 화면</h1>
+		<div class="table-responsive" style="width: 100%; overflow: auto">
+		<table class="table table-dark">
+			<thead>
+				<tr>
+					<th scope="col">구분</th>
+					<th scope="col">부서명</th>
+					<th scope="col">부서생성한 사원</th>
+					<th scope="col">부서 생성 일자</th>
+					<th scope="col">사용여부</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">1</th>
+					<td>기획부</td>
+					<td>id001</td>
+					<td>2022-12-29</td>
+					<td>Y</td>
+				</tr>
+				<tr>
+					<th scope="row">2</th>
+					<td>회계부</td>
+					<td>id001</td>
+					<td>2022-12-29</td>
+					<td>Y</td>
+				</tr>
+				<tr>
+					<th scope="row">3</th>
+					<td>전산부</td>
+					<td>id001</td>
+					<td>2022-12-29</td>
+					<td>Y</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
 	</th:block>
 	
 </html>
