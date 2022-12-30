@@ -1,32 +1,87 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/default}">
-	
-	<th:block layout:fragment="customCrumbbar">
-		<div class="breadcrumbbar">
-			<div class="row align-items-center">
-				<div class="col-md-8 col-lg-8">
-					<h4 class="page-title">Home</h4>
-					<div class="breadcrumb-list">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item active" aria-current="page">Home</li>
-						</ol>
-					</div>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customCrumbbar">
+	<div class="breadcrumbbar">
+		<div class="row align-items-center">
+			<div class="col-md-8 col-lg-8">
+				<h4 class="page-title">Home</h4>
+				<div class="breadcrumb-list">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active" aria-current="page">Home</li>
+					</ol>
 				</div>
-				<div class="col-md-4 col-lg-4">
-					<div class="widgetbar">
-						<button class="btn btn-primary-rgba">
-							<i class="feather icon-plus mr-2"></i>Actions
-						</button>
-					</div>
+			</div>
+			<div class="col-md-4 col-lg-4">
+				<div class="widgetbar">
+					<button class="btn btn-primary-rgba">
+						<i class="feather icon-plus mr-2"></i>Actions
+					</button>
 				</div>
 			</div>
 		</div>
-		<br><br>
-	</th:block>
-	<th:block layout:fragment="customContents">
-		<h1>프로젝트 리스트 화면</h1>
-	</th:block>
-	
+	</div>
+	<br>
+	<br>
+</th:block>
+<th:block layout:fragment="customContents">
+	<h2>진행중</h2>
+	<div style="width: 30%; float: left;">
+		<div class="col-lg-14 col-xl-14">
+			<div class="card text-white bg-primary m-b-10 col-11">
+				<div class="card-body">
+					<h5 class="card-title text-white font-18">커피만들기</h5>
+					<p class="card-text">1.커피만들기 2.커피사기 3.커피뽑기</p>
+					<p class="card-text">인원수:8</p>
+					<a href="/project/projectDetail" class="btn btn-white text-primary">들어가기</a> 
+					<a href="/project/projectMember" class="btn btn-white text-primary">프로젝트 인원설정</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="width: 30%; float: left;">
+		<div class="col-lg-14 col-xl-14">
+			<div class="card text-white bg-primary m-b-10 col-11">
+				<div class="card-body">
+					<h5 class="card-title text-white font-18">커피만들기</h5>
+					<p class="card-text">1.커피만들기 2.커피사기 3.커피뽑기</p>
+					<p class="card-text">인원수:8</p>
+					<a href="/project/projectDetail" class="btn btn-white text-primary">들어가기</a> 
+					<a href="/project/projectMember" class="btn btn-white text-primary">프로젝트 인원설정</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="width: 30%; float: left;">
+		<div class="col-lg-14 col-xl-14">
+			<div class="card text-white bg-primary m-b-10 col-11">
+				<div class="card-body">
+					<h5 class="card-title text-white font-18">커피만들기</h5>
+					<p class="card-text">1.커피만들기 2.커피사기 3.커피뽑기</p>
+					<p class="card-text">인원수:8</p>
+					<a href="/project/projectDetail" class="btn btn-white text-primary">들어가기</a> 
+					<a href="/project/projectMember" class="btn btn-white text-primary">프로젝트 인원설정</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="width: 30%; float: left;">
+		<div class="col-lg-14 col-xl-14">
+			<div class="card text-white bg-primary m-b-10 col-11">
+				<div class="card-body">
+					<h5 class="card-title text-white font-18">커피만들기</h5>
+					<p class="card-text">1.커피만들기 2.커피사기 3.커피뽑기</p>
+					<p class="card-text">인원수:8</p>
+					<a href="/project/projectDetail" class="btn btn-white text-primary">들어가기</a> 
+					<a href="/project/projectMember" class="btn btn-white text-primary">프로젝트 인원설정</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>
+
 </html>

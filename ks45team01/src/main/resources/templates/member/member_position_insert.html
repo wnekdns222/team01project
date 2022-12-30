@@ -26,7 +26,12 @@
 		<br><br>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<h1>직급 등록 화면</h1>
+		직급명 입력
+		<input type="text" class="form-control" name="inputText"
+					id="inputText" placeholder="Text Input">
+					<button type="button" class="btn btn-outline-primary"
+					onclick="location.href='/member/MemberPositionList'">완료</button>
+					<button type="button" class="btn btn-outline-primary">취소</button>
 	</th:block>
 	
 </html>
