@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	
+	<th:block layout:fragment="customCrumbbar">
+		<div class="row align-items-center">
+			<div class="col-md-8 col-lg-8">
+				<h4 class="page-title">Home</h4>
+				<div class="breadcrumb-list">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">전사원연차조회</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 col-lg-12">
+         	<div class="widgetbar">
+				<button type="button" class="btn btn-outline-success" onclick="location.href='/settings/vacationVrietyInsert'"><i class="feather icon-plus mr-2">
+				Insert</i></button>
+			</div>
+		</div>
+	</th:block>
+	
+	
+	
+	<th:block layout:fragment="customContents">
+	<h3>전사원연차조회</h3>
+		<table class="table table-hover">
+          <thead>
+              <tr>
+                  <th scope="col">사원번호</th>
+                  <th scope="col">근속연수</th>
+                  <th scope="col">기본연차휴가일수</th>
+                  <th scope="col">포상휴가일수</th>
+                  <th scope="col">대체휴가일수</th>
+                  <th scope="col">휴가잔여일</th>
+                  <th scope="col">휴가잔여시간</th>
+                  <th scope="col">사용연도</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- <tr th:if="${not #lists.isEmpty(worktypeList)}" th:each="wt : ${worktypeList}">
+                  <td th:text="${wt.workTypeNum}"></td>
+                  <td th:text="${wt.memberNum}"></td>
+                  <td th:text="${wt.workName}"></td>
+                  <td th:text="${wt.workDate}"></td>
+                  <td th:text="${wt.attendanceTime}"></td>
+                  <td th:text="${wt.leaveWorkTime}"></td>
+                  <td th:text="${wt.workTypeUsePeriod}"></td>
+                  <td>
+						<a th:href="@{/settings/workTypeModify(workTypeNum=${wt.workTypeNum})}">수정</a>
+					</td>
+              </tr>
+              <tr th:unless="${not #lists.isEmpty(worktypeList)}">
+              </tr> -->
+          </tbody>
+      </table>
 
-</body>
+	</th:block>
 </html>
