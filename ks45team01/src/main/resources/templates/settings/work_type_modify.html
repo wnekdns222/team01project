@@ -1,10 +1,66 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	
+	<th:block layout:fragment="customCrumbbar">
+		<div class="row align-items-center">
+			<div class="col-md-8 col-lg-8">
+				<h4 class="page-title">Home</h4>
+				<div class="breadcrumb-list">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Home</a></li>
+						<li class="breadcrumb-item"><a href="/settings/workTypeList">전사원근무유형</a></li>
+						<li class="breadcrumb-item active" aria-current="page">근태유형 수정</li>
+					</ol>
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-4">
+				<div class="widgetbar">
+					<button class="btn btn-primary-rgba">
+						<i class="feather icon-plus mr-2"></i>Actions
+					</button>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	
+	
+	
+	<th:block layout:fragment="customContents">
+		<h3>근태유형 수정</h3>
+				<form>
+                  <div class="form-group">
+                      <label for="memberNum">사원번호</label>
+                      <input type="text" class="form-control" id="memberNum"  required>
+                  </div>
+                  <div class="form-group">
+                      <label for="workName">근태명</label>
+                      <input type="text" class="form-control" id="workName"  required>
+                  </div>
+                   <div class="form-group">
+                      <label for="workDate">근무일</label>
+                           <input type="date" class="form-control" name="workDate" id="workDate" required>
+                       </div>
+                  <div class="form-group">
+                      <label for="attendanceTime">출근시간</label>
+                          <input type="time" class="form-control" name="attendanceTime" id="attendanceTime" required>
+                      </div>
+                  <div class="form-group">
+                      <label for="leaveWorkTime">퇴근시간</label>
+                          <input type="time" class="form-control" name="leaveWorkTime" id="leaveWorkTime" required>
+                      </div>
+                 <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="use" required>
+                      <label class="form-check-label" for="use">
+                      사용여부
+                      </label>
+                  </div>
+                  <div class="form-group">
+                      <label for="workTypeUsePeriod">사용기한</label>
+                           <input type="date" class="form-control" name="workTypeUsePeriod" id="inputDate" required>
+                       </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+	</th:block>
 </html>

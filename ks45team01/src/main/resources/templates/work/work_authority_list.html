@@ -10,7 +10,7 @@
 				<div class="breadcrumb-list">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">부서근무내역조회</li>
+						<li class="breadcrumb-item active" aria-current="page">전사원근무내역조회</li>
 					</ol>
 				</div>
 			</div>
@@ -26,20 +26,20 @@
 	
 	
 	<th:block layout:fragment="customContents">
-	<h3>근태내역조회</h3>
+	<h3>비정상 근태 조회</h3>
 		<table class="table table-hover">
           <thead>
               <tr>
+                  <th scope="col">근태번호</th>
                   <th scope="col">사원번호</th>
-                  <th scope="col">근태유형</th>
-                  <th scope="col">출근일</th>
+                  <th scope="col">근무일</th>
                   <th scope="col">출근시간</th>
                   <th scope="col">퇴근시간</th>
-                  <th scope="col">외출,외근시작시간</th>
-                  <th scope="col">외출,외근복귀시간</th>
-                  <th scope="col">출근상태</th>
-                  <th scope="col">퇴근상태</th>
-                  <th scope="col">비정상근태 등록 유무</th>
+                  <th scope="col">입력사유</th>
+                  <th scope="col">대분류</th>
+                  <th scope="col">중분류</th>
+                  <th scope="col">소분류</th>
+                  <th scope="col">입력사유</th>
               </tr>
           </thead>
           <tbody>

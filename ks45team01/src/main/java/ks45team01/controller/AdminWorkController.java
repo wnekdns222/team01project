@@ -42,6 +42,12 @@ public class AdminWorkController {
 		
 		return "work/work_authority_Insert";
 	}
+	//비정상 근태 조회
+	@GetMapping("work/workAuthorityList")
+	public String getAuthorityWorkInfo() {
+		
+		return "work/work_authority_list";
+	}
 	//근무유형 입력
 	@GetMapping("settings/workTypeInsert")
 	public String updateWorkType() {
@@ -75,7 +81,7 @@ public class AdminWorkController {
 		return "vacation/vacation_info_all_list";
 	}
 	//사내 휴가종류입력
-	@GetMapping("settings/vacationVrietyInsert")
+	@GetMapping("settings/vacationVarietyInsert")
 	public String addVacationVariety() {
 		
 		return "settings/vacation_variety_insert";
