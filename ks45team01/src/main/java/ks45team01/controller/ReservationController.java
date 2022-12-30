@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ReservationController {
 	
 	//예약하기
+	@GetMapping("/meetingroomList")
+	public String getMeetingroomList() {
+		
+		return "/reservation/meetingroom_list";
+	}
+	
+	//예약하기
 	@GetMapping("/meetingroomReservationInsert")
 	public String addMeetingroomReservation() {
 		

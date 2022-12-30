@@ -88,4 +88,11 @@ public class MemberController {
 		model.addAttribute("MemberLevelModify","사원권한리스트 화면");
 	return "member/member_level_modify";
 	}
+	
+	
+	@GetMapping("/MemberPasswordModify")
+	public String GetMemberPasswordModify(Model model) {
+		model.addAttribute("MemberPasswordModify","사원패스워드 변경 화면");
+	return "member/member_password_modify";
+	}
 }

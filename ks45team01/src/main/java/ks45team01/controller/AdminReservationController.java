@@ -1,12 +1,13 @@
 package ks45team01.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ks45team01.dto.Meetingroom;
+
 
 @Controller
 @RequestMapping("/reservation")
@@ -22,12 +23,12 @@ public class AdminReservationController {
 	
 	
 	//회의실 수정
-	@GetMapping("/meetingroomList")
-	public String modifyMeetingroom() {
+	@GetMapping("/meetingroomAdminList")
+	public String getMeetingroomAdminList() {
 			
 
 		
-		return "reservation/meetingroom_modify";
+		return "reservation/meetingroom_admin_list";
 	}
 	
 }
