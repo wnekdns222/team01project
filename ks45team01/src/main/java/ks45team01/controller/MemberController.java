@@ -47,10 +47,10 @@ public class MemberController {
 	return "member/member_department_insert";
 	}
 	
-	@GetMapping("/MemberDepartmentDelete")
-	public String GetMemberDepartmentDelete(Model model) {
-		model.addAttribute("MemberDepartmentDelete","부서삭제화면");
-	return "member/member_department_delete";
+	@GetMapping("/MemberDepartmentModify")
+	public String GetMemberDepartmentModify(Model model) {
+		model.addAttribute("MemberDepartmentModify","부서삭제화면");
+	return "member/member_department_modify";
 	}
 	
 	@GetMapping("/MemberPositionList")

@@ -57,6 +57,14 @@ public class ApprovalController {
 		return "approval/draftInsert";
 	}
 	
+	@GetMapping("approvalDoneView")
+	public String approvalDoneView(Model model) {
+		
+		model.addAttribute("title", "결재완료상세보기");
+		
+		return "approval/approvalDoneView";
+	}
+	
 	/**
 	 * 결재완료함 
 	 * @param model
@@ -127,17 +135,40 @@ public class ApprovalController {
 		return "approval/referrerList";
 	}
 	
+	@GetMapping("receiverView")
+	public String receiverView(Model model) {
+		
+		model.addAttribute("title", "수신문서 상세보기");
+		
+		return "approval/receiverView";
+	}
+	
 	/**
 	 * 수신함 리스트
 	 * @param model
 	 * @return
 	 */
+	
 	@GetMapping("receiverList")
 	public String receiverList(Model model) {
 		
 		model.addAttribute("title", "수신함");
 		
 		return "approval/receiverList";
+	}
+	
+	/**
+	 * 기안함 상세보기
+	 * @param model
+	 * @return
+	 */
+	
+	@GetMapping("draftView")
+	public String draftView(Model model) {
+		
+		model.addAttribute("title", "기안상세보기");
+		
+		return "approval/draftView";
 	}
 	
 	/**
