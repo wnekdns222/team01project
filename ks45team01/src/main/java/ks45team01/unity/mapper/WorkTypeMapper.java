@@ -1,12 +1,13 @@
-package ks45team01.mapper;
+package ks45team01.unity.mapper;
 
 import java.util.List;
+
 
 import org.apache.ibatis.annotations.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ks45team01.dto.WorkType;
+import ks45team01.unity.dto.WorkType;
 
 @Mapper
 public interface WorkTypeMapper {

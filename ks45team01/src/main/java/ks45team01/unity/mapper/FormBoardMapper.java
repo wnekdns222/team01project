@@ -1,10 +1,11 @@
-package ks45team01.mapper;
+package ks45team01.unity.mapper;
 
 import java.util.List;
 
+
 import org.apache.ibatis.annotations.Mapper;
 
-import ks45team01.dto.FormBoard;
+import ks45team01.unity.dto.FormBoard;
 
 @Mapper
 public interface FormBoardMapper {

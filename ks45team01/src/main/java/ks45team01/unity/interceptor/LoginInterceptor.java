@@ -1,4 +1,4 @@
-package ks45team01.interceptor;
+package ks45team01.unity.interceptor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

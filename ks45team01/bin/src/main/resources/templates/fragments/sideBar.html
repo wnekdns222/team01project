@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="sideBarFragment">
+
+	<!-- Start Leftbar -->
+	<div class="leftbar">
+		<!-- Start Sidebar -->
+		<div class="sidebar">
+			<!-- Start Navigationbar -->
+			<div class="navigationbar">
+				<div class="vertical-menu-icon">
+					<div class="nav flex-column nav-pills" id="v-pills-tab"
+						role="tablist" aria-orientation="vertical">
+						<div class="logobar">
+							<a href="/" class="logo logo-small"><img
+								src="/assets/images/small_logo.svg" class="img-fluid" alt="logo"></a>
+						</div>
+						<a class="nav-link active" id="v-pills-crm-tab" data-toggle="pill"
+							href="#v-pills-crm" role="tab" aria-controls="v-pills-crm"
+							aria-selected="true"><img
+							src="/assets/images/svg-icon/crm.svg" class="img-fluid" alt="CRM"
+							data-toggle="tooltip" data-placement="top" title="CRM"></a> <a
+							class="nav-link" id="v-pills-uikits-tab" data-toggle="pill"
+							href="#v-pills-uikits" role="tab" aria-controls="v-pills-uikits"
+							aria-selected="false"><img
+							src="/assets/images/svg-icon/ui-kits.svg" class="img-fluid"
+							alt="UI Kits" data-toggle="tooltip" data-placement="top"
+							title="UI Kits"></a> <a class="nav-link" id="v-pills-pages-tab"
+							data-toggle="pill" href="#v-pills-pages" role="tab"
+							aria-controls="v-pills-pages" aria-selected="false"><img
+							src="/assets/images/svg-icon/pages.svg" class="img-fluid"
+							alt="Pages" data-toggle="tooltip" data-placement="top"
+							title="Pages"></a>
+					</div>
+				</div>
+				<div class="vertical-menu-detail">
+					<div class="logobar">
+						<a href="/" class="logo logo-large"><img
+							src="/assets/images/logo.svg" class="img-fluid" alt="logo1"></a>
+					</div>
+					<div class="tab-content" id="v-pills-tabContent">
+						<div class="tab-pane fade show active" id="v-pills-crm"
+							role="tabpanel" aria-labelledby="v-pills-crm-tab">
+							<ul class="vertical-menu">
+								<li><h5 class="menu-title">사원목록</h5></li>
+								<li><a href="/member/Member"><img
+										src="/assets/images/svg-icon/dashboard.svg" class="img-fluid"
+										alt="dashboard">사원목록</a></li>
+
+								<li><a href="/member/MemberModify"><img
+										src="/assets/images/svg-icon/dashboard.svg" class="img-fluid"
+										alt="dashboard">사원정보수정(개인)</a></li>
+								<li><a href="/member/MemberPasswordModify"><img
+										src="/assets/images/svg-icon/dashboard.svg" class="img-fluid"
+										alt="dashboard">비밀번호변경(개인)</a></li>
+							</ul>
+						</div>
+						<div class="tab-pane fade" id="v-pills-uikits" role="tabpanel"
+							aria-labelledby="v-pills-uikits-tab">
+							<ul class="vertical-menu">
+								<li><h5 class="menu-title">UI Kits</h5></li>
+								<!-- 1뎁스 근태관리메뉴 -->
+								<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/basic.svg" class="img-fluid"
+										alt="basic"><span>근태관리</span><i
+										class="feather icon-chevron-right"></i>
+								</a>
+									<ul class="vertical-submenu">
+										<!-- 2뎁스 근태메뉴 -->
+										<li><a href="/work/workInsert">근태입력</a></li>
+										<li><a href="/work/workList">근태내역조회</a></li>
+										<li><a href="/work/workDepartmentList">부서근태내역조회</a></li>
+										<li><a href="/work/workAllList">전사원근태내역조회</a></li>
+										<li><a href="/work/workAuthorityInsert">비정상근태권한입력</a></li>
+										<li><a href="/vacation/vacationInfoList">연차조회</a></li>
+										<li><a href="/vacation/vacationInfoDepartmentList">부서연차조회</a></li>
+										<li><a href="/vacation/vacationInfoAllList">전사원연차조회</a></li>
+									</ul></li>
+								<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/forms.svg" class="img-fluid"
+										alt="forms"><span>프로젝트</span><i
+										class="feather icon-chevron-right"></i>
+								</a>
+									<ul class="vertical-submenu">
+										<li><a href="form-inputs.html">Basic Elements</a></li>
+										<li><a href="form-groups.html">Groups</a></li>
+										<li><a href="form-layouts.html">Layouts</a></li>
+									</ul></li>
+								<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/charts.svg" class="img-fluid"
+										alt="charts"><span>예약</span><i
+										class="feather icon-chevron-right"></i>
+								</a>
+									<ul class="vertical-submenu">
+										<li><a href="/reservation/meetingroomList">회의실 목록</a></li>
+										<li><a href="/reservation/meetingroomReservationInsert">회의실
+												예약하기</a></li>
+										<li><a href="/reservation/meetingroomReservationList">회의실
+												예약확인</a></li>
+										<li><a href="/reservation/meetingroomInsert">회의실 등록</a></li>
+										<li><a href="/reservation/meetingroomAdminList">회의실
+												수정</a></li>
+									</ul></li>
+								<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/icons.svg" class="img-fluid"
+										alt="icons"><span>전자결재</span><i
+										class="feather icon-chevron-right"></i>
+								</a>
+									<ul class="vertical-submenu">
+										<li><a href="/form/formList">서식</a></li>
+										<li><a href="/approval/draftInsert">기안</a></li>
+										<li><a href="/approval/draftList">기안함</a></li>
+										<li><a href="/approval/receiverList">수신함</a></li>
+										<li><a href="/approval/referrerList">참조함</a></li>
+										<li><a href="/approval/circularList">회람함</a></li>
+										<li><a href="/approval/rejectList">반려함</a></li>
+										<li><a href="/approval/approvalList">결재함</a></li>
+										<li><a href="/approval/approvalDoneList">결재완료함</a></li>
+										<li><a href="/approval/vacationInsert">휴가신청</a></li>
+										<li><a href="/approval/workCorrectInsert">근태정정</a></li>
+										<li><a href="/approval/finalApproverList">전결/대결</a></li>
+									</ul></li>
+								<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/tables.svg" class="img-fluid"
+										alt="tables"><span>메신저</span><i
+										class="feather icon-chevron-right"></i>
+								</a>
+									<ul class="vertical-submenu">
+										<li><a href="/messenger/messengerWorkerList">사원목록</a></li>
+										<li><a href="/messenger/messengerChatroomList">채팅리스트</a></li>
+										<li><a href="/messenger/messengerChatroomInsert">채팅방생성</a></li>
+										<li><a href="/messenger/messengerChatroomInviteInsert">초대</a></li>
+									</ul></li>
+								<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/maps.svg" class="img-fluid"
+										alt="maps"><span>파일공유</span><i
+										class="feather icon-chevron-right"></i>
+								</a>
+									<ul class="vertical-submenu">
+										<li><a href="/file/fileList">파일목록</a></li>
+									</ul></li>
+								<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/customers.svg" class="img-fluid"
+										alt="maps"><span>채용</span><i
+										class="feather icon-chevron-right"></i>
+								</a>
+									<ul class="vertical-submenu">
+										<li><a href="#">채용공고 생성</a></li>
+										<li><a href="#">채용공고 관리</a></li>
+										<li><a href="#">채용 카테고리 관리</a></li>
+										<li><a href="#">채용 단계 관리</a></li>
+										<li><a href="#">채용 기준관리</a></li>
+										<li><a href="#">채용 팀 관리</a></li>
+										<li><a href="#">지원자 정보</a></li>
+										<li><a href="#">채용 평가</a></li>
+										<li><a href="#">스케줄 캘린더</a></li>
+									</ul></li>
+
+								<!-- 사이드바 큰메뉴 2번째 커뮤니티 메뉴 -->
+								<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/menu.svg" class="img-fluid"
+										alt="maps"><span>커뮤니티</span><i
+										class="feather icon-chevron-right"></i>
+								</a>
+									<ul class="vertical-submenu">
+										<li><a href="/community/noticeList">공지사항</a></li>
+										<li><a href="/community/BoardList">게시판</a></li>
+									</ul></li>
+									
+									<!-- 사이드바 큰메뉴 2번째 캘린더 메뉴 -->
+									<li>
+									<a href="javaScript:void();"> <img
+											src="/assets/images/svg-icon/calender.svg" class="img-fluid"
+											alt="maps"><span>캘린더</span>
+											<i class="feather icon-chevron-right"></i>
+									</a>
+										<ul class="vertical-submenu">
+											<li><a href="/calender/scheduelList">전체캘린더</a></li>
+											<li><a href="map-google.html">부서캘린더</a></li>
+											<li><a href="map-vector.html">개인캘린더</a></li>											
+										</ul>
+									</li>
+								</ul>	
+							</div>
+							<div class="tab-pane fade" id="v-pills-pages" role="tabpanel"
+								aria-labelledby="v-pills-pages-tab">
+								<!-- 사이드바 큰메뉴 3번째 관리 메뉴 -->
+								<ul class="vertical-menu">
+									<!-- 사이드바 큰메뉴 타이틀 -->
+									<li><h5 class="menu-title">관리자메뉴</h5></li>
+									
+											<!-- 사이드바 큰메뉴 3번째내에 1번째 프로젝트 메뉴  -->
+									<li><a href="javaScript:void();"> <img
+											src="/assets/images/svg-icon/basic_page.svg" class="img-fluid"
+											alt="basic_page">
+											<span>프로젝트 관리</span><i
+											class="feather icon-chevron-right"></i>
+									</a>
+										<!-- 사이드바 큰메뉴 3번째내에 1번째 프로젝트 디테일 메뉴 -->
+										<ul class="vertical-submenu">
+
+										<!-- 메인페이지 관리에 넣을것 
+										1.전체 메인프로젝트 삭제 수정 관리
+										2.프로젝트내 전체 게시글 삭제 수정 관리
+										3.프로젝트내 전체 업무요청 삭제 수정 관리
+										4.프로젝트내 전체 업무진행 삭제 수정 관리
+										5.프로젝트내 통합 댓글 삭제 수정 관리
+										6.프로젝트내 첨부파일 삭제 수정 관리-->
+										<li><a href="page-starter.html">프로젝트 관리</a></li>
+
+										<!-- 참여인원관리 넣을것
+											1.전체 메인 프로젝트 참여인원 삭제 추가 수정 관리
+											2.전체 메인 프로젝트 단위업무 참여 인원 추가 수정 관리
+											-->
+										<li><a href="page-starter.html">참여인원 관리</a></li>
+
+										<!--캘린더 관리에 넣을것 
+											1.프로젝트내 캘린더 삭제 수정 관리
+											2.프로젝트내 캘린터 참서자 관리 -->
+										<li><a href="page-starter.html">캘린더 관리</a></li>
+									</ul></li>
+
+								<!-- 사이드바 큰메뉴 3번째내에 2번째 사원관리 -->
+								<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/authentication.svg"
+										class="img-fluid" alt="authentication"><span>사원관리</span><i
+										class="feather icon-chevron-right"></i>
+								</a> <!-- 사이드바 큰메뉴 3번째내에 2번째 사원관리 디테일 메뉴 -->
+									<ul class="vertical-submenu">
+										<!-- 로그인 일시관리
+												1.시간별 사원 접속 일시 확인 -->
+										<li><a href="user-login.html">로그인 일시관리</a></li>
+
+										<!-- 사용자 권환관리
+												2.사용자별 관리자 권한 수정 등록 -->
+										<li><a href="/member/MemberLevelList">사용자 권환목록</a></li>
+
+										<!-- 사용자 등록관리
+												1.사원 입사시 정보 입력하면 아이디 비번 생성 및 정보 입력 최종 승인 관리 -->
+										<li><a href="/member/MemberInsert">사용자 등록</a></li>
+
+										<!-- 사용자 정보관리
+												1.사용자 직급 부서 개인정보 전체 변경 수정 관리 -->
+										<li><a href="/member/Member">사용자 정보관리</a></li>
+
+										<!-- 직급관리
+												1.직급명 수정 및 삭제 관리 -->
+										<li><a href="/member/MemberPositionList">직급관리</a></li>
+
+										<!-- 부서관리
+												1.부서명 수정 및 삭제 관리 -->
+										<li><a href="/member/MemberDepartmentList">부서관리</a></li>
+									</ul></li>
+								<!-- 관리자설정-근태 -->
+								<li><a href="javaScript:void();"> <img
+										src="/assets/images/svg-icon/authentication.svg"
+										class="img-fluid" alt="authentication"><span>근태관리설정</span><i
+										class="feather icon-chevron-right"></i>
+								</a>
+									<ul class="vertical-submenu">
+										<li><a href="/settings/workTypeList">사원 근무유형</a></li>
+										<li><a href="/settings/vacationInsert">사원 휴가부여</a></li>
+										<li><a href="/settings/vacationVarietyList">휴가설정</a></li>
+									</ul></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<!-- End Navigationbar -->
+		</div>
+		<!-- End Sidebar -->
+	</div>
+	<!-- End Leftbar -->
+</th:block>
+</html>

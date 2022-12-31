@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">예약확인</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">예약</li>
+							<li class="breadcrumb-item active" aria-current="page">예약확인</li>
+						</ol>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<div class="widgetbar">
+						<button class="btn btn-primary-rgba">
+							<i class="feather icon-plus mr-2"></i>Actions
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<th:block layout:fragment="customContents">
+		<table class="table table-hover">
+                  <thead>
+                      <tr>
+                          <th scope="col">예약번호</th>
+                          <th scope="col">회의실</th>
+                          <th scope="col">시작시간</th>
+                          <th scope="col">종료시간</th>
+                          <th scope="col">예약자</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <th scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                      </tr>
+                      <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                      </tr>
+                      <tr>
+                          <th scope="row">3</th>
+                          <td colspan="2">Larry the Bird</td>
+                          <td>@twitter</td>
+                      </tr>
+                  </tbody>
+              </table>
+	</th:block>
+</html>

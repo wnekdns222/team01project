@@ -1,4 +1,4 @@
-package ks45team01.controller;
+package ks45team01.unity.worker.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
