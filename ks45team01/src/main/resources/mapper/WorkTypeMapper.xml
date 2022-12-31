@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ks45team01.mapper.WorkTypeMapper">
+<mapper namespace="ks45team01.unity.mapper.WorkTypeMapper">
 	<resultMap type="WorkType" id="workTypeResultMap">
 		<id		property="workTypeNum"	column="work_type_num" />
 		<result property="memberNum"  column="member_num" />

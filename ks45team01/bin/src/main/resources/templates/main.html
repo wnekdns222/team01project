@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+	<th:block layout:fragment="customCrumbbar">
+		<div class="row align-items-center">
+			<div class="col-md-8 col-lg-8">
+				<h4 class="page-title">Home</h4>
+				<div class="breadcrumb-list">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active" aria-current="page">Home</li>
+					</ol>
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-4">
+				<div class="widgetbar">
+					<button class="btn btn-primary-rgba">
+						<i class="feather icon-plus mr-2"></i>Actions
+					</button>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<div class="col-lg-12 col-xl-3">
+			<div class="card m-b-30">
+				<div class="card-header">
+					<div class="row align-items-center">
+						<div class="col-9">
+							<h5 class="card-title mb-0">profile</h5>
+						</div>
+						<div class="col-3">
+							<div class="dropdown">
+								<button class="btn btn-link p-0 font-18 float-right"
+									type="button" id="widgetRevenue" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">
+									<i class="feather icon-more-horizontal-"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="widgetRevenue">
+									<a class="dropdown-item font-13" href="#">Refresh</a> <a
+										class="dropdown-item font-13" href="#">Export</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="user-slider">
+					<div class="user-slider-item">
+						<div class="card-body text-center">
+							<span class="action-icon badge badge-primary-inverse">JD</span>
+							<h6>인사과</h6>
+							<h5>지영김</h5>
+							<p>demo@email.com</p>
+							<div class="button-list mt-4">
+								<button type="button" class="btn btn-outline-primary">출근</button>
+                                <button type="button" class="btn btn-outline-danger">퇴근</button>
+							</div>
+							<div class="button-list mt-1">
+                             	<button type="button" class="btn btn-outline-success">외출</button>
+                                <button type="button" class="btn btn-outline-success">외근</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+
+</html>
