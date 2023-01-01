@@ -79,7 +79,7 @@ public class MemberController {
 	
 	@GetMapping("/MemberLevelInsert")
 	public String GetMemberLevelInsert(Model model) {
-		model.addAttribute("MemberLevelInsert","사원권한리스트 화면");
+		model.addAttribute("MemberLevelInsert","사원권환등록 화면");
 	return "member/member_level_insert";
 	}
 	
@@ -94,5 +94,11 @@ public class MemberController {
 	public String GetMemberPasswordModify(Model model) {
 		model.addAttribute("MemberPasswordModify","사원패스워드 변경 화면");
 	return "member/member_password_modify";
+	}
+	
+	@GetMapping("/MemberAdmin")
+	public String GetMemberAdmin(Model model) {
+		model.addAttribute("MemberAdmin","사원 관리페이지");
+	return "member/memberAdmin";
 	}
 }
