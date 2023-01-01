@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">전결/대결</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">전결/대결 리스트</li>
+						</ol>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<div class="widgetbar">
+						<button class="btn btn-primary-rgba">
+							<i class="feather icon-plus mr-2"></i>Actions
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<th:block layout:fragment="customContents">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>전결/대결 번호</th>
+					<th>전결/대결 사원번호</th>
+					<th>부서</th>
+					<th>직급</th>
+					<th>전결/대결 위임날짜</th>
+					<th>전결/대결 유지날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="6">등록된 전결/대결자가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+	</th:block>
+</html>

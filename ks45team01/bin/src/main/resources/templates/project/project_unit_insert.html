@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">Home</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active" aria-current="page">Home</li>
+						</ol>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<div class="widgetbar">
+						<button class="btn btn-primary-rgba">
+							<i class="feather icon-plus mr-2"></i>Actions
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br><br>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<h1>프로젝트 단위업무 등록 화면</h1>
+	</th:block>
+	
+</html>
