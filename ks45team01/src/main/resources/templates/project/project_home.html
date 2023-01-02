@@ -32,29 +32,37 @@
 		<ul class="nav nav-tabs" role="tablist">
 
 			<li class="nav-item">
-			<button class="btn btn-light" data-toggle="modal" data-target="#TaProjectBoardInsert">게시글 등록</button>
+				<button class="btn btn-light" data-toggle="modal"
+					data-target="#TaProjectBoardInsert">게시글 등록</button>
 			</li>
 
 			<li class="nav-item">
-			<button class="btn btn-light" data-toggle="modal" data-target="#TaProjectTaskInsert">업무요청 등록</button>
+				<button class="btn btn-light" data-toggle="modal"
+					data-target="#TaProjectTaskInsert">업무요청 등록</button>
 			</li>
 
 			<li class="nav-item">
-			<button class="btn btn-light" data-toggle="modal" data-target="#TaProjectCalenderInsert">캘린더일정 등록</button>
+				<button class="btn btn-light" data-toggle="modal"
+					data-target="#TaProjectCalenderInsert">캘린더일정 등록</button>
 			</li>
 
 			<li class="nav-item">
-			<button class="btn btn-light" data-toggle="modal" data-target="#TaProjectTodoInsert">할일 등록</button>
+				<button class="btn btn-light" data-toggle="modal"
+					data-target="#TaProjectTodoInsert">할일 등록</button>
 			</li>
 
 		</ul>
 	</div>
 
 
+	
 
-	<div class="modal fade" id="TaProjectBoardInsert" tabindex="-1" role="dialog"
-		aria-labelledby="TaProjectBoardInsert" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
+
+
+	<div class="modal fade" id="TaProjectBoardInsert" tabindex="-1"
+		role="dialog" aria-labelledby="largeModal"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">게시글 등록</h5>
@@ -66,12 +74,16 @@
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="modelemail">게시글 제목</label> 
-							<input type="text" class="form-control" id="modelemail">
+							<label for="modelemail">게시글 제목</label> <input type="text"
+								class="form-control" id="modelemail">
 						</div>
 						<div class="form-group">
-							<label for="modelpass">게시글 내용</label> 
-							<textarea class="form-control" rows="5"></textarea>
+							<label for="modelpass">게시글 내용</label>
+							<div id="summernote" class="summernote"></div>
+						</div>
+						<div class="form-group">	
+							<input type="file" class="form-control-file"
+								id="FIprojectTaskInsert">
 						</div>
 						<button type="submit" class="btn btn-primary">등록</button>
 					</form>
@@ -79,12 +91,152 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
-	<div class="modal fade" id="TaProjectTaskInsert" tabindex="-1" role="dialog"
-		aria-labelledby="TaProjectTaskInsert" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
+
+
+
+	<div class="modal fade" id="TaProjectTaskInsert" tabindex="-1"
+		role="dialog" aria-labelledby="TaProjectTaskInsert" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">업무 등록</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="modelemail">업무 제목</label> <input type="text"
+								class="form-control" id="TEprojectTaskInsert">
+						</div>
+						<div class="form-group">
+							<label for="modelpass">게시글 내용</label>
+							<div id="summernote" class="summernote"></div>
+						</div>
+						
+						<div class="form-group">	
+							<input type="file" class="form-control-file"
+								id="FIprojectTaskInsert">
+						</div>
+					<div class="col-md-14 col-12 selects-contant">
+						<div class="form-group">
+							<div class="select-wrapper">
+								<select class="js-basic-multiple form-control" name="states[]"
+									multiple="multiple">
+									<optgroup label="Alaskan/Hawaiian Time Zone">
+										<option value="AK">Alaska</option>
+										<option value="HI">Hawaii</option>
+									</optgroup>
+									<optgroup label="Pacific Time Zone">
+										<option value="CA">California</option>
+										<option value="NV">Nevada</option>
+										<option value="OR">Oregon</option>
+										<option value="WA">Washington</option>
+									</optgroup>
+									<optgroup label="Mountain Time Zone">
+										<option value="AZ">Arizona</option>
+										<option value="CO">Colorado</option>
+										<option value="ID">Idaho</option>
+										<option value="MT">Montana</option>
+										<option value="NE">Nebraska</option>
+										<option value="NM">New Mexico</option>
+										<option value="ND">North Dakota</option>
+										<option value="UT">Utah</option>
+										<option value="WY">Wyoming</option>
+									</optgroup>
+								</select>
+							</div>
+						</div>
+					</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">등록</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="TaProjectCalenderInsert" tabindex="-1"
+		role="dialog" aria-labelledby="TaProjectCalenderInsert"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">캘린더 일정등록</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="modelemail">제목</label> <input type="email"
+								class="form-control" id="modelemail">
+						</div>
+						
+						<div class="form-group">
+							<label for="modelpass">게시글 내용</label>
+							<textarea class="form-control" placeholder="Message" id="Textarea1" rows="3"></textarea>
+						</div>
+						
+							
+						<div class="form-group">
+							<div id="summernote" class="summernote"></div>
+						</div>
+							<div class="input-group" data-date="23/11/2018" data-date-format="mm/dd/yyyy">
+                             <span class="input-group-addon">시작일정</span>
+                              <input type="text" class="form-control range-from" name="from">
+                              <span class="input-group-addon">종료일정</span>
+                              <input class="form-control range-to" type="text" name="to">
+                            </div>
+						
+							<div class="col-md-14 col-12 selects-contant">
+							<div class="form-group">
+							<span class="input-group-addon">지정자</span>
+								<div class="select-wrapper">
+									<select class="js-basic-multiple form-control" name="states[]"
+										multiple="multiple">
+										<optgroup label="Alaskan/Hawaiian Time Zone">
+											<option value="AK">Alaska</option>
+											<option value="HI">Hawaii</option>
+										</optgroup>
+										<optgroup label="Pacific Time Zone">
+											<option value="CA">California</option>
+											<option value="NV">Nevada</option>
+											<option value="OR">Oregon</option>
+											<option value="WA">Washington</option>
+										</optgroup>
+										<optgroup label="Mountain Time Zone">
+											<option value="AZ">Arizona</option>
+											<option value="CO">Colorado</option>
+											<option value="ID">Idaho</option>
+											<option value="MT">Montana</option>
+											<option value="NE">Nebraska</option>
+											<option value="NM">New Mexico</option>
+											<option value="ND">North Dakota</option>
+											<option value="UT">Utah</option>
+											<option value="WY">Wyoming</option>
+										</optgroup>
+									</select>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">등록</button>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="TaProjectTodoInsert" tabindex="-1"
+		role="dialog" aria-labelledby="TaProjectTodoInsert" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Login</h5>
@@ -114,73 +266,6 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	<div class="modal fade" id="TaProjectCalenderInsert" tabindex="-1" role="dialog"
-		aria-labelledby="TaProjectCalenderInsert" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Login</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="modelemail">Username</label> <input type="email"
-								class="form-control" id="modelemail">
-						</div>
-						<div class="form-group">
-							<label for="modelpass">Password</label> <input type="password"
-								class="form-control" id="modelpass">
-						</div>
-						<div class="form-group form-check">
-							<input type="checkbox" class="form-check-input"
-								id="exampleCheck1"> <label class="form-check-label"
-								for="exampleCheck1">Remember</label>
-						</div>
-						<button type="submit" class="btn btn-primary">LOGIN</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="modal fade" id="TaProjectTodoInsert" tabindex="-1" role="dialog"
-		aria-labelledby="TaProjectTodoInsert" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Login</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="modelemail">Username</label> <input type="email"
-								class="form-control" id="modelemail">
-						</div>
-						<div class="form-group">
-							<label for="modelpass">Password</label> <input type="password"
-								class="form-control" id="modelpass">
-						</div>
-						<div class="form-group form-check">
-							<input type="checkbox" class="form-check-input"
-								id="exampleCheck1"> <label class="form-check-label"
-								for="exampleCheck1">Remember</label>
-						</div>
-						<button type="submit" class="btn btn-primary">LOGIN</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+
 </th:block>
 </html>
