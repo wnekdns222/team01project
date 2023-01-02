@@ -1,62 +1,186 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/default}">
-	
-	<th:block layout:fragment="customCrumbbar">
-		<div class="breadcrumbbar">
-			<div class="row align-items-center">
-				<div class="col-md-8 col-lg-8">
-					<h4 class="page-title">Home</h4>
-					<div class="breadcrumb-list">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item active" aria-current="page">Home</li>
-						</ol>
-					</div>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<th:block layout:fragment="customCrumbbar">
+	<div class="breadcrumbbar">
+		<div class="row align-items-center">
+			<div class="col-md-8 col-lg-8">
+				<h4 class="page-title">Home</h4>
+				<div class="breadcrumb-list">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active" aria-current="page">Home</li>
+					</ol>
 				</div>
-				<div class="col-md-4 col-lg-4">
-					<div class="widgetbar">
-						<button class="btn btn-primary-rgba">
-							<i class="feather icon-plus mr-2"></i>Actions
-						</button>
-					</div>
+			</div>
+			<div class="col-md-4 col-lg-4">
+				<div class="widgetbar">
+					<button class="btn btn-primary-rgba">
+						<i class="feather icon-plus mr-2"></i>Actions
+					</button>
 				</div>
 			</div>
 		</div>
-		<br><br>
-	</th:block>
-	<th:block layout:fragment="customContents">
-	<th:block th:fragment="bizTab4">
-		<div class="tab tab-border nav-center">
-                                            <ul class="nav nav-tabs" role="tablist">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active show" id="boardinsert-05-tab" data-toggle="tab" href="#boardinsert" role="tab" aria-controls="boardinsert" aria-selected="true"> 게시글등록</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="taskInsert-05-tab" data-toggle="tab" href="#taskInsert" role="tab" aria-controls="taskInsert" aria-selected="false"> 업무요청 등록 </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="portfolio-05-tab" data-toggle="tab" href="#calenderInsert" role="tab" aria-controls="calenderInsert" aria-selected="false"> 캘린더등록 </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="contact-05-tab" data-toggle="tab" href="#projectTodo" role="tab" aria-controls="projectTodo" aria-selected="false">할일 </a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content">
-                                                <div class="tab-pane fade active show" id="boardinsert" role="tabpanel">
-                                                   <div th:include="~{project/project_home/project_board_insert:: bizTab1}"></div>
-                                                </div>
-                                                <div class="tab-pane fade" id="taskInsert" role="tabpanel" >
-                                                   <div th:include="~{project/project_home/project_task_insert:: bizTab1}"></div> 
-                                                </div>
-                                                <div class="tab-pane fade" id="calenderInsert" role="tabpanel">
-                                                   <div th:include="~{project/project_home/project_calender_insert:: bizTab1}"></div>
-                                                </div>
-                                                <div class="tab-pane fade" id="projectTodo" role="tabpanel" >
-                                                    <div th:include="~{project/project_home/project_todo:: bizTab1}"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-	</th:block>
-	</th:block>
+	</div>
+
+</th:block>
+<th:block layout:fragment="customContents">
+	<!-- /project/projectDetail의 bizTab4 -->
+</th:block>
+<th:block th:fragment="projectHomeTab1">
+	<div class="tab tab-border nav-center">
+		<ul class="nav nav-tabs" role="tablist">
+
+			<li class="nav-item">
+			<button class="btn btn-light" data-toggle="modal" data-target="#TaProjectBoardInsert">게시글 등록</button>
+			</li>
+
+			<li class="nav-item">
+			<button class="btn btn-light" data-toggle="modal" data-target="#TaProjectTaskInsert">업무요청 등록</button>
+			</li>
+
+			<li class="nav-item">
+			<button class="btn btn-light" data-toggle="modal" data-target="#TaProjectCalenderInsert">캘린더일정 등록</button>
+			</li>
+
+			<li class="nav-item">
+			<button class="btn btn-light" data-toggle="modal" data-target="#TaProjectTodoInsert">할일 등록</button>
+			</li>
+
+		</ul>
+	</div>
+
+
+
+	<div class="modal fade" id="TaProjectBoardInsert" tabindex="-1" role="dialog"
+		aria-labelledby="TaProjectBoardInsert" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">게시글 등록</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="modelemail">게시글 제목</label> 
+							<input type="text" class="form-control" id="modelemail">
+						</div>
+						<div class="form-group">
+							<label for="modelpass">게시글 내용</label> 
+							<textarea class="form-control" rows="5"></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">등록</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="modal fade" id="TaProjectTaskInsert" tabindex="-1" role="dialog"
+		aria-labelledby="TaProjectTaskInsert" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Login</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="modelemail">Username</label> <input type="email"
+								class="form-control" id="modelemail">
+						</div>
+						<div class="form-group">
+							<label for="modelpass">Password</label> <input type="password"
+								class="form-control" id="modelpass">
+						</div>
+						<div class="form-group form-check">
+							<input type="checkbox" class="form-check-input"
+								id="exampleCheck1"> <label class="form-check-label"
+								for="exampleCheck1">Remember</label>
+						</div>
+						<button type="submit" class="btn btn-primary">LOGIN</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="TaProjectCalenderInsert" tabindex="-1" role="dialog"
+		aria-labelledby="TaProjectCalenderInsert" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Login</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="modelemail">Username</label> <input type="email"
+								class="form-control" id="modelemail">
+						</div>
+						<div class="form-group">
+							<label for="modelpass">Password</label> <input type="password"
+								class="form-control" id="modelpass">
+						</div>
+						<div class="form-group form-check">
+							<input type="checkbox" class="form-check-input"
+								id="exampleCheck1"> <label class="form-check-label"
+								for="exampleCheck1">Remember</label>
+						</div>
+						<button type="submit" class="btn btn-primary">LOGIN</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="TaProjectTodoInsert" tabindex="-1" role="dialog"
+		aria-labelledby="TaProjectTodoInsert" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Login</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="modelemail">Username</label> <input type="email"
+								class="form-control" id="modelemail">
+						</div>
+						<div class="form-group">
+							<label for="modelpass">Password</label> <input type="password"
+								class="form-control" id="modelpass">
+						</div>
+						<div class="form-group form-check">
+							<input type="checkbox" class="form-check-input"
+								id="exampleCheck1"> <label class="form-check-label"
+								for="exampleCheck1">Remember</label>
+						</div>
+						<button type="submit" class="btn btn-primary">LOGIN</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</th:block>
 </html>
