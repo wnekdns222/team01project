@@ -6,7 +6,7 @@
 	<th:block layout:fragment="customCrumbbar">
 		<div class="breadcrumbbar">
 			<div class="row align-items-center">
-				<div class="col-md-8 col-lg-8">
+				<div class="col-md-8 col-lg-11">
 					<h4 class="page-title">파일목록</h4>
 					<div class="breadcrumb-list">
 						<ol class="breadcrumb">
@@ -15,13 +15,11 @@
 						</ol>
 					</div>
 				</div>
-				<div class="col-md-4 col-lg-4">
-					<div class="widgetbar">
-						<button class="btn btn-outline-success" onclick="location.href='/file/addFile';">
-							<i class="feather icon-plus mr-2"></i>파일등록
-						</button>
-					</div>
-				</div>
+		<div style="text-align: right;">
+			<button class="btn btn-outline-success" onclick="location.href='/file/addFile';">
+				<i class="feather icon-plus mr-2"></i>파일등록
+			</button>
+		</div>
 			</div>
 		</div>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,15 +48,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>file1</td>
+				<tr th:unless="${#lists.isEmpty(fileList)}" th:each="f : ${fileList}">
+					<th th:text=${f.fileNum} scope="col"></th>
 					<td>
-						<a th:href="@{/file/fileView}">나만의 파일</a>
+						<a th:href="@{/file/fileView(fileNum = ${f.fileNum})}">[[${f.fileTitle}]]</a>
 					</td>
-					<td>id001</td>
-					<td>인사과</td>
+					<td th:text=${f.fileRegiStrant}></td>
 					<td>부장</td>
-					<td>2022-12-29</td>
+					<td>인사과</td>
+					<td th:text=${f.fileRegDate}></td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(fileList)}" th:each="f : ${fileList}">
+					<td colspan="6">등록된 파일이 없습니다.</td>
 				</tr>
 			</tbody>
 		</table>

@@ -121,6 +121,13 @@ public class ApprovalController {
 		return "approval/circularList";
 	}
 	
+	@GetMapping("referrerView")
+	public String referrerView(Model model) {
+		
+		model.addAttribute("title", "참조문서 상세보기");
+		
+		return "approval/referrerView";
+	}
 	/**
 	 * 참조함 리스트
 	 * @param model
@@ -134,7 +141,11 @@ public class ApprovalController {
 		
 		return "approval/referrerList";
 	}
-	
+	/**
+	 * 수신문서 상세보기 
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("receiverView")
 	public String receiverView(Model model) {
 		
@@ -158,7 +169,7 @@ public class ApprovalController {
 	}
 	
 	/**
-	 * 기안함 상세보기
+	 * 기안문서 상세보기
 	 * @param model
 	 * @return
 	 */
