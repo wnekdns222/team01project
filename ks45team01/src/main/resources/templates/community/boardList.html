@@ -4,11 +4,50 @@
 	  layout:decorate="~{layout/default}">
 	
 <th:block layout:fragment="customCrumbbar">
-  <div class="page_tits">
-    <h3>게시판 관리</h3>
-    <p class="path"><strong>현재 위치 :</strong> <span>게시판 관리</span> <span>리스트형</span> <span>글작성</span></p>
-  </div>
-</th:block>
+		<!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-30">
+                                <!-- begin page title -->
+                                <div class="d-block d-lg-flex flex-nowrap align-items-center">
+                                    <div class="page-title mr-4 pr-4 border-right">
+                                        <h1>게시판 등록</h1>
+                                    </div>
+                                    <div class="breadcrumb-bar align-items-center">
+                                        <nav>
+                                            <ol class="breadcrumb p-0 m-b-0">
+                                                <li class="breadcrumb-item">
+                                                    <a href="index.html"><i class="ti ti-home"></i></a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    게시판 리스트
+                                                </li>
+                                                <li class="breadcrumb-item active text-primary" aria-current="page">게시글 등록</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                    <div class="ml-auto d-flex align-items-center secondary-menu text-center">
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Todo list">
+                                            <i class="fe fe-edit btn btn-icon text-primary"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Projects">
+                                            <i class="fa fa-lightbulb-o btn btn-icon text-success"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Task">
+                                            <i class="fa fa-check btn btn-icon text-warning"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Calendar">
+                                            <i class="fa fa-calendar-o btn btn-icon text-cyan"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Analytics">
+                                            <i class="fa fa-bar-chart-o btn btn-icon text-danger"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- end page title -->
+                            </div>
+                        </div>
+        </th:block>
+        
 <th:block layout:fragment="customContents">
   <div class="content">
     <section>
