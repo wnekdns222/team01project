@@ -1,4 +1,4 @@
-package ks45team01.unity.worker.controller;
+package ks45team01.unity.admin.controller;
 
 import java.util.List;
 
@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team01.unity.dto.WorkType;
 import ks45team01.unity.service.WorkTypeService;
@@ -49,20 +51,60 @@ public class AdminWorkController {
 		
 		return "work/work_authority_list";
 	}
-	//근무유형 입력
-	@GetMapping("settings/workTypeInsert")
-	public String updateWorkType() {
+	/**
+	 * 근무유형 수정
+	 * @return "settings/work_type_modify";
+	 */
+	@GetMapping("settings/workTypeModify")
+	public String updateWorkType(@RequestParam(value="workTypeNum", required=false)String workTypeNum, Model model) {
+		
+		log.info("workType: {}", workTypeNum);
+		WorkType workType = workTypeService.getWorkTypeById(workTypeNum);
+		model.addAttribute("workType", workType);
 		
 		return "settings/work_type_modify";
 	}
-	//근무유형 수정
-	@GetMapping("settings/workTypeModify")
+	
+	/**
+	 * 근무유형 수정처리
+	 * @param workType
+	 * @return 
+	 */
+	@PostMapping("settings/workTypeModify")
+	public String updateWorkType(WorkType workType) {
+		
+		log.info("근무유형 수정: {}",workType);
+		workTypeService.updateWorkType(workType);
+		return "redirect:/settings/workTypeList";
+	}
+	
+	/**
+	 * 근무유형 입력
+	 * @return "settings/work_type_insert";
+	 */
+	@GetMapping("settings/workTypeInsert")
 	public String addWorkType() {
 		
 		return "settings/work_type_insert";
 	}
-
-	//전직원근무유형 조회
+	
+	/**
+	 * 근무유형 입력처리
+	 * @return "redirect:/settings/workTypeList";
+	 */
+	@PostMapping("settings/workTypeInsert")
+	public String addWorkType(WorkType workType) {
+		
+		log.info("근무유형 입력: {}",workType);
+		workTypeService.addWorkType(workType);
+		
+		return "redirect:/settings/workTypeList";
+	}
+	/**
+	 * 전직원근무유형 조회
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("settings/workTypeList")
 	public String getAllWorkType(Model model) {
 		
@@ -70,7 +112,7 @@ public class AdminWorkController {
 		
 		log.info("근무유형 조회: {}", workTypeList);
 		
-		model.addAttribute("worktypeList", workTypeList);
+		model.addAttribute("workTypeList", workTypeList);
 		
 		return "settings/work_type_list";
 	}
@@ -88,11 +130,11 @@ public class AdminWorkController {
 		return "settings/vacation_variety_insert";
 	}
 	//사내 휴가종류목록
-		@GetMapping("settings/vacationVarietyList")
-		public String getVacationVariety() {
-			
-			return "settings/vacation_variety_list";
-		}
+	@GetMapping("settings/vacationVarietyList")
+	public String getVacationVariety() {
+		
+		return "settings/vacation_variety_list";
+	}
 	//휴가종류수정
 	@GetMapping("settings/vacationVarietyModify")
 	public String updateVacationVariety() {

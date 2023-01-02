@@ -44,20 +44,20 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:if="${not #lists.isEmpty(worktypeList)}"
-				th:each="wt : ${worktypeList}">
-				<td th:text="${wt.workTypeNum}"></td>
-				<td th:text="${wt.memberNum}"></td>
-				<td th:text="${wt.workName}"></td>
-				<td th:text="${wt.workDate}"></td>
-				<td th:text="${wt.attendanceTime}"></td>
-				<td th:text="${wt.leaveWorkTime}"></td>
-				<td th:text="${wt.workTypeUsePeriod}"></td>
+			<tr th:if="${not #lists.isEmpty(workTypeList)}"
+				th:each="t : ${workTypeList}">
+				<td th:text="${t.workTypeNum}"></td>
+				<td th:text="${t.memberNum}"></td>
+				<td th:text="${t.workName}"></td>
+				<td th:text="${t.workDate}"></td>
+				<td th:text="${t.attendanceTime}"></td>
+				<td th:text="${t.leaveWorkTime}"></td>
+				<td th:text="${t.workTypeUsePeriod}"></td>
 				<td><a
-					th:href="@{/settings/workTypeModify(workTypeNum=${wt.workTypeNum})}">수정</a>
+					th:href="@{/settings/workTypeModify(workTypeNum=${t.workTypeNum})}">수정</a>
 				</td>
 			</tr>
-			<tr th:unless="${not #lists.isEmpty(worktypeList)}">
+			<tr th:unless="${not #lists.isEmpty(workTypeList)}">
 			</tr>
 		</tbody>
 	</table>

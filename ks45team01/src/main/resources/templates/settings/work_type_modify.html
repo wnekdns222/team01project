@@ -21,38 +21,41 @@
 		<!-- end page title -->
 </th:block>
 
-<th:block layout:fragment="customContents">
-	<form>
+<th:block layout:fragment="customContents" th:object="${workType}">
+	<form th:action="@{/settings/workTypeModify}" method="post">
+		<input type="hidden"  th:value="*{workTypeNum}" name="workTypeNum" >
 		<div class="form-group">
-			<label for="memberNum">사원번호</label> <input type="text"
-				class="form-control" id="memberNum" required>
+			<label for="memberNum">사원번호</label> 
+			<input type="text"
+				class="form-control" name="memberNum" th:value="*{memberNum}" readonly>
 		</div>
 		<div class="form-group">
 			<label for="workName">근태명</label> <input type="text"
-				class="form-control" id="workName" required>
+				class="form-control" name="workName" th:value="*{workName}" required>
 		</div>
 		<div class="form-group">
 			<label for="workDate">근무일</label> <input type="date"
-				class="form-control" name="workDate" id="workDate" required>
+				class="form-control" name="workDate" id="workDate" th:value="*{workDate}" required>
 		</div>
 		<div class="form-group">
 			<label for="attendanceTime">출근시간</label> <input type="time"
-				class="form-control" name="attendanceTime" id="attendanceTime"
-				required>
+				class="form-control" name="attendanceTime" th:value="*{attendanceTime}" id="attendanceTime" required>
 		</div>
 		<div class="form-group">
 			<label for="leaveWorkTime">퇴근시간</label> <input type="time"
-				class="form-control" name="leaveWorkTime" id="leaveWorkTime"
-				required>
+				class="form-control" name="leaveWorkTime" th:value="*{leaveWorkTime}" id="leaveWorkTime" required>
+		</div>
+		<div class="form-group">
+			<label for="correctMemberNum">수정자</label> <input type="text"
+				class="form-control" name="correctMemberNum" id="correctMemberNum" required>
 		</div>
 		<div class="form-check">
-			<input class="form-check-input" type="checkbox" id="use" required>
+			<input class="form-check-input" type="checkbox" name="use" id="use" required>
 			<label class="form-check-label" for="use"> 사용여부 </label>
 		</div>
 		<div class="form-group">
 			<label for="workTypeUsePeriod">사용기한</label> <input type="date"
-				class="form-control" name="workTypeUsePeriod" id="inputDate"
-				required>
+				class="form-control" name="workTypeUsePeriod" id="inputDate" th:value="*{workTypeUsePeriod}" required>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
