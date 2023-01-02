@@ -9,7 +9,7 @@ public class WorkType {
 	private String workDate;
 	private String attendanceTime;
 	private String leaveWorkTime;
-	private String regMemberDate;
+	private String regMemberNum;
 	private String regDate;
 	private String correctMemberNum;
 	private String correctDate;
@@ -51,11 +51,11 @@ public class WorkType {
 	public void setLeaveWorkTime(String leaveWorkTime) {
 		this.leaveWorkTime = leaveWorkTime;
 	}
-	public String getRegMemberDate() {
-		return regMemberDate;
+	public String getRegMemberNum() {
+		return regMemberNum;
 	}
-	public void setRegMemberDate(String regMemberDate) {
-		this.regMemberDate = regMemberDate;
+	public void setRegMemberNum(String regMemberNum) {
+		this.regMemberNum = regMemberNum;
 	}
 	public String getRegDate() {
 		return regDate;
@@ -102,8 +102,8 @@ public class WorkType {
 		builder.append(attendanceTime);
 		builder.append(", leaveWorkTime=");
 		builder.append(leaveWorkTime);
-		builder.append(", regMemberDate=");
-		builder.append(regMemberDate);
+		builder.append(", regMemberNum=");
+		builder.append(regMemberNum);
 		builder.append(", regDate=");
 		builder.append(regDate);
 		builder.append(", correctMemberNum=");

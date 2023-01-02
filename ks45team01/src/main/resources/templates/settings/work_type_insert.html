@@ -22,14 +22,14 @@
 
 
 <th:block layout:fragment="customContents">
-	<form>
+	<form th:action="@{/settings/workTypeInsert}" method="post">
 		<div class="form-group">
 			<label for="memberNum">사원번호</label> <input type="text"
-				class="form-control" id="memberNum" required>
+				class="form-control" name="memberNum" id="memberNum" required>
 		</div>
 		<div class="form-group">
 			<label for="workName">근태명</label> <input type="text"
-				class="form-control" id="workName" required>
+				class="form-control" name="workName" id="workName" required>
 		</div>
 		<div class="form-group">
 			<label for="workDate">근무일</label> <input type="date"
@@ -45,13 +45,17 @@
 				class="form-control" name="leaveWorkTime" id="leaveWorkTime"
 				required>
 		</div>
+		<div class="form-group">
+			<label for="regMemberNum">등록자</label> <input type="text"
+				class="form-control" name="regMemberNum" id="regMemberNum" required>
+		</div>
 		<div class="form-check">
-			<input class="form-check-input" type="checkbox" id="use" required>
-			<label class="form-check-label" for="use"> 사용여부 </label>
+			<input class="form-check-input" type="checkbox" id="use" name="use" required>
+			<label class="form-check-label" for="use" > 사용여부 </label>
 		</div>
 		<div class="form-group">
 			<label for="workTypeUsePeriod">사용기한</label> <input type="date"
-				class="form-control" name="workTypeUsePeriod" id="inputDate"
+				class="form-control" name="workTypeUsePeriod" id="workTypeUsePeriod"
 				required>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
