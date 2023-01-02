@@ -27,19 +27,19 @@
 	</th:block>
 	<th:block layout:fragment="customContents">
 		<form id="addFile" th:action="@{/file/addFile}" method="post">
-			<label for="fileName">파일명</label>
+			<label for="fileTitle">파일명</label>
 			<div style="width: 800px;">
-				<input type="text" class="form-control" id="formName" name="formName"
+				<input type="text" class="form-control" id="fileTitle" name="fileTitle"
 					placeholder="파일명을 입력해주세요" />
 			</div>
 			<label for="fileRegiStrant">작성자</label>
 			<div style="width: 800px;">
-				<input type="text" class="form-control" id="formRegiStrant"
-					name="formRegiStrant" placeholder="작성자를 입력해주세요" /> <label
+				<input type="text" class="form-control" id="fileRegiStrant"
+					name="fileRegiStrant" placeholder="작성자를 입력해주세요" /> <label
 					for="Contents">내용</label>
-				<textarea class="file-control" name="fileContents" id="fileContents"
+				<textarea class="form-control" name="fileContents" id="fileContents"
 					placeholder="내용을 입력해주세요" style="height: 150px; width: 800px;"></textarea>
-				<input type="file"></input>
+				<input name="fileAttach" type="file"/>
 			</div>
 			<div style="margin-top: 20px; margin-left: 300px;">
 				<button type="submit" class="btn btn-primary">등록</button>

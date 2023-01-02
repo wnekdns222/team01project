@@ -20,46 +20,29 @@
 		</div>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<table class="table table-hover">
-			<tr>
-				<td style="font-family:돋음; font-size:12" height="16">
-					<div align="center">파일번호</div>
-				</td>
-				<td style="font-family:돋음; font-size:12">
-					1
-				</td>
-			</tr>
-			<tr>
-				<td style="font-family:돋음; font-size:12" height="16">
-					<div align="center">파일명</div>
-				</td>
-				<td style="font-family:돋음; font-size:12">
-					예시
-				</td>
-			</tr>
-			<tr>
-				<td style="font-family:돋음; font-size:12" height="16">
-					<div align="center">내용</div>
-				</td>
-				<td style="font-family:돋음; font-size:12">
-					<textarea class="file-control">예시입니다.</textarea>
-				</td>
-			</tr>
-			<tr>
-				<td style="font-family:돋음; font-size:12" height="16">
-					<div align="center">파일첨부</div>
-				</td>
-				<td>
-					<input type="file"/>
-				</td>
-			</tr>
-			<tr style="text-align:right;">
-				<td>
-					<a th:href="@{/file/fileUpdate}">[수정]</a>
-					<a th:href="@{#}">[취소]</a>
-					<a th:href="@{/file/fileList}">[목록]</a>
-				</td>
-			</tr>
-		</table>
+		<form id="fileUpdate" th:action="@{/file/fileUpdate}" method="post">
+			<input type="hidden" name="fileNum" th:value="${fileUpdate.fileNum}" />
+			<label for="fileTitle">서식명</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileTitle" name="fileTitle" th:value="${fileUpdate.fileTitle}"/>
+			</div>
+				<label for="fileRegiStrant">작성자</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileRegiStrant" name="fileRegiStrant" th:value="${fileUpdate.fileRegiStrant}" readonly="readonly"/>
+			</div>
+				<label for="fileRegiStrant">수정자</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileRegiStrant" name="fileRegiStrant" th:value="${fileUpdate.fileModifier}"/>
+			</div>
+			<label for="fileContents">내용</label>
+			<textarea class="form-control" name="fileContents" id="fileContents" style="height: 150px; width: 800px;" th:text="${fileUpdate.fileContents}"></textarea>
+			<div style="margin-top: 8px">
+				<input name="fileAttach" type="file"/>
+			</div>
+			<div style="margin-left: 300px; margin-top: 8px;">
+			<button type="submit" class="btn btn-outline-success">등록</button>
+			<button type="button" class="btn btn-outline-success" onclick="location.href='/file/fileList';">취소</button>
+			</div>
+		</form>
 	</th:block>
 </html>
