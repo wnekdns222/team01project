@@ -4,9 +4,10 @@
 	  layout:decorate="~{layout/default}">
 	
 	<th:block layout:fragment="customCrumbbar">
+		<!-- begin page title -->
 		<div class="row align-items-center">
 			<div class="col-md-8 col-lg-8">
-				<h4 class="page-title">Home</h4>
+				<h4 class="page-title">휴가부여</h4>
 				<div class="breadcrumb-list">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -15,20 +16,10 @@
 					</ol>
 				</div>
 			</div>
-			<div class="col-md-4 col-lg-4">
-				<div class="widgetbar">
-					<button class="btn btn-primary-rgba">
-						<i class="feather icon-plus mr-2"></i>Actions
-					</button>
-				</div>
-			</div>
 		</div>
+		<!-- end page title -->
 	</th:block>
-	
-	
-	
 	<th:block layout:fragment="customContents">
-		<h1>휴가부여</h1>
 		<form>
 			<div class="form-group">
 				<label for="memberNum">사원번호</label> 
@@ -45,5 +36,4 @@
 			<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 	</th:block>
-	
 </html>

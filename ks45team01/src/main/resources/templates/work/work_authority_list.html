@@ -1,49 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/default}">
-	
-	<th:block layout:fragment="customCrumbbar">
-		<div class="row align-items-center">
-			<div class="col-md-8 col-lg-8">
-				<h4 class="page-title">Home</h4>
-				<div class="breadcrumb-list">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">전사원근무내역조회</li>
-					</ol>
-				</div>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+
+<th:block layout:fragment="customCrumbbar">
+	<!-- begin page title -->
+	<div class="row align-items-center">
+		<div class="col-md-8 col-lg-8">
+			<h4 class="page-title">전사원근무내역조회</h4>
+			<div class="breadcrumb-list">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/">Home</a></li>
+					<li class="breadcrumb-item active" aria-current="page">전사원근무내역조회</li>
+				</ol>
 			</div>
 		</div>
-		<div class="col-md-12 col-lg-12">
-         	<div class="widgetbar">
-				<button type="button" class="btn btn-outline-success" onclick="location.href='/settings/vacationVrietyInsert'"><i class="feather icon-plus mr-2">
-				Insert</i></button>
-			</div>
-		</div>
-	</th:block>
-	
-	
-	
-	<th:block layout:fragment="customContents">
-	<h3>비정상 근태 조회</h3>
-		<table class="table table-hover">
-          <thead>
-              <tr>
-                  <th scope="col">근태번호</th>
-                  <th scope="col">사원번호</th>
-                  <th scope="col">근무일</th>
-                  <th scope="col">출근시간</th>
-                  <th scope="col">퇴근시간</th>
-                  <th scope="col">입력사유</th>
-                  <th scope="col">대분류</th>
-                  <th scope="col">중분류</th>
-                  <th scope="col">소분류</th>
-                  <th scope="col">입력사유</th>
-              </tr>
-          </thead>
-          <tbody>
-              <!-- <tr th:if="${not #lists.isEmpty(worktypeList)}" th:each="wt : ${worktypeList}">
+	</div>
+	<!-- end page title -->
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">근태번호</th>
+				<th scope="col">사원번호</th>
+				<th scope="col">근무일</th>
+				<th scope="col">출근시간</th>
+				<th scope="col">퇴근시간</th>
+				<th scope="col">입력사유</th>
+				<th scope="col">대분류</th>
+				<th scope="col">중분류</th>
+				<th scope="col">소분류</th>
+				<th scope="col">입력사유</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- <tr th:if="${not #lists.isEmpty(worktypeList)}" th:each="wt : ${worktypeList}">
                   <td th:text="${wt.workTypeNum}"></td>
                   <td th:text="${wt.memberNum}"></td>
                   <td th:text="${wt.workName}"></td>
@@ -57,8 +51,8 @@
               </tr>
               <tr th:unless="${not #lists.isEmpty(worktypeList)}">
               </tr> -->
-          </tbody>
-      </table>
+		</tbody>
+	</table>
 
-	</th:block>
+</th:block>
 </html>
