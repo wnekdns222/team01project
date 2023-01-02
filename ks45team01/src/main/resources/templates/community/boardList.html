@@ -2,31 +2,143 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/default}">
-	
-	<th:block layout:fragment="customCrumbbar">
-		<div class="row align-items-center">
-			<div class="col-md-8 col-lg-8">
-				<h4 class="page-title">Home</h4>
-				<div class="breadcrumb-list">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active" aria-current="page">Home</li>
-					</ol>
-				</div>
-			</div>
-			<div class="col-md-4 col-lg-4">
-				<div class="widgetbar">
-					<button class="btn btn-primary-rgba">
-						<i class="feather icon-plus mr-2"></i>Actions
-					</button>
-				</div>
-			</div>
-		</div>
-	</th:block>
-	
-	
-	
-	<th:block layout:fragment="customContents">
-		<h1>게시판 메인화면</h1>
-	</th:block>
-	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>boardList</title>
+</head>
+<body>
+<th:block layout:fragment="customCrumbbar">
+		<!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-30">
+                                <!-- begin page title -->
+                                <div class="d-block d-lg-flex flex-nowrap align-items-center">
+                                    <div class="page-title mr-4 pr-4 border-right">
+                                        <h1>게시판 등록</h1>
+                                    </div>
+                                    <div class="breadcrumb-bar align-items-center">
+                                        <nav>
+                                            <ol class="breadcrumb p-0 m-b-0">
+                                                <li class="breadcrumb-item">
+                                                    <a href="index.html"><i class="ti ti-home"></i></a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    게시판 리스트
+                                                </li>
+                                                
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                    <div class="ml-auto d-flex align-items-center secondary-menu text-center">
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Todo list">
+                                            <i class="fe fe-edit btn btn-icon text-primary"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Projects">
+                                            <i class="fa fa-lightbulb-o btn btn-icon text-success"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Task">
+                                            <i class="fa fa-check btn btn-icon text-warning"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Calendar">
+                                            <i class="fa fa-calendar-o btn btn-icon text-cyan"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Analytics">
+                                            <i class="fa fa-bar-chart-o btn btn-icon text-danger"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- end page title -->
+                            </div>
+                        </div>
+        </th:block>
+     <th:block layout:fragment="customContents">   
+		<div class="page-wrapper">
+		    <div class="container-fluid">
+		        <div class="col-lg-12"><!--게시판 넓이 -->
+		            <div class="col-lg-12">
+		                <h1 class="page-header">게시판 리스트</h1>
+		            </div>
+		            <div class="row">
+		                  
+		              </div>
+		           
+		                <div class="col-12 col-lg-12">
+                                    <div class="card card-statistics">
+                                        <div class="card-header">
+                                            <div class="col-lg-2" style="float: right;">
+                                            <button type="button" class="btn btn-block btn-round btn-outline-info" onclick="location.href='/community/boardInsert';">게시판 작성</button>
+                                     		 </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">No.</th>
+                                                            <th scope="col">제목</th>
+                                                            <th scope="col">내용</th>
+                                                            <th scope="col">첨부파일</th>
+                                                            <th scope="col">등록 날짜</th>
+                                                            <th scope="col">수정 날짜</th>
+                                                            <th scope="col">조회수</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">1</th>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">1</th>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">1</th>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                            <td>Cell</td>
+                                                        </tr>
+ <!-- 이런식으로 db연결해야함.. -->
+  <!--                                                       <c:forEach items="${alm}" var="alm" varStatus="status">
+          <tr>
+            <td>${alm.ora_id}</td>
+            <td>${alm.ora_pw}</td>
+            <td>${alm.ora_level}</td>
+            <td>${alm.ora_name}</td>
+            <td>${alm.ora_email}</td>
+        	<td>
+<a href="<%= request.getContextPath() %>/Mup/m_update_form.ksmart_m?send_id=${alm.ora_id}"><button type="button" class="btn btn-info">수정버튼</button></a>
+							수정버튼 클릭시 경로 확장자 ksmart_m으로 변경 후 작업 시작			
+		</td>
+		<td>
+<a href="<%= request.getContextPath() %>/Mdel/m_delete_pro.ksmart_m?send_id=${alm.ora_id}"><button type="button" class="btn btn-primary">삭제버튼</button></a>
+							삭제버튼 클릭시 경로 확장자 ksmart_m으로 변경 후 작업 시작			
+		</td> -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</th:block>
+</body>
 </html>

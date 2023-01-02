@@ -2,155 +2,235 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="sideBarFragment">
 
-<!-- begin app-nabar -->
-                <aside class="app-navbar">
-                    <!-- begin sidebar-nav -->
-                    <div class="sidebar-nav scrollbar scroll_light">
-                        <ul class="metismenu " id="sidebarNav">
-                            <li class="nav-static-title">그룹웨어</li>
-                            <li class="active">
-                                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
-                                    <i class="nav-icon ti ti-rocket"></i>
-                                    <span class="nav-title">사원관리</span>
-                                    <span class="nav-label label label-danger">3</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    <li class="active"> <a href='/member/Member'>사원정보</a> </li>
-                                    <li> <a href='/member/MemberModify'>개인정보수정</a> </li>
-                                    <li> <a href='/member/MemberPasswordModify'>비밀번호 변경</a> </li>
-                                </ul>
-                            </li>
-                            
-                            
-                            
-                            <li><a href="/project/projectList" aria-expanded="false"><i class="nav-icon ti ti-comment"></i><span class="nav-title">프로젝트</span></a> </li>
-                            
-                            
-                            
-                            <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-calendar"></i><span class="nav-title">Calendar</span></a>
-                                <ul aria-expanded="false">
-                                    <li> <a href='/calender/scheduelList'>Full Calendar</a> </li>
-                                    <li> <a href='calendar-list.html'>Calendar List</a> </li>
-                                </ul>
-                            </li>
-                            
-                            
-                            <li class="nav-static-title">그룹웨어 관리자 페이지</li>
-                            <li>
-                                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"> <i class="nav-icon ti ti-layout-grid4-alt"></i> <span class="nav-title">사원관리</span> </a>
-                                <ul aria-expanded="false">
-                                    <li> <a href="/member/MemberAdmin">전체사원관리</a> </li>
+	<!-- begin app-nabar -->
+	<aside class="app-navbar">
+		<!-- begin sidebar-nav -->
+		<div class="sidebar-nav scrollbar scroll_light">
+			<ul class="metismenu " id="sidebarNav">
+				<li class="nav-static-title">그룹웨어</li>
+				<li class="active"><a class="has-arrow"
+					href="javascript:void(0)" aria-expanded="false"> <i
+						class="nav-icon ti ti-rocket"></i> <span class="nav-title">사원관리</span>
+						<span class="nav-label label label-danger">3</span>
+				</a>
+					<ul aria-expanded="false">
+						<li><a href='/member/Member'>사원정보</a></li>
+						<li><a href='/member/MemberModify'>개인정보수정</a></li>
+						<li><a href='/member/MemberPasswordModify'>비밀번호 변경</a></li>
+					</ul></li>
 
-                                    <li> <a href="/member/MemberDepartmentList">부서목록관리</a> </li>
 
-                                    <li> <a href="/member/MemberPositionList">직급목록관리</a> </li>
 
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-layout-column3-alt"></i><span class="nav-title">프로젝트관리</span></a>
-                                <ul aria-expanded="false">
-                                    <li> <a href="tables-basic.html">프로젝트 관리</a> </li>
-                                    <li> <a href="tables-color.html">전체 내부프로젝트 관리 </a> </li>
-                                    <li> <a href="tables-datatable.html">전체 통합댓글 관리</a> </li>
-                                    <li> <a href="tables-editable.html">전체 캘린더관리</a> </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-layout"></i> <span class="nav-title">Layouts</span></a>
-                                <ul aria-expanded="false">
-                                    <li><a href="layout-mini.html">Sidebar Mini</a></li>
+				<li><a href="/project/projectList" aria-expanded="false"><i
+						class="nav-icon ti ti-comment"></i><span class="nav-title">프로젝트</span></a>
+				</li>
+				<!-- 근태메뉴 -->
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"> <i
+						class="nav-icon ti ti-layout-column3-alt"></i> <span
+						class="nav-title">근태</span></a>
+					<ul aria-expanded="false">
+						<li><a href="/work/workList">근태내역조회</a></li>
+						<li><a href="/work/workDepartmentList">부서근태내역조회</a></li>
+						<li><a href="/work/workAllList">전사원근태내역조회</a></li>
+						<li><a href="/work/workAuthorityInsert">비정상근태권한입력</a></li>
+						<li><a href="/work/workAuthorityList">비정상근태권한조회</a></li>
+						<li><a href="/vacation/vacationInfoList">연차조회</a></li>
+						<li><a href="/vacation/vacationInfoDepartmentList">부서연차조회</a></li>
+						<li><a href="/vacation/vacationInfoAllList">전사원연차조회</a></li>
+					</ul></li>
+				<!-- 메신저메뉴 -->
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"> <i class="nav-icon ti ti-comment"></i> <span
+						class="nav-title">메신저</span></a>
+					<ul aria-expanded="false">
+						<li><a href="/messenger/messengerWorkerList">사원목록</a></li>
+						<li><a href="/messenger/messengerChatroomList">채팅리스트</a></li>
+						<!-- <li><a href="/messenger/messengerChatDetail">채팅</a></li> -->
+						<!-- 									<li><a href="/messenger/messengerChatroomInviteInsert">초대</a></li> -->
+					</ul></li>
 
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-pie-chart"></i><span class="nav-title">Charts</span></a>
-                                <ul aria-expanded="false">
-                                    <li> <a href="chart-apex.html">Apex Chart</a> </li>
-                                    <li> <a href="chart-flot.html">Flot Chart</a> </li>
-                                    <li> <a href="chart-morris.html">Morris Chart</a> </li>
-                                    <li> <a href="chart-chartist.html">Chartist Charts</a> </li>
-                                    <li> <a href="chart-chartjs.html">Chartjs Chart</a> </li>
-                                    <li> <a href="chart-c3.html">C3 Chart</a> </li>
-                                    <li> <a href="chart-sparkline.html">Sparkline Chart</a> </li>
-                                    <li> <a href="chart-knob.html">Knob Chart</a> </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"> <i class="nav-icon ti ti-pencil-alt"></i> <span class="nav-title">Forms</span> </a>
-                                <ul aria-expanded="false">
-                                    <li> <a href="form-autonumeric.html">Autonumeric</a> </li>
-                                    <li> <a href="form-editors.html">Editors</a> </li>
-                                    <li> <a href="form-elements.html">Elements</a> </li>
-                                    <li> <a href="form-file-upload.html">Drop Zone</a> </li>
-                                    <li> <a href="form-input-groups.html">Input Groups</a> </li>
-                                    <li> <a href="form-inputmask.html">Input Masks</a> </li>
-                                    <li> <a href="form-layouts.html">Forms Layouts</a> </li>
-                                    <li> <a href="form-listbox.html">Listbox</a> </li>
-                                    <li> <a href="form-pickers.html">Pickers</a> </li>
-                                    <li> <a href="form-range-slider.html">Range Slider</a> </li>
-                                    <li> <a href="form-selects.html">Selects</a> </li>
-                                    <li> <a href="form-switchers.html">Switchers</a> </li>
-                                    <li> <a href="form-validation.html">Validation</a> </li>
-                                </ul>
-                            </li>
-                            <li class="nav-static-title">Extra Components</li>
-                            <li>
-                                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-map-alt"></i><span class="nav-title">Maps</span></a>
-                                <ul aria-expanded="false">
-                                    <li> <a href="maps-google.html">Google Maps</a> </li>
-                                    <li> <a href="maps-vector.html">Vector Maps</a> </li>
-                                    <li> <a href="maps-mapael.html">Mapael Maps</a> </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-layers"></i><span class="nav-title">Pages</span><span class="nav-label label label-primary">12</span></a>
-                                <ul aria-expanded="false">
-                                    <li> <a href="page-account-settings.html">Account Settings</a> </li>
-                                    <li> <a href="page-clients.html">Clients</a> </li>
-                                    <li> <a href="page-contacts.html">Contacts</a> </li>
-                                    <li> <a href="page-employees.html">Employees</a> </li>
-                                    <li> <a href="page-faq.html">FAQ</a> </li>
-                                    <li> <a href="page-file-manager.html">File Manager</a> </li>
-                                    <li> <a href="page-gallery.html">Gallery</a> </li>
+				<li>
+					<a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="nav-icon ti ti-calendar"></i>
+					<span class="nav-title">캘린더</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href='/calender/scheduelList'>Full Calendar</a></li>
+					</ul>
+				</li>
+				<li>
+					<a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="fe fe-clipboard"></i>
+					<span class="nav-title">커뮤니티</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href='/community/noticeList'>공지사항</a></li>
+						<li><a href='/community/boardList'>게시판</a></li>
+					</ul>
+				</li>
 
-                                    <li> <a href="page-pricing.html">Pricing</a> </li>
-                                    <li> <a href="page-task-list.html">Task List</a> </li>
-                                    <li> <a href="page-404.html">404</a> </li>
-                                    <li> <a href="page-500.html">500</a> </li>
-                                    <li> <a href="page-coming-soon.html">Coming Soon</a> </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-key"></i><span class="nav-title">Auth</span></a>
-                                <ul aria-expanded="false">
-                                    <li> <a href="/Login/loginMain">Login</a> </li>
-                                    <li> <a href="auth-register.html">Register</a> </li>
-                                    <li> <a href="auth-lockscreen.html">Lock Screen</a> </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-list"></i><span class="nav-title">Multi Level</span></a>
-                                <ul aria-expanded="false">
-                                    <li> <a href="javascript: void(0);">Level 1.1</a> </li>
-                                    <li class="scoop-hasmenu">
-                                        <a class="has-arrow" href="javascript: void(0);">Level 1.2</a>
-                                        <ul aria-expanded="false">
-                                            <li> <a href="javascript: void(0);">Level 2.1</a> </li>
-                                            <li> <a href="javascript: void(0);">Level 2.2</a> </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="sidebar-banner p-4 bg-gradient text-center m-3 d-block rounded">
-                                <h5 class="text-white mb-1">Mentor admin</h5>
-                                <p class="font-13 text-white line-20">Multipurpose Bootstrap 4 Admin Template</p>
-                                <a class="btn btn-square btn-inverse-light btn-xs d-inline-block mt-2 mb-0" href="#"> Buy now</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- end sidebar-nav -->
-                </aside>
-                <!-- end app-navbar -->
+				<li class="active"><a class="has-arrow"
+					href="javascript:void(0)" aria-expanded="false"> <i
+						class="nav-icon ti ti-rocket"></i> <span class="nav-title">전자결재</span>
+						<span class="nav-label label label-danger">3</span>
+				</a>
+					<ul aria-expanded="false">
+						<li><a href='/form/formList'>서식</a></li>
+						<li><a href="/approval/draftInsert">기안</a></li>
+						<li><a href="/approval/draftList">기안함</a></li>
+						<li><a href="/approval/receiverList">수신함</a></li>
+						<li><a href="/approval/referrerList">참조함</a></li>
+						<li><a href="/approval/circularList">회람함</a></li>
+						<li><a href="/approval/rejectList">반려함</a></li>
+						<li><a href="/approval/approvalList">결재함</a></li>
+						<li><a href="/approval/approvalDoneList">결재완료함</a></li>
+						<li><a href="/approval/vacationInsert">휴가신청</a></li>
+						<li><a href="/approval/workCorrectInsert">근태정정</a></li>
+						<li><a href="/approval/finalApproverList">전결/대결</a></li>
+					</ul></li>
+				<li class="active"><a class="has-arrow"
+					href="javascript:void(0)" aria-expanded="false"> <i
+						class="nav-icon ti ti-rocket"></i> <span class="nav-title">파일</span>
+						<span class="nav-label label label-danger">3</span>
+				</a>
+					<ul aria-expanded="false">
+						<li><a href="/file/fileList">파일목록</a></li>
+					</ul></li>
+				<li class="nav-static-title">그룹웨어 관리자 페이지</li>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"> <i
+						class="nav-icon ti ti-layout-grid4-alt"></i> <span
+						class="nav-title">사원관리</span>
+				</a>
+					<ul aria-expanded="false">
+						<li><a href="/member/MemberAdmin">전체사원관리</a></li>
+
+						<li><a href="/member/MemberDepartmentList">부서목록관리</a></li>
+
+						<li><a href="/member/MemberPositionList">직급목록관리</a></li>
+
+					</ul></li>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i
+						class="nav-icon ti ti-layout-column3-alt"></i><span
+						class="nav-title">프로젝트관리</span></a>
+					<ul aria-expanded="false">
+						<li><a href="tables-basic.html">프로젝트 관리</a></li>
+						<li><a href="tables-color.html">전체 내부프로젝트 관리 </a></li>
+						<li><a href="tables-datatable.html">전체 통합댓글 관리</a></li>
+						<li><a href="tables-editable.html">전체 캘린더관리</a></li>
+					</ul></li>
+				<!-- 관리자 근태설정 -->
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i
+						class="nav-icon ti ti-layout-column3-alt"></i><span
+						class="nav-title">근태관리</span></a>
+					<ul aria-expanded="false">
+						<li><a href="/settings/workTypeList">사원 근무유형</a></li>
+						<li><a href="/settings/vacationInsert">사원 휴가부여</a></li>
+						<li><a href="/settings/vacationVarietyList">휴가설정</a></li>
+					</ul></li>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="nav-icon ti ti-layout"></i> <span
+						class="nav-title">Layouts</span></a>
+					<ul aria-expanded="false">
+						<li><a href="layout-mini.html">Sidebar Mini</a></li>
+
+					</ul></li>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="nav-icon ti ti-pie-chart"></i><span
+						class="nav-title">Charts</span></a>
+					<ul aria-expanded="false">
+						<li><a href="chart-apex.html">Apex Chart</a></li>
+						<li><a href="chart-flot.html">Flot Chart</a></li>
+						<li><a href="chart-morris.html">Morris Chart</a></li>
+						<li><a href="chart-chartist.html">Chartist Charts</a></li>
+						<li><a href="chart-chartjs.html">Chartjs Chart</a></li>
+						<li><a href="chart-c3.html">C3 Chart</a></li>
+						<li><a href="chart-sparkline.html">Sparkline Chart</a></li>
+						<li><a href="chart-knob.html">Knob Chart</a></li>
+					</ul></li>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"> <i class="nav-icon ti ti-pencil-alt"></i>
+						<span class="nav-title">Forms</span>
+				</a>
+					<ul aria-expanded="false">
+						<li><a href="form-autonumeric.html">Autonumeric</a></li>
+						<li><a href="form-editors.html">Editors</a></li>
+						<li><a href="form-elements.html">Elements</a></li>
+						<li><a href="form-file-upload.html">Drop Zone</a></li>
+						<li><a href="form-input-groups.html">Input Groups</a></li>
+						<li><a href="form-inputmask.html">Input Masks</a></li>
+						<li><a href="form-layouts.html">Forms Layouts</a></li>
+						<li><a href="form-listbox.html">Listbox</a></li>
+						<li><a href="form-pickers.html">Pickers</a></li>
+						<li><a href="form-range-slider.html">Range Slider</a></li>
+						<li><a href="form-selects.html">Selects</a></li>
+						<li><a href="form-switchers.html">Switchers</a></li>
+						<li><a href="form-validation.html">Validation</a></li>
+					</ul></li>
+				<li class="nav-static-title">Extra Components</li>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="nav-icon ti ti-map-alt"></i><span
+						class="nav-title">Maps</span></a>
+					<ul aria-expanded="false">
+						<li><a href="maps-google.html">Google Maps</a></li>
+						<li><a href="maps-vector.html">Vector Maps</a></li>
+						<li><a href="maps-mapael.html">Mapael Maps</a></li>
+					</ul></li>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="nav-icon ti ti-layers"></i><span
+						class="nav-title">Pages</span><span
+						class="nav-label label label-primary">12</span></a>
+					<ul aria-expanded="false">
+						<li><a href="page-account-settings.html">Account Settings</a>
+						</li>
+						<li><a href="page-clients.html">Clients</a></li>
+						<li><a href="page-contacts.html">Contacts</a></li>
+						<li><a href="page-employees.html">Employees</a></li>
+						<li><a href="page-faq.html">FAQ</a></li>
+						<li><a href="page-file-manager.html">File Manager</a></li>
+						<li><a href="page-gallery.html">Gallery</a></li>
+
+						<li><a href="page-pricing.html">Pricing</a></li>
+						<li><a href="page-task-list.html">Task List</a></li>
+						<li><a href="page-404.html">404</a></li>
+						<li><a href="page-500.html">500</a></li>
+						<li><a href="page-coming-soon.html">Coming Soon</a></li>
+					</ul></li>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="nav-icon ti ti-key"></i><span
+						class="nav-title">Auth</span></a>
+					<ul aria-expanded="false">
+						<li><a href="/Login/loginMain">Login</a></li>
+						<li><a href="auth-register.html">Register</a></li>
+						<li><a href="auth-lockscreen.html">Lock Screen</a></li>
+					</ul></li>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="nav-icon ti ti-list"></i><span
+						class="nav-title">Multi Level</span></a>
+					<ul aria-expanded="false">
+						<li><a href="javascript: void(0);">Level 1.1</a></li>
+						<li class="scoop-hasmenu"><a class="has-arrow"
+							href="javascript: void(0);">Level 1.2</a>
+							<ul aria-expanded="false">
+								<li><a href="javascript: void(0);">Level 2.1</a></li>
+								<li><a href="javascript: void(0);">Level 2.2</a></li>
+							</ul></li>
+					</ul></li>
+				<li
+					class="sidebar-banner p-4 bg-gradient text-center m-3 d-block rounded">
+					<h5 class="text-white mb-1">Mentor admin</h5>
+					<p class="font-13 text-white line-20">Multipurpose Bootstrap 4
+						Admin Template</p> <a
+					class="btn btn-square btn-inverse-light btn-xs d-inline-block mt-2 mb-0"
+					href="#"> Buy now</a>
+				</li>
+			</ul>
+		</div>
+		<!-- end sidebar-nav -->
+	</aside>
+	<!-- end app-navbar -->
 </th:block>
 </html>

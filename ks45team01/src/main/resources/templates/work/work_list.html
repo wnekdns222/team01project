@@ -4,9 +4,9 @@
 	  layout:decorate="~{layout/default}">
 	
 	<th:block layout:fragment="customCrumbbar">
-		<div class="row align-items-center">
+	<div class="row align-items-center">
 			<div class="col-md-8 col-lg-8">
-				<h4 class="page-title">Home</h4>
+				<h4 class="page-title">부서근무내역조회</h4>
 				<div class="breadcrumb-list">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -15,18 +15,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-12 col-lg-12">
-         	<div class="widgetbar">
-				<button type="button" class="btn btn-outline-success" onclick="location.href='/settings/vacationVrietyInsert'"><i class="feather icon-plus mr-2">
-				Insert</i></button>
-			</div>
-		</div>
-	</th:block>
-	
-	
+</th:block>
 	
 	<th:block layout:fragment="customContents">
-	<h3>근태내역조회</h3>
 		<table class="table table-hover">
           <thead>
               <tr>
