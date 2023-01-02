@@ -3,30 +3,61 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/default}">
 	
-	<th:block layout:fragment="customCrumbbar">
-		<div class="row align-items-center">
-			<div class="col-md-8 col-lg-8">
-				<h4 class="page-title">Home</h4>
-				<div class="breadcrumb-list">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active" aria-current="page">Home</li>
-					</ol>
-				</div>
-			</div>
-			<div class="col-md-4 col-lg-4">
-				<div class="widgetbar">
-					<button class="btn btn-primary-rgba">
-						<i class="feather icon-plus mr-2"></i>Actions
-					</button>
-				</div>
-			</div>
-		</div>
-	</th:block>
+<th:block layout:fragment="customCrumbbar">
+  <div class="page_tits">
+    <h3>게시판 관리</h3>
+    <p class="path"><strong>현재 위치 :</strong> <span>게시판 관리</span> <span>리스트형</span> <span>글작성</span></p>
+  </div>
+</th:block>
+<th:block layout:fragment="customContents">
+  <div class="content">
+    <section>
+      <form id="saveForm" method="post" autocomplete="off">
+        <!--/* 게시글 수정인 경우, 서버로 전달할 게시글 번호 (PK) */-->
+        <input type="hidden" id="id" name="id" th:if="${post != null}" th:value="${post.id}" />
+
+        <!--/* 서버로 전달할 공지글 여부 */-->
+        <input type="hidden" id="noticeYn" name="noticeYn" />
+        <table class="tb tb_row">
+          <colgroup>
+            <col style="width:15%;" /><col style="width:35%;" /><col style="width:15%;" /><col style="width:35%;" />
+          </colgroup>
+          <tbody>
+          <tr>
+            <th scope="row">게시글</th>
+            <td><span class="chkbox"><input type="checkbox" id="isNotice" name="isNotice" class="chk" /><i></i><label for="isNotice"> 설정</label></span></td>
+
+            <th scope="row">등록일</th>
+            <td colspan="3"><input type="text" id="createdDate" name="createdDate" readonly /></td>
+          </tr>
+
+          <tr>
+            <th>제목 <span class="es">필수 입력</span></th>
+            <td colspan="3"><input type="text" id="title" name="title" maxlength="50" placeholder="제목을 입력해 주세요." /></td>
+          </tr>
+
+          <tr>
+            <th>이름 <span class="es">필수 입력</span></th>
+            <td colspan="3"><input type="text" id="writer" name="writer" maxlength="10" placeholder="이름을 입력해 주세요." /></td>
+          </tr>
+
+          <tr>
+            <th>내용 <span class="es">필수 입력</span></th>
+            <td colspan="3"><textarea id="content" name="content" cols="50" rows="10" placeholder="내용을 입력해 주세요."></textarea></td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+      <p class="btn_set">
+        <button type="button" id="saveBtn" onclick="savePost();" class="btns btn_st3 btn_mid">저장</button>
+        <a th:href="@{/post/list.do}" class="btns btn_bdr3 btn_mid">뒤로</a>
+      </p>
+    </section>
+  </div> <!--/* .content */-->
+</th:block>
 	
 	
 	
-	<th:block layout:fragment="customContents">
-		<h1>게시판 메인화면</h1>
-	</th:block>
+
 	
 </html>

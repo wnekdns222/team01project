@@ -3,12 +3,13 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/default}">
 	
-<th:block layout:fragment="content">
+<th:block layout:fragment="customCrumbbar">
   <div class="page_tits">
-    <h3>게시판 관리</h3>
-    <p class="path"><strong>현재 위치 :</strong> <span>게시판 관리</span> <span>리스트형</span> <span>글작성</span></p>
+    <h3>공지사항 관리</h3>
+    <p class="path"><strong>현재 위치 :</strong> <span>공지사항 관리</span> <span>리스트형</span> <span>글작성</span></p>
   </div>
-
+</th:block>
+<th:block layout:fragment="customContents">
   <div class="content">
     <section>
       <form id="saveForm" method="post" autocomplete="off">
@@ -57,8 +58,6 @@
 	
 	
 	
-	<th:block layout:fragment="customContents">
-		<h1>공지사항 메인화면</h1>
-	</th:block>
+
 	
 </html>
