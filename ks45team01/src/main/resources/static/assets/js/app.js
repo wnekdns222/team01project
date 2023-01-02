@@ -13392,7 +13392,11 @@ var checkin = $('.range-from').datepicker({
     $(function(){
         var sidebarNav = jQuery(".sidebar-nav");
         if (sidebarNav.length > 0) {
-                $('#sidebarNav').metisMenu();
+			var currentUrl = location.pathname;
+			var currentAtag = $('a[href="'+currentUrl+'"]');
+			$('li.active').removeClass('active');
+			$(currentAtag).parents('li').addClass('active');	
+			$('#sidebarNav').metisMenu();
         }
     });
 
