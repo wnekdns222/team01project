@@ -11,14 +11,14 @@ public class MemberLevel {
 	private String calenderCategoryLevel;
 	private String communityLevel;
 	private String departVacationInfoLevel;
-	private String allVactionInfoLevel;
+	private String allVacationInfoLevel;
 	private String allWorkInfoLevel;
 	private String unusualWorkInsertLevel;
 	private String approvalLevel;
 	private String majorCategoryLevel;
-	private String workVavationSettingLevel;
+	private String workVacationSettingLevel;
 	private String approvalCateLevel;
-	private String workVategoryLevel;
+	private String workCategoryLevel;
 	private String fileCategoryLevel;
 	public String getLevelCode() {
 		return levelCode;
@@ -50,11 +50,11 @@ public class MemberLevel {
 	public void setLoginLevel(String loginLevel) {
 		this.loginLevel = loginLevel;
 	}
-	public String getProject_level() {
+	public String getProjectLevel() {
 		return projectLevel;
 	}
-	public void setProject_level(String project_level) {
-		this.projectLevel = project_level;
+	public void setProjectLevel(String projectLevel) {
+		this.projectLevel = projectLevel;
 	}
 	public String getDepartWorkInfoLevel() {
 		return departWorkInfoLevel;
@@ -80,11 +80,11 @@ public class MemberLevel {
 	public void setDepartVacationInfoLevel(String departVacationInfoLevel) {
 		this.departVacationInfoLevel = departVacationInfoLevel;
 	}
-	public String getAllVactionInfoLevel() {
-		return allVactionInfoLevel;
+	public String getAllVacationInfoLevel() {
+		return allVacationInfoLevel;
 	}
-	public void setAllVactionInfoLevel(String allVactionInfoLevel) {
-		this.allVactionInfoLevel = allVactionInfoLevel;
+	public void setAllVacationInfoLevel(String allVacationInfoLevel) {
+		this.allVacationInfoLevel = allVacationInfoLevel;
 	}
 	public String getAllWorkInfoLevel() {
 		return allWorkInfoLevel;
@@ -110,11 +110,11 @@ public class MemberLevel {
 	public void setMajorCategoryLevel(String majorCategoryLevel) {
 		this.majorCategoryLevel = majorCategoryLevel;
 	}
-	public String getWorkVavationSettingLevel() {
-		return workVavationSettingLevel;
+	public String getWorkVacationSettingLevel() {
+		return workVacationSettingLevel;
 	}
-	public void setWorkVavationSettingLevel(String workVavationSettingLevel) {
-		this.workVavationSettingLevel = workVavationSettingLevel;
+	public void setWorkVacationSettingLevel(String workVacationSettingLevel) {
+		this.workVacationSettingLevel = workVacationSettingLevel;
 	}
 	public String getApprovalCateLevel() {
 		return approvalCateLevel;
@@ -122,11 +122,11 @@ public class MemberLevel {
 	public void setApprovalCateLevel(String approvalCateLevel) {
 		this.approvalCateLevel = approvalCateLevel;
 	}
-	public String getWorkVategoryLevel() {
-		return workVategoryLevel;
+	public String getWorkCategoryLevel() {
+		return workCategoryLevel;
 	}
-	public void setWorkVategoryLevel(String workVategoryLevel) {
-		this.workVategoryLevel = workVategoryLevel;
+	public void setWorkCategoryLevel(String workCategoryLevel) {
+		this.workCategoryLevel = workCategoryLevel;
 	}
 	public String getFileCategoryLevel() {
 		return fileCategoryLevel;
@@ -147,7 +147,7 @@ public class MemberLevel {
 		builder.append(memberUserLevel);
 		builder.append(", loginLevel=");
 		builder.append(loginLevel);
-		builder.append(", project_level=");
+		builder.append(", projectLevel=");
 		builder.append(projectLevel);
 		builder.append(", departWorkInfoLevel=");
 		builder.append(departWorkInfoLevel);
@@ -157,8 +157,8 @@ public class MemberLevel {
 		builder.append(communityLevel);
 		builder.append(", departVacationInfoLevel=");
 		builder.append(departVacationInfoLevel);
-		builder.append(", allVactionInfoLevel=");
-		builder.append(allVactionInfoLevel);
+		builder.append(", allVacationInfoLevel=");
+		builder.append(allVacationInfoLevel);
 		builder.append(", allWorkInfoLevel=");
 		builder.append(allWorkInfoLevel);
 		builder.append(", unusualWorkInsertLevel=");
@@ -167,16 +167,61 @@ public class MemberLevel {
 		builder.append(approvalLevel);
 		builder.append(", majorCategoryLevel=");
 		builder.append(majorCategoryLevel);
-		builder.append(", workVavationSettingLevel=");
-		builder.append(workVavationSettingLevel);
+		builder.append(", workVacationSettingLevel=");
+		builder.append(workVacationSettingLevel);
 		builder.append(", approvalCateLevel=");
 		builder.append(approvalCateLevel);
-		builder.append(", workVategoryLevel=");
-		builder.append(workVategoryLevel);
+		builder.append(", workCategoryLevel=");
+		builder.append(workCategoryLevel);
 		builder.append(", fileCategoryLevel=");
 		builder.append(fileCategoryLevel);
+		builder.append(", getLevelCode()=");
+		builder.append(getLevelCode());
+		builder.append(", getMemberNum()=");
+		builder.append(getMemberNum());
+		builder.append(", getMemberAdminLevel()=");
+		builder.append(getMemberAdminLevel());
+		builder.append(", getMemberUserLevel()=");
+		builder.append(getMemberUserLevel());
+		builder.append(", getLoginLevel()=");
+		builder.append(getLoginLevel());
+		builder.append(", getProjectLevel()=");
+		builder.append(getProjectLevel());
+		builder.append(", getDepartWorkInfoLevel()=");
+		builder.append(getDepartWorkInfoLevel());
+		builder.append(", getCalenderCategoryLevel()=");
+		builder.append(getCalenderCategoryLevel());
+		builder.append(", getCommunityLevel()=");
+		builder.append(getCommunityLevel());
+		builder.append(", getDepartVacationInfoLevel()=");
+		builder.append(getDepartVacationInfoLevel());
+		builder.append(", getAllVacationInfoLevel()=");
+		builder.append(getAllVacationInfoLevel());
+		builder.append(", getAllWorkInfoLevel()=");
+		builder.append(getAllWorkInfoLevel());
+		builder.append(", getUnusualWorkInsertLevel()=");
+		builder.append(getUnusualWorkInsertLevel());
+		builder.append(", getApprovalLevel()=");
+		builder.append(getApprovalLevel());
+		builder.append(", getMajorCategoryLevel()=");
+		builder.append(getMajorCategoryLevel());
+		builder.append(", getWorkVacationSettingLevel()=");
+		builder.append(getWorkVacationSettingLevel());
+		builder.append(", getApprovalCateLevel()=");
+		builder.append(getApprovalCateLevel());
+		builder.append(", getWorkCategoryLevel()=");
+		builder.append(getWorkCategoryLevel());
+		builder.append(", getFileCategoryLevel()=");
+		builder.append(getFileCategoryLevel());
+		builder.append(", getClass()=");
+		builder.append(getClass());
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append(", toString()=");
+		builder.append(super.toString());
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 }
