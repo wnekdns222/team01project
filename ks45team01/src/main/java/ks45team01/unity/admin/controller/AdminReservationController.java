@@ -14,21 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminReservationController {
 
 
-	//회의실 추가
-	@GetMapping("/meetingroomInsert")
+	//회의실 관리 첫 화면
+	@GetMapping("/meetingroomList")
 	public String addMeetingroom() {
 
-		return "reservation/meetingroom_insert";
-	}
-	
-	
-	//회의실 수정
-	@GetMapping("/meetingroomAdminList")
-	public String getMeetingroomAdminList() {
-			
-
-		
-		return "reservation/meetingroom_admin_list";
+		return "reservation/meetingroom_list";
 	}
 	
 }
