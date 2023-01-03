@@ -104,19 +104,19 @@ public class FileController {
 	}
 	
 	/**
-	 * 파일 목록 
+	 * 인사파일 목록 
 	 * @param model
 	 * @return
 	 */
 	
-	@GetMapping("fileList")
-	public String fileList(Model model) {
+	@GetMapping("/hrList")
+	public String ResourcesList(Model model) {
 		
-		List<File> fileList = fileService.fileList();
+		List<File> hrList = fileService.hrList();
 		
 		model.addAttribute("title", "파일목록");
-		model.addAttribute("fileList", fileList);
+		model.addAttribute("hrList", hrList);
 		
-		return "file/fileList";
+		return "file/hrList";
 	}
 }

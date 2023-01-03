@@ -50,13 +50,28 @@
 						<!-- 									<li><a href="/messenger/messengerChatroomInviteInsert">초대</a></li> -->
 					</ul></li>
 
-				<li><a class="has-arrow" href="javascript:void(0)"
-					aria-expanded="false"><i class="nav-icon ti ti-calendar"></i><span
-						class="nav-title">Calendar</span></a>
+				<li>
+					<a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="nav-icon ti ti-calendar"></i>
+					<span class="nav-title">캘린더</span>
+					</a>
 					<ul aria-expanded="false">
-						<li><a href='/calender/scheduelList'>Full Calendar</a></li>
-						<li><a href='calendar-list.html'>Calendar List</a></li>
-					</ul></li>
+						<li><a href='/calender/scheduelList'>공유 캘린더</a></li>
+					</ul>
+					<ul aria-expanded="false">
+						<li><a href='/calender/CalenderList'>개인 캘린더</a></li>
+					</ul>
+				</li>
+				<li>
+					<a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="fe fe-clipboard"></i>
+					<span class="nav-title">커뮤니티</span>
+					</a>
+					<ul aria-expanded="false">
+						<li><a href='/community/noticeList'>공지사항</a></li>
+						<li><a href='/community/boardList'>게시판</a></li>
+					</ul>
+				</li>
 
 				<li class="active"><a class="has-arrow"
 					href="javascript:void(0)" aria-expanded="false"> <i
@@ -77,13 +92,17 @@
 						<li><a href="/approval/workCorrectInsert">근태정정</a></li>
 						<li><a href="/approval/finalApproverList">전결/대결</a></li>
 					</ul></li>
-				<li class="active"><a class="has-arrow"
-					href="javascript:void(0)" aria-expanded="false"> <i
-						class="nav-icon ti ti-rocket"></i> <span class="nav-title">파일</span>
-						<span class="nav-label label label-danger">3</span>
-				</a>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i class="nav-icon ti ti-list"></i><span
+						class="nav-title">파일</span></a>
 					<ul aria-expanded="false">
-						<li><a href="/file/fileList">파일목록</a></li>
+						<li class="scoop-hasmenu"><a class="has-arrow"
+							href="javascript: void(0);">파일목록</a>
+							<ul aria-expanded="false">
+								<li><a href="/file/hrList">인사부서</a></li>
+								<li><a href="/file/hrList">마케팅부서</a></li>
+								<li><a href="/file/hrList">경영지원부서</a></li>
+							</ul></li>
 					</ul></li>
 				<li><a class="has-arrow" href="javascript:void(0)"
 					aria-expanded="false"> <i

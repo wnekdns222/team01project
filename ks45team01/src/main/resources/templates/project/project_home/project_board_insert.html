@@ -26,9 +26,30 @@
 		<br><br>
 	</th:block>
 	<th:block layout:fragment="customContents">
-	</th:block>
-	<th:block th:fragment="bizTab1">
-		
-	</th:block>
+
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-statistics">
+				<div class="card-header">
+					<div class="card-heading">
+						<h4 class="card-title">게시글 내용</h4>
+						<input class="form-control form-control-lg" type="text"
+						placeholder="제목을 입력하세요">
+					</div>
+				</div>
+				<div class="card-body">
+					<div id="summernote" class="summernote"></div>
+					<button type="submit" class="btn btn-primary"
+					onclick="location.href='/project/projectDetail'">등록</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</th:block>
+	
 	
 </html>
