@@ -1,15 +1,25 @@
 package ks45team01.unity.worker.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ks45team01.unity.dto.MemberLevel;
+import ks45team01.unity.mapper.MemberLevelMapper;
+import ks45team01.unity.service.MemberLevelService;
 
 @Controller
 
 @RequestMapping("/member")
 public class MemberController {
 
+	private final MemberLevelService memberLevelService;
+	public MemberController(MemberLevelService memberLevelService) {
+		this.memberLevelService = memberLevelService;
+	}
 	
 	@GetMapping("/Member")
 	public String GetMember(Model model) {
@@ -73,7 +83,11 @@ public class MemberController {
 	
 	@GetMapping("/MemberLevelList")
 	public String GetMemberLevelList(Model model) {
+		
+		List<MemberLevel> memberLevelList = memberLevelService.memberLevelList();
+		
 		model.addAttribute("MemberLevelList","사원권한리스트 화면");
+		model.addAttribute("memberLevelList", memberLevelList);
 	return "member/member_level_list";
 	}
 	
@@ -101,4 +115,6 @@ public class MemberController {
 		model.addAttribute("MemberAdmin","사원 관리페이지");
 	return "member/memberAdmin";
 	}
+	
+	
 }
