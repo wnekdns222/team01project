@@ -15,6 +15,7 @@ public class WorkType {
 	private String correctDate;
 	private String use;
 	private String workTypeUsePeriod;
+	
 	public String getWorkTypeNum() {
 		return workTypeNum;
 	}

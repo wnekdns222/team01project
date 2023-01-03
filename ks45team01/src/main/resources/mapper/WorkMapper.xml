@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.WorkMapper">
+	<resultMap type="Work" id="workResultMap">
+		<id property="workNum" column="work_num" />
+		<result property="memberNum" column="member_num" />
+		<result property="workTypeNum" column="work_type_num" />
+		<result property="departmentNum" column="department_num" />
+		<result property="attendanceDay" column="attendance_day" />
+		<result property="attendanceTime" column="attendance_time" />
+		<result property="leaveworkTime" column="leavework_time" />
+		<result property="gooutWorkoutStartTime" column="goout_workout_start_time" />
+		<result property="gooutWorkoutComebackTime" column="goout_workout_comeback_time" />
+		<result property="entrance" column="entrance" />
+		<result property="leave" column="leave" />
+		<result property="attendanceStatus" column="attendance_status" />
+		<result property="leaveworkStatus" column="leavework_status" />
+		<result property="outsideDuty" column="outside_duty" />
+		<result property="workUnusual" column="work_unusual" />
+			<association property="workType" javaType="WorkType">
+				<id		property="workTypeNum"	column="work_type_num" />
+				<result property="memberNum"  column="member_num" />
+				<result property="workName"  column="work_name" />
+				<result property="workDate"  column="work_date" />
+				<result property="attendanceTime"  column="attendance_time" />
+				<result property="leaveWorkTime"  column="leavework_time" />
+				<result property="regMemberNum"  column="reg_member_num" />
+				<result property="regDate"  column="reg_date" />
+				<result property="correctMemberNum"  column="correct_member_num" />
+				<result property="correctDate"  column="correct_date" />
+				<result property="use"  column="use" />
+				<result property="workTypeUsePeriod"  column="work_type_use_period" />	
+		</association>
+	</resultMap>
+	<select id="getCommonNewCode" parameterType="String">
+	/* 자동증가코드 */
+	
+	</select>
+	<insert id="addWork" parameterType="Work">
+	/* 근태등록 */
+	
+	</insert>
+	<select id="getAllWorkInfo" resultType="List" resultMap="workResultMap">
+	/* 전사원 근태조회 */
+	SELECT
+		*
+	FROM
+		tb_work AS w
+	INNER JOIN
+		tb_work_type AS t
+	ON 
+		w.work_type_num = t.work_type_num
+	WHERE 
+		w.attendance_day = t.work_date;
+	</select>
+</mapper>

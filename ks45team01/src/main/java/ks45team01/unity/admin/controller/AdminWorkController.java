@@ -2,7 +2,6 @@ package ks45team01.unity.admin.controller;
 
 import java.util.List;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ks45team01.unity.dto.Work;
 import ks45team01.unity.dto.WorkType;
+import ks45team01.unity.service.WorkService;
 import ks45team01.unity.service.WorkTypeService;
 
 /**
@@ -29,13 +30,18 @@ public class AdminWorkController {
 
 	
 	private final WorkTypeService workTypeService;
+	private final WorkService workService;
 	
-	public AdminWorkController(WorkTypeService workTypeService) {
+	public AdminWorkController(WorkTypeService workTypeService, WorkService workService) {
 		this.workTypeService = workTypeService;
+		this.workService = workService;
 	}
 	//전사원 근무내역 조회
 	@GetMapping("work/workAllList")
-	public String getAllWorkInfo() {   
+	public String getAllWorkInfo(Model model) {   
+		
+		List<Work> workInfoList = workService.getAllWorkInfo();
+		model.addAttribute("workInfoList",workInfoList);
 		
 		return "work/work_all_list";
 	}
