@@ -21,5 +21,5 @@ public interface FormBoardMapper {
 	int formBoardCount();
 	
 	// 서식글 목록
-	List<FormBoard> formList();
+	List<FormBoard> formList(String searchKey, String searchValue);
 }

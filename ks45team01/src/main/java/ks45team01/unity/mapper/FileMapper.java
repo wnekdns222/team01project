@@ -19,6 +19,6 @@ public interface FileMapper {
 	// 파일 상세보기
 	File fileView(String fileNum);
 	
-	// 파일 목록
-	List<File> FileList();
+	// 인사 파일 목록
+	List<File> hrList();
 }

@@ -81,10 +81,12 @@ public class FormController {
 	}
 
 	@GetMapping("/formList")
-	public String formList(Model model) {
+	public String formList(Model model
+							,@RequestParam(value="searchKey", required = false) String searchKey
+			   				,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {
 
 		int cnt = formBoardService.formBoardCount();
-		List<FormBoard> formList = formBoardService.formList();
+		List<FormBoard> formList = formBoardService.formList(searchKey, searchValue);
 
 		model.addAttribute("title", "서식목록");
 		model.addAttribute("cnt", cnt);

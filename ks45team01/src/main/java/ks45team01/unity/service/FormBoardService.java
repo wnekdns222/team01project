@@ -72,9 +72,20 @@ public class FormBoardService {
 	 * @return formList
 	 */
 	
-	public List<FormBoard> formList(){
+	public List<FormBoard> formList(String searchKey, String searchValue){
 		
-		List<FormBoard> formList = formBoardMapper.formList();
+		if(searchKey != null) {
+			switch(searchKey) {
+			case "formName":
+				searchKey = "form_name";
+				break;
+			case "formRegiStrant":
+				searchKey = "form_registrant";
+				break;
+			}
+		}
+		
+		List<FormBoard> formList = formBoardMapper.formList(searchKey, searchValue);
 		
 		return formList;
 	}
