@@ -133,7 +133,7 @@ public class ProjectController {
 	@GetMapping("/projectBoardInsert")
 	public String projectBoardInsert(Model model) {
 		model.addAttribute("projectBoardInsert","프로젝트내부 게시글 생성화면");
-	return "project/project_board_insert";
+	return "project/project_home/project_board_insert";
 	}
 	
 	@GetMapping("/projectBoardModify")
@@ -145,7 +145,7 @@ public class ProjectController {
 	@GetMapping("/projectTaskInsert")
 	public String projectTaskInsert(Model model) {
 		model.addAttribute("projectTaskInsert","프로젝트내부 업무요청 등록화면");
-	return "project/project_task_insert";
+	return "project/project_home/project_task_insert";
 	}
 	
 	@GetMapping("/projectTaskModify")
@@ -163,7 +163,7 @@ public class ProjectController {
 	@GetMapping("/projectCalenderInsert")
 	public String projectCalenderInsert(Model model) {
 		model.addAttribute("projectCalenderInsert","프로젝트내부 캘린더 입력 화면");
-	return "project/project_calender_insert";
+	return "project/project_home/project_calender_insert";
 	}
 	
 	@GetMapping("/projectCalenderModify")
@@ -182,6 +182,12 @@ public class ProjectController {
 	public String projectFilesInsert(Model model) {
 		model.addAttribute("projectFilesInsert","프로젝트 첨부파일 등록화면");
 	return "project/project_files_insert";
+	}
+	
+	@GetMapping("/projectTodo")
+	public String projectTodo(Model model) {
+		model.addAttribute("projectTodo","프로젝트내부 todo");
+	return "project/project_home/project_todo";
 	}
 }
 
