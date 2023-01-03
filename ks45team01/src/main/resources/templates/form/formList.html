@@ -25,6 +25,16 @@
 		</div>
 	</th:block>
 	<th:block layout:fragment="customContents">
+		<div th:fragment="searchFragment">
+			<form th:action="@{/form/formList}" method="get">
+				<select name="searchKey">
+					<option value="formName">서식명</option>
+					<option value="formRegiStrant">작성자</option>
+				</select>
+				<input type="text" name="searchValue" placeholder="검색어를 입력해주세요."/>
+				<button class="btn btn-outline-success" type="submit" style="height: 35px;">검색</button>
+			</form>
+		</div>
 		<th:block th:text="'서식 개수 : ' + ${cnt}" />
 		<table class="table table-bordered">
 			<thead>

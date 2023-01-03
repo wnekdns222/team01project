@@ -46,10 +46,10 @@ public class FileService {
 	 * 파일 목록
 	 * @return
 	 */
-	public List<File> fileList(){
+	public List<File> hrList(){
 		
-		List<File> fileList = fileMapper.FileList();
+		List<File> hrList = fileMapper.hrList();
 		
-		return fileList;
+		return hrList;
 	}
 }

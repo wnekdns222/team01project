@@ -56,7 +56,7 @@
 		WHERE file_num = #{fileNum};
 	</select>
 	
-	<select id="FileList" resultMap="fileResultMap">
+	<select id="hrList" resultMap="fileResultMap">
 		SELECT 
 			*
 		FROM 
