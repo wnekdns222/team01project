@@ -17,6 +17,7 @@
 				</div>
 			</div>
 		</div>
+	<a href="/reservation/meetingroomReservationInsert" id="exportExcel" class="btn btn-primary" style="float:right; margin-bottom:8px;">수정</a>
 	<th:block layout:fragment="customContents">
 		<table class="table table-hover">
                   <thead>
@@ -30,7 +31,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr th:if="${not #lists.isEmpty(meetingroomList)}"
+                      <tr th:unless="${#lists.isEmpty(meetingroomList)}"
 					th:each="l : ${meetingroomList}">
 					<td th:text="${l.meetName}"></td>
 					<td th:text="${l.meetUsableStart}"></td>
@@ -38,7 +39,6 @@
 					<td th:text="${l.meetLocation}"></td>
 					<td th:text="${l.meetCapacity}"></td>
 					<td th:text="${l.meetDetail}"></td>
-					
 				</tr>
                   </tbody>
               </table>

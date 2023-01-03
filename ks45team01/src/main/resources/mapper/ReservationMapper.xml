@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.ReservationMapper">
+	<resultMap type="Meetingroom" id="meetingroomResultMap">
+		<id		property="meetNum"	column="meet_num" />
+		<result property="meetName"  column="meet_name" />
+		<result property="meetLocation"  column="meet_location" />
+		<result property="meetUsableStart"  column="meet_usable_start" />
+		<result property="meetUsableEnd"  column="meet_usable_End" />
+		<result property="meetRegDate"  column="meet_reg_date" />
+		<result property="memberNum"  column="member_num" />
+		<result property="meetUpdateMember"  column="meet_update_member" />
+		<result property="meetCapacity"  column="meet_capacity" />
+		<result property="meetStatus"  column="meet_status" />
+		<result property="meetRejectReason"  column="meet_reject_reason" />
+		<result property="meetDetail"  column="meet_detail" />
+		<result property="meetManager"  column="meet_manager" />
+	</resultMap>
+	
+	<resultMap type="Reservation" id="reservationResultMap">
+		<id		property="reservationNum"	column="reservation_num" />
+		<result property="meetNum"  column="meet_num" />
+		<result property="reservationDate"  column="reservation_date" />
+		<result property="reservationStartTime"  column="reservation_start_time" />
+		<result property="reservationEndTime"  column="reservation_end_time" />
+		<result property="meetOutTime"  column="meet_out_time" />
+		<result property="reservationContents"  column="reservation_contents" />
+		<result property="meetApplicationDate"  column="meet_application_date" />
+		<result property="memberNum"  column="member_num" />
+		<result property="reservationUpdateDate"  column="reservation_update_date" />
+		<result property="reservationUpdateMember"  column="reservation_update_member" />
+		<collection property="meetingroom" javaType="list" ofType="Meetingroom">
+		  <id property="meetNum" column="meet_num" /> 
+		  <result property="meetName" column="meet_name" /> 
+		</collection>
+		<collection property="listMember" javaType="list" ofType="listMember">
+		  <id property="memberNum" column="member_num" /> 
+		  <result property="memberName" column="member_name" /> 
+		</collection>
+	</resultMap>
+	<select id="getMeetingroomList" resultMap="meetingroomResultMap">
+		/* 회의실 조회 */
+		SELECT 
+			*
+		FROM 
+			tb_meetingroom;
+	</select>
+	
+	<select id="getReservationList" resultMap="reservationResultMap">
+		/* 예약 조회 */
+		SELECT
+			t.reservation_num,
+			r.meet_name,
+			t.reservation_start_time,
+			t.reservation_end_time,
+			m.member_name
+		FROM
+			tb_meetingroom AS r
+			INNER join
+			tb_meet_reservation AS t
+			on
+			r.meet_num = t.meet_num
+			INNER join
+			tb_member AS m
+			ON
+			m.member_num = t.member_num
+	</select>
+	
+</mapper>
