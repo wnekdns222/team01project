@@ -17,7 +17,7 @@
 				</div>
 			</div>
 		</div>
-	  <a href="/reservation/meetingroomReservationInsert" id="exportExcel" class="btn btn-primary">예약하기</a>
+	  <a href="/reservation/meetingroomReservationInsert" id="exportExcel" class="btn btn-primary" style="float:right; margin-bottom:8px;">예약하기</a>
 	<th:block layout:fragment="customContents">
 		<table class="table table-hover">
                   <thead>
@@ -30,23 +30,20 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                      </tr>
-                      <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                      </tr>
-                      <tr>
-                          <th scope="row">3</th>
-                          <td colspan="2">Larry the Bird</td>
-                          <td>@twitter</td>
-                      </tr>
+                    <tr th:unless="${#lists.isEmpty(reservationList)}"
+					    th:each="l : ${reservationList}">
+							<td th:text="${l.reservationNum}"></td>
+							<th:block th:unless="${#lists.isEmpty(l.meetingroom)}"
+									  th:each="ml : ${l.meetingroom}">
+								<td th:text="${ml.meetName}"></td>
+							</th:block>
+							<td th:text="${l.reservationStartTime}"></td>
+							<td th:text="${l.reservationEndTime}"></td>
+							<th:block th:unless="${#lists.isEmpty(l.listMember)}"
+									  th:each="ll : ${l.listMember}">
+								<td th:text="${ll.memberName}"></td>
+							</th:block>
+				    </tr>
                   </tbody>
               </table>
 	</th:block>
