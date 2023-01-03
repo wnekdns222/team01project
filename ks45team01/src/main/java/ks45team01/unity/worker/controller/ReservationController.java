@@ -7,26 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/reservation")
 public class ReservationController {
-	
-	//예약하기
-	@GetMapping("/meetingroomList")
-	public String getMeetingroomList() {
-		
-		return "/reservation/meetingroom_list";
-	}
-	
-	//예약하기
-	@GetMapping("/meetingroomReservationInsert")
-	public String addMeetingroomReservation() {
-		
-		return "/reservation/meetingroom_reservation_insert";
-	}
-	
-	//예약확인
+			
+	//예약 첫 화면
 	@GetMapping("/meetingroomReservationList")
 	public String getMeetingroomReservationList() {
 		
 		return "/reservation/meetingroom_reservation_list";
+	}
+	
+	//예약하기 화면
+	@GetMapping("/meetingroomReservationInsert")
+	public String MeetingroomReservationInsert() {
+		
+		return "/reservation/meetingroom_reservation_insert";
 	}
 	
 }
