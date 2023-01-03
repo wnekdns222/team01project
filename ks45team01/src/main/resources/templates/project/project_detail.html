@@ -75,7 +75,7 @@
                                         </div>
                                 <div class="tab-content">
                                     <div class="card-body table-responsive p-0 tab-pane fade active show" id="home" role="tabpanel">
-                                        <div th:include="~{project/project_home:: bizTab4}"></div>
+                                        <div th:include="~{project/project_home:: projectHomeTab1}"></div>
                                     </div>
                                     <div class="card-body table-responsive p-0 tab-pane fade" id="task" role="tabpanel">
                                        <div th:include="~{project/project_task:: bizTab2}"></div>
@@ -91,6 +91,15 @@
                             </div>
                         </div>
                         <!-- end task list contant -->
+                
+               
+         
 	</th:block>
+	
+         <th:block layout:fragment="customScript">         
+	        <script>
+	       
+	        </script>
+         </th:block>
 	
 </html>
