@@ -4,17 +4,27 @@
 	layout:decorate="~{layout/default}">
 
 <th:block layout:fragment="customCrumbbar">
-	<div class="row align-items-center">
-		<div class="col-md-8 col-lg-8">
-			<h4 class="page-title">전사원연차조회</h4>
-			<div class="breadcrumb-list">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="/">Home</a></li>
-					<li class="breadcrumb-item active" aria-current="page">전사원연차조회</li>
-				</ol>
+	<div class="row">
+		<div class="col-md-12 m-b-30">
+			<!-- begin page title -->
+			<div class="d-block d-lg-flex flex-nowrap align-items-center">
+				<div class="page-title mr-4 pr-4 border-right">
+					<h1>전사원연차조회</h1>
+				</div>
+				<div class="breadcrumb-bar align-items-center">
+					<nav>
+						<ol class="breadcrumb p-0 m-b-0">
+							<li class="breadcrumb-item"><a href="/"><i
+									class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item active text-primary"
+								aria-current="page">전사원연차조회</li>
+						</ol>
+					</nav>
+				</div>
 			</div>
 		</div>
 	</div>
+	<!-- end page title -->
 </th:block>
 
 

@@ -17,6 +17,14 @@ public class Work {
 	private String outsideDuty;
 	private String workUnusual;
 	
+	private WorkType workType;
+	
+	public WorkType getWorkType() {
+		return workType;
+	}
+	public void setWorkType(WorkType workType) {
+		this.workType = workType;
+	}
 	public String getWorkNum() {
 		return workNum;
 	}
@@ -107,7 +115,6 @@ public class Work {
 	public void setWorkUnusual(String workUnusual) {
 		this.workUnusual = workUnusual;
 	}
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -141,7 +148,11 @@ public class Work {
 		builder.append(outsideDuty);
 		builder.append(", workUnusual=");
 		builder.append(workUnusual);
+		builder.append(", workType=");
+		builder.append(workType);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 }
