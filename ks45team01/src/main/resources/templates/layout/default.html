@@ -1,76 +1,95 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
- 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-	<head>
-		<meta charset="UTF-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="description" content="Soyuz is a bootstrap 4x + laravel admin dashboard template">
-	    <meta name="keywords" content="admin, admin dashboard, admin panel, admin template, analytics, bootstrap 4, laravel, clean, crm, ecommerce, hospital, responsive, rtl, sass support, ui kits">
-	    <meta name="author" content="Themesbox17">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-	    <title th:text="${title}"></title>
-	    <!-- Fevicon -->
-	    <link rel="shortcut icon" href="/assets/images/favicon.ico">
-	    <!-- Start css -->    
-	    <!-- Apex css -->
-	    <link href="/assets/plugins/apexcharts/apexcharts.css" rel="stylesheet">
-	    <!-- jvectormap css -->
-	    <link href="/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
-	    <!-- Slick css -->
-	    <link href="/assets/plugins/slick/slick.css" rel="stylesheet">
-	    <link href="/assets/plugins/slick/slick-theme.css" rel="stylesheet">
-	    <!-- Switchery css -->
-	    <link href="/assets/plugins/switchery/switchery.min.css" rel="stylesheet">
-	    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-	    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css">
-	    <link href="/assets/css/flag-icon.min.css" rel="stylesheet" type="text/css">
-	    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
-	</head>
-	
-	
-	<body class="vertical-layout">
-	 <!-- Start Infobar Setting Sidebar -->
-		<div th:replace="~{fragments/infoBar :: infoBarFragment}"></div>
-		<div class="infobar-settings-sidebar-overlay"></div>
-	<!-- End Infobar Setting Sidebar -->
-	
-	 <!-- Start Containerbar -->
-		<div id="containerbar">
-			
-			<!-- Start Leftbar -->
-				 <!-- Start Sidebar -->
-					<!-- Start Navigationbar -->
-			<div th:replace="~{fragments/sideBar :: sideBarFragment}"></div>
-					<!-- End Navigationbar -->
-				<!-- End Sidebar -->
-			<!-- End Leftbar -->
-			 
-			 
-			 
-			 <!-- Start Rightbar --> 
-			<div class="rightbar">
-			
-				<!-- Start Topbar -->
-					<!-- Start row -->
-						<!-- Start col -->
-				<div th:replace="~{fragments/top :: topFragment}"></div>
-						<!-- End col -->
-					<!-- End row -->
-				 <!-- End Topbar -->
-				 
-				 
-				<!-- customCrumbbar로 개인화면에 붙임 -->
-				<!-- <div th:replace="~{fragments/breadCrumbBar :: breadFragment}"></div> -->
-				
-				<div class="breadcrumbbar">
-					<th:block layout:fragment="customCrumbbar"></th:block>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description"
+	content="Admin template that can be used to build dashboards for CRM, CMS, etc." />
+<meta name="author" content="Potenza Global Solutions" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title th:text="${title}"></title>
+<!-- app favicon -->
+<link rel="shortcut icon" href="/assets/img/favicon.ico">
+<!-- google fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+	rel="stylesheet">
+<!-- plugin stylesheets -->
+<link rel="stylesheet" type="text/css" href="/assets/css/vendors.css" />
+<!-- app style -->
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+</head>
+
+
+<body>
+	<!-- begin app -->
+	<div class="app">
+		<!-- begin app-wrap -->
+		<div class="app-wrap">
+			<!-- begin pre-loader -->
+			<div th:replace="~{fragments/pre-loader :: preLoaderFragment}"></div>
+			<!-- end pre-loader -->
+
+			<!-- begin app-header -->
+			<header class="app-header top-bar">
+				<!-- begin navbar -->
+				<nav class="navbar navbar-expand-md">
+
+					<!-- begin navbar-header -->
+					<div th:replace="~{fragments/top :: topFragment}"></div>
+
+					<!-- end navbar-header -->
+
+					<!-- begin navigation -->
+					
+					
+					<div th:replace="~{fragments/navigation :: navigationFragment}"></div>
+
+					
+					
+					<!-- end navigation -->
+				</nav>
+				<!-- end navbar -->
+			</header>
+			<!-- end app-header -->
+
+
+
+			<!-- begin app-container -->
+			<div class="app-container">
+
+				<!-- begin app-nabar -->
+				<!-- begin sidebar-nav -->
+				<div th:replace="~{fragments/sideBar :: sideBarFragment}"></div>
+				<!-- end sidebar-nav -->
+				<!-- end app-navbar -->
+
+				<!-- begin app-main -->
+				<div class="app-main" id="main">
+					<!-- begin container-fluid -->
+					<div class="container-fluid">
+
+						<th:block layout:fragment="customCrumbbar"></th:block>
+						<th:block layout:fragment="customContents"></th:block>
+
+
+					</div>
+					<!-- end container-fluid -->
 				</div>
-				<div class="contentbar">
-					<th:block layout:fragment="customContents"></th:block>
-				</div>
+				<!-- end app-main -->
 			</div>
+			<!-- end app-container -->
+
+			<!-- begin footer -->
+			<div th:replace="~{fragments/footer :: footerFragment}"></div>
+			<!-- end footer -->
+
 		</div>
-		<div th:replace="~{fragments/footer :: footerFragment}"></div>	
-		<div th:replace="~{fragments/footerScript :: footerScriptFragment}"></div>	
-	</body>
+		<!-- end app-wrap -->
+	</div>
+	<!-- end app -->
+	<div th:replace="~{fragments/footerScript :: footerScriptFragment}"></div>
+	<th:block layout:fragment="customScript"></th:block>
+</body>
 </html>

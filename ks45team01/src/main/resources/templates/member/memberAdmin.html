@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+	<th:block layout:fragment="customCrumbbar">
+		<!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-12 m-b-30">
+                                <!-- begin page title -->
+                                <div class="d-block d-lg-flex flex-nowrap align-items-center">
+                                    <div class="page-title mr-4 pr-4 border-right">
+                                        <h1>Dashboard</h1>
+                                    </div>
+                                    <div class="breadcrumb-bar align-items-center">
+                                        <nav>
+                                            <ol class="breadcrumb p-0 m-b-0">
+                                                <li class="breadcrumb-item">
+                                                    <a href="index.html"><i class="ti ti-home"></i></a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    Dashboard
+                                                </li>
+                                                <li class="breadcrumb-item active text-primary" aria-current="page">Default</li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                    <div class="ml-auto d-flex align-items-center secondary-menu text-center">
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Todo list">
+                                            <i class="fe fe-edit btn btn-icon text-primary"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Projects">
+                                            <i class="fa fa-lightbulb-o btn btn-icon text-success"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Task">
+                                            <i class="fa fa-check btn btn-icon text-warning"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Calendar">
+                                            <i class="fa fa-calendar-o btn btn-icon text-cyan"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="" data-original-title="Analytics">
+                                            <i class="fa fa-bar-chart-o btn btn-icon text-danger"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- end page title -->
+                            </div>
+                        </div>
+	
+	
+	
+		<!-- 	<div class="col-lg-4">
+			<select id="formControlSelect">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+			<div>
+				<input type="Search" class="form-control" name="inputSearch"
+					id="inputSearch" placeholder="Search">
+			</div>
+		</div> -->
+		<select id="formControlSelect">
+			<option>아이디</option>
+			<option>이름</option>
+			<option>직급</option>
+			<option>부서</option>
+			<option>이메일</option>
+		</select>
+		<input placeholder="검색어를 입력해주세요." />
+
+
+	</th:block>
+		<th:block layout:fragment="customContents">
+                        <!--start contact contant-->
+
+                        <div class="row">
+                            <div class="col-xxl-3 col-xl-4  col-sm-6">
+                                <div class="card card-statistics contact-contant">
+                                    <div class="card-body py-4">
+                                        <div class="d-flex align-items-center">
+                                            <div class="bg-img">
+                                                <img src="/assets/img/avtar/01.jpg" alt="" class="img-fluid">
+                                            </div>
+                                            <div class="ml-3">
+                                                <h4 class="mb-0">주현우</h4>
+                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1">사원</span></p>
+                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1">id001</span></p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-mobile"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <p>기획부</p>
+                                                </li>
+                                            </ul>
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-phone"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <p>40-1440-8546</p>
+                                                </li>
+                                            </ul>
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <p>Lizzy.Halfman@gmail.com</p>
+                                                </li>
+                                            </ul>
+                                             <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <p>남</p>
+                                                </li>
+                                            </ul>
+                                             <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <p>1997-07-25</p>
+                                                </li>
+                                            </ul>
+                                            
+                                             <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <button class="btn btn-dark" onclick="location.href='/member/MemberModify'">사원수정</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           <div class="col-xxl-3 col-xl-4  col-sm-6">
+                                <div class="card card-statistics contact-contant">
+                                    <div class="card-body py-4">
+                                        <div class="d-flex align-items-center">
+                                            <div class="bg-img">
+                                                <img src="/assets/img/avtar/01.jpg" alt="" class="img-fluid">
+                                            </div>
+                                            <div class="ml-3">
+                                                <h4 class="mb-0">주현우</h4>
+                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1">사원</span></p>
+                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1">id001</span></p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-mobile"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <p>기획부</p>
+                                                </li>
+                                            </ul>
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-phone"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <p>40-1440-8546</p>
+                                                </li>
+                                            </ul>
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <p>Lizzy.Halfman@gmail.com</p>
+                                                </li>
+                                            </ul>
+                                             <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <p>남</p>
+                                                </li>
+                                            </ul>
+                                             <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <p>1997-07-25</p>
+                                                </li>
+                                            </ul>
+                                             <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <button class="btn btn-dark" onclick="location.href='/member/MemberModify'">사원수정</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--end contact contant-->
+		</th:block>
+</html>

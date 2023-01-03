@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">사원관리</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active" aria-current="page">사원조회</li>
+						</ol>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<div class="widgetbar">
+						<button class="btn btn-primary-rgba">
+							<i class="feather icon-plus mr-2"></i>Actions
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	
+	
+		<!-- 	<div class="col-lg-4">
+			<select id="formControlSelect">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+			<div>
+				<input type="Search" class="form-control" name="inputSearch"
+					id="inputSearch" placeholder="Search">
+			</div>
+		</div> -->
+		<select id="formControlSelect">
+			<option>아이디</option>
+			<option>이름</option>
+			<option>직급</option>
+			<option>부서</option>
+			<option>이메일</option>
+		</select>
+		<input placeholder="검색어를 입력해주세요." />
+
+
+	</th:block>
+		<th:block layout:fragment="customContents">
+			<div class="container-fluid">
+				<div class="row">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">아이디</th>
+								<th scope="col">이름</th>
+								<th scope="col">성별</th>
+								<th scope="col">직급</th>
+								<th scope="col">부서</th>
+								<th scope="col">이메일</th>
+								<th scope="col">전화번호</th>
+								<th scope="col">관리</th>
+		
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>id001</td>
+								<td>김길동</td>
+								<td>남</td>
+								<td>부장</td>
+								<td>회계부</td>
+								<td>1@11.com</td>
+								<td>010-9187-6629</td>
+								<td>
+									<button type="button" class="btn btn-outline-dark"
+										onclick="location.href='/member/MemberModify'">관리</button>
+									<button type="button" class="btn btn-outline-dark"
+										onclick="location.href='/member/MemberModify'">비밀번호
+										변경</button>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>id001</td>
+								<td>김길동</td>
+								<td>남</td>
+								<td>부장</td>
+								<td>회계부</td>
+								<td>1@11.com</td>
+								<td>010-9187-6629</td>
+								<td>
+									<button type="button" class="btn btn-outline-dark"
+										onclick="location.href='/member/MemberModify'">관리</button>
+									<button type="button" class="btn btn-outline-dark"
+										onclick="location.href='/member/MemberModify'">비밀번호
+										변경</button>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td>id001</td>
+								<td>김길동</td>
+								<td>남</td>
+								<td>부장</td>
+								<td>회계부</td>
+								<td>1@11.com</td>
+								<td>010-9187-6629</td>
+								<td>
+									<button type="button" class="btn btn-outline-dark"
+										onclick="location.href='/member/MemberModify'">관리</button>
+									<button type="button" class="btn btn-outline-dark"
+										onclick="location.href='/member/MemberModify'">비밀번호
+										변경</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</th:block>
+</html>

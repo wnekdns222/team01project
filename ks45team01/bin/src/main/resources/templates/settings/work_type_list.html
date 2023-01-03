@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	
+	<th:block layout:fragment="customCrumbbar">
+		<div class="row align-items-center">
+			<div class="col-md-8 col-lg-8">
+				<h4 class="page-title">Home</h4>
+				<div class="breadcrumb-list">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">전사원근무유형</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	
+	
+	
+	<th:block layout:fragment="customContents">
+		<table class="table table-hover">
+          <thead>
+              <tr>
+                  <th scope="col">근무유형번호</th>
+                  <th scope="col">사원번호</th>
+                  <th scope="col">근태명</th>
+                  <th scope="col">근무일</th>
+                  <th scope="col">출근시간</th>
+                  <th scope="col">퇴근시간</th>
+                  <th scope="col">사용기한</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:if="${not #lists.isEmpty(worktypeList)}" th:each="wt : ${worktypeList}">
+                  <td th:text="${wt.workTypeNum}"></td>
+                  <td th:text="${wt.memberNum}"></td>
+                  <td th:text="${wt.workName}"></td>
+                  <td th:text="${wt.workDate}"></td>
+                  <td th:text="${wt.attendanceTime}"></td>
+                  <td th:text="${wt.leaveWorkTime}"></td>
+                  <td th:text="${wt.workTypeUsePeriod}"></td>
+              </tr>
+              <tr th:unless="${not #lists.isEmpty(worktypeList)}">
+              </tr>
+          </tbody>
+      </table>
+	</th:block>
+</html>

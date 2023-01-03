@@ -1,10 +1,160 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-</body>
+<th:block layout:fragment="customCrumbbar">
+	<!-- begin page title -->
+	<div class="row align-items-center">
+		<div class="col-md-8 col-lg-8">
+			<h4 class="page-title">휴가설정</h4>
+			<div class="breadcrumb-list">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/">Home</a></li>
+					<li class="breadcrumb-item active" aria-current="page">휴가설정</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<!-- end page title -->
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<div style="width: 50%; float: left;">
+		<div class="col-md-12 col-lg-12">
+			<div class="widgetbar"
+				style="margin-bottom: 20px; margin-right: 40px; float: right">
+				<button type="button" class="btn btn-outline-success"
+					onclick="location.href='/settings/vacationVarietyInsert'">
+					<i class="feather icon-plus mr-2"> Insert</i>
+				</button>
+			</div>
+		</div>
+		<h3>휴가대분류 설정</h3>
+		<div class="col-md-10 col-lg-10">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">휴가명</th>
+						<th scope="col">사용유무</th>
+						<th scope="col">수정</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Mark</td>
+						<td>Mark</td>
+						<td>
+							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
+							th:href="@{/settings/vacationVarietyModify}">수정</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div style="width: 50%; float: right;">
+		<div class="col-md-12 col-lg-12">
+			<div class="widgetbar"
+				style="margin-bottom: 20px; margin-right: 40px; float: right">
+				<button type="button" class="btn btn-outline-success"
+					onclick="location.href='/settings/vacationVarietyInsert'">
+					<i class="feather icon-plus mr-2"> Insert</i>
+				</button>
+			</div>
+		</div>
+		<h3>휴가중분류 설정</h3>
+		<div class="col-md-10 col-lg-10">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">휴가명</th>
+						<th scope="col">사용유무</th>
+						<th scope="col">수정</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Mark</td>
+						<td>Mark</td>
+						<td>
+							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
+							th:href="@{/settings/vacationVarietyModify}">수정</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div style="width: 50%; float: left; margin-top: 40px;">
+		<div class="col-md-12 col-lg-12">
+			<div class="widgetbar"
+				style="margin-bottom: 20px; margin-right: 40px; float: right">
+				<button type="button" class="btn btn-outline-success"
+					onclick="location.href='/settings/vacationVarietyInsert'">
+					<i class="feather icon-plus mr-2"> Insert</i>
+				</button>
+			</div>
+		</div>
+		<h3>휴가종류 설정</h3>
+		<div class="col-md-10 col-lg-10">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">휴가명</th>
+						<th scope="col">사용유무</th>
+						<th scope="col">수정</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Mark</td>
+						<td>Mark</td>
+						<td>
+							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
+							th:href="@{/settings/vacationVarietyModify}">수정</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div style="width: 50%; float: right; margin-top: 40px;">
+		<div class="col-md-12 col-lg-12">
+			<div class="widgetbar"
+				style="margin-bottom: 20px; margin-right: 40px; float: right">
+				<button type="button" class="btn btn-outline-success"
+					onclick="location.href='/settings/vacationVarietyInsert'">
+					<i class="feather icon-plus mr-2"> Insert</i>
+				</button>
+			</div>
+		</div>
+		<h3>휴가기준 설정</h3>
+		<div class="col-md-10 col-lg-10">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">근속연수</th>
+						<th scope="col">휴가개수</th>
+						<th scope="col">지급시기</th>
+						<th scope="col">사용여부</th>
+						<th scope="col">수정</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Mark</td>
+						<td>Mark</td>
+						<td>Mark</td>
+						<td>Mark</td>
+						<td>
+							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
+							th:href="@{/settings/vacationVarietyModify}">수정</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</th:block>
 </html>

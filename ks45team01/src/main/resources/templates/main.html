@@ -1,32 +1,143 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/default}">
-	
-	<th:block layout:fragment="customCrumbbar">
-		<div class="row align-items-center">
-			<div class="col-md-8 col-lg-8">
-				<h4 class="page-title">Home</h4>
-				<div class="breadcrumb-list">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active" aria-current="page">Home</li>
-					</ol>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customCrumbbar">
+	<div class="row align-items-center">
+		<div class="col-md-8 col-lg-8">
+			<h4 class="page-title">Home</h4>
+			<div class="breadcrumb-list">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item active" aria-current="page">Home</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</th:block>
+<th:block layout:fragment="customContents">
+	<div class="col-lg-12 col-xl-4">
+		<div class="card m-b-30">
+			<div class="card-header">
+				<div class="row align-items-center">
+					<div class="col-9">
+						<h5 class="card-title mb-0">profile</h5>
+					</div>
+					<div class="col-3">
+						<div class="dropdown">
+							<button class="btn btn-link p-0 font-18 float-right"
+								type="button" id="widgetRevenue" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">
+								<i class="feather icon-more-horizontal-"></i>
+							</button>
+							<div class="dropdown-menu dropdown-menu-right"
+								aria-labelledby="widgetRevenue">
+								<a class="dropdown-item font-13" href="#">Refresh</a> <a
+									class="dropdown-item font-13" href="#">Export</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-4 col-lg-4">
-				<div class="widgetbar">
-					<button class="btn btn-primary-rgba">
-						<i class="feather icon-plus mr-2"></i>Actions
-					</button>
+			<div class="user-slider">
+				<div class="user-slider-item">
+					<div class="card-body text-center">
+						<span class="action-icon badge badge-primary-inverse"
+							style="margin-bottom: 20px;">JD</span>
+						<h6>인사과</h6>
+						<h5>지영김</h5>
+						<p>demo@email.com</p>
+						<div class="button-list mt-4">
+							<button type="button" class="btn btn-outline-primary"
+								name="attendance">출근</button>
+							<button type="button" class="btn btn-outline-danger"
+								name="leaveWork">퇴근</button>
+						</div>
+						<div class="button-list mt-1">
+							<button type="button" class="btn btn-outline-success"
+								name="goOut">외출</button>
+							<button type="button" class="btn btn-outline-success"
+								name="comeback">복귀</button>
+							<div class="card-footer text-center">
+								<div class="row">
+									<div class="col-6 border-right">
+										<div id="attendance"></div>
+										<p class="my-2">출근시간</p>
+									</div>
+									<div class="col-6">
+										<div id="leaveWork"></div>
+										<p class="my-2">퇴근시간</p>
+									</div>
+								</div>
+							</div>
+							<div class="card-footer text-center">
+								<div class="row">
+									<div class="col-6 border-right">
+										<div id="goOut"></div>
+										<p class="my-2">외출시작시간</p>
+									</div>
+									<div class="col-6">
+										<div id="comeBack"></div>
+										<p class="my-2">외출복귀시간</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</th:block>
+	</div>
+</th:block>
+
+
+<!-- 사용자 지정 js script -->
+<th:block layout:fragment="customScript">
+
+	<script>
+		const $attendanceBtn = document.querySelector('button[name="attendance"]');
+		const $leaveWorkBtn = document.querySelector('button[name="leaveWork"]');
+		const $goOutBtn = document.querySelector('button[name="goOut"]');
+		const $comebackBtn = document.querySelector('button[name="comeback"]');
 	
-	
-	
-	<th:block layout:fragment="customContents">
-		<h1>메인화면</h1>
-	</th:block>
-	
+		const $attendanceEle = document.getElementById('attendance');
+		const $leaveWorkEle = document.getElementById('leaveWork');
+		const $goOutEle = document.getElementById('goOut');
+		const $comeBackEle = document.getElementById('comeBack');
+
+		const today = new Date();
+		const year = today.getFullYear();
+		const month = ('0'+ (today.getMonth() + 1)).slice(-2);
+		const day = ('0' + today.getDate()).slice(-2);
+		const hour = ('0' + today.getHours()).slice(-2);
+		const min = ('0' + today.getMinutes()).slice(-2);
+		const sec = ('0' + today.getSeconds()).slice(-2);
+		
+		const workDate = year + '-' + month + '-' + day;
+		const workTime = hour + ':' + min + ':' + sec;
+		
+			function clickBtn(btn){
+				alert(`${workDate}/${workTime}`);
+				
+			}
+			$attendanceBtn.addEventListener('click', function(){
+				clickBtn(this);
+				$attendanceEle.innerHTML = `${workTime}`;
+			});
+			$leaveWorkBtn.addEventListener('click', function(){
+				clickBtn(this);
+				$leaveWorkEle.innerHTML = `${workTime}`;
+			});
+			$goOutBtn.addEventListener('click', function(){
+				clickBtn(this);
+				$goOutEle.innerHTML = `${workTime}`;
+			});
+			$comebackBtn.addEventListener('click', function(){
+				clickBtn(this);
+				$comeBackEle.innerHTML = `${workTime}`;
+			});
+			
+
+	</script>
+</th:block>
 </html>
