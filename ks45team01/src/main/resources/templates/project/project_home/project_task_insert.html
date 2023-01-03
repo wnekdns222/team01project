@@ -26,10 +26,85 @@
 		<br><br>
 	</th:block>
 	<th:block layout:fragment="customContents">
-	<th:block th:fragment="bizTab1">
-		<h1>프로젝트 업무요청등록 화면</h1>
-		<h1>업무요청등록진행</h1>
-	</th:block>
+	<div class="col-md-12">
+		<div class="card card-statistics">
+			<div class="card-header">
+				<div class="card-heading">
+					<h4 class="card-title">게시글 제목</h4>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<input class="form-control form-control-lg" type="text"
+						placeholder="제목을 입력하세요">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-statistics">
+				<div class="card-header">
+					<div class="card-heading">
+						<h4 class="card-title">게시글 내용</h4>
+					</div>
+				</div>
+				<div class="card-body">
+				<h4>업무요청내용</h4>
+					<div id="summernote" class="summernote"></div>
+					<input type="file" class="form-control-file"
+								id="FIprojectTaskInsert">
+								
+								<h4>지정자 선택</h4>
+								  <div class="row">
+                            <div class="col-md-12">
+                                <div class="card card-statistics">
+                                    <div class="card-body">
+                                        <div class="duallistbox">
+                                            <select multiple="multiple" size="10" id="duallistbox">
+                                                <option value="option1" selected="selected">Option 1</option>
+                                                <option value="option2">Option 2</option>
+                                                <option value="option3">Option 3</option>
+                                                <option value="option4">Option 4</option>
+                                                <option value="option5">Option 5</option>
+                                                <option value="option6" selected="selected">Option 6</option>
+                                                <option value="option7">Option 7</option>
+                                                <option value="option8">Option 8</option>
+                                                <option value="option9">Option 9</option>
+                                                <option value="option0">Option 10</option>
+                                                <option value="option0">Option 11</option>
+                                                <option value="option0">Option 12</option>
+                                                <option value="option0">Option 13</option>
+                                                <option value="option0">Option 14</option>
+                                                <option value="option0">Option 15</option>
+                                                <option value="option0">Option 16</option>
+                                                <option value="option0">Option 17</option>
+                                                <option value="option0">Option 18</option>
+                                                <option value="option0">Option 19</option>
+                                                <option value="option0">Option 20</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+								
+					
+					<button type="submit" class="btn btn-primary"
+					onclick="location.href='/project/projectDetail'">등록</button>
+					<button type="submit" class="btn btn-primary"
+					onclick="location.href='/project/projectDetail'">취소</button>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+
 	</th:block>
 	
 </html>
