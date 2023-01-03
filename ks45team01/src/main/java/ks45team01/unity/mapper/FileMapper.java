@@ -21,4 +21,7 @@ public interface FileMapper {
 	
 	// 인사 파일 목록
 	List<File> hrList();
+	
+	// 마케팅 파일 목록
+	List<File> marketingList();
 }

@@ -103,6 +103,17 @@ public class FileController {
 		return "file/addFile";
 	}
 	
+	@GetMapping("/marketingList")
+	public String marketingList(Model model) {
+		
+		List<File> marketingList = fileService.marketingList();
+		model.addAttribute("title", "마케팅");
+		model.addAttribute("marketingList", marketingList);
+		
+		return "file/marketingList";
+		
+	}
+	
 	/**
 	 * 인사파일 목록 
 	 * @param model
