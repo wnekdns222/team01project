@@ -19,9 +19,7 @@ public interface FileMapper {
 	// 파일 상세보기
 	File fileView(String fileNum);
 	
-	// 인사 파일 목록
-	List<File> hrList();
+	// 파일 서비스별 (인사, 마케팅) 목록
+	List<File> fileServiceTypeList(String serviceType);
 	
-	// 마케팅 파일 목록
-	List<File> marketingList();
 }
