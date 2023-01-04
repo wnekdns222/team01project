@@ -33,4 +33,16 @@ public class MemberLevelService {
 		
 		return memberLevelList;
 	}
+	
+	/**
+	 * 특정회원 권한 조회
+	 * @param levelCode
+	 * @return
+	 */
+	public MemberLevel memberLevelDetail(String levelCode) {
+		
+		MemberLevel memberLevelDetail = memberLevelMapper.memberLevelDetail(levelCode);
+		
+		return memberLevelDetail;
+	}
 }

@@ -1,9 +1,17 @@
 package ks45team01.unity.worker.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ks45team01.unity.dto.MemberLevel;
+import ks45team01.unity.dto.ProjectList;
+import ks45team01.unity.service.MemberDepartmentListService;
+import ks45team01.unity.service.MemberLevelService;
+import ks45team01.unity.service.ProjectListService;
 
 @Controller
 //리퀘스트메핑 /project로 잡음
@@ -18,19 +26,18 @@ public class ProjectController {
 	 * @return
 	 */
 	
-	
+	private final ProjectListService projectListService;
+	public ProjectController(ProjectListService projectListService) {
+		this.projectListService = projectListService;
+	}
 	
 	
 	@GetMapping("/projectList")
 	public String GetProjectList(Model model) {
-		model.addAttribute("project","프로젝트메인화면");
-		/**
-		 *객체 만들어서 서비스랑 연결하기  
-		 *ex)List<Member> memberList = memberService.getMemberList();
-		 * 
-		 * 모델 프로젝트 리스트 가져오기
-		 * model.addAttribute("projectList",projectList);
-		 */
+		List<ProjectList> projectList = projectListService.projectListSe();
+		
+		model.addAttribute("projectList", projectList);
+		model.addAttribute("title","프로젝트메인화면");
 		return "project/project";
 	}
 	

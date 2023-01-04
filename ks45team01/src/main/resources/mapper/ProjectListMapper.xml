@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.ProjectListMapper">
+	<resultMap type="projectList" id="projectListResultMap">
+		<id property="projectNum" column="project_num"/>
+		<result property="memberNum" column="member_num"/>
+		<result property="projectContent" column="project_content"/>
+		<result property="projectRegDate" column="project_reg_date"/>
+		<result property="projectEnd" column="project_end"/>
+		<result property="projectDone" column="project_done"/>
+		<result property="projectProgress" column="project_progress"/>	
+		<result property="projectJoin" column="project_join"/>	
+	</resultMap>
+	
+	
+	<select id="projectListSe" resultMap="projectListResultMap">
+		SELECT 
+			*
+		FROM 
+			tb_project
+	</select>
+</mapper>
