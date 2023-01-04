@@ -37,7 +37,7 @@
 		tb_work_type AS t
 		ORDER BY t.work_date 
 		<if test="startRowNum !=null and startRowNum > -1">
-			LiMIT #{startRowNum}, #{rowPerPage};
+			LIMIT #{startRowNum}, #{rowPerPage};
 		</if>
 	</select>
 	<select id="countAllWorkType" resultType="int">
@@ -54,8 +54,8 @@
 		member_num, 
 		work_name,
 		work_date, 
-		attendance_time, 
-		leavework_time, 
+		attendance_time_type, 
+		leavework_time_type, 
 		reg_member_num, 
 		reg_date, 
 		`use`, 
@@ -77,8 +77,8 @@
 		  member_num, 
 		  work_name,
 		  work_date,
-		  attendance_time, 
-		  leavework_time, 
+		  attendance_time_type, 
+		  leavework_time_type, 
 		  reg_member_num, 
 		  reg_date, 
 		  correct_member_num, 
@@ -104,10 +104,10 @@
 			work_date=#{workDate},
 		</if>
 		<if test="attendanceTime != null and attendanceTime != ''">
-			attendance_time=#{attendanceTime},
+			attendance_time_type=#{attendanceTime},
 		</if>
 		<if test="leaveWorkTime != null and leaveWorkTime != ''">
-			leavework_time=#{leaveWorkTime},
+			leavework_time_type=#{leaveWorkTime},
 		</if>
 		<if test="correctMemberNum != null and correctMemberNum != ''">
 			correct_member_num=#{correctMemberNum},

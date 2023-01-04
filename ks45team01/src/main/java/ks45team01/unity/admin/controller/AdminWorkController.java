@@ -12,9 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ks45team01.unity.dto.VacationCategory;
+import ks45team01.unity.dto.VacationSort;
+import ks45team01.unity.dto.VacationStandard;
+import ks45team01.unity.dto.VacationType;
 import ks45team01.unity.dto.Work;
 import ks45team01.unity.dto.WorkType;
 import ks45team01.unity.dto.WorkUnusual;
+import ks45team01.unity.service.VacationService;
 import ks45team01.unity.service.WorkService;
 import ks45team01.unity.service.WorkTypeService;
 
@@ -30,13 +35,14 @@ public class AdminWorkController {
 	
 	private static final Logger log = LoggerFactory.getLogger(AdminWorkController.class);
 
-	
+	private final VacationService vacationService;
 	private final WorkTypeService workTypeService;
 	private final WorkService workService;
 	
-	public AdminWorkController(WorkTypeService workTypeService, WorkService workService) {
+	public AdminWorkController(WorkTypeService workTypeService, WorkService workService,VacationService vacationService) {
 		this.workTypeService = workTypeService;
 		this.workService = workService;
+		this.vacationService = vacationService;
 	}
 	/**
 	 * 전사원 근태내역 조회
@@ -158,7 +164,18 @@ public class AdminWorkController {
 	}
 	//사내 휴가종류목록
 	@GetMapping("settings/vacationVarietyList")
-	public String getVacationVariety() {
+	public String getVacationVariety(Model model) {
+		
+		Map<String, Object> variety = vacationService.getVacationVariety();
+		List<VacationCategory> category = (List<VacationCategory>)variety.get("category");
+		List<VacationSort> sort =(List<VacationSort>)variety.get("sort");
+		List<VacationType> type =(List<VacationType>)variety.get("type");
+		List<VacationStandard> standard = (List<VacationStandard>)variety.get("standard");
+		model.addAttribute("title", "휴가설정");
+		model.addAttribute("category", category);
+		model.addAttribute("sort", sort);
+		model.addAttribute("type", type);
+		model.addAttribute("standard", standard);
 		
 		return "settings/vacation_variety_list";
 	}
