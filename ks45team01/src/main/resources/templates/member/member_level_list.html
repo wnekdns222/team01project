@@ -31,86 +31,63 @@
 </th:block>
 <th:block layout:fragment="customContents">
 
-
+	
 
 
 	<div class="table-responsive" style="width: 100%; overflow: auto">
 		<table class="table table-dark">
 			<thead>
 				<tr>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">캘린더 권한 부여관리</th>
-					<th scope="col">권한 수정</th>
+					<th scope="col">권한코드</th>
+					<th scope="col">사원번호</th>
+					<th scope="col">사원권한설정여부</th>
+					<th scope="col">사원관리권환</th>
+					<th scope="col">로그인관리권한</th>
+					<th scope="col">프로젝트관리자권한</th>
+					<th scope="col">부서근태내역조회권환</th>
+					<th scope="col">캘린더카테고리등록권한</th>
+					<th scope="col">커뮤니티카테고리등록권한</th>
+					<th scope="col">부서휴가내역조회</th>
+					<th scope="col">전사원휴가내역조회</th>
+					<th scope="col">전사원근태내역조회</th>
+					<th scope="col">비정상근태직권등록</th>
+					<th scope="col">결재자 권한</th>
+					<th scope="col">근태,휴가설정권한</th>
+					<th scope="col">전자결재대분류카테고리권한</th>
+					<th scope="col">결재카테고리등록권한</th>
+					<th scope="col">근태카테고리등록권한</th>
+					<th scope="col">파일카테고리등록권한</th>
+					<th scope="col">권한수정</th>
 
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">id001</th>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td><button type="button" class="btn btn-outline-primary"
+				<tr th:each="ml : ${memberLevelList}">
+				
+					<th scope="row" th:text="${ml.levelCode}"></th>
+					<td th:text="${ml.memberNum}"></td>
+					<td th:text="${ml.memberAdminLevel}"></td>
+					<td th:text="${ml.memberUserLevel}"></td>
+					<td th:text="${ml.loginLevel}"></td>
+					<td th:text="${ml.projectLevel}"></td>
+					<td th:text="${ml.departWorkInfoLevel}"></td>
+					<td th:text="${ml.calenderCategoryLevel}"></td>
+					<td th:text="${ml.communityLevel}"></td>
+					<td th:text="${ml.departVacationInfoLevel}"></td>
+					<td th:text="${ml.allVacationInfoLevel}"></td>
+					<td th:text="${ml.allWorkInfoLevel}"></td>
+					<td th:text="${ml.unusualWorkInsertLevel}"></td>
+					<td th:text="${ml.approvalLevel}"></td>
+					<td th:text="${ml.majorCategoryLevel}"></td>
+					<td th:text="${ml.workVacationSettingLevel}"></td>
+					<td th:text="${ml.approvalCateLevel}"></td>
+					<td th:text="${ml.workCategoryLevel}"></td>
+					<td th:text="${ml.fileCategoryLevel}"></td>
+					<td ><button type="button" class="btn btn-outline-primary"
 					onclick="location.href='/member/MemberLevelModify'">권한 수정</button></td>
 				</tr>
-				<tr>
-					<th scope="row">id002</th>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td><button type="button" class="btn btn-outline-primary"
-					onclick="location.href='/member/MemberLevelModify'">권한 수정</button></td>
-				</tr>
-				<tr>
-					<th scope="row">id003</th>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td>Y</td>
-					<td><button type="button" class="btn btn-outline-primary"
-					onclick="location.href='/member/MemberLevelModify'">권한 수정</button></td>
-				</tr>
+				
+				
 			</tbody>
 		</table>
 

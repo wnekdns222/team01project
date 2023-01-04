@@ -55,18 +55,12 @@
 			tb_file
 		WHERE file_num = #{fileNum};
 	</select>
-	<select id="marketingList" resultMap="fileResultMap">
+	<select id="fileServiceTypeList" parameterType="String" resultMap="fileResultMap">
 		SELECT 
 			*
 		FROM 
 			tb_file
-		WHERE file_category_code = 'file_catecode_2';
+		WHERE file_category_code = #{serviceType};
 	</select>
-	<select id="hrList" resultMap="fileResultMap">
-		SELECT 
-			*
-		FROM 
-			tb_file
-		WHERE file_category_code = 'file_catecode_1';
-	</select>
+	
 </mapper>

@@ -42,20 +42,23 @@ public class FileService {
 		return fileView;
 	}
 	
-	public List<File> marketingList(){
-		List<File> marketingList = fileMapper.marketingList();
+	public List<File> fileServiceTypeList(String serviceType){
 		
-		return marketingList;
+		List<File> serviceTypeList = fileMapper.fileServiceTypeList(serviceType);
+		
+		return serviceTypeList;
 	}
 	
 	/**
 	 * 인사과파일 목록
 	 * @return
 	 */
+	/*
 	public List<File> hrList(){
 		
 		List<File> hrList = fileMapper.hrList();
 		
 		return hrList;
 	}
+	*/
 }
