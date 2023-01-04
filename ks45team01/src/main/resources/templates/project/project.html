@@ -59,50 +59,23 @@
 		<div class="card card-statistics">
 			<div class="card-header">
 				<h4 class="card-title">진행중</h4>
+				<div style="text-align:right;">
+				<a href="/project/projectInsert"
+									class="btn btn-primary mt-2">프로젝트 생성</a>
+				</div>
 			</div>
 			<div class="card-body">
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-3" th:each="pl : ${projectList}">
 						<div class="card h-100">
 							<div class="card-body">
-								<h4 class="card-title">커피만들기 프로젝트</h4>
-								<p class="card-text">1.커피만들기 2.커피사기 3.커피주문제작 4.고양이똥 루왁기다리기</p>
+								<h4 class="card-title" th:text="${pl.projectContent}"></h4>
+								<p class="card-text"></p>
 								<a href="/project/projectDetail" class="btn btn-primary mt-2">들어가기</a>
 								<a href="/project/projectMemberModify"
 									class="btn btn-primary mt-2">인원수정</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="card h-100">
-							<div class="card-body">
-								<h4 class="card-title">커피만들기 프로젝트</h4>
-								<p class="card-text">1.커피만들기 2.커피사기 3.커피주문제작 4.고양이똥 루왁기다리기</p>
-								<a href="/project/projectDetail" class="btn btn-primary mt-2">들어가기</a>
-								<a href="/project/projectMemberModify"
-									class="btn btn-primary mt-2">인원수정</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="card h-100">
-							<div class="card-body">
-								<h4 class="card-title">커피만들기 프로젝트</h4>
-								<p class="card-text">1.커피만들기 2.커피사기 3.커피주문제작 4.고양이똥 루왁기다리기</p>
-								<a href="/project/projectDetail" class="btn btn-primary mt-2">들어가기</a>
-								<a href="/project/projectMemberModify"
-									class="btn btn-primary mt-2">인원수정</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="card h-100">
-							<div class="card-body">
-								<h4 class="card-title">커피만들기 프로젝트</h4>
-								<p class="card-text">1.커피만들기 2.커피사기 3.커피주문제작 4.고양이똥 루왁기다리기</p>
-								<a href="/project/projectDetail" class="btn btn-primary mt-2">들어가기</a>
-								<a href="/project/projectMemberModify"
-									class="btn btn-primary mt-2">인원수정</a>
+									<h6 th:text="|진척률 : ${pl.projectProgress}|"></h6>
+									<h6 th:text="|인원수 : ${pl.projectJoin}|"></h6>
 							</div>
 						</div>
 					</div>

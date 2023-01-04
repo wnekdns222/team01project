@@ -84,10 +84,9 @@
 					<td th:text="${ml.workCategoryLevel}"></td>
 					<td th:text="${ml.fileCategoryLevel}"></td>
 					<td ><button type="button" class="btn btn-outline-primary"
-					onclick="location.href='/member/MemberLevelModify'">권한 수정</button></td>
+					th:onclick="|location.href='@{/member/MemberLevelModify(levelCode=${ml.levelCode})}'|">권한 수정</button></td>
 				</tr>
-				
-				
+							
 			</tbody>
 		</table>
 

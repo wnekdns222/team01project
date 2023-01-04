@@ -31,4 +31,13 @@
 		FROM 
 			tb_member_level;
 	</select>
+	
+	<select id="memberLevelDetail" resultMap="MemberLevelResultMap" parameterType="String">
+		SELECT 
+			*
+		FROM 
+			tb_member_level
+		WHERE
+			level_code = #{levelCode};
+	</select>
 </mapper>
