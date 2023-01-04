@@ -49,10 +49,6 @@ public class FileService {
 		return serviceTypeList;
 	}
 	
-	/**
-	 * 인사과파일 목록
-	 * @return
-	 */
 	/*
 	public List<File> hrList(){
 		
