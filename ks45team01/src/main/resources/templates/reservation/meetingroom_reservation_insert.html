@@ -21,20 +21,49 @@
 		<div class="card-body">
 		    <h6 class="card-subtitle"></h6>
 		    <form>
-		        <div class="form-group">
+		        <div class="form-group" style="margin:50px 0px 20px 0px;">
 		            <label for="exampleInputPassword1">회의실</label>
-		            <select class="form-control" id="exampleInputPassword1">
-		            </select>
+		            <select class="form-control" id="meetingroomList" name="meetingroomList">
+		            	<th:block th:if="${not #lists.isEmpty(meetingroomList)}" 
+		            	          th:each="l : ${meetingroomList}">
+		            	<option th:text="${l.meetName}">
+		            	</option>
+		            	</th:block>
+		            	<th:block th:unless="${not #lists.isEmpty(meetingroomList)}">								
+									<option>등록된 회의실이 없습니다</option>
+						</th:block>
+		            </select>  
 		        </div>
-		        <div class="form-group">
-		            <label for="exampleInputPassword1">시작시간</label>
-		            <input type="datetime-local" class="form-control" id="exampleInputPassword1" placeholder="Password">
-		        </div>
-		        <div class="form-group">
-		            <label for="exampleInputPassword1">종료시간</label>
-		            <input type="datetime-local" class="form-control" id="exampleInputPassword1" placeholder="Password">
-		        </div>
-		        <button type="submit" class="btn btn-primary">확인</button>
+		         <label for="exampleInputPassword1">예약시간</label>
+		        <div class="input-group" data-date="23/11/2018" data-date-format="mm/dd/yyyy">
+                    <input type="text" class="form-control range-from" name="from">
+                    <span class="input-group-addon">To</span>
+                    <input class="form-control range-to" type="text" name="to">
+                </div>
+		        <div class="btn-toolbar"role="toolbar"  aria-label="Toolbar with Group Buttons">
+                    <div class="btn-group mr-2 mb-2 mb-xxs-0" role="group" aria-label="First group" style="margin:17px 0px 0px 0px;">
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black; width: 16.4%;">7</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black; width: 16.4%;">8</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black; width: 16.4%;">9</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black; width: 16.4%;">10</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black; width: 16.4%;">11</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black; width: 16.4%;">12</button>
+                    </div>
+                    </div>
+                    <div class="btn-toolbar"role="toolbar"  aria-label="Toolbar with Group Buttons">
+                    <div class="btn-group mr-2 mb-2 mb-xxs-0" role="group" aria-label="Second group">
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">13</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">14</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">15</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">16</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">17</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">18</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">19</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">20</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">21</button>
+					</div>
+                </div>
+		        <button type="submit" class="btn btn-primary" style="margin:120px 0px 0px 0px;">확인</button>
 		    </form>
 		</div>
 	</th:block>

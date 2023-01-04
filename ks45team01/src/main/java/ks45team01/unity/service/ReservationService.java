@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ks45team01.unity.dto.Meetingroom;
-import ks45team01.unity.dto.Reservation;
 import ks45team01.unity.mapper.ReservationMapper;
 
 @Service
@@ -25,13 +24,6 @@ public class ReservationService {
 		List<Meetingroom> meetingroomList = reservationMapper.getMeetingroomList();
 		
 		return meetingroomList;
-	}
-	
-	public List<Reservation> getReservationList(){
-		
-		List<Reservation> reservationList = reservationMapper.getReservationList();
-		
-		return reservationList;
 	}
 	
 }
