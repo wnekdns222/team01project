@@ -26,7 +26,39 @@
 		<br><br>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<h1>프로젝트 인서트 등록 화면</h1>
+		<form>
+		<div class="form-group">
+			<label for="workNum">제목</label> <input type="text"
+				class="form-control" id="workNum" required>
+		</div>
+		<div class="form-group">
+			<label for="writeChangeReason">단위업무</label>
+			<textarea class="form-control" name="writeChangeReason"
+				id="writeChangeReason" rows="3" placeholder="Textarea text">
+	                     </textarea>
+		</div>
+		<div class="form-group">
+			<label for="vacationCategoryNum">대분류</label> <select
+				class="form-control" name="vacationCategoryNum"
+				id="vacationCategoryNum" required>
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="vacationSortNum">중분류</label> <select class="form-control"
+				name="vacationSortNum" id="vacationSortNum" required>
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="vacationTypeNum">휴가종류</label> <select
+				class="form-control" name="vacationTypeNum" id="vacationTypeNum"
+				required>
+				<option value=""></option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
 	</th:block>
 	
 </html>
