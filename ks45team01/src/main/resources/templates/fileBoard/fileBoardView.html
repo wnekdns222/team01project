@@ -33,37 +33,31 @@
 					<div align="center">파일번호</div>
 				</td>
 				<td style="font-family: 돋음; font-size: 12">
-					[[${fileView.fileNum}]]</td>
+					[[${boardFileView.fileBoardNum}]]</td>
 			</tr>
 			<tr>
 				<td style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">파일명</div>
 				</td>
 				<td style="font-family: 돋음; font-size: 12">
-					[[${fileView.fileTitle}]]</td>
+					[[${boardFileView.fileBoardTitle}]]</td>
 			</tr>
 			<tr>
 				<td style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">내용</div>
 				</td>
 				<td style="font-family: 돋음; font-size: 12"><textarea
-						class="form-control" disabled="disabled">[[${fileView.fileContents}]]</textarea>
+						class="form-control" disabled="disabled">[[${boardFileView.fileBoardContents}]]</textarea>
 				</td>
-			</tr>
-			<tr>
-				<td style="font-family: 돋음; font-size: 12" height="16">
-					<div align="center">첨부파일</div>
-				</td>
-				<td th:text="${fileView.fileAttach}"/>
 			</tr>
 		</table>
 		<div style="text-align: center;">
 			<button type="button" class="btn btn-outline-success"
-				th:onclick="|location.href='@{/file/fileUpdate(fileNum=${fileView.fileNum})}'|">수정</button>
+				th:onclick="|location.href='@{/fileBoard/fileBoardUpdate(fileBoardNum=${boardFileView.fileBoardNum})}'|">수정</button>
 			<button type="button" class="btn btn-outline-success"
 				onclick="location.href='/file/fileList';">목록</button>
 			<button type="button" class="btn btn-outline-success"
-				th:onclick="|location.href='@{/file/fileDelete(fileNum=${fileView.fileNum})}'|">삭제</button>
+				th:onclick="|location.href='@{/fileBoard/fileBoardDelete(fileBoardNum=${boardFileView.fileBoardNum})}'|">삭제</button>
 		</div>
 	</th:block>
 </html>

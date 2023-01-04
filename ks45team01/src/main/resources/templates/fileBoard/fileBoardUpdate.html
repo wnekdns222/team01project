@@ -20,28 +20,28 @@
 		</div>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<form id="fileUpdate" th:action="@{/file/fileUpdate}" method="post">
-			<input type="hidden" name="fileNum" th:value="${fileUpdate.fileNum}" />
-			<label for="fileTitle">서식명</label>
+		<form id="fileBoardUpdate" th:action="@{/fileBoard/fileBoardUpdate}" method="post">
+			<input type="hidden" name="fileBoardNum" th:value="${boardFileView.fileBoardNum}"/>
+			<label for="fileBoardTitle">서식명</label>
 			<div style="width: 800px;">
-				<input type="text" class="form-control" id="fileTitle" name="fileTitle" th:value="${fileUpdate.fileTitle}"/>
+				<input type="text" class="form-control" id="fileBoardTitle" name="fileBoardTitle" th:value="${boardFileView.fileBoardTitle}"/>
 			</div>
-				<label for="fileRegiStrant">작성자</label>
+				<label for="fileBoardRegistrant">작성자</label>
 			<div style="width: 800px;">
-				<input type="text" class="form-control" id="fileRegiStrant" name="fileRegiStrant" th:value="${fileUpdate.fileRegiStrant}" readonly="readonly"/>
+				<input type="text" class="form-control" id="fileBoardRegistrant" name="fileBoardRegistrant" th:value="${boardFileView.fileBoardRegistrant}" readonly="readonly"/>
 			</div>
-				<label for="fileRegiStrant">수정자</label>
+				<label for="fileModifier">수정자</label>
 			<div style="width: 800px;">
-				<input type="text" class="form-control" id="fileRegiStrant" name="fileRegiStrant" th:value="${fileUpdate.fileModifier}"/>
+				<input type="text" class="form-control" id="fileModifier" name="fileModifier" th:value="${boardFileView.fileModifier}"/>
 			</div>
-			<label for="fileContents">내용</label>
-			<textarea class="form-control" name="fileContents" id="fileContents" style="height: 150px; width: 800px;" th:text="${fileUpdate.fileContents}"></textarea>
+			<label for="fileBoardContents">내용</label>
+			<textarea class="form-control" name="fileBoardContents" id="fileBoardContents" style="height: 150px; width: 800px;" th:text="${boardFileView.fileBoardContents}"></textarea>
 			<div style="margin-top: 8px">
 				<input name="fileAttach" type="file"/>
 			</div>
 			<div style="margin-left: 300px; margin-top: 8px;">
 			<button type="submit" class="btn btn-outline-success">등록</button>
-			<button type="button" class="btn btn-outline-success" onclick="location.href='/file/fileList';">취소</button>
+			<button type="button" class="btn btn-outline-success" onclick="location.href='/fileBoard/hrList';">취소</button>
 			</div>
 		</form>
 	</th:block>

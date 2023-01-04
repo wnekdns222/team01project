@@ -38,7 +38,7 @@ public class FileBoardController {
 	 * @return
 	 */
 	@PostMapping("/fileBoardUpdate")
-	public String fileUpdate(FileBoard fileBoard) {
+	public String fileBoardUpdate(FileBoard fileBoard) {
 		
 		fileBoardService.boardFileUpdate(fileBoard);
 		
@@ -60,7 +60,7 @@ public class FileBoardController {
 		model.addAttribute("title", "파일게시글수정");
 		model.addAttribute("boardFileView", boardFileView);
 		
-		return "file/fileBoardUpdate";
+		return "fileBoard/fileBoardUpdate";
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public class FileBoardController {
 		model.addAttribute("title", "파일상세보기");
 		model.addAttribute("boardFileView", boardFileView);
 		
-		return "file/fileBoardView";
+		return "fileBoard/fileBoardView";
 	}
 	
 	/**
@@ -101,7 +101,7 @@ public class FileBoardController {
 		
 		model.addAttribute("title", "파일게시글등록");
 		
-		return "file/addBoardFile";
+		return "fileBoard/addBoardFile";
 	}
 	
 	@GetMapping("/{serviceType}")
@@ -111,7 +111,6 @@ public class FileBoardController {
 		String title = null;
 		if(serviceType != null) {
 			switch (serviceType) {
-			/*
 				case "planningDept" ->{
 					servieList = fileBoardService.fileServiceTypeList("file_catecode_4");
 					title = "기획실";
@@ -127,7 +126,6 @@ public class FileBoardController {
 					title = "마케팅부서";
 					break;
 				}
-				*/
 				case "hrList" ->{
 					servieList = fileBoardService.fileServiceTypeList("file_catecode_1");
 					title = "인사부서";
