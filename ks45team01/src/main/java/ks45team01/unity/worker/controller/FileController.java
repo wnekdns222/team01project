@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,14 +104,31 @@ public class FileController {
 		return "file/addFile";
 	}
 	
-	@GetMapping("/marketingList")
-	public String marketingList(Model model) {
+	@GetMapping("/{serviceType}")
+	public String marketingList(@PathVariable(name="serviceType") String serviceType
+								,Model model) {
+		List<File> servieList = null;
+		String title = null;
+		if(serviceType != null) {
+			switch (serviceType) {
+				case "marketingList" ->{
+					servieList = fileService.fileServiceTypeList("file_catecode_2");
+					title = "마케팅부서";
+					break;
+				}
+				case "hrList" ->{
+					servieList = fileService.fileServiceTypeList("file_catecode_1");
+					title = "인사부서";
+					break;
+				}
+			}
+			
+		}
+
+		model.addAttribute("title", title);
+		model.addAttribute(serviceType, servieList);
 		
-		List<File> marketingList = fileService.marketingList();
-		model.addAttribute("title", "마케팅");
-		model.addAttribute("marketingList", marketingList);
-		
-		return "file/marketingList";
+		return "file/" + serviceType;
 		
 	}
 	
@@ -119,7 +137,7 @@ public class FileController {
 	 * @param model
 	 * @return
 	 */
-	
+	/*
 	@GetMapping("/hrList")
 	public String ResourcesList(Model model) {
 		
@@ -130,4 +148,5 @@ public class FileController {
 		
 		return "file/hrList";
 	}
+	*/
 }
