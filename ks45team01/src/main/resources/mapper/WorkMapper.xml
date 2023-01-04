@@ -68,8 +68,8 @@
 	INNER JOIN
 		tb_work_type AS t
 	ON 
-		w.work_type_num = t.work_type_num
-	WHERE 
+		w.member_num = t.member_num
+	where
 		w.attendance_day = t.work_date;
 	</select>
 	<select id="getAuthorityWorkInfo" resultType="List" resultMap="workUnusualResultMap">
