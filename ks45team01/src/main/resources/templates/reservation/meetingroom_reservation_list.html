@@ -22,28 +22,32 @@
 		<table class="table table-hover">
                   <thead>
                       <tr>
-                          <th scope="col">예약번호</th>
-                          <th scope="col">회의실</th>
-                          <th scope="col">시작시간</th>
-                          <th scope="col">종료시간</th>
-                          <th scope="col">예약자</th>
+                          <th scope="col">회의실명</th>
+                          <th scope="col">사용가능시작시간</th>
+                          <th scope="col">사용가능종료시간</th>
+                          <th scope="col">회의실 위치</th>
+                          <th scope="col">회의실 수용인원</th>
+                          <th scope="col">회의실 상세정보</th>
                       </tr>
                   </thead>
                   <tbody>
-                    <tr th:unless="${#lists.isEmpty(reservationList)}"
-					    th:each="l : ${reservationList}">
-							<td th:text="${l.reservationNum}"></td>
-							<th:block th:unless="${#lists.isEmpty(l.meetingroom)}"
-									  th:each="ml : ${l.meetingroom}">
-								<td th:text="${ml.meetName}"></td>
-							</th:block>
-							<td th:text="${l.reservationStartTime}"></td>
-							<td th:text="${l.reservationEndTime}"></td>
-							<th:block th:unless="${#lists.isEmpty(l.listMember)}"
-									  th:each="ll : ${l.listMember}">
-								<td th:text="${ll.memberName}"></td>
-							</th:block>
-				    </tr>
+                    <tr th:unless="${#lists.isEmpty(meetingroomList)}"
+					th:each="l : ${meetingroomList}">	
+					<td>
+					 <div class="controls">
+                       <div class="form-check mb-0 py-2">
+                           <input class="form-check-input" type="radio" name="toasts"
+                               id="success" value="success" th:text="${l.meetName}"> 
+                               <label class="form-check-label" for="success"></label>
+                       </div>
+                     </div>
+                    </td>
+					<td th:text="${l.meetUsableStart}"></td>
+					<td th:text="${l.meetUsableEnd}"></td>
+					<td th:text="${l.meetLocation}"></td>
+					<td th:text="${l.meetCapacity}"></td> 
+					<td th:text="${l.meetDetail}"></td>
+					</tr>
                   </tbody>
               </table>
 	</th:block>
