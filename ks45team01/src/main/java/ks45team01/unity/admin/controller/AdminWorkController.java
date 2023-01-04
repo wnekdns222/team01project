@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team01.unity.dto.Work;
 import ks45team01.unity.dto.WorkType;
+import ks45team01.unity.dto.WorkUnusual;
 import ks45team01.unity.service.WorkService;
 import ks45team01.unity.service.WorkTypeService;
 
@@ -36,7 +37,11 @@ public class AdminWorkController {
 		this.workTypeService = workTypeService;
 		this.workService = workService;
 	}
-	//전사원 근무내역 조회
+	/**
+	 * 전사원 근태내역 조회
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("work/workAllList")
 	public String getAllWorkInfo(Model model) {   
 		
@@ -51,9 +56,15 @@ public class AdminWorkController {
 		
 		return "work/work_authority_Insert";
 	}
-	//비정상 근태 조회
+	/**
+	 * 비정상 근태 조회
+	 * @return "work/work_authority_list"
+	 */
 	@GetMapping("work/workAuthorityList")
-	public String getAuthorityWorkInfo() {
+	public String getAuthorityWorkInfo(Model model) {
+		
+		List<WorkUnusual> unusualList = workService.getAuthorityWorkInfo();
+		model.addAttribute("unusualList", unusualList);
 		
 		return "work/work_authority_list";
 	}

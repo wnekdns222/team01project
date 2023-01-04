@@ -37,7 +37,6 @@
 				<th scope="col">근무일</th>
 				<th scope="col">출근시간</th>
 				<th scope="col">퇴근시간</th>
-				<th scope="col">입력사유</th>
 				<th scope="col">대분류</th>
 				<th scope="col">중분류</th>
 				<th scope="col">소분류</th>
@@ -45,20 +44,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			<!-- <tr th:if="${not #lists.isEmpty(worktypeList)}" th:each="wt : ${worktypeList}">
-                  <td th:text="${wt.workTypeNum}"></td>
-                  <td th:text="${wt.memberNum}"></td>
-                  <td th:text="${wt.workName}"></td>
-                  <td th:text="${wt.workDate}"></td>
-                  <td th:text="${wt.attendanceTime}"></td>
-                  <td th:text="${wt.leaveWorkTime}"></td>
-                  <td th:text="${wt.workTypeUsePeriod}"></td>
-                  <td>
-						<a th:href="@{/settings/workTypeModify(workTypeNum=${wt.workTypeNum})}">수정</a>
-					</td>
+			<tr th:if="${not #lists.isEmpty(unusualList)}" th:each="u : ${unusualList}">
+                  <td th:text="${u.workNum}"></td>
+                  <td th:text="${u.memberNum}"></td>
+                  <td th:text="${u.writeAttendanceDay}"></td>
+                  <td th:text="${u.writeAttendanceTime}"></td>
+                  <td th:text="${u.writeLeaveworkTime}"></td>
+                  <td th:text="${u.vacationCategoryNum}"></td>
+                  <td th:text="${u.vacationSortNum}"></td>
+                  <td th:text="${u.vacationTypeNum}"></td>
+                  <td th:text="${u.writeChangeReason}"></td>
               </tr>
-              <tr th:unless="${not #lists.isEmpty(worktypeList)}">
-              </tr> -->
+              <tr th:unless="${not #lists.isEmpty(unusualList)}">
+              </tr>
 		</tbody>
 	</table>
 
