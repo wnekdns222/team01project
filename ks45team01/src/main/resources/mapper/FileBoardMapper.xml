@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.FileBoardMapper">
+	<resultMap type="FileBoard" id="fileBoardResultMap">
+		<id property="fileBoardNum" column="file_board_num"/>
+		<result property="fileCategoryCode" column="file_category_code"/>
+		<result property="fileBoardRegistrant" column="file_board_registrant"/>
+		<result property="fileBoardTitle" column="file_board_title"/>
+		<result property="fileBoardContents" column="file_board_contents"/>
+		<result property="fileRegDate" column="file_reg_date"/>
+		<result property="fileModifier" column="file_modifier"/>
+		<result property="fileModificationDate" column="file_modification_date"/>
+		<result property="fileUseOrNot" column="file_use_or_not"/>
+		<result property="fileGroupCode" column="file_group_code"/>
+	</resultMap>
+	<delete id="boardFileDelete" parameterType="String">
+		DELETE FROM tb_file_board WHERE file_board_num = #{fileBoardNum};
+	</delete>
+	<insert id="addBoardFile" parameterType="FileBoard">
+		INSERT INTO tb_file_board
+		(file_board_num, file_board_registrant, file_board_title, file_board_contents, file_reg_date)
+		VALUES (sf_fileBoardNum(), #{fileBoardRegistrant}, #{fileBoardTitle}, #{fileBoardContents}, NOW());
+	</insert>
+	<update id="boardFileUpdate" parameterType="FileBoard">
+		UPDATE tb_file
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="fileBoardTitle != null and fileBoardTitle != '' ">
+			 	,file_board_title = #{fileBoardTitle} 
+			</if>		
+			<if test="fileBoardContents != null and fileBoardContents != '' ">
+				,file_board_contents = #{fileBoardContents} 
+			</if>
+			<if test="fileModifier != null and fileModifier != '' ">
+				,file_modifier = #{fileModifier} 
+			</if>
+			<if test="fileModificationDate != null and fileModificationDate != '' ">
+				,file_modification_date = NOW()
+			</if>
+		</trim>
+		WHERE 
+			file_board_num = #{fileBoardNum};
+	</update>
+	
+	<select id="boardFileView" resultMap="fileBoardResultMap" parameterType="String">
+		SELECT 
+			*
+		FROM 
+			tb_file_board
+		WHERE file_board_num = #{fileBoardNum};
+	</select>
+	<select id="fileServiceTypeList" parameterType="String" resultMap="fileBoardResultMap">
+		SELECT 
+			*
+		FROM 
+			tb_file_board
+		WHERE file_category_code = #{serviceType};
+	</select>
+	
+</mapper>

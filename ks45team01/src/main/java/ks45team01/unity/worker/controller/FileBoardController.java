@@ -10,37 +10,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ks45team01.unity.dto.File;
-import ks45team01.unity.service.FileService;
+import ks45team01.unity.dto.FileBoard;
+import ks45team01.unity.service.FileBoardService;
 
 @Controller
-@RequestMapping("/file")
-public class FileController {
+@RequestMapping("/fileBoard")
+public class FileBoardController {
 		
 	
-	private final FileService fileService;
-	public FileController(FileService fileService) {
-		this.fileService = fileService;
+	private final FileBoardService fileBoardService;
+	public FileBoardController(FileBoardService fileBoardService) {
+		this.fileBoardService = fileBoardService;
 	}
 	
 	
-	@GetMapping("/fileDelete")
-	public String fileDelete(String fileNum) {
+	@GetMapping("/fileBoardDelete")
+	public String fileDelete(String fileBoardNum) {
 		
-		fileService.fileDelete(fileNum);
+		fileBoardService.boardFileDelete(fileBoardNum);
 		
 		return "redirect:/file/fileList";
 	}
 	
 	/**
 	 * 파일 수정 처리과정
-	 * @param file
+	 * @param fileBoard
 	 * @return
 	 */
-	@PostMapping("/fileUpdate")
-	public String fileUpdate(File file) {
+	@PostMapping("/fileBoardUpdate")
+	public String fileUpdate(FileBoard fileBoard) {
 		
-		fileService.fileUpdate(file);
+		fileBoardService.boardFileUpdate(fileBoard);
 		
 		return "redirect:/file/fileList";
 	}
@@ -51,16 +51,16 @@ public class FileController {
 	 * @return
 	 */
 	
-	@GetMapping("/fileUpdate")
-	public String fileUpdateForm(@RequestParam(value = "fileNum", required = false) String fileNum
+	@GetMapping("/fileBoardUpdate")
+	public String fileUpdateForm(@RequestParam(value = "fileBoardNum", required = false) String fileBoardNum
 							,Model model) {
 		
-		File fileUpdate = fileService.fileView(fileNum);
+		FileBoard boardFileView = fileBoardService.boardFileView(fileBoardNum);
 		
-		model.addAttribute("title", "파일수정");
-		model.addAttribute("fileUpdate", fileUpdate);
+		model.addAttribute("title", "파일게시글수정");
+		model.addAttribute("boardFileView", boardFileView);
 		
-		return "file/fileUpdate";
+		return "file/fileBoardUpdate";
 	}
 	
 	/**
@@ -69,16 +69,16 @@ public class FileController {
 	 * @return
 	 */
 	
-	@GetMapping("/fileView")
-	public String fileView(String fileNum
+	@GetMapping("/fileBoardView")
+	public String fileView(String fileBoardNum
 						  ,Model model) {
 		
-		File fileView = fileService.fileView(fileNum);
+		FileBoard boardFileView = fileBoardService.boardFileView(fileBoardNum);
 		
 		model.addAttribute("title", "파일상세보기");
-		model.addAttribute("fileView", fileView);
+		model.addAttribute("boardFileView", boardFileView);
 		
-		return "file/fileView";
+		return "file/fileBoardView";
 	}
 	
 	/**
@@ -87,47 +87,49 @@ public class FileController {
 	 * @return
 	 */
 	
-	@PostMapping("/addFile")
-	public String addFile(File file) {
+	@PostMapping("/addBoardFile")
+	public String addBoardFile(FileBoard fileBoard) {
 		
-		fileService.addFile(file);
+		fileBoardService.addBoardFile(fileBoard);
 		
 		return "redirect:/file/fileList";
 	}
 	
-	@GetMapping("/addFile")
-	public String addFileForm(Model model) {
+	@GetMapping("/addFileBoardForm")
+	public String addFileBoardForm(Model model) {
 		
 		
-		model.addAttribute("title", "파일등록");
+		model.addAttribute("title", "파일게시글등록");
 		
-		return "file/addFile";
+		return "file/addBoardFile";
 	}
 	
 	@GetMapping("/{serviceType}")
 	public String marketingList(@PathVariable(name="serviceType") String serviceType
 								,Model model) {
-		List<File> servieList = null;
+		List<FileBoard> servieList = null;
 		String title = null;
 		if(serviceType != null) {
 			switch (serviceType) {
+			/*
 				case "planningDept" ->{
-					servieList = fileService.fileServiceTypeList("file_catecode_4");
+					servieList = fileBoardService.fileServiceTypeList("file_catecode_4");
 					title = "기획실";
 					break;
 				}
 				case "managementSupportList" ->{
-					servieList = fileService.fileServiceTypeList("file_catecode_3");
+					servieList = fileBoardService.fileServiceTypeList("file_catecode_3");
 					title = "경영지원부서";
 					break;
 				}
 				case "marketingList" ->{
-					servieList = fileService.fileServiceTypeList("file_catecode_2");
+					servieList = fileBoardService.fileServiceTypeList("file_catecode_2");
 					title = "마케팅부서";
 					break;
 				}
+				*/
 				case "hrList" ->{
-					servieList = fileService.fileServiceTypeList("file_catecode_1");
+					servieList = fileBoardService.fileServiceTypeList("file_catecode_1");
 					title = "인사부서";
 					break;
 				}
@@ -138,7 +140,7 @@ public class FileController {
 		model.addAttribute("title", title);
 		model.addAttribute(serviceType, servieList);
 		
-		return "file/" + serviceType;
+		return "fileBoard/" + serviceType;
 		
 	}
 	
