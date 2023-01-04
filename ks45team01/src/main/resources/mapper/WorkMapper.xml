@@ -24,8 +24,8 @@
 				<result property="memberNum"  column="member_num" />
 				<result property="workName"  column="work_name" />
 				<result property="workDate"  column="work_date" />
-				<result property="attendanceTime"  column="attendance_time" />
-				<result property="leaveWorkTime"  column="leavework_time" />
+				<result property="attendanceTime"  column="attendance_time_type" />
+				<result property="leaveWorkTime"  column="leavework_time_type" />
 				<result property="regMemberNum"  column="reg_member_num" />
 				<result property="regDate"  column="reg_date" />
 				<result property="correctMemberNum"  column="correct_member_num" />
@@ -91,4 +91,5 @@
 	on
 	u.vacation_type_num = t.vacation_type_num;
 	</select>
+	
 </mapper>

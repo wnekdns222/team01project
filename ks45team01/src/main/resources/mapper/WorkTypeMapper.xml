@@ -8,8 +8,8 @@
 		<result property="memberNum"  column="member_num" />
 		<result property="workName"  column="work_name" />
 		<result property="workDate"  column="work_date" />
-		<result property="attendanceTime"  column="attendance_time" />
-		<result property="leaveWorkTime"  column="leavework_time" />
+		<result property="attendanceTime"  column="attendance_time_type" />
+		<result property="leaveWorkTime"  column="leavework_time_type" />
 		<result property="regMemberNum"  column="reg_member_num" />
 		<result property="regDate"  column="reg_date" />
 		<result property="correctMemberNum"  column="correct_member_num" />
@@ -18,15 +18,15 @@
 		<result property="workTypeUsePeriod"  column="work_type_use_period" />
 	</resultMap>
 	
-	<select id="getAllWorkType" resultMap="workTypeResultMap">
+	<select id="getAllWorkType" resultMap="workTypeResultMap" parameterType="map">
 		/* 근무유형 조회 */
 		SELECT
 			t.work_type_num
 			,t.member_num
 			,t.work_name
 			,t.work_date
-			,t.attendance_time
-			,t.leavework_time
+			,t.attendance_time_type
+			,t.leavework_time_type
 			,t.reg_member_num
 			,t.reg_date
 			,t.correct_member_num
@@ -34,7 +34,18 @@
 			,t.`use`
 			,t.work_type_use_period
 		FROM
-		tb_work_type AS t;
+		tb_work_type AS t
+		ORDER BY t.work_date 
+		<if test="startRowNum !=null and startRowNum > -1">
+			LiMIT #{startRowNum}, #{rowPerPage};
+		</if>
+	</select>
+	<select id="countAllWorkType" resultType="int">
+		/* 근태 유형 테이블 전체 행의 갯수  */
+		select
+			count(1)
+		from
+			tb_work_type;
 	</select>
 	<insert id="addWorkType" parameterType="WorkType">
 	/* 근태유형 입력 */
@@ -113,4 +124,5 @@
 	</trim>
 	WHERE work_type_num=#{workTypeNum};
 	</update>
+	
 </mapper>
