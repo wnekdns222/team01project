@@ -17,7 +17,7 @@ public class Reservation {
 	private String reservationUpdateMember;
 	
 	private List<Meetingroom> meetingroom;
-	private List<listMember> listMember;
+	private List<MemberList> listMember;
 	public String getReservationNum() {
 		return reservationNum;
 	}
@@ -90,10 +90,10 @@ public class Reservation {
 	public void setMeetingroom(List<Meetingroom> meetingroom) {
 		this.meetingroom = meetingroom;
 	}
-	public List<listMember> getListMember() {
+	public List<MemberList> getListMember() {
 		return listMember;
 	}
-	public void setListMember(List<listMember> listMember) {
+	public void setListMember(List<MemberList> listMember) {
 		this.listMember = listMember;
 	}
 	@Override

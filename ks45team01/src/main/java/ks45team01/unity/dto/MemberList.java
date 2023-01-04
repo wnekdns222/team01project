@@ -1,6 +1,6 @@
 package ks45team01.unity.dto;
 
-public class listMember {
+public class MemberList {
 	private String memberNum;
 	private String memberPw;
 	private String memberName;
