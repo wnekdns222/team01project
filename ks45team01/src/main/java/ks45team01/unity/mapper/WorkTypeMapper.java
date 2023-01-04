@@ -1,7 +1,7 @@
 package ks45team01.unity.mapper;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,7 +12,10 @@ public interface WorkTypeMapper {
 
 	
 	//근무유형 조회
-	public List<WorkType> getAllWorkType();
+	public List<WorkType> getAllWorkType(Map<String,Object>	 paramMap);
+	
+	//근태유형 테이블 전체 행의 개수
+	public int countAllWorkType();
 	
 	//근무유형 입력
 	public void addWorkType(WorkType workType);
@@ -22,5 +25,6 @@ public interface WorkTypeMapper {
 	
 	//근무유형 수정
 	public void updateWorkType(WorkType workType);
+	
 	
 }

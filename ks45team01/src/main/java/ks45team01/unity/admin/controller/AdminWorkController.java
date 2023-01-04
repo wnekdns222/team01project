@@ -1,6 +1,7 @@
 package ks45team01.unity.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team01.unity.dto.Work;
 import ks45team01.unity.dto.WorkType;
+import ks45team01.unity.dto.WorkUnusual;
 import ks45team01.unity.service.WorkService;
 import ks45team01.unity.service.WorkTypeService;
 
@@ -36,7 +38,11 @@ public class AdminWorkController {
 		this.workTypeService = workTypeService;
 		this.workService = workService;
 	}
-	//전사원 근무내역 조회
+	/**
+	 * 전사원 근태내역 조회
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("work/workAllList")
 	public String getAllWorkInfo(Model model) {   
 		
@@ -51,9 +57,15 @@ public class AdminWorkController {
 		
 		return "work/work_authority_Insert";
 	}
-	//비정상 근태 조회
+	/**
+	 * 비정상 근태 조회
+	 * @return "work/work_authority_list"
+	 */
 	@GetMapping("work/workAuthorityList")
-	public String getAuthorityWorkInfo() {
+	public String getAuthorityWorkInfo(Model model) {
+		
+		List<WorkUnusual> unusualList = workService.getAuthorityWorkInfo();
+		model.addAttribute("unusualList", unusualList);
 		
 		return "work/work_authority_list";
 	}
@@ -107,18 +119,27 @@ public class AdminWorkController {
 		return "redirect:/settings/workTypeList";
 	}
 	/**
-	 * 전직원근무유형 조회
-	 * @param model
+	 * 전직원근무유형 조회, 페이징
+	 * @param model, requestParam
 	 * @return
 	 */
 	@GetMapping("settings/workTypeList")
-	public String getAllWorkType(Model model) {
+	public String getAllWorkType(Model model
+								,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
 		
-		List<WorkType> workTypeList = workTypeService.getAllWorkType();
+		Map<String, Object> paramMap = workTypeService.getAllWorkType(currentPage);
+		int lastPage = (int)paramMap.get("lastPage");
+		List<WorkType> workTypeList = (List<WorkType>) paramMap.get("workType");
+		int startPageNum = (int) paramMap.get("startPageNum");
+		int endPageNum = (int) paramMap.get("endPageNum");
 		
 		log.info("근무유형 조회: {}", workTypeList);
 		
 		model.addAttribute("workTypeList", workTypeList);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
 		
 		return "settings/work_type_list";
 	}

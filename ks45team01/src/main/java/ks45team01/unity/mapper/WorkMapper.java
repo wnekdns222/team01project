@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import ks45team01.unity.dto.Work;
+import ks45team01.unity.dto.WorkUnusual;
 
 @Mapper
 public interface WorkMapper {
@@ -18,4 +19,6 @@ public interface WorkMapper {
 	//전사원 근태조회
 	public List<Work> getAllWorkInfo();
 	
+	//비정상 근태 등록 조회
+	public List<WorkUnusual> getAuthorityWorkInfo();
 }
