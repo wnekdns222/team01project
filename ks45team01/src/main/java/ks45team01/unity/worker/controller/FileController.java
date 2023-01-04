@@ -111,6 +111,16 @@ public class FileController {
 		String title = null;
 		if(serviceType != null) {
 			switch (serviceType) {
+				case "planningDept" ->{
+					servieList = fileService.fileServiceTypeList("file_catecode_4");
+					title = "기획실";
+					break;
+				}
+				case "managementSupportList" ->{
+					servieList = fileService.fileServiceTypeList("file_catecode_3");
+					title = "경영지원부서";
+					break;
+				}
 				case "marketingList" ->{
 					servieList = fileService.fileServiceTypeList("file_catecode_2");
 					title = "마케팅부서";
