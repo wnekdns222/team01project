@@ -62,6 +62,7 @@
 					id="inputSearch" placeholder="Search">
 			</div>
 		</div> -->
+		<div class="col-lg-6 ">
 		<select id="formControlSelect">
 			<option>아이디</option>
 			<option>이름</option>
@@ -70,24 +71,26 @@
 			<option>이메일</option>
 		</select>
 		<input placeholder="검색어를 입력해주세요." />
-
+	</div>
 
 	</th:block>
 		<th:block layout:fragment="customContents">
                         <!--start contact contant-->
 
                         <div class="row">
-                            <div class="col-xxl-3 col-xl-4  col-sm-6">
+                            <div class="col-xxl-3 col-xl-4  col-sm-6" th:each="ml : ${memberList}">
                                 <div class="card card-statistics contact-contant">
                                     <div class="card-body py-4">
                                         <div class="d-flex align-items-center">
                                             <div class="bg-img">
-                                                <img src="assets/img/avtar/01.jpg" alt="" class="img-fluid">
+                                                <img src="/assets/img/avtar/01.jpg" alt="" class="img-fluid">
                                             </div>
                                             <div class="ml-3">
-                                                <h4 class="mb-0">주현우</h4>
-                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1">사원</span></p>
-                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1">id001</span></p>
+                                                <h4 class="mb-0" th:text="${ml.memberName}"></h4>
+                                                <div class="row">
+                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1" th:text="${ml.departmentNum}"></span></p>
+                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1" th:text="${ml.memberNum}"></span></p>
+                                            	</div>
                                             </div>
                                         </div>
                                         <div>
@@ -96,7 +99,7 @@
                                                     <div class="img-icon"><i class="fa fa-mobile"></i></div>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <p>기획부</p>
+                                                    <p th:text="${ml.positionNum}"></p>
                                                 </li>
                                             </ul>
                                             <ul class="nav">
@@ -104,7 +107,7 @@
                                                     <div class="img-icon"><i class="fa fa-phone"></i></div>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <p>40-1440-8546</p>
+                                                    <p th:text="${ml.memberPhone}"></p>
                                                 </li>
                                             </ul>
                                             <ul class="nav">
@@ -112,7 +115,7 @@
                                                     <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <p>Lizzy.Halfman@gmail.com</p>
+                                                    <p th:text="${ml.memberEmail}"></p>
                                                 </li>
                                             </ul>
                                              <ul class="nav">
@@ -120,7 +123,7 @@
                                                     <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <p>남</p>
+                                                    <p th:text="${ml.memberGender}"></p>
                                                 </li>
                                             </ul>
                                              <ul class="nav">
@@ -128,65 +131,7 @@
                                                     <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <p>1997-07-25</p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           <div class="col-xxl-3 col-xl-4  col-sm-6">
-                                <div class="card card-statistics contact-contant">
-                                    <div class="card-body py-4">
-                                        <div class="d-flex align-items-center">
-                                            <div class="bg-img">
-                                                <img src="assets/img/avtar/01.jpg" alt="" class="img-fluid">
-                                            </div>
-                                            <div class="ml-3">
-                                                <h4 class="mb-0">주현우</h4>
-                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1">사원</span></p>
-                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1">id001</span></p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <ul class="nav">
-                                                <li class="nav-item">
-                                                    <div class="img-icon"><i class="fa fa-mobile"></i></div>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <p>기획부</p>
-                                                </li>
-                                            </ul>
-                                            <ul class="nav">
-                                                <li class="nav-item">
-                                                    <div class="img-icon"><i class="fa fa-phone"></i></div>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <p>40-1440-8546</p>
-                                                </li>
-                                            </ul>
-                                            <ul class="nav">
-                                                <li class="nav-item">
-                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <p>Lizzy.Halfman@gmail.com</p>
-                                                </li>
-                                            </ul>
-                                             <ul class="nav">
-                                                <li class="nav-item">
-                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <p>남</p>
-                                                </li>
-                                            </ul>
-                                             <ul class="nav">
-                                                <li class="nav-item">
-                                                    <div class="img-icon"><i class="fa fa-envelope-o"></i></div>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <p>1997-07-25</p>
+                                                    <p th:text="${ml.memberBirth}"></p>
                                                 </li>
                                             </ul>
                                         </div>

@@ -26,7 +26,62 @@
 		<br><br>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<h1>프로젝트 수정 등록 화면</h1>
+<form>	
+		<h2>변경 단위업무</h2>
+		<div class="form-group">
+			<label for="writeChangeReason">단위업무</label>
+			<textarea class="form-control" name="writeChangeReason"
+				id="writeChangeReason" rows="3" placeholder="Textarea text">
+	        </textarea>
+		</div>
+		
+			<button type="submit" class="btn btn-primary">단위업무변경</button>
+	</form>
+	<div class="form-group">
+			<label for="writeChangeReason">단위업무확인
+			</label>
+			<div class="row">
+                            <div class="col-12">
+                                <div class="card card-statistics clients-contant">
+                                    <div class="card-header">
+                                        <div class="d-xxs-flex justify-content-between align-items-center">
+                                            <div class="card-heading">
+                                                <h4 class="card-title">Clients</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body py-0 table-responsive">
+                                        <table class="table clients-contant-table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">등록자</th>
+                                                    <th scope="col">등록일자</th>
+                                                    <th scope="col">수정일자</th>
+                                                    <th scope="col">단위업무내용</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-img mr-4">
+                                                                <img src="/assets/img/avtar/01.jpg" class="img-fluid" alt="Clients-01">
+                                                            </div>
+                                                            <p class="font-weight-bold">id001</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>20/07/2018</td>
+                                                     <td>20/07/2018</td>
+                                                    <td>1.커피고르기</td>
+                                                </tr>
+                                              
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+		</div>
 	</th:block>
 	
 </html>
