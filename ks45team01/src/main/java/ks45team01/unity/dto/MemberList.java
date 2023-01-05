@@ -43,11 +43,11 @@ public class MemberList {
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
-	public String getMemberbirth() {
+	public String getMemberBirth() {
 		return memberBirth;
 	}
-	public void setMemberbirth(String memberbirth) {
-		this.memberBirth = memberbirth;
+	public void setMemberBirth(String memberBirth) {
+		this.memberBirth = memberBirth;
 	}
 	public String getMemberPhone() {
 		return memberPhone;
@@ -55,11 +55,11 @@ public class MemberList {
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
 	}
-	public String getMemberdormant() {
+	public String getMemberDormant() {
 		return memberDormant;
 	}
-	public void setMemberdormant(String memberdormant) {
-		this.memberDormant = memberdormant;
+	public void setMemberDormant(String memberDormant) {
+		this.memberDormant = memberDormant;
 	}
 	public String getMemberDormantDate() {
 		return memberDormantDate;
@@ -88,7 +88,7 @@ public class MemberList {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("listMember [memberNum=");
+		builder.append("MemberList [memberNum=");
 		builder.append(memberNum);
 		builder.append(", memberPw=");
 		builder.append(memberPw);
@@ -98,11 +98,11 @@ public class MemberList {
 		builder.append(memberGender);
 		builder.append(", memberEmail=");
 		builder.append(memberEmail);
-		builder.append(", memberbirth=");
+		builder.append(", memberBirth=");
 		builder.append(memberBirth);
 		builder.append(", memberPhone=");
 		builder.append(memberPhone);
-		builder.append(", memberdormant=");
+		builder.append(", memberDormant=");
 		builder.append(memberDormant);
 		builder.append(", memberDormantDate=");
 		builder.append(memberDormantDate);

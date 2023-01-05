@@ -8,26 +8,40 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberLevel;
+import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.service.MemberDepartmentListService;
 import ks45team01.unity.service.MemberLevelService;
+import ks45team01.unity.service.MemberListService;
 
 @Controller
 
 @RequestMapping("/member")
 public class MemberController {
 
+	
+	
+	
+	
 	private final MemberLevelService memberLevelService;
 	private final MemberDepartmentListService memberDepartmentListService;
+	private final MemberListService memberListService;
+	
 	public MemberController(MemberLevelService memberLevelService
-							,MemberDepartmentListService memberDepartmentListService) {
+							,MemberDepartmentListService memberDepartmentListService
+							,MemberListService memberListService) {
+		
 		this.memberLevelService = memberLevelService;
 		this.memberDepartmentListService = memberDepartmentListService;
+		this.memberListService = memberListService;
 	}
 	
 	
 	@GetMapping("/Member")
 	public String GetMember(Model model) {
+		List<MemberList> memberList = memberListService.memberListSe();
+		
 		model.addAttribute("title","사원리스트화면");
+		model.addAttribute("memberList",memberList);
 	return "member/member";
 	}
 	
@@ -131,5 +145,16 @@ public class MemberController {
 	return "member/memberAdmin";
 	}
 	
+	@GetMapping("/MemberDepartMentManige")
+	public String GetMemberDepartMentManige(Model model) {
+		model.addAttribute("title","부서사원전체관리");
+	return "member/member_department_manige";
+	}
+	
+	@GetMapping("/MemberPositionManige")
+	public String GetMemberPositionManige(Model model) {
+		model.addAttribute("title","직급사원전체관리");
+	return "member/member_position_manige";
+	}
 	
 }
