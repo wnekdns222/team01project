@@ -6,12 +6,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ks45team01.unity.dto.DepartmentManage;
 import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberLevel;
 import ks45team01.unity.dto.MemberList;
+import ks45team01.unity.dto.PositionManage;
+import ks45team01.unity.service.DepartmentManageService;
 import ks45team01.unity.service.MemberDepartmentListService;
 import ks45team01.unity.service.MemberLevelService;
 import ks45team01.unity.service.MemberListService;
+import ks45team01.unity.service.PositionManageService;
 
 @Controller
 
@@ -25,14 +30,20 @@ public class MemberController {
 	private final MemberLevelService memberLevelService;
 	private final MemberDepartmentListService memberDepartmentListService;
 	private final MemberListService memberListService;
+	private final PositionManageService positionManageService;
+	private final DepartmentManageService departmentManageService;
 	
 	public MemberController(MemberLevelService memberLevelService
 							,MemberDepartmentListService memberDepartmentListService
-							,MemberListService memberListService) {
+							,MemberListService memberListService
+							,PositionManageService positionManageService
+							,DepartmentManageService departmentManageService) {
 		
 		this.memberLevelService = memberLevelService;
 		this.memberDepartmentListService = memberDepartmentListService;
 		this.memberListService = memberListService;
+		this.positionManageService = positionManageService;
+		this.departmentManageService = departmentManageService;
 	}
 	
 	
@@ -147,13 +158,21 @@ public class MemberController {
 	
 	@GetMapping("/MemberDepartMentManige")
 	public String GetMemberDepartMentManige(Model model) {
+		
+		List<DepartmentManage> departmentManage = departmentManageService.departmentManageSe();
+		
 		model.addAttribute("title","부서사원전체관리");
+		model.addAttribute("departmentManage",departmentManage);
 	return "member/member_department_manige";
 	}
 	
 	@GetMapping("/MemberPositionManige")
 	public String GetMemberPositionManige(Model model) {
+		
+		List<PositionManage> positionManage = positionManageService.positionManageSe();
+		
 		model.addAttribute("title","직급사원전체관리");
+		model.addAttribute("positionManage",positionManage);
 	return "member/member_position_manige";
 	}
 	
