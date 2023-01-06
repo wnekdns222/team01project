@@ -36,11 +36,11 @@
 			</thead>
 			<tbody>
 				<tr th:unless="${#lists.isEmpty(marketingList)}" th:each="f : ${marketingList}">
-					<th th:text=${f.fileNum} scope="col"></th>
+					<th th:text=${f.fileBoardNum} scope="col"></th>
 					<td>
-						<a th:href="@{/file/fileView(fileNum = ${f.fileNum})}">[[${f.fileTitle}]]</a>
+						<a th:href="@{/fileBoard/fileBoardView(fileBoardNum = ${f.fileBoardNum})}">[[${f.fileBoardTitle}]]</a>
 					</td>
-					<td th:text=${f.fileRegiStrant}></td>
+					<td th:text=${f.fileBoardContents}></td>
 					<td>부장</td>
 					<td>마케팅</td>
 					<td th:text=${f.fileRegDate}></td>

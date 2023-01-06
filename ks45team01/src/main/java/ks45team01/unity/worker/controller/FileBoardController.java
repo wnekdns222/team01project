@@ -95,11 +95,13 @@ public class FileBoardController {
 		return "redirect:/file/fileList";
 	}
 	
-	@GetMapping("/addFileBoardForm")
+	@GetMapping("/addBoardFile")
 	public String addFileBoardForm(Model model) {
 		
-		
+		List<FileBoard> fileBoardCateList = fileBoardService.fileBoardCateList();
+			
 		model.addAttribute("title", "파일게시글등록");
+		model.addAttribute("fileBoardCateList", fileBoardCateList);
 		
 		return "fileBoard/addBoardFile";
 	}
@@ -142,21 +144,4 @@ public class FileBoardController {
 		
 	}
 	
-	/**
-	 * 인사파일 목록 
-	 * @param model
-	 * @return
-	 */
-	/*
-	@GetMapping("/hrList")
-	public String ResourcesList(Model model) {
-		
-		List<File> hrList = fileService.hrList();
-		
-		model.addAttribute("title", "파일목록");
-		model.addAttribute("hrList", hrList);
-		
-		return "file/hrList";
-	}
-	*/
 }

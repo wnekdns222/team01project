@@ -55,7 +55,7 @@
 			<button type="button" class="btn btn-outline-success"
 				th:onclick="|location.href='@{/fileBoard/fileBoardUpdate(fileBoardNum=${boardFileView.fileBoardNum})}'|">수정</button>
 			<button type="button" class="btn btn-outline-success"
-				onclick="location.href='/file/fileList';">목록</button>
+				th:onclick="|location.href='@{/fileBoard/${serviceType}'|">목록</button>
 			<button type="button" class="btn btn-outline-success"
 				th:onclick="|location.href='@{/fileBoard/fileBoardDelete(fileBoardNum=${boardFileView.fileBoardNum})}'|">삭제</button>
 		</div>
