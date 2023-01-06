@@ -11,11 +11,13 @@ import ks45team01.unity.dto.DepartmentManage;
 import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberLevel;
 import ks45team01.unity.dto.MemberList;
+import ks45team01.unity.dto.MemberPositionList;
 import ks45team01.unity.dto.PositionManage;
 import ks45team01.unity.service.DepartmentManageService;
 import ks45team01.unity.service.MemberDepartmentListService;
 import ks45team01.unity.service.MemberLevelService;
 import ks45team01.unity.service.MemberListService;
+import ks45team01.unity.service.MemberPositionListService;
 import ks45team01.unity.service.PositionManageService;
 
 @Controller
@@ -29,18 +31,21 @@ public class MemberController {
 	
 	private final MemberLevelService memberLevelService;
 	private final MemberDepartmentListService memberDepartmentListService;
+	private final MemberPositionListService memberPositionListService;
 	private final MemberListService memberListService;
 	private final PositionManageService positionManageService;
 	private final DepartmentManageService departmentManageService;
 	
 	public MemberController(MemberLevelService memberLevelService
 							,MemberDepartmentListService memberDepartmentListService
+							,MemberPositionListService memberPositionListService
 							,MemberListService memberListService
 							,PositionManageService positionManageService
 							,DepartmentManageService departmentManageService) {
 		
 		this.memberLevelService = memberLevelService;
 		this.memberDepartmentListService = memberDepartmentListService;
+		this.memberPositionListService = memberPositionListService;
 		this.memberListService = memberListService;
 		this.positionManageService = positionManageService;
 		this.departmentManageService = departmentManageService;
@@ -101,7 +106,11 @@ public class MemberController {
 	
 	@GetMapping("/MemberPositionList")
 	public String GetMemberPositionList(Model model) {
+		
+		List<MemberPositionList> memberPositionList = memberPositionListService.memberPositionList();
+		
 		model.addAttribute("title","직급리스트화면");
+		model.addAttribute("memberPositionList",memberPositionList);
 	return "member/member_position_list";
 	}
 	

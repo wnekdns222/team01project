@@ -9,7 +9,7 @@
 		<result property="memberNum" column="member_num"/>
 		<result property="departmentRegDate" column="department_reg_date"/>
 		<result property="departmentUpdateDate" column="department_update_date"/>
-		<result property="positionModifier" column="position_modifier"/>
+		<result property="departmentModifier" column="department_modifier"/>
 		<result property="useOrNot" column="use_or_not"/>
 		
 	</resultMap>

@@ -7,11 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ks45team01.unity.dto.MemberLevel;
+import ks45team01.unity.dto.ProjectBoard;
 import ks45team01.unity.dto.ProjectList;
-import ks45team01.unity.service.MemberDepartmentListService;
-import ks45team01.unity.service.MemberLevelService;
+import ks45team01.unity.dto.ProjectUnit;
+import ks45team01.unity.service.ProjectBoardService;
 import ks45team01.unity.service.ProjectListService;
+import ks45team01.unity.service.ProjectUnitService;
 
 @Controller
 //리퀘스트메핑 /project로 잡음
@@ -27,8 +28,14 @@ public class ProjectController {
 	 */
 	
 	private final ProjectListService projectListService;
-	public ProjectController(ProjectListService projectListService) {
+	private final ProjectUnitService projectUnitService;
+	private final ProjectBoardService projectBoardService;
+	public ProjectController(ProjectListService projectListService
+							,ProjectUnitService projectUnitService
+							,ProjectBoardService projectBoardService) {
 		this.projectListService = projectListService;
+		this.projectUnitService = projectUnitService;
+		this.projectBoardService = projectBoardService;
 	}
 	
 	
@@ -54,10 +61,11 @@ public class ProjectController {
 	
 	@GetMapping("/projectInsert")
 	public String GetProjectInsert(Model model) {
+		
+		List<ProjectUnit> projectUnit = projectUnitService.projectUnitList();
+		
 		model.addAttribute("projectInsert","프로젝트등록화면");
-		/**모델 프로젝트 인서트 등록 가져오기
-		 * model.addAttribute("projectInsert",projectInsert);
-		 */
+		model.addAttribute("projectUnit",projectUnit);
 		return "project/project_insert";
 	}
 	
@@ -133,9 +141,23 @@ public class ProjectController {
 	
 	@GetMapping("/projectDetail")
 	public String GetProjectDetail(Model model) {
-		model.addAttribute("projectDetail","프로젝트내부 홈 화면");
+		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
+		
+		model.addAttribute("title","프로젝트내부 디테일 화면");
+		model.addAttribute("projectBoardList",projectBoardList);
 	return "project/project_detail";
 	}
+	
+	@GetMapping("/project_home:: projectHomeTab1")
+	public String GetProjectHome(Model model) {
+		
+		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
+		
+		model.addAttribute("title","프로젝트내부 홈 화면");
+		model.addAttribute("projectBoardList",projectBoardList);
+	return "project/project_home";
+	}
+	
 	
 	@GetMapping("/projectBoardInsert")
 	public String projectBoardInsert(Model model) {

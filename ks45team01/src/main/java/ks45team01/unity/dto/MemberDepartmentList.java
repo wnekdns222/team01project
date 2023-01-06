@@ -6,7 +6,7 @@ public class MemberDepartmentList {
 	private String memberNum;
 	private String departmentRegDate;
 	private String departmentUpdateDate;
-	private String positionModifier;
+	private String departmentModifier;
 	private String useOrNot;
 	public String getDepartmentNum() {
 		return departmentNum;
@@ -38,11 +38,11 @@ public class MemberDepartmentList {
 	public void setDepartmentUpdateDate(String departmentUpdateDate) {
 		this.departmentUpdateDate = departmentUpdateDate;
 	}
-	public String getPositionModifier() {
-		return positionModifier;
+	public String getDepartmentModifier() {
+		return departmentModifier;
 	}
-	public void setPositionModifier(String positionModifier) {
-		this.positionModifier = positionModifier;
+	public void setDepartmentModifier(String departmentModifier) {
+		this.departmentModifier = departmentModifier;
 	}
 	public String getUseOrNot() {
 		return useOrNot;
@@ -63,10 +63,30 @@ public class MemberDepartmentList {
 		builder.append(departmentRegDate);
 		builder.append(", departmentUpdateDate=");
 		builder.append(departmentUpdateDate);
-		builder.append(", positionModifier=");
-		builder.append(positionModifier);
+		builder.append(", departmentModifier=");
+		builder.append(departmentModifier);
 		builder.append(", useOrNot=");
 		builder.append(useOrNot);
+		builder.append(", getDepartmentNum()=");
+		builder.append(getDepartmentNum());
+		builder.append(", getDepartmentName()=");
+		builder.append(getDepartmentName());
+		builder.append(", getMemberNum()=");
+		builder.append(getMemberNum());
+		builder.append(", getDepartmentRegDate()=");
+		builder.append(getDepartmentRegDate());
+		builder.append(", getDepartmentUpdateDate()=");
+		builder.append(getDepartmentUpdateDate());
+		builder.append(", getDepartmentModifier()=");
+		builder.append(getDepartmentModifier());
+		builder.append(", getUseOrNot()=");
+		builder.append(getUseOrNot());
+		builder.append(", getClass()=");
+		builder.append(getClass());
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append(", toString()=");
+		builder.append(super.toString());
 		builder.append("]");
 		return builder.toString();
 	}
