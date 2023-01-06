@@ -4,27 +4,37 @@
 	layout:decorate="~{layout/default}">
 
 <th:block layout:fragment="customCrumbbar">
-	<!-- begin page title -->
-	<div class="row align-items-center">
-			<div class="col-md-8 col-lg-8">
-				<h4 class="page-title">전사원근무내역조회</h4>
-				<div class="breadcrumb-list">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">전사원근무내역조회</li>
-					</ol>
+	<div class="row">
+		<div class="col-md-12 m-b-30">
+			<!-- begin page title -->
+			<div class="d-block d-lg-flex flex-nowrap align-items-center">
+				<div class="page-title mr-4 pr-4 border-right">
+					<h1>전사원근무내역조회</h1>
+				</div>
+				<div class="breadcrumb-bar align-items-center">
+					<nav>
+						<ol class="breadcrumb p-0 m-b-0">
+							<li class="breadcrumb-item"><a href="/"><i
+									class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item active text-primary"
+								aria-current="page">전사원근무내역조회</li>
+						</ol>
+					</nav>
 				</div>
 			</div>
 		</div>
+	</div>
 	<!-- end page title -->
 </th:block>
 
-	<th:block layout:fragment="customContents">
-		<table class="table table-hover">
+<th:block layout:fragment="customContents">
+	<!-- begin row -->
+	<div class="table-responsive">
+		<table class="table table-bordered mb-0">
 			<thead>
 				<tr>
+				<tr>
 					<th scope="col">사원번호</th>
-					<th scope="col">근태유형</th>
 					<th scope="col">출근일</th>
 					<th scope="col">출근시간</th>
 					<th scope="col">퇴근시간</th>
@@ -32,26 +42,34 @@
 					<th scope="col">외출,외근복귀시간</th>
 					<th scope="col">출근상태</th>
 					<th scope="col">퇴근상태</th>
+					<th scope="col">근태명</th>
+					<th scope="col">근태유형별 출근시간</th>
+					<th scope="col">근태유형별 퇴근시간</th>
+					<th scope="col">외근유무</th>
 					<th scope="col">비정상근태 등록 유무</th>
 				</tr>
 			</thead>
 			<tbody>
-				<!-- <tr th:if="${not #lists.isEmpty(worktypeList)}" th:each="wt : ${worktypeList}">
-                  <td th:text="${wt.workTypeNum}"></td>
-                  <td th:text="${wt.memberNum}"></td>
-                  <td th:text="${wt.workName}"></td>
-                  <td th:text="${wt.workDate}"></td>
-                  <td th:text="${wt.attendanceTime}"></td>
-                  <td th:text="${wt.leaveWorkTime}"></td>
-                  <td th:text="${wt.workTypeUsePeriod}"></td>
-                  <td>
-						<a th:href="@{/settings/workTypeModify(workTypeNum=${wt.workTypeNum})}">수정</a>
-					</td>
-              </tr>
-              <tr th:unless="${not #lists.isEmpty(worktypeList)}">
-              </tr> -->
+				<tr th:if="${not #lists.isEmpty(workInfoList)}"
+					th:each="i : ${workInfoList}">
+					<td th:text="${i.memberNum}"></td>
+					<td th:text="${i.attendanceDay}"></td>
+					<td th:text="${i.attendanceTime}"></td>
+					<td th:text="${i.leaveworkTime}"></td>
+					<td th:text="${i.gooutWorkoutStartTime}"></td>
+					<td th:text="${i.gooutWorkoutComebackTime}"></td>
+					<td th:text="${i.attendanceStatus}"></td>
+					<td th:text="${i.leaveworkStatus}"></td>
+					<td th:text="${i.workType.workName}"></td>
+					<td th:text="${i.workType.attendanceTime}"></td>
+					<td th:text="${i.workType.leaveWorkTime}"></td>
+					<td th:text="${i.outsideDuty}"></td>
+					<td th:text="${i.workUnusual}"></td>
+				</tr>
+				<tr th:unless="${not #lists.isEmpty(workInfoList)}">
+				</tr>
 			</tbody>
 		</table>
-
-	</th:block>
+	</div>
+</th:block>
 </html>

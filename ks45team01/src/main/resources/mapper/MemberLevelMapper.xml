@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.MemberLevelMapper">
+	<resultMap type="MemberLevel" id="MemberLevelResultMap">
+		<id property="levelCode" column="level_code"/>
+		<result property="memberNum" column="member_num"/>
+		<result property="memberAdminLevel" column="member_admin_level"/>
+		<result property="memberUserLevel" column="user_level"/>
+		<result property="loginLevel" column="login_level"/>
+		<result property="projectLevel" column="project_level"/>
+		<result property="departWorkInfoLevel" column="depart_work_info_level"/>	
+		<result property="calenderCategoryLevel" column="calender_category_level"/>	
+		<result property="communityLevel" column="community_level"/>
+		<result property="departVacationInfoLevel" column="depart_vacation_info_level"/>	
+		<result property="allVacationInfoLevel" column="all_vacation_info_level"/>
+		<result property="allWorkInfoLevel" column="all_work_info_level"/>
+		<result property="unusualWorkInsertLevel" column="unusual_work_insert_level"/>
+		<result property="approvalLevel" column="approval_level"/>
+		<result property="majorCategoryLevel" column="major_category_level"/>
+		<result property="workVacationSettingLevel" column="work_vacation_setting_level"/>
+		<result property="approvalCateLevel" column="approval_cate_level"/>
+		<result property="workCategoryLevel" column="work_category_level"/>
+		<result property="fileCategoryLevel" column="file_category_level"/>
+	</resultMap>
+	
+	<select id="memberLevelList" resultMap="MemberLevelResultMap">
+		SELECT 
+			*
+		FROM 
+			tb_member_level;
+	</select>
+	
+	<select id="memberLevelDetail" resultMap="MemberLevelResultMap" parameterType="String">
+		SELECT 
+			*
+		FROM 
+			tb_member_level
+		WHERE
+			level_code = #{levelCode};
+	</select>
+</mapper>

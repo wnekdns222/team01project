@@ -4,17 +4,29 @@
 	layout:decorate="~{layout/default}">
 
 <th:block layout:fragment="customCrumbbar">
-	<div class="row align-items-center">
-		<div class="col-md-8 col-lg-8">
-			<h4 class="page-title">Home</h4>
-			<div class="breadcrumb-list">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item active" aria-current="page">Home</li>
-				</ol>
+	<div class="row">
+		<div class="col-md-12 m-b-30">
+			<!-- begin page title -->
+			<div class="d-block d-lg-flex flex-nowrap align-items-center">
+				<div class="page-title mr-4 pr-4 border-right">
+					<h1>근무내역조회</h1>
+				</div>
+				<div class="breadcrumb-bar align-items-center">
+					<nav>
+						<ol class="breadcrumb p-0 m-b-0">
+							<li class="breadcrumb-item"><a href="/"><i
+									class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item active text-primary"
+								aria-current="page">근무내역조회</li>
+						</ol>
+					</nav>
+				</div>
 			</div>
 		</div>
 	</div>
+	<!-- end page title -->
 </th:block>
+
 <th:block layout:fragment="customContents">
 	<div class="col-lg-12 col-xl-4">
 		<div class="card m-b-30">
@@ -47,25 +59,26 @@
 						<h6>인사과</h6>
 						<h5>지영김</h5>
 						<p>demo@email.com</p>
+
 						<div class="button-list mt-4">
 							<button type="button" class="btn btn-outline-primary"
-								name="attendance">출근</button>
+								name="attendanceTime">출근</button>
 							<button type="button" class="btn btn-outline-danger"
-								name="leaveWork">퇴근</button>
+								name="leaveworkTime">퇴근</button>
 						</div>
 						<div class="button-list mt-1">
 							<button type="button" class="btn btn-outline-success"
-								name="goOut">외출</button>
+								name="gooutWorkoutStartTime">외출</button>
 							<button type="button" class="btn btn-outline-success"
-								name="comeback">복귀</button>
+								name="gooutWorkoutComebackTime">복귀</button>
 							<div class="card-footer text-center">
 								<div class="row">
 									<div class="col-6 border-right">
-										<div id="attendance"></div>
+										<div id="attendanceTime"></div>
 										<p class="my-2">출근시간</p>
 									</div>
 									<div class="col-6">
-										<div id="leaveWork"></div>
+										<div id="leaveworkTime"></div>
 										<p class="my-2">퇴근시간</p>
 									</div>
 								</div>
@@ -73,11 +86,11 @@
 							<div class="card-footer text-center">
 								<div class="row">
 									<div class="col-6 border-right">
-										<div id="goOut"></div>
+										<div id="gooutWorkoutStartTime"></div>
 										<p class="my-2">외출시작시간</p>
 									</div>
 									<div class="col-6">
-										<div id="comeBack"></div>
+										<div id="gooutWorkoutComebackTime"></div>
 										<p class="my-2">외출복귀시간</p>
 									</div>
 								</div>
@@ -95,49 +108,45 @@
 <th:block layout:fragment="customScript">
 
 	<script>
-		const $attendanceBtn = document.querySelector('button[name="attendance"]');
-		const $leaveWorkBtn = document.querySelector('button[name="leaveWork"]');
-		const $goOutBtn = document.querySelector('button[name="goOut"]');
-		const $comebackBtn = document.querySelector('button[name="comeback"]');
-	
-		const $attendanceEle = document.getElementById('attendance');
-		const $leaveWorkEle = document.getElementById('leaveWork');
-		const $goOutEle = document.getElementById('goOut');
-		const $comeBackEle = document.getElementById('comeBack');
+		const $attendanceBtn = document
+				.querySelector('button[name="attendanceTime"]');
+		const $leaveWorkBtn = document
+				.querySelector('button[name="leaveworkTime"]');
+		const $goOutBtn = document.querySelector('button[name="gooutWorkoutStartTime"]');
+		const $comebackBtn = document.querySelector('button[name="gooutWorkoutComebackTime"]');
+
+		const $attendanceEle = document.getElementById('attendanceTime');
+		const $leaveWorkEle = document.getElementById('leaveworkTime');
+		const $goOutEle = document.getElementById('gooutWorkoutStartTime');
+		const $comeBackEle = document.getElementById('gooutWorkoutComebackTime');
 
 		const today = new Date();
 		const year = today.getFullYear();
-		const month = ('0'+ (today.getMonth() + 1)).slice(-2);
+		const month = ('0' + (today.getMonth() + 1)).slice(-2);
 		const day = ('0' + today.getDate()).slice(-2);
 		const hour = ('0' + today.getHours()).slice(-2);
 		const min = ('0' + today.getMinutes()).slice(-2);
 		const sec = ('0' + today.getSeconds()).slice(-2);
-		
-		const workDate = year + '-' + month + '-' + day;
-		const workTime = hour + ':' + min + ':' + sec;
-		
-			function clickBtn(btn){
-				alert(`${workDate}/${workTime}`);
-				
-			}
-			$attendanceBtn.addEventListener('click', function(){
-				clickBtn(this);
-				$attendanceEle.innerHTML = `${workTime}`;
-			});
-			$leaveWorkBtn.addEventListener('click', function(){
-				clickBtn(this);
-				$leaveWorkEle.innerHTML = `${workTime}`;
-			});
-			$goOutBtn.addEventListener('click', function(){
-				clickBtn(this);
-				$goOutEle.innerHTML = `${workTime}`;
-			});
-			$comebackBtn.addEventListener('click', function(){
-				clickBtn(this);
-				$comeBackEle.innerHTML = `${workTime}`;
-			});
-			
 
+		const attendanceDay = year + '-' + month + '-' + day;
+		const workTime = hour + ':' + min + ':' + sec;
+
+		$attendanceBtn.addEventListener('click', function() {
+			$attendanceEle.innerHTML = `${workTime}`;
+			//document.location.href = "/work/workInsert"; 
+		});
+		$leaveWorkBtn.addEventListener('click', function() {
+			$leaveWorkEle.innerHTML = `${workTime}`;
+			//document.location.href = "/work/updateLeaveWork?leaveworkTime="+$leaveWorkEle.value;
+		});
+		$goOutBtn.addEventListener('click', function() {
+			$goOutEle.innerHTML = `${workTime}`;
+			//document.location.href = "/work/updateGoOutStart?gooutWorkoutStartTime="+$goOutEle.value;
+		});
+		$comebackBtn.addEventListener('click', function() {
+			$comeBackEle.innerHTML = `${workTime}`;
+			//document.location.href = "/work/updateComeback?gooutWorkoutComebackTime="+$comeBackEle.value;
+		});
 	</script>
 </th:block>
 </html>

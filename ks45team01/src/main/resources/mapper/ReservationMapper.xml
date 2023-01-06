@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.ReservationMapper">
+	<resultMap type="Meetingroom" id="meetingroomResultMap">
+		<id		property="meetNum"	column="meet_num" />
+		<result property="meetName"  column="meet_name" />
+		<result property="meetLocation"  column="meet_location" />
+		<result property="meetUsableStart"  column="meet_usable_start" />
+		<result property="meetUsableEnd"  column="meet_usable_End" />
+		<result property="meetRegDate"  column="meet_reg_date" />
+		<result property="memberNum"  column="member_num" />
+		<result property="meetUpdateMember"  column="meet_update_member" />
+		<result property="meetCapacity"  column="meet_capacity" />
+		<result property="meetStatus"  column="meet_status" />
+		<result property="meetRejectReason"  column="meet_reject_reason" />
+		<result property="meetDetail"  column="meet_detail" />
+		<result property="meetManager"  column="meet_manager" />
+	</resultMap>
+
+	<select id="getMeetingroomList" resultMap="meetingroomResultMap">
+		/* 회의실 조회 */
+		SELECT 
+			*
+		FROM 
+			tb_meetingroom;
+	</select>
+	<select id="getMeetingroomById" parameterType="String" resultMap="meetingroomResultMap">
+		/* 회의실 조회 */
+		SELECT 
+			*
+		FROM 
+			tb_meetingroom
+		WHERE
+			meet_num = #{meetNum};
+	</select>
+	<update id="modifyMeetingroom" parameterType="Meetingroom">
+		/* 특정 회의실 수정 */
+		UPDATE tb_meetingroom
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="meetUsableStart != null and meetUsableStart != '' ">
+				,meet_usable_start = #{meetUsableStart}
+			</if> 
+			<if test="meetUsableEnd != null and meetUsableEnd != '' ">
+				,meet_usable_end = #{meetUsableEnd}
+			</if> 
+			<if test="meetLocation != null and meetLocation != '' ">
+				,meet_location = #{meetLocation}
+			</if> 
+			<if test="meetCapacity != null and meetCapacity != '' ">
+				,meet_capacity = #{meetCapacity}
+			</if> 
+			<if test="meetDetail != null and meetDetail != '' ">
+				,meet_detail = #{meetDetail}
+			</if>
+		</trim>
+		 WHERE
+		 	meet_num = #{meetNum};
+	</update>
+	
+	<delete id="deleteMeetingroom" parameterType="String">
+		/* 회의실코드로 회의실 삭제*/
+		DELETE
+		FROM
+			tb_meetingroom
+		WHERE
+			meet_num = #{meetNum};
+	</delete>	
+</mapper>

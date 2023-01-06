@@ -4,15 +4,22 @@
 	layout:decorate="~{layout/default}">
 
 <th:block layout:fragment="customCrumbbar">
-	<!-- begin page title -->
-	<div class="row align-items-center">
-		<div class="col-md-8 col-lg-8">
-			<h4 class="page-title">휴가설정</h4>
-			<div class="breadcrumb-list">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="/">Home</a></li>
-					<li class="breadcrumb-item active" aria-current="page">휴가설정</li>
-				</ol>
+	<div class="row">
+		<div class="col-md-12 m-b-30">
+			<!-- begin page title -->
+			<div class="d-block d-lg-flex flex-nowrap align-items-center">
+				<div class="page-title mr-4 pr-4 border-right">
+					<h1>휴가설정</h1>
+				</div>
+				<div class="breadcrumb-bar align-items-center">
+					<nav>
+						<ol class="breadcrumb p-0 m-b-0">
+							<li class="breadcrumb-item"><a href="/"><i
+									class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item active text-primary" aria-current="page">휴가설정</li>
+						</ol>
+					</nav>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -20,6 +27,8 @@
 </th:block>
 
 <th:block layout:fragment="customContents">
+<title th:text="${title}"></title>
+<div style="text-align:center;">
 	<div style="width: 50%; float: left;">
 		<div class="col-md-12 col-lg-12">
 			<div class="widgetbar"
@@ -31,6 +40,7 @@
 			</div>
 		</div>
 		<h3>휴가대분류 설정</h3>
+		
 		<div class="col-md-10 col-lg-10">
 			<table class="table table-hover">
 				<thead>
@@ -41,9 +51,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Mark</td>
-						<td>Mark</td>
+					<tr th:if="${not #lists.isEmpty(category)}"
+						th:each="c : ${category}">
+						<td th:text="${c.vacationCategoryName}"></td>
+						<td th:text="${c.vacationUse}"></td>
 						<td>
 							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
 							th:href="@{/settings/vacationVarietyModify}">수정</a>
@@ -74,13 +85,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Mark</td>
-						<td>Mark</td>
+					<tr th:if="${not #lists.isEmpty(sort)}"
+						th:each="s : ${sort}">
+						<td th:text="${s.vacationSortName}"></td>
+						<td th:text="${s.vacationUse}"></td>
 						<td>
-							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
-							th:href="@{/settings/vacationVarietyModify}">수정</a>
+							<!-- (workTypeNum=${wt.workTypeNum}) -->
+							 <a th:href="@{/settings/vacationVarietyModify}">수정</a>
 						</td>
+					</tr>
+					<tr th:unless="${not #lists.isEmpty(category)}">
 					</tr>
 				</tbody>
 			</table>
@@ -108,8 +122,10 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>Mark</td>
-						<td>Mark</td>
+						<tr th:if="${not #lists.isEmpty(type)}"
+						th:each="t : ${type}">
+						<td th:text="${t.vacationName}"></td>
+						<td th:text="${t.vacationUse}"></td>
 						<td>
 							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
 							th:href="@{/settings/vacationVarietyModify}">수정</a>
@@ -136,17 +152,17 @@
 					<tr>
 						<th scope="col">근속연수</th>
 						<th scope="col">휴가개수</th>
-						<th scope="col">지급시기</th>
 						<th scope="col">사용여부</th>
 						<th scope="col">수정</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>Mark</td>
-						<td>Mark</td>
-						<td>Mark</td>
-						<td>Mark</td>
+						<tr th:if="${not #lists.isEmpty(standard)}"
+						th:each="st : ${standard}">
+						<td th:text="${st.lengthOfService}"></td>
+						<td th:text="${st.addVacation}"></td>
+						<td th:text="${st.vacationStandardUse}"></td>
 						<td>
 							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
 							th:href="@{/settings/vacationVarietyModify}">수정</a>
@@ -156,5 +172,6 @@
 			</table>
 		</div>
 	</div>
+</div>
 </th:block>
 </html>

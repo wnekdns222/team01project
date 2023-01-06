@@ -1,7 +1,7 @@
 package ks45team01.unity.admin.controller;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ks45team01.unity.dto.VacationCategory;
+import ks45team01.unity.dto.VacationSort;
+import ks45team01.unity.dto.VacationStandard;
+import ks45team01.unity.dto.VacationType;
+import ks45team01.unity.dto.Work;
 import ks45team01.unity.dto.WorkType;
+import ks45team01.unity.dto.WorkUnusual;
+import ks45team01.unity.service.VacationService;
+import ks45team01.unity.service.WorkService;
 import ks45team01.unity.service.WorkTypeService;
 
 /**
@@ -27,15 +35,25 @@ public class AdminWorkController {
 	
 	private static final Logger log = LoggerFactory.getLogger(AdminWorkController.class);
 
-	
+	private final VacationService vacationService;
 	private final WorkTypeService workTypeService;
+	private final WorkService workService;
 	
-	public AdminWorkController(WorkTypeService workTypeService) {
+	public AdminWorkController(WorkTypeService workTypeService, WorkService workService,VacationService vacationService) {
 		this.workTypeService = workTypeService;
+		this.workService = workService;
+		this.vacationService = vacationService;
 	}
-	//전사원 근무내역 조회
+	/**
+	 * 전사원 근태내역 조회
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("work/workAllList")
-	public String getAllWorkInfo() {   
+	public String getAllWorkInfo(Model model) {   
+		
+		List<Work> workInfoList = workService.getAllWorkInfo();
+		model.addAttribute("workInfoList",workInfoList);
 		
 		return "work/work_all_list";
 	}
@@ -45,9 +63,15 @@ public class AdminWorkController {
 		
 		return "work/work_authority_Insert";
 	}
-	//비정상 근태 조회
+	/**
+	 * 비정상 근태 조회
+	 * @return "work/work_authority_list"
+	 */
 	@GetMapping("work/workAuthorityList")
-	public String getAuthorityWorkInfo() {
+	public String getAuthorityWorkInfo(Model model) {
+		
+		List<WorkUnusual> unusualList = workService.getAuthorityWorkInfo();
+		model.addAttribute("unusualList", unusualList);
 		
 		return "work/work_authority_list";
 	}
@@ -101,18 +125,27 @@ public class AdminWorkController {
 		return "redirect:/settings/workTypeList";
 	}
 	/**
-	 * 전직원근무유형 조회
-	 * @param model
+	 * 전직원근무유형 조회, 페이징
+	 * @param model, requestParam
 	 * @return
 	 */
 	@GetMapping("settings/workTypeList")
-	public String getAllWorkType(Model model) {
+	public String getAllWorkType(Model model
+								,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
 		
-		List<WorkType> workTypeList = workTypeService.getAllWorkType();
+		Map<String, Object> paramMap = workTypeService.getAllWorkType(currentPage);
+		int lastPage = (int)paramMap.get("lastPage");
+		List<WorkType> workTypeList = (List<WorkType>) paramMap.get("workType");
+		int startPageNum = (int) paramMap.get("startPageNum");
+		int endPageNum = (int) paramMap.get("endPageNum");
 		
 		log.info("근무유형 조회: {}", workTypeList);
 		
 		model.addAttribute("workTypeList", workTypeList);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
 		
 		return "settings/work_type_list";
 	}
@@ -131,7 +164,18 @@ public class AdminWorkController {
 	}
 	//사내 휴가종류목록
 	@GetMapping("settings/vacationVarietyList")
-	public String getVacationVariety() {
+	public String getVacationVariety(Model model) {
+		
+		Map<String, Object> variety = vacationService.getVacationVariety();
+		List<VacationCategory> category = (List<VacationCategory>)variety.get("category");
+		List<VacationSort> sort =(List<VacationSort>)variety.get("sort");
+		List<VacationType> type =(List<VacationType>)variety.get("type");
+		List<VacationStandard> standard = (List<VacationStandard>)variety.get("standard");
+		model.addAttribute("title", "휴가설정");
+		model.addAttribute("category", category);
+		model.addAttribute("sort", sort);
+		model.addAttribute("type", type);
+		model.addAttribute("standard", standard);
 		
 		return "settings/vacation_variety_list";
 	}

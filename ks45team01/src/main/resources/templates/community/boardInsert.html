@@ -91,26 +91,26 @@
 						</tr>
 						<tr>
 							<th>파일 등록</th>
-							<td colspan="2"><input type="file" class="custom-file-input"
-								id="customFile"> <label class="custom-file-label"
-								for="customFile">Choose file</label></td>
+							<td colspan="2" class="custom-file"><input type="file"
+								class="custom-file-input" id="customFile"> <label
+								class="custom-file-label" for="customFile">파일 선택</label></td>
 						</tr>
 
 						<tr>
 							<th>내용 <!-- <span class="es">필수 입력</span> --></th>
-							<td colspan="4"><textarea class="form-control" id="content"
-									name="content" cols="50" rows="10" placeholder="내용을 입력해 주세요."></textarea></td>
+							<td colspan="4"><div id="summernote" class="summernote" ></div>
+							<!-- <textarea class="form-control" id="content"
+									name="content" cols="50" rows="10" placeholder="내용을 입력해 주세요."></textarea> --></td>
 						</tr>
 					</tbody>
 				</table>
 			</form>
-			</br>
-			<p class="btn_set">
+			<p class="btn_set" style="margin-left: 150px; margin-top: 8px;">
 				<button type="button" id="saveBtn" onclick="savePost();"
-					class="btn btn-round btn-outline-primary">저장</button>
+					class="btn btn-round btn-outline-primary" >저장</button>
 				<!-- 뒤로가기 버튼을 누르면 리스트 화면으로 돌아간다. -->
 				<a th:href="@{/community/noticeList}"
-					class="btn btn-round btn-outline-light">뒤로</a>
+					class="btn btn-round btn-outline-light" >뒤로</a>
 			</p>
 		</section>
 	</div>
