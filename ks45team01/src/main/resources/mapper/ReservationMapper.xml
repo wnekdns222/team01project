@@ -26,4 +26,45 @@
 		FROM 
 			tb_meetingroom;
 	</select>
+	<select id="getMeetingroomById" parameterType="String" resultMap="meetingroomResultMap">
+		/* 회의실 조회 */
+		SELECT 
+			*
+		FROM 
+			tb_meetingroom
+		WHERE
+			meet_num = #{meetNum};
+	</select>
+	<update id="modifyMeetingroom" parameterType="Meetingroom">
+		/* 특정 회의실 수정 */
+		UPDATE tb_meetingroom
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="meetUsableStart != null and meetUsableStart != '' ">
+				,meet_usable_start = #{meetUsableStart}
+			</if> 
+			<if test="meetUsableEnd != null and meetUsableEnd != '' ">
+				,meet_usable_end = #{meetUsableEnd}
+			</if> 
+			<if test="meetLocation != null and meetLocation != '' ">
+				,meet_location = #{meetLocation}
+			</if> 
+			<if test="meetCapacity != null and meetCapacity != '' ">
+				,meet_capacity = #{meetCapacity}
+			</if> 
+			<if test="meetDetail != null and meetDetail != '' ">
+				,meet_detail = #{meetDetail}
+			</if>
+		</trim>
+		 WHERE
+		 	meet_num = #{meetNum};
+	</update>
+	
+	<delete id="deleteMeetingroom" parameterType="String">
+		/* 회의실코드로 회의실 삭제*/
+		DELETE
+		FROM
+			tb_meetingroom
+		WHERE
+			meet_num = #{meetNum};
+	</delete>	
 </mapper>

@@ -17,7 +17,7 @@
 				</div>
 			</div>
 		</div>
-	<a href="/reservation/meetingroomReservationInsert" id="exportExcel" class="btn btn-primary" style="float:right; margin-bottom:8px;">수정</a>
+	<a href="/reservation/meetingroomReservationInsert" id="exportExcel" class="btn btn-primary" style="float:right; margin-bottom:8px;">추가</a>
 	<th:block layout:fragment="customContents">
 		<table class="table table-hover">
                   <thead>
@@ -28,18 +28,26 @@
                           <th scope="col">회의실 위치</th>
                           <th scope="col">회의실 수용인원</th>
                           <th scope="col">회의실 상세정보</th>
+                          <th scope="col">수정</th>
+                          <th scope="col">삭제</th>
                       </tr>
                   </thead>
                   <tbody>
                       <tr th:unless="${#lists.isEmpty(meetingroomList)}"
 					th:each="l : ${meetingroomList}">
-					<td th:text="${l.meetName}"></td>
-					<td th:text="${l.meetUsableStart}"></td>
-					<td th:text="${l.meetUsableEnd}"></td>
-					<td th:text="${l.meetLocation}"></td>
-					<td th:text="${l.meetCapacity}"></td>
-					<td th:text="${l.meetDetail}"></td>
-				</tr>
+						<td th:text="${l.meetName}"></td>
+						<td th:text="${l.meetUsableStart}"></td>
+						<td th:text="${l.meetUsableEnd}"></td>
+						<td th:text="${l.meetLocation}"></td>
+						<td th:text="${l.meetCapacity}"></td>
+						<td th:text="${l.meetDetail}"></td>
+						<td>
+							<a th:href="@{/reservation/meetingroomModify(meetNum=${l.meetNum})}"  href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i class="ti ti-pencil"></i></a>
+						</td>
+						<td>					
+							<a th:href="@{/reservation/meetingroomDelete(meetNum=${l.meetNum})}" href="javascript:void(0)" class="btn btn-icon btn-outline-danger btn-round"><i class="ti ti-close"></i></a>
+						</td>
+				      </tr>
                   </tbody>
               </table>
 	</th:block>

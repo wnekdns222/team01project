@@ -29,46 +29,28 @@
 		<table class="table table-dark">
 			<thead>
 				<tr>
-					<th scope="col">구분</th>
-					<th scope="col">직급명</th>
-					<th scope="col">직급생성한 사원</th>
-					<th scope="col">직급 생성 일자</th>
-					<th scope="col">사용여부</th>
-					<th scope="col">수정</th>
+					<th scope="col">직급관리번호</th>
+					<th scope="col">사원번호</th>
+					<th scope="col">직급코드</th>
+					<th scope="col">직급 등록 일자</th>
+					<th scope="col">직급변경일시</th>
+					<th scope="col">등록자</th>
+					<th scope="col">등록일자</th>
+					<th scope="col">수정자</th>
+					<th scope="col">수정일자</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>임원</td>
-					<td>id001</td>
-					<td>2022-12-29</td>
-					<td>Y</td>
-					<th scope="col">
-					<button type="button" class="btn btn-outline-primary"
-					onclick="location.href='/member/MemberPositionModify'">수정</button>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>부장</td>
-					<td>id001</td>
-					<td>2022-12-29</td>
-					<td>Y</td>
-					<th scope="col">
-					<button type="button" class="btn btn-outline-primary"
-					onclick="location.href='/member/MemberPositionModify'">수정</button>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>차장</td>
-					<td>id001</td>
-					<td>2022-12-29</td>
-					<td>Y</td>
-					<th scope="col">
-					<button type="button" class="btn btn-outline-primary"
-					onclick="location.href='/member/MemberPositionModify'">수정</button>
+				<tr th:each="pm : ${positionManage}">
+					<th scope="row" th:text="${pm.positionListNum}"></th>
+					<td th:text="${pm.memberNum}"></td>
+					<td th:text="${pm.positionNum}"></td>
+					<td th:text="${pm.positionRegDate}"></td>
+					<td th:text="${pm.positionUpdateRegDate}"></td>
+					<td th:text="${pm.positionListManageRegistrant}"></td>
+					<td th:text="${pm.regDate}"></td>
+					<td th:text="${pm.positionListManageModifier}"></td>
+					<th th:text="${pm.positionUpdateDate}">
 					</th>
 				</tr>
 			</tbody>

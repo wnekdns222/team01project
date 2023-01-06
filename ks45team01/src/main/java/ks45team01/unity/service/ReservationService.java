@@ -26,4 +26,22 @@ public class ReservationService {
 		return meetingroomList;
 	}
 	
+	public void modifyMeetingroom (Meetingroom meetingroom) {
+		
+		reservationMapper.modifyMeetingroom(meetingroom);
+	}
+	
+	public Meetingroom getMeetingroomById(String meetNum) {
+		
+		Meetingroom meetingroom = reservationMapper.getMeetingroomById(meetNum);
+		
+		return meetingroom;
+	}
+	
+	public void deleteMeetingroom (Meetingroom meetingroom) {
+		
+		reservationMapper.deleteMeetingroom(meetingroom);
+		
+	}
+	
 }
