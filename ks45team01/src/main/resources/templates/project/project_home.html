@@ -26,7 +26,7 @@
 </th:block>
 <th:block layout:fragment="customContents">
 	<!-- /project/projectDetail의 bizTab4 -->
-</th:block>
+
 <th:block th:fragment="projectHomeTab1">
 	<div class="tab tab-border nav-center">
 		<ul class="nav nav-tabs" role="tablist">
@@ -57,22 +57,28 @@
 		</ul>
 	</div>
 	<h3>전체</h3>
-	<div class="row">
+	<div class="row" th:each="pbl : ${projectBoardList}">
 		<div class="col-md-12">
 			<div class="card card-statistics">
 				<div class="card-header">
+					<div>
+					<!-- 멤버아이디 db값 가져오기  -->
+					<h5> 작성자 : [[${pbl.memberNum}]]  작성일자 : [[${pbl.projectBoardRegDate}]]</h5>
+					<!-- 멤버아이디 db값 가져오기  -->
+					</div>
+					<div>
+						<h4 class="card-title">게시글 제목 <button type="submit" class="btn btn-primary"
+						onclick="location.href='/project/projectDetail'" style="float: right;">수정</button></h4>
+						</div>
 					<div class="card-heading">
-						<h4 class="card-title">게시글 내용</h4>
-						<input class="form-control form-control-lg" type="text"
-							placeholder="제목을 입력하세요" readonly>
+					<!-- 프로젝트보드제목 db연결 -->
+						<input class="form-control form-control-lg" type="text" disabled="disabled" th:value="${pbl.projectBoardTitle}" style="background-color: white;"/>
 					</div>
 				</div>
 				<div class="card-body">
 					<h5>내용</h5>
 					<textarea class="form-control" placeholder="Message" id="Textarea1"
-						rows="10"></textarea>
-					<button type="submit" class="btn btn-primary"
-						onclick="location.href='/project/projectDetail'">수정</button>
+						rows="10" th:text="${pbl.projectBoardContent}" readonly style="background-color: white;"></textarea>
 						<div class="d-flex flex-column comment-section">
 									<div class="bg-white p-2">
 										<div class="d-flex flex-row user-info">
@@ -133,8 +139,7 @@
 				<div class="card-header">
 					<div class="card-heading">
 						<h4 class="card-title">업무진행 내용</h4>
-						<input class="form-control form-control-lg" type="text"
-							placeholder="제목">
+						<input class="form-control form-control-lg" type="text">
 					<div class="col-12">
 						<h4>진행상황</h4>
 						<div class="row tabs-contant">
@@ -170,7 +175,7 @@
 							<div class="col-12">
 								<div class="col-md-12">
 									<div class="slider-1">
-										<input type="text" id="slider-1" name="example_name" value="" />
+										<input type="text" id="slider-1" name="example_name" value="50" />
 									</div>
 								</div>
 							</div>
@@ -248,5 +253,6 @@
 
 
 
+</th:block>
 </th:block>
 </html>
