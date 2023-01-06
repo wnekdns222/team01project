@@ -4,26 +4,84 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team01.unity.mapper.FileBoardMapper">
 	<resultMap type="FileBoard" id="fileBoardResultMap">
-		<id property="fileBoardNum" column="file_board_num"/>
-		<result property="fileCategoryCode" column="file_category_code"/>
-		<result property="fileBoardRegistrant" column="file_board_registrant"/>
-		<result property="fileBoardTitle" column="file_board_title"/>
-		<result property="fileBoardContents" column="file_board_contents"/>
-		<result property="fileRegDate" column="file_reg_date"/>
-		<result property="fileModifier" column="file_modifier"/>
+		<id property="fileBoardNum" 			column="file_board_num"/>
+		<result property="fileCategoryCode" 	column="file_category_code"/>
+		<result property="fileBoardRegistrant" 	column="file_board_registrant"/>
+		<result property="fileBoardTitle" 		column="file_board_title"/>
+		<result property="fileBoardContents" 	column="file_board_contents"/>
+		<result property="fileRegDate" 			column="file_reg_date"/>
+		<result property="fileModifier" 		column="file_modifier"/>
 		<result property="fileModificationDate" column="file_modification_date"/>
-		<result property="fileUseOrNot" column="file_use_or_not"/>
-		<result property="fileGroupCode" column="file_group_code"/>
+		<result property="fileUseOrNot" 		column="file_use_or_not"/>
+		<result property="fileGroupCode" 		column="file_group_code"/>
+		<association property="fileBoardCate" javaType="FileBoardCate">
+			<result property="fileCategoryCode" 			column="file_category_code"/>
+			<result property="fileCategoryName" 			column="file_category_name"/>
+			<result property="fileCategoryRegistrant" 		column="file_category_registrant"/>
+			<result property="fileCategoryRegDate" 			column="file_category_reg_date"/>
+			<result property="fileCategoryModifier" 		column="file_category_modifier"/>
+			<result property="fileCategoryModificationDate" column="file_category_modification_date"/>
+			<result property="categoryUseOrNot" 			column="category_use_or_not"/>
+		</association>
 	</resultMap>
+	<delete id="fileBoardCateDelete" parameterType="String">
+		/* 파일 카테고리 삭제 */
+		DELETE FROM tb_fileboard_category WHERE file_category_code=#{fileCategoryCode};
+	</delete>
+	<update id="fileBoardCateModify" parameterType="FileBoardCate">
+		/* 파일카테고리 수정 */
+		UPDATE tb_fileboard_category
+		SET
+			file_category_name=#{fileCategoryName},
+			file_category_modifier=#{fileCategoryModifier},
+			file_category_modification_date=NOW()
+		WHERE file_category_code=#{fileCategoryCode};
+	</update>
+	<select id="fileBoardCateModifyForm" resultType="FileBoardCate" parameterType="String">
+	/* 파일 카테고리 상세보기 */
+		SELECT
+			file_category_code AS fileCategoryCode,
+			file_category_name AS fileCategoryName,
+			file_category_registrant AS fileCategoryRegistrant,
+			file_category_reg_date AS fileCategoryRegDate,
+			file_category_modifier AS fileCategoryModifier,
+			file_category_modification_date AS fileCategoryModificationDate
+		FROM
+			tb_fileboard_category
+		WHERE file_category_code = #{fileCategoryCode};
+	</select>
+	
+	<insert id="addFileBoardCate" parameterType="FileBoardCate">
+		/* 파일 카테고리 등록 */
+		INSERT INTO tb_fileboard_category
+		(file_category_code, file_category_name, file_category_registrant, file_category_reg_date)
+		VALUES (sf_fileBoardCateNum(), #{fileCategoryName}, #{fileCategoryRegistrant}, NOW());
+	</insert>
+	<select id="fileBoardCateList" resultType="List" resultMap="fileBoardResultMap">
+		/* 파일 카테고리 조회 및 전체 조회 중복제거 */
+		SELECT 
+		DISTINCT
+			 f.file_category_code
+			,fc.file_category_name
+		FROM 
+			tb_fileboard_category AS fc
+			INNER JOIN 
+			tb_file_board AS f
+			ON 
+			fc.file_category_code = f.file_category_code;
+	</select>
 	<delete id="boardFileDelete" parameterType="String">
+		/* 파일 게시글 삭제 */
 		DELETE FROM tb_file_board WHERE file_board_num = #{fileBoardNum};
 	</delete>
 	<insert id="addBoardFile" parameterType="FileBoard">
+		/* 파일 게시글 등록 */
 		INSERT INTO tb_file_board
-		(file_board_num, file_board_registrant, file_board_title, file_board_contents, file_reg_date)
-		VALUES (sf_fileBoardNum(), #{fileBoardRegistrant}, #{fileBoardTitle}, #{fileBoardContents}, NOW());
+		(file_board_num, file_category_code, file_board_registrant, file_board_title, file_board_contents, file_reg_date)
+		VALUES (sf_fileBoardNum(), #{fileCategoryCode}, #{fileBoardRegistrant}, #{fileBoardTitle}, #{fileBoardContents}, NOW());
 	</insert>
 	<update id="boardFileUpdate" parameterType="FileBoard">
+		/* 파일게시글 수정 */
 		UPDATE tb_file
 		<trim prefix="SET" prefixOverrides=",">
 			<if test="fileBoardTitle != null and fileBoardTitle != '' ">
@@ -44,6 +102,7 @@
 	</update>
 	
 	<select id="boardFileView" resultMap="fileBoardResultMap" parameterType="String">
+	/* 파일게시글 상세보기 */
 		SELECT 
 			*
 		FROM 
@@ -57,5 +116,4 @@
 			tb_file_board
 		WHERE file_category_code = #{serviceType};
 	</select>
-	
 </mapper>
