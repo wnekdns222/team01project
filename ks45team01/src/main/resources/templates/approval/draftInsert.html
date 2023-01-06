@@ -24,20 +24,38 @@
 				</div>
 			</div>
 		</div>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-				<a class="nav-link" href="#">공문서</a> <a class="nav-link disabled"
-					href="#">품위서</a>
-			</div>
-		</div>
-	</nav>
+	</th:block>
 	<th:block layout:fragment="customContents">
-		<h1>기안작성을 보여줄 화면입니다.</h1>
+				<form id="addBoardFile" th:action="@{/fileBoard/addBoardFile}" method="post">
+			<label for="fileBoardTitle">서식명</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileBoardTitle" name="fileBoardTitle"
+					placeholder="서식명을 입력해주세요" />
+			</div>
+			<div>
+	            <select id="fileCategoryCode" name="fileCategoryCode">
+	            	<th:block th:if="${not #lists.isEmpty(fileBoardCateList)}" 
+	            	          th:each="f : ${fileBoardCateList}">
+	            	<option th:value="${f.FileBoardCate.fileCategoryCode}">[[${f.FileBoardCate.fileCategoryName}]]</option>
+	            	</th:block>
+	            	<th:block th:unless="${not #lists.isEmpty(fileBoardCateList)}">								
+								<option>등록된 카테고리가 없습니다</option>
+					</th:block>
+	            </select>
+           </div>  
+			<label for="fileBoardRegistrant">작성자</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileBoardRegistrant"
+					name="fileBoardRegistrant" placeholder="작성자를 입력해주세요" /> <label
+					for="Contents">내용</label>
+				<textarea class="form-control" name="fileBoardContents" id="fileBoardContents"
+					placeholder="내용을 입력해주세요" style="height: 150px; width: 800px;"></textarea>
+			</div>
+			<div style="margin-top: 20px; margin-left: 300px;">
+				<button type="submit" class="btn btn-primary">등록</button>
+				<button type="button" class="btn btn-primary"
+					onclick="location.href='/file/fileList';">취소</button>
+			</div>
+		</form>
 	</th:block>
 </html>
