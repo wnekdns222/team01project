@@ -133,19 +133,24 @@
 
 
 
-	<div class="row">
+	<div class="row" th:each="prl : ${projectRequestList}">
 		<div class="col-md-12">
 			<div class="card card-statistics">
 				<div class="card-header">
 					<div class="card-heading">
-						<h4 class="card-title">업무진행 내용</h4>
-						<input class="form-control form-control-lg" type="text">
+						<h4 class="card-title">업무진행 제목</h4>
+						<input class="form-control form-control-lg" type="text" th:value="${prl.projectTaskTitle}" readonly style="background-color: white;">
 					<div class="col-12">
 						<h4>진행상황</h4>
 						<div class="row tabs-contant">
 							<div class="col-xxl-6">
 								<div class="tab round">
 									<ul class="nav nav-tabs" role="tablist">
+										<li class="nav-item"><a class="nav-link"
+											id="contact-07-tab" data-toggle="tab" href="#contact-07"
+											role="tab" aria-controls="contact-07" aria-selected="false">
+												<i class="fa fa-check-square-o"></i> 요청
+										</a></li>
 										<li class="nav-item"><a class="nav-link active show"
 											id="home-07-tab" data-toggle="tab" href="#home-07" role="tab"
 											aria-controls="home-07" aria-selected="true"> <i
@@ -161,31 +166,17 @@
 											role="tab" aria-controls="portfolio-07" aria-selected="false">
 												<i class="fa fa-picture-o"></i> 완료
 										</a></li>
-										<li class="nav-item"><a class="nav-link"
-											id="contact-07-tab" data-toggle="tab" href="#contact-07"
-											role="tab" aria-controls="contact-07" aria-selected="false">
-												<i class="fa fa-check-square-o"></i> 요청
-										</a></li>
 									</ul>
 								</div>
 							</div>
 						</div>
-						<h4>진행률</h4>
-						<div class="row rangeslider-wrapper">
-							<div class="col-12">
-								<div class="col-md-12">
-									<div class="slider-1">
-										<input type="text" id="slider-1" name="example_name" value="50" />
-									</div>
-								</div>
-							</div>
-						</div>
+						
 						<h5>내용</h5>
 						<textarea class="form-control" placeholder="Message"
-							id="Textarea1" rows="10"></textarea>
+							id="Textarea1" rows="10" th:text="${prl.projectRequestContent}" readonly style="background-color: white;"></textarea>
 						<button type="submit" class="btn btn-primary"
 							onclick="location.href='/project/projectDetail'">수정</button>
-							
+                        	
 					</div>
 				</div>
 					
@@ -203,11 +194,7 @@
 											</div>
 										</div>
 										<div class="mt-2">
-											<p class="comment-text">Lorem ipsum dolor sit amet,
-												consectetur adipiscing elit, sed do eiusmod tempor
-												incididunt ut labore et dolore magna aliqua. Ut enim ad
-												minim veniam, quis nostrud exercitation ullamco laboris nisi
-												ut aliquip ex ea commodo consequat.</p>
+											<p class="comment-text">ujjjjhjkjhjjjh</p>
 										</div>
 									</div>
 									<div class="bg-white">

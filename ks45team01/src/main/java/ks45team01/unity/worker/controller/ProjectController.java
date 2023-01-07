@@ -7,11 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.ProjectBoard;
 import ks45team01.unity.dto.ProjectList;
+import ks45team01.unity.dto.ProjectRequest;
 import ks45team01.unity.dto.ProjectUnit;
+import ks45team01.unity.service.MemberListService;
 import ks45team01.unity.service.ProjectBoardService;
 import ks45team01.unity.service.ProjectListService;
+import ks45team01.unity.service.ProjectRequestService;
 import ks45team01.unity.service.ProjectUnitService;
 
 @Controller
@@ -30,12 +34,18 @@ public class ProjectController {
 	private final ProjectListService projectListService;
 	private final ProjectUnitService projectUnitService;
 	private final ProjectBoardService projectBoardService;
+	private final ProjectRequestService projectRequestService;
+	private final MemberListService memberListService;
 	public ProjectController(ProjectListService projectListService
 							,ProjectUnitService projectUnitService
-							,ProjectBoardService projectBoardService) {
+							,ProjectBoardService projectBoardService
+							,ProjectRequestService projectRequestService
+							,MemberListService memberListService) {
 		this.projectListService = projectListService;
 		this.projectUnitService = projectUnitService;
 		this.projectBoardService = projectBoardService;
+		this.projectRequestService = projectRequestService;
+		this.memberListService = memberListService;
 	}
 	
 	
@@ -142,9 +152,13 @@ public class ProjectController {
 	@GetMapping("/projectDetail")
 	public String GetProjectDetail(Model model) {
 		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
+		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList();
+		List<MemberList> memberList = memberListService.memberListSe();
 		
 		model.addAttribute("title","프로젝트내부 디테일 화면");
 		model.addAttribute("projectBoardList",projectBoardList);
+		model.addAttribute("projectRequestList",projectRequestList);
+		model.addAttribute("memberList",memberList);
 	return "project/project_detail";
 	}
 	
@@ -152,9 +166,11 @@ public class ProjectController {
 	public String GetProjectHome(Model model) {
 		
 		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
+		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList();
 		
 		model.addAttribute("title","프로젝트내부 홈 화면");
 		model.addAttribute("projectBoardList",projectBoardList);
+		model.addAttribute("projectRequestList",projectRequestList);
 	return "project/project_home";
 	}
 	

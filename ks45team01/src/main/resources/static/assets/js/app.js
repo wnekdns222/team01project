@@ -13153,7 +13153,7 @@ var checkin = $('.range-from').datepicker({
                 //slider-1
                 $("#slider-1").ionRangeSlider();
                 //slider-2
-                $("#slider-2").ionRangeSlider({
+                $(".slider-2").ionRangeSlider({
                     min: 100,
                     max: 1000,
                     from: 550
