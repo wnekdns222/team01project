@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ks45team01.unity.dto.MemberList;
-import ks45team01.unity.dto.ProjectList;
 import ks45team01.unity.mapper.MemberListMapper;
-import ks45team01.unity.mapper.ProjectListMapper;
 
 @Service
 public class MemberListService {
