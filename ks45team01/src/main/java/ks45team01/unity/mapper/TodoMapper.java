@@ -1,5 +1,11 @@
 package ks45team01.unity.mapper;
 
-public interface TodoMapper {
+import org.apache.ibatis.annotations.Mapper;
 
+
+@Mapper
+public interface TodoMapper {
+	
+	
+	
 }
