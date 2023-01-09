@@ -1,16 +1,22 @@
 package ks45team01.unity.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import ks45team01.unity.dto.MemberLevel;
+
 import ks45team01.unity.dto.MemberList;
 
 
 @Mapper
 public interface MemberListMapper {
 	
-	// 회원 멤버전체 조회
-	List<MemberList> memberListSe();
+	//회원조회
+	List<MemberList> memberListSe(Map<String, Object> paramMap);
+	
+	//회원 전체 갯수 조회
+	int getMemberListCnt();
+	
+
 }

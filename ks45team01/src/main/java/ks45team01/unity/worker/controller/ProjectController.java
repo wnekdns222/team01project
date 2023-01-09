@@ -153,7 +153,7 @@ public class ProjectController {
 	public String GetProjectDetail(Model model) {
 		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
 		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList();
-		List<MemberList> memberList = memberListService.memberListSe();
+		List<MemberList> memberList = memberListService.memberListSe("","");
 		
 		model.addAttribute("title","프로젝트내부 디테일 화면");
 		model.addAttribute("projectBoardList",projectBoardList);

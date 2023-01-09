@@ -16,13 +16,64 @@
 		<result property="departmentNum" column="department_num"/>	
 		<result property="positionNum" column="position_num"/>	
 		<result property="memberInsertDate" column="member_insert_date"/>	
+	
+	
+	<association property ="memberPositionList" javaType="MemberPositionList">
+		<id property="positionNum" 				column="position_num"/>
+		<result property="positionName" 		column="position_name"/>
+		<result property="memberNum" 			column="member_num"/>
+		<result property="positionRegDate" 		column="position_reg_date"/>
+		<result property="positionUpdateDate" 	column="position_update_date"/>
+		<result property="positionModifier" 	column="position_modifier"/>
+		<result property="useOrNot" 			column="use_or_not"/>
+	</association>
+	
+	<association property ="memberDepartmentList" javaType="memberDepartmentList">
+		<id property="departmentNum" 				column="department_num"/>
+		<result property="departmentName" 		column="department_name"/>
+		<result property="memberNum" 			column="member_num"/>
+		<result property="departmentRegDate" 		column="department_reg_date"/>
+		<result property="departmentUpdateDate" 	column="department_update_date"/>
+		<result property="departmentModifier" 	column="department_modifier"/>
+		<result property="useOrNot" 			column="use_or_not"/>
+	</association>
+	
 	</resultMap>
 	
 	
-	<select id="memberListSe" resultMap="MemberListResultMap">
-		SELECT 
-			*
-		FROM 
-			tb_member
+	<select id="getMemberListCnt" resultType="int">
+	/*사원 이력테이블 전체 행의 갯수*/
+	SELECT
+		COUNT(1)
+	FROM
+		tb_member;
+	
 	</select>
+	
+	<select id="memberListSe" resultMap="MemberListResultMap" parameterType="map">
+	/*멤버 포지션 조인 및 페이징 조건문*/
+	SELECT
+		*
+	FROM
+		tb_member AS m
+			INNER JOIN 
+		tb_position_list AS pl
+			ON
+		m.member_position_num = pl.position_num
+		INNER JOIN 
+		tb_department_list AS dl
+		ON
+		m.member_department_num = dl.department_num
+		<where>
+		<if test="searchKey != null and searchKey != ''">
+			${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+		</if>
+	
+	</where>
+		<if test="startRowNum !=null and startRowNum> -1">
+		LIMIT #{startRowNum}, #{rowPerPage};
+		</if>
+	</select>
+	
+
 </mapper>
