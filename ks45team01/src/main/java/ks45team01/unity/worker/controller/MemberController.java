@@ -19,6 +19,7 @@ import ks45team01.unity.service.DepartmentManageService;
 import ks45team01.unity.service.MemberDepartmentListService;
 import ks45team01.unity.service.MemberLevelService;
 import ks45team01.unity.service.MemberListService;
+import ks45team01.unity.service.MemberModifyService;
 import ks45team01.unity.service.MemberPositionListService;
 import ks45team01.unity.service.PositionManageService;
 
@@ -37,13 +38,15 @@ public class MemberController {
 	private final MemberListService memberListService;
 	private final PositionManageService positionManageService;
 	private final DepartmentManageService departmentManageService;
+	private final MemberModifyService memberModifyService;
 	
 	public MemberController(MemberLevelService memberLevelService
 							,MemberDepartmentListService memberDepartmentListService
 							,MemberPositionListService memberPositionListService
 							,MemberListService memberListService
 							,PositionManageService positionManageService
-							,DepartmentManageService departmentManageService) {
+							,DepartmentManageService departmentManageService
+							,MemberModifyService memberModifyService) {
 		
 		this.memberLevelService = memberLevelService;
 		this.memberDepartmentListService = memberDepartmentListService;
@@ -51,6 +54,7 @@ public class MemberController {
 		this.memberListService = memberListService;
 		this.positionManageService = positionManageService;
 		this.departmentManageService = departmentManageService;
+		this.memberModifyService = memberModifyService;
 	}
 	
 	
@@ -88,7 +92,11 @@ public class MemberController {
 	
 	@GetMapping("/MemberModify")
 	public String GetMemberModify(Model model) {
+		
+		List<MemberList> memberModifyList = memberModifyService.memberModifyList();
+		
 		model.addAttribute("title","사원수정화면");
+		model.addAttribute("memberModifyList", memberModifyList);
 	return "member/member_modify";
 	}
 	
@@ -164,7 +172,9 @@ public class MemberController {
 	@GetMapping("/MemberLevelModify")
 	public String GetMemberLevelModify(String levelCode
 									   ,Model model) {
+		
 		MemberLevel memberLevelDetail = memberLevelService.memberLevelDetail(levelCode);
+		
 		model.addAttribute("title", "사원권한리스트 화면");
 		model.addAttribute("memberLevelDetail", memberLevelDetail);
 		
