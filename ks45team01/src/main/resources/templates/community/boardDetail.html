@@ -70,24 +70,34 @@
 						<col style="width: 35%;" />
 					</colgroup>
 					<tbody>
+						<tr>
+							<th scope="row">등록일</th>
+							<td colspan="2"><input class="form-control" type="text"
+								id="BoardRegDate" name="BoardRegDate" th:value="${boardDetail.BoardRegDate}" readonly /></td>
+						</tr>
 
 						<tr>
 							<th>제목 <!-- <span class="es">필수 입력</span> --></th>
 							<td colspan="2"><input class="form-control" type="text"
-								id="BoardName" name="BoardName" maxlength="50"
-								placeholder="제목을 입력해 주세요." /></td>
+								id="BoardName" name="BoardName" maxlength="50" readonly="readonly" th:value="${boardDetail.BoardName}"/></td>
 						</tr>
 
 						<tr>
 							<th>이름 <!-- <span class="es">필수 입력</span> --></th>
-							<td colspan="2"><input class="form-control" type="text"
-								id="MemberNum" name="MemberNum" maxlength="10"
-								placeholder="이름을 입력해 주세요." /></td>
+							<td colspan="2"><input class="form-control" type="text" readonly="readonly"
+								id="writer" name="writer" maxlength="10"/></td>
+						</tr>
+						<tr>
+							<th>파일</th>
+							<td colspan="2" class="custom-file"><input type="file"
+								class="BoardFile" id="BoardFile" readonly="readonly" th:value="${boardDetail.BoardFile}"> <label
+								class="BoardFile" for="customFile">파일찾기</label></td>
 						</tr>
 
 						<tr>
 							<th>내용 <!-- <span class="es">필수 입력</span> --></th>
-							<td colspan="4"><div id="BoardContent" class="BoardContent" ></div>
+							<td colspan="4">
+							<div id="summernote" class="summernote" >[[${boardDetail.BoardContent}]]</div>
 							<!-- <textarea class="form-control" id="content"
 									name="content" cols="50" rows="10" placeholder="내용을 입력해 주세요."></textarea> --></td>
 						</tr>
@@ -95,7 +105,7 @@
 				</table>
 			</form>
 			<p class="btn_set" style="margin-left: 150px; margin-top: 8px;">
-				<button type="submit"
+				<button type="button" id="saveBtn" onclick="savePost();"
 					class="btn btn-round btn-outline-primary" >저장</button>
 				<!-- 뒤로가기 버튼을 누르면 리스트 화면으로 돌아간다. -->
 				<a th:href="@{/community/noticeList}"

@@ -15,8 +15,8 @@ public class CommunityBoard {
 	public String getBoardCode() {
 		return BoardCode;
 	}
-	public void setBoardCode(String BoardCode) {
-		BoardCode = BoardCode;
+	public void setBoardCode(String boardCode) {
+		BoardCode = boardCode;
 	}
 	public String getCommunityCode() {
 		return CommunityCode;
@@ -27,8 +27,8 @@ public class CommunityBoard {
 	public String getBoardName() {
 		return BoardName;
 	}
-	public void setBoardName(String BoardName) {
-		BoardName = BoardName;
+	public void setBoardName(String boardName) {
+		BoardName = boardName;
 	}
 	public String getMemberNum() {
 		return MemberNum;
@@ -39,40 +39,39 @@ public class CommunityBoard {
 	public String getBoardContent() {
 		return BoardContent;
 	}
-	public void setBoardContent(String BoardContent) {
-		BoardContent = BoardContent;
+	public void setBoardContent(String boardContent) {
+		BoardContent = boardContent;
 	}
 	public String getBoardFile() {
 		return BoardFile;
 	}
-	public void setBoardFile(String BoardFile) {
-		BoardFile = BoardFile;
+	public void setBoardFile(String boardFile) {
+		BoardFile = boardFile;
 	}
 	public String getBoardFilePath() {
 		return BoardFilePath;
 	}
-	public void setBoardFilePath(String BoardFilePath) {
-		BoardFilePath = BoardFilePath;
+	public void setBoardFilePath(String boardFilePath) {
+		BoardFilePath = boardFilePath;
 	}
 	public String getBoardRegDate() {
 		return BoardRegDate;
 	}
-	public void setBoardRegDate(String BoardRegDate) {
-		BoardRegDate = BoardRegDate;
+	public void setBoardRegDate(String boardRegDate) {
+		BoardRegDate = boardRegDate;
 	}
 	public String getBoardUpdateDate() {
 		return BoardUpdateDate;
 	}
-	public void setBoardUpdateDate(String BoardUpdateDate) {
-		BoardUpdateDate = BoardUpdateDate;
+	public void setBoardUpdateDate(String boardUpdateDate) {
+		BoardUpdateDate = boardUpdateDate;
 	}
 	public String getBoardViewCount() {
 		return BoardViewCount;
 	}
-	public void setBoardViewCount(String BoardViewCount) {
-		BoardViewCount = BoardViewCount;
+	public void setBoardViewCount(String boardViewCount) {
+		BoardViewCount = boardViewCount;
 	}
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
