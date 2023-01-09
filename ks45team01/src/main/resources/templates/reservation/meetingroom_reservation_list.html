@@ -33,13 +33,7 @@
                   <tbody>
                     <tr th:unless="${#lists.isEmpty(meetingroomList)}"
 					th:each="l : ${meetingroomList}">	
-					<td>
-                       <div class="form-check mb-0 py-2">
-                           <input class="form-check-input" type="radio" name="meetingroom[${l.index}]"
-                               id="success" value="success" th:text="${l.meetName}"> 
-                               <label class="form-check-label" for="success"></label>
-                       </div>
-                    </td>
+					<td th:text="${l.meetName}"></td>
 					<td th:text="${l.meetUsableStart}"></td>
 					<td th:text="${l.meetUsableEnd}"></td>
 					<td th:text="${l.meetLocation}"></td>
