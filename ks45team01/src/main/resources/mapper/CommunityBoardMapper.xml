@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.CommunityBoardMapper">
+	<resultMap type="CommunityBoard" 	id="communityBoardResultMap">
+		<id property="BoardCode" 			column="board_code"/>
+		<result property="CommunityCode" 	column="community_code"/>
+		<result property="BoardName" 		column="board_name"/>
+		<result property="MemberNum" 		column="member_num"/>
+		<result property="BoardContent" 	column="board_content"/>
+		<result property="BoardFile" 		column="board_file"/>
+		<result property="BoardFilePath" 	column="board_file_path"/>
+		<result property="BoardRegDate" 	column="board_reg_date"/>
+		<result property="BoardUpdateDate" 	column="board_update_date"/>
+		<result property="BoardViewCount" 	column="board_view_count"/>
+	</resultMap>
+	<select id="getCommonNewCode" parameterType="String" resultType="String">
+			SELECT
+	            CASE
+	            WHEN COUNT(1) = 0 THEN CONCAT(#{column}, '_1')
+	            ELSE
+	                CONCAT(#{column},'_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT(#{column}, '_'), -1) AS UNSIGNED))+1)
+	            END AS newCode
+	        FROM
+	            ${table};
+	</select>
+	<insert id="communityBoardAdd" parameterType="CommunityBoard">
+		INSERT INTO tb_board
+		(board_code, board_name, board_content, board_reg_date)
+		VALUES (#{BoardCode}, #{BoardName}, #{BoardContent}, NOW())
+	</insert>
+	<select id="communityBoardList" resultType="List" resultMap="communityBoardResultMap">
+		SELECT
+			*
+		FROM
+			tb_board;	
+	</select>
+	<select id="communityBoardDetail" parameterType="String" resultMap="communityBoardResultMap">
+		SELECT 
+			*
+		FROM 
+			tb_board
+		WHERE
+			board_code = #{BoardCode};
+	</select>
+	
+</mapper>

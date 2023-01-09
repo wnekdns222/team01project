@@ -1,14 +1,26 @@
 package ks45team01.unity.worker.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import ks45team01.unity.dto.CommunityBoard;
+import ks45team01.unity.service.CommunityBoardService;
 
 @Controller
 @RequestMapping("/community")
 public class CommunityController {
-
+	
+		private final CommunityBoardService communityBoardService;
+		public CommunityController(CommunityBoardService communityBoardService) {
+			this.communityBoardService = communityBoardService;
+		}
+	
 		//공지사항 화면 Notice
 		@GetMapping("/noticeList")
 		public String getNotice (Model model) {   
@@ -23,19 +35,51 @@ public class CommunityController {
 			
 			return "community/noticeInsert";
 		}
+		
+		@GetMapping("/boardDetail")
+		public String boardDetail(@RequestParam(value = "BoardCode", required = false) String BoardCode
+								 ,Model model) {
+			
+			CommunityBoard boardDetail = communityBoardService.communityBoardDetail(BoardCode);
+			
+			model.addAttribute("title", "게시판 상세 화면");
+			model.addAttribute("boardDetail", boardDetail);
+			
+			return "community/boardDetail";
+			
+		}
+		
 		//게시판 화면 Board
 		@GetMapping("/boardList")
-		public String getBoard(Model model) {   
+		public String getBoard(Model model) { 
+			
+			List<CommunityBoard> communityBoardList = communityBoardService.communityBoardList();
+			
 			model.addAttribute("title", "게시판 화면");
+			model.addAttribute("communityBoardList", communityBoardList);
 			
 			return "community/boardList";
 		}
-		//게시판 등록화면 Notice
+		//게시판 등록화면 Board
 		@GetMapping("/boardInsert")
-		public String boardInsert(Model model) {   
+		public String boardInsert(Model model) {  
+			
+			List<CommunityBoard> communityBoardList = communityBoardService.communityBoardList();
+			
 			model.addAttribute("title", "게시판 등록 화면");
+			model.addAttribute("communityBoardList", communityBoardList);
 			
 			return "community/boardInsert";
 		}
+		
+		@PostMapping("/boardInsert")
+			public String communityBoardAdd(CommunityBoard communityBoard) {
+				
+				communityBoardService.communityBoardAdd(communityBoard);
+				
+				return "redirect:/community/boardList";
+		}
+	}
 
-}
+
+
