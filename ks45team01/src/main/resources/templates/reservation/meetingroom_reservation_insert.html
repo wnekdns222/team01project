@@ -2,7 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/default}">
-	
+	<head>
+	<style>
+      .ab {
+        background-color: blue;
+      }
+    </style>
+	</head>
 	<th:block layout:fragment="customCrumbbar">
 		<div class="breadcrumbbar">
 			<div class="row align-items-center">
@@ -18,10 +24,11 @@
 			</div>
 		</div>
 	<th:block layout:fragment="customContents">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<div class="card-body">
 		    <h6 class="card-subtitle"></h6>
 		    <form>
-		        <div class="form-group" style="margin:50px 0px 20px 0px;">
+		        <div class="form-group" style="margin:20px 0px 15px 0px;">
 		            <label for="exampleInputPassword1">회의실</label>
 		            <select class="form-control" id="meetingroomList" name="meetingroomList">
 		            	<th:block th:if="${not #lists.isEmpty(meetingroomList)}" 
@@ -34,43 +41,54 @@
 						</th:block>
 		            </select>  
 		        </div>
-		         <label for="exampleInputPassword1">예약시간</label>
-		        <div class="input-group date" id="datepicker-action">
+		         <label for="exampleInputPassword1">예약날짜</label>
+		        <div class="input-group date display-years" id="datepicker-action">
                   <input class="form-control" type="text" value=>
                   <span class="input-group-addon">
                     <i class="fa fa-calendar"></i> 
                 </span>
                 </div>
+                <div class="form-group">
+                   	<label for="exampleInputPassword1">시작시간</label>
+                  	<select class="form-control" id="StartTime" name="StartTime">
+                  	
+               	</select>
+               	</div>
+               	<div class="form-group">
+                   	<label for="exampleInputPassword1">종료시간</label>
+                  	 	<select class="form-control" id="exampleInputPassword1" name="reservationEndTime">
+                  	 	</select>
+               	</div>
 		        <div role="toolbar"  aria-label="Toolbar with Group Buttons" style="text-align: center;">
                     <div class="btn-group mr-2 mb-2 mb-xxs-0" role="group" aria-label="First group" style="margin:25px 0px 0px 0px;">
-                    	<button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">01</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">02</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">03</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">04</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">05</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">06</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">07</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">08</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">09</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">10</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">11</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">12</button>
+                    	<button type="button" class="btn btn-primary" style="background-color:white; color:black;">01</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">02</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">03</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">04</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">05</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">06</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">07</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">08</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">09</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">10</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">11</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">12</button>
                     </div>
                     </div>
                     <div role="toolbar"  aria-label="Toolbar with Group Buttons" style="text-align: center;">
                     <div class="btn-group mr-2 mb-2 mb-xxs-0" role="group" aria-label="Second group">
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">13</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">14</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">15</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">16</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">17</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">18</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">19</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">20</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">21</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">22</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">23</button>
-                        <button type="button" onClick="chk(this)" class="btn btn-primary" style="background-color:white; color:black;">24</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">13</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">14</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">15</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">16</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">17</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">18</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">19</button>                       
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">20</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">21</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">22</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">23</button>
+                        <button type="button" class="btn btn-primary" style="background-color:white; color:black;">24</button>
 					</div>
                 </div>
 		        <button type="submit" class="btn btn-primary" style="margin:80px 0px 0px 0px;">확인</button>
@@ -82,17 +100,12 @@
 	</th:block>
 	<th:block layout:fragment="customScript">
 	<script>
-	var color = "one";
-	function chk(obj)
-	{
-	if(color == "one") {
-	color = "two";
-	obj.style.background = 'blue';
-	} else if(color == "two") {
-	color = "one";
-	obj.style.background = 'white';
-	} 
-	}
-    </script>
+	const $selectBtns = document.querySelectorAll('.btn');
+	for (const selectBtn of $selectBtns) {
+		selectBtn.addEventListener('click', function() {
+        	console.log(selectBtn.innerText);
+                });
+        }	
+	</script>
 	</th:block>
 </html>
