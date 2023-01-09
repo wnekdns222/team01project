@@ -23,6 +23,15 @@
 			<result property="fileCategoryModificationDate" column="file_category_modification_date"/>
 			<result property="categoryUseOrNot" 			column="category_use_or_not"/>
 		</association>
+		<association property="memberPositionList" javaType="MemberPositionList">
+			<id property="positionNum" column="position_num"/>
+			<result property="positionName" column="position_name"/>
+			<result property="memberNum" column="member_num"/>
+			<result property="positionRegDate" column="position_reg_date"/>
+			<result property="positionUpdateDate" column="position_update_date"/>
+			<result property="positionModifier" column="position_modifier"/>
+			<result property="useOrNot" column="use_or_not"/>
+		</association>
 	</resultMap>
 	<delete id="fileBoardCateDelete" parameterType="String">
 		/* 파일 카테고리 삭제 */
@@ -115,5 +124,20 @@
 		FROM 
 			tb_file_board
 		WHERE file_category_code = #{serviceType};
+	</select>
+	<select id="fileBoardList" resultType="List" resultMap="fileBoardResultMap">
+		/* 파일게시글 전체 목록 조회 */
+		SELECT 
+			*
+		FROM 
+			tb_file_board AS f
+			INNER JOIN 
+			tb_position_list AS p
+			ON 
+			f.file_board_registrant = p.position_member_num
+			INNER JOIN 
+			tb_department_list AS d
+			ON 
+			p.position_member_num = d.member_num;
 	</select>
 </mapper>

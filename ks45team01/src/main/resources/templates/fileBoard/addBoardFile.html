@@ -26,9 +26,10 @@
 		</div>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<form id="addBoardFile" th:action="@{/fileBoard/addBoardFile}" method="post">
+		<form id="addBoardFile" th:action="@{/fileBoard/addBoardFile}" enctype="multipart/form-data" method="post">
 			<label for="fileBoardTitle">파일명</label>
 			<div style="width: 800px;">
+				<input type="file" name="uploadfile" multiple="multiple"/>
 				<input type="text" class="form-control" id="fileBoardTitle" name="fileBoardTitle"
 					placeholder="파일명을 입력해주세요" />
 			</div>

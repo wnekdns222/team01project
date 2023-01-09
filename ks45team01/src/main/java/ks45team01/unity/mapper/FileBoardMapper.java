@@ -37,4 +37,7 @@ public interface FileBoardMapper {
 	
 	// 파일 카테고리 삭제
 	int fileBoardCateDelete(String fileCategoryCode);
+	
+	// 파일 게시글 전체목록 조회
+	List<FileBoard> fileBoardList();
 }
