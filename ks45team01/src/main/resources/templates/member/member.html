@@ -49,28 +49,18 @@
 	
 	
 	
-		<!-- 	<div class="col-lg-4">
-			<select id="formControlSelect">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
-			<div>
-				<input type="Search" class="form-control" name="inputSearch"
-					id="inputSearch" placeholder="Search">
-			</div>
-		</div> -->
 		<div class="col-lg-6 ">
-		<select id="formControlSelect">
-			<option>아이디</option>
-			<option>이름</option>
-			<option>직급</option>
-			<option>부서</option>
-			<option>이메일</option>
-		</select>
-		<input placeholder="검색어를 입력해주세요." />
+		<form th:action="@{/member/Member}" method="get">
+			<select name="searchKey">
+				<option value="memberNum">아이디</option>
+				<option value="memberName">이름</option>
+				<option value="memberEmail">이메일</option>
+				<option value="positionName">직급</option>
+				<option value="departmentName">부서</option>
+			</select>
+						<input type="text" name="searchValue" placeholder="검색어를 입력해주세요."/>
+				<button class="btn btn-outline-success" type="submit" style="height: 35px;">검색</button>
+		</form>
 	</div>
 
 	</th:block>
@@ -88,7 +78,7 @@
                                             <div class="ml-3">
                                                 <h4 class="mb-0" th:text="${ml.memberName}"></h4>
                                                 <div class="row">
-                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1" th:text="${ml.departmentNum}"></span></p>
+                                                <p><span class="badge badge-warning-inverse px-2 py-1 mt-1" th:text="${ml.memberDepartmentList.departmentName}"></span></p>
                                                 <p><span class="badge badge-warning-inverse px-2 py-1 mt-1" th:text="${ml.memberNum}"></span></p>
                                             	</div>
                                             </div>
@@ -99,7 +89,7 @@
                                                     <div class="img-icon"><i class="fa fa-mobile"></i></div>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <p th:text="${ml.positionNum}"></p>
+                                                    <p th:text="${ml.MemberPositionList.positionName}"></p>
                                                 </li>
                                             </ul>
                                             <ul class="nav">
@@ -139,6 +129,35 @@
                                 </div>
                             </div>
                         </div>
+                                <div>
+						<ul class="pagination justify-content-center">
+						<li class="page-item active"><a class="page-link"
+							href="javascript:void(0)" th:if="${currentPage != 1}"
+							th:href="@{/settings/workTypeList}">[first]</a></li>
+						<li class="page-item active"><a class="page-link"
+							href="javascript:void(0)" th:if="${currentPage > 1}"
+							th:href="@{/settings/workTypeList(currentPage=${currentPage-1})}">Previous</a></li>
+						<li class="page-item disabled"><a class="page-link"
+							href="javascript:void(0)" th:unless="${currentPage>1}">Previous</a></li>
+						<th:block
+							th:each="num : ${#numbers.sequence(startPageNum,endPageNum)}">
+							<li class="page-item active"><a class="page-link"
+								href="javascript:void(0)" th:if="${currentPage!=num}"
+								th:href="@{/settings/workTypeList(currentPage=${num})}"
+								th:text="|[${num}]|"></a></li>
+							<li class="page-item disabled"><a class="page-link"
+								href="javascript:void(0)" th:if="${currentPage==num}">[[${'['+num+']'}]]</a></li>
+						</th:block>
+						<li class="page-item"><a class="page-link"
+							href="javascript:void(0)" th:if="${currentPage < lastPage}"
+							th:href="@{/settings/workTypeList(currentPage=${currentPage+1})}">Next</a></li>
+						<li class="page-item disabled"><a class="page-link"
+							href="javascript:void(0)" th:unless="${currentPage<lastPage}">Next</a></li>
+						<li class="page-item active"><a class="page-link"
+							href="javascript:void(0)" th:if="${currentPage != lastPage}"
+							th:href="@{/settings/workTypeList(currentPage=${lastPage})}">[End]</a></li>
+					</ul>
+					</div>
 
                         <!--end contact contant-->
 		</th:block>
