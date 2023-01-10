@@ -9,7 +9,7 @@
 			<!-- begin page title -->
 			<div class="d-block d-lg-flex flex-nowrap align-items-center">
 				<div class="page-title mr-4 pr-4 border-right">
-					<h1>휴가종류 수정</h1>
+					<h1>휴가대분류 수정</h1>
 				</div>
 				<div class="breadcrumb-bar align-items-center">
 					<nav>
@@ -18,7 +18,7 @@
 									class="ti ti-home"></i></a></li>
 							<li class="breadcrumb-item"><a
 								href="/settings/vacationVarietyList">휴가설정</a></li>
-							<li class="breadcrumb-item active text-primary" aria-current="page">휴가종류
+							<li class="breadcrumb-item active text-primary" aria-current="page">휴가대분류
 								수정</li>
 						</ol>
 					</nav>
@@ -31,22 +31,20 @@
 
 
 <th:block layout:fragment="customContents">
-	<form>
+<title th:text="title"></title>
+	<form th:action="@{/settings/vacationCategoryModify}" method="post" th:object="${vacationCategory}">
+	<input type="hidden" th:value="*{vacationCategoryNum}" name="vacationCategoryNum" readonly>
 		<div class="form-group">
-			<label for="vacationName">휴가명</label> <input type="text"
-				class="form-control" id="vacationName" required>
+			<label for="vacationCategoryName">휴가명</label> <input type="text"
+				class="form-control" th:value="*{vacationCategoryName}" name="vacationCategoryName" required>
 		</div>
 		<div class="form-group">
-			<label for="vacationType">최대 사용일수</label> <input type="text"
-				class="form-control" id="vacationType" required>
-		</div>
-		<div class="form-group">
-			<label for="subtractUnit">차감단위</label> <input type="text"
-				class="form-control" name="inputDate" id="inputDate" required>
+			<label for="correctMemberNum">수정사원</label> <input type="text"
+				class="form-control" name="correctMemberNum" id="correctMemberNum" required>
 		</div>
 		<div class="form-group">
 			<label for="vacationUse">사용유무</label> <input type="text"
-				class="form-control" name="vacationUse" id="vacationUse" required>
+				class="form-control" th:value="*{vacationUse}" name="vacationUse" id="vacationUse" required>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>

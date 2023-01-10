@@ -9,7 +9,7 @@
 			<!-- begin page title -->
 			<div class="d-block d-lg-flex flex-nowrap align-items-center">
 				<div class="page-title mr-4 pr-4 border-right">
-					<h1>휴가종류 등록</h1>
+					<h1>휴가중분류 등록</h1>
 				</div>
 				<div class="breadcrumb-bar align-items-center">
 					<nav>
@@ -18,7 +18,7 @@
 									class="ti ti-home"></i></a></li>
 							<li class="breadcrumb-item">휴가기준 설정</li>
 							<li class="breadcrumb-item active text-primary"
-								aria-current="page">휴가부여</li>
+								aria-current="page">휴가중분류 등록</li>
 						</ol>
 					</nav>
 				</div>
@@ -30,18 +30,15 @@
 
 
 <th:block layout:fragment="customContents">
-	<form>
+<title th:text="${title}"></title>
+	<form th:action="@{/settings/vacationSortInsert}" method="post">
 		<div class="form-group">
-			<label for="vacationName">휴가명</label> <input type="text"
-				class="form-control" id="vacationName" required>
+			<label for="vacationSortName">휴가명</label> <input type="text"
+				class="form-control" name ="vacationSortName" id="vacationSortName" required>
 		</div>
 		<div class="form-group">
-			<label for="vacationType">최대 사용일수</label> <input type="text"
-				class="form-control" id="vacationType" required>
-		</div>
-		<div class="form-group">
-			<label for="subtractUnit">차감단위</label> <input type="text"
-				class="form-control" name="subtractUnit" id="subtractUnit" required>
+			<label for="memberNum">등록 사원번호</label> <input type="text"
+				class="form-control" name="memberNum" id="memberNum" required>
 		</div>
 		<div class="form-group">
 			<label for="vacationUse">사용유무</label> <input type="text"
