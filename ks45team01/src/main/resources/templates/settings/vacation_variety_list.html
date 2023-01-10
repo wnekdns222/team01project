@@ -2,7 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
-
+<head>
+	<title th:text="${title}"></title>
+	<style>
+	.hidden {
+	    display:none;
+	}
+	</style>
+</head>
 <th:block layout:fragment="customCrumbbar">
 	<div class="row">
 		<div class="col-md-12 m-b-30">
@@ -28,20 +35,13 @@
 </th:block>
 
 <th:block layout:fragment="customContents">
-	<title th:text="${title}"></title>
-	<style>
-	.hidden {
-	    display:none;
-	}
-	</style>
-	<div style="text-align: center;">
 		<div style="width: 50%; float: left;">
 			<div class="col-md-12 col-lg-12">
 				<div class="widgetbar"
 					style="margin-bottom: 20px; margin-right: 40px; float: right">
 					<a class="btn btn-outline-success"
 						th:href="@{/settings/vacationCategoryInsert}">
-						<i class="feather icon-plus mr-2"> Insert</i>
+						<i class="feather icon-plus mr-2">등록</i>
 					</a>
 				</div>
 			</div>
@@ -73,7 +73,7 @@
 							</td>
 							<td>
 								<!-- (workTypeNum=${wt.workTypeNum}) --> <a
-								th:href="@{/settings/vacationCategoryModify(vacationCategoryNum=${c.vacationCategoryNum})}">수정</a>
+								th:href="@{/settings/vacationCategoryModify(vacationCategoryNum=${c.vacationCategoryNum})}" href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i class="ti ti-pencil"></i></a>
 							</td>
 						</tr>
 					</tbody>
@@ -86,7 +86,7 @@
 					style="margin-bottom: 20px; margin-right: 40px; float: right">
 					<a class="btn btn-outline-success"
 						th:href="@{/settings/vacationSortInsert}">
-						<i class="feather icon-plus mr-2"> Insert</i>
+						<i class="feather icon-plus mr-2"> 등록</i>
 					</a>
 				</div>
 			</div>
@@ -116,7 +116,7 @@
 							</td>
 							<td>
 								<!-- (workTypeNum=${wt.workTypeNum}) --> <a
-								th:href="@{/settings/vacationSortModify(vacationSortNum=${s.vacationSortNum})}">수정</a>
+								th:href="@{/settings/vacationSortModify(vacationSortNum=${s.vacationSortNum})}" href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i class="ti ti-pencil"></i></a>
 							</td>
 						</tr>
 						<tr th:unless="${not #lists.isEmpty(category)}">
@@ -131,7 +131,7 @@
 					style="margin-bottom: 20px; margin-right: 40px; float: right">
 					<a class="btn btn-outline-success"
 						th:href="@{/settings/vacationTypeInsert}">
-						<i class="feather icon-plus mr-2"> Insert</i>
+						<i class="feather icon-plus mr-2"> 등록</i>
 					</a>
 				</div>
 			</div>
@@ -164,7 +164,7 @@
 							</td>
 							<td>
 								<!-- (workTypeNum=${wt.workTypeNum}) --> <a
-								th:href="@{/settings/vacationTypeModify(vacationTypeNum=${t.vacationTypeNum})}">수정</a>
+								th:href="@{/settings/vacationTypeModify(vacationTypeNum=${t.vacationTypeNum})}" href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i class="ti ti-pencil"></i></a>
 							</td>
 						</tr>
 					</tbody>
@@ -177,7 +177,7 @@
 					style="margin-bottom: 20px; margin-right: 40px; float: right">
 					<a class="btn btn-outline-success"
 						th:href="@{/settings/vacationTypeInsert}">
-						<i class="feather icon-plus mr-2"> Insert</i>
+						<i class="feather icon-plus mr-2"> 등록</i>
 					</a>
 				</div>
 			</div>
@@ -211,14 +211,13 @@
 							</td>
 							<td>
 								<!-- (workTypeNum=${wt.workTypeNum}) --> <a
-								th:href="@{/settings/vacationTypeModify}">수정</a>
+								th:href="@{/settings/vacationTypeModify}" href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i class="ti ti-pencil"></i></a>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-	</div>
 </th:block>
 
 <!-- 사용자 지정 js 파일 -->
