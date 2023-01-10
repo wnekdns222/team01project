@@ -32,6 +32,29 @@
 			<result property="positionModifier" 	column="position_modifier"/>
 			<result property="useOrNot" 			column="use_or_not"/>
 		</association>
+		<association property ="memberList" javaType="MemberList">
+			<id property="memberNum" 				column="member_num"/>
+			<result property="memberPw" 			column="member_pw"/>
+			<result property="memberName" 			column="member_name"/>
+			<result property="memberGender" 		column="member_gender"/>
+			<result property="memberEmail" 			column="member_email"/>
+			<result property="memberBirth" 			column="member_birth"/>
+			<result property="memberPhone" 			column="member_phone"/>	
+			<result property="memberDormant" 		column="member_dormant"/>
+			<result property="memberDormantDate"	column="member_dormant_date"/>	
+			<result property="departmentNum" 		column="department_num"/>	
+			<result property="positionNum" 			column="position_num"/>	
+			<result property="memberInsertDate" 	column="member_insert_date"/>
+		</association>
+		<association property ="memberDepartmentList" javaType="MemberDepartmentList">
+			<id property="departmentNum" 			column="department_num"/>
+			<result property="departmentName" 		column="department_name"/>
+			<result property="memberNum" 			column="member_num"/>
+			<result property="departmentRegDate" 	column="department_reg_date"/>
+			<result property="departmentUpdateDate" column="department_update_date"/>
+			<result property="departmentModifier" 	column="department_modifier"/>
+			<result property="useOrNot" 			column="use_or_not"/>
+		</association>
 	</resultMap>
 	<delete id="fileBoardCateDelete" parameterType="String">
 		/* 파일 카테고리 삭제 */
@@ -76,7 +99,7 @@
 		/* 파일 카테고리 코드, 이름 조회 및 중복제거 */
 		SELECT 
 		DISTINCT
-			 f.file_category_code
+			 fc.file_category_code
 			,fc.file_category_name
 		FROM 
 			tb_fileboard_category AS fc
@@ -144,6 +167,11 @@
 			INNER JOIN 
 			tb_department_list AS d
 			ON 
-			p.position_member_num = d.member_num;
+			p.position_member_num = d.member_num
+			INNER JOIN 
+			tb_member AS m
+			ON
+			d.member_num = m.member_num
+			WHERE f.file_category_code=#{fileCategoryCode};
 	</select>
 </mapper>

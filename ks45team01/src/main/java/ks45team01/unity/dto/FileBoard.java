@@ -17,6 +17,10 @@ public class FileBoard {
 
 	private MemberPositionList memberPositionList;
 
+	private MemberList memberList;
+
+	private MemberDepartmentList memberDepartmentList;
+
 	public String getFileBoardNum() {
 		return fileBoardNum;
 	}
@@ -113,6 +117,22 @@ public class FileBoard {
 		this.memberPositionList = memberPositionList;
 	}
 
+	public MemberList getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(MemberList memberList) {
+		this.memberList = memberList;
+	}
+
+	public MemberDepartmentList getMemberDepartmentList() {
+		return memberDepartmentList;
+	}
+
+	public void setMemberDepartmentList(MemberDepartmentList memberDepartmentList) {
+		this.memberDepartmentList = memberDepartmentList;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -140,8 +160,13 @@ public class FileBoard {
 		builder.append(fileBoardCate);
 		builder.append(", memberPositionList=");
 		builder.append(memberPositionList);
+		builder.append(", memberList=");
+		builder.append(memberList);
+		builder.append(", memberDepartmentList=");
+		builder.append(memberDepartmentList);
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 }
