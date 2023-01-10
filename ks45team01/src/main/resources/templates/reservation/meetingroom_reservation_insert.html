@@ -27,28 +27,31 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<div class="card-body">
 		    <h6 class="card-subtitle"></h6>
-		    <form>
+		    <form th:object="${reservation}" th:action="@{/reservation/meetingroomReservationInsert}" method="post">
+		    		<input type="hidden"  th:value="*{reservationNum}" name="reservationNum" >
 		        <div class="form-group" style="margin:20px 0px 15px 0px;">
 		            <label for="exampleInputPassword1">회의실</label>
-		            <select class="form-control" id="meetingroomList" name="meetingroomList">
-		            	<th:block th:if="${not #lists.isEmpty(meetingroomList)}" 
-		            	          th:each="l : ${meetingroomList}">
-		            	<option th:text="${l.meetName}">
+		            <select class="form-control" id="reservation" name="reservation">
+		            	<th:block th:if="${not #lists.isEmpty(reservation)}" 
+		            	          th:each="r : ${reservation}">
+		            	<option th:text="${r.reservationNum}">
 		            	</option>
 		            	</th:block>
-		            	<th:block th:unless="${not #lists.isEmpty(meetingroomList)}">								
+		            	<th:block th:unless="${not #lists.isEmpty(reservation)}">								
 									<option>등록된 회의실이 없습니다</option>
 						</th:block>
 		            </select>  
 		        </div>
-		        <label for="exampleInputPassword1">예약날짜</label>
+		        <label for="exampleInputPassword1">시작시간</label>
 		        <div class="form-group" id="startDate">
-                  <input class="form-control" type="datetime-local" id="DateLocal" >
+                 	<input class="form-control" type="datetime-local" id="DateLocal" >
                 </div>
-                <label for="exampleInputPassword1">예약날짜</label>
+                <label for="exampleInputPassword1">종료시간</label>
 		        <div class="form-group" id="endDate">
-                  <input class="form-control" type="datetime-local" id="EndDateLocal">
+                  	<input class="form-control" type="datetime-local" id="EndDateLocal">
                 </div>
+                <label for="exampleInputPassword1">예약내용</label>
+                	<textarea class="form-control" rows="3"></textarea>
 		        <button type="submit" class="btn btn-primary" style="margin:80px 0px 0px 0px;">확인</button>
 		    </form>
 		</div>

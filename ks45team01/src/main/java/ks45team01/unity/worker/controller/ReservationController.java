@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team01.unity.dto.Meetingroom;
+import ks45team01.unity.dto.Reservation;
 import ks45team01.unity.service.ReservationService;
 
 @Controller
@@ -25,7 +27,7 @@ public class ReservationController {
 	
 	//예약 첫 화면
 	@GetMapping("/meetingroomReservationList")
-	public String MeetingroomList(Model model) {
+	public String meetingroomList(Model model) {
 			
 		List<Meetingroom> meetingroomList = reservationService.getMeetingroomList();
 		
@@ -35,14 +37,15 @@ public class ReservationController {
 		return "/reservation/meetingroom_reservation_list";
 	}
 	
+	
 	//예약하기 화면
 	@GetMapping("/meetingroomReservationInsert")
-	public String MeetingroomReservationInsert(Model model) {
+	public String insertMeetingroomReservation(@RequestParam(value="reservationNum",required=false) String reservationNum,Model model) {
 		
-		List<Meetingroom> meetingroomList = reservationService.getMeetingroomList();
+		Reservation reservation = reservationService.getReservationById(reservationNum);
 		
 		model.addAttribute("title", "회의실 목록");
-		model.addAttribute("meetingroomList", meetingroomList);
+		model.addAttribute("reservation", reservation);
 		
 		
 		return "/reservation/meetingroom_reservation_insert";
