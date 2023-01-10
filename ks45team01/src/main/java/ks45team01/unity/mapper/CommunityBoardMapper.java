@@ -12,7 +12,7 @@ public interface CommunityBoardMapper {
 	List<CommunityBoard> communityBoardList();
 	
 	// 커뮤니티 게시판 상세 페이지
-	CommunityBoard communityBoardDetail(String BoardCode);
+	CommunityBoard communityBoardDetail(String boardCode);
 	
 	// 커뮤니티 게시판 등록
 	void communityBoardAdd(CommunityBoard communityBoard);

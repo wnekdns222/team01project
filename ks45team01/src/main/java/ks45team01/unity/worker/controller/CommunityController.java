@@ -37,10 +37,10 @@ public class CommunityController {
 		}
 		
 		@GetMapping("/boardDetail")
-		public String boardDetail(@RequestParam(value = "BoardCode", required = false) String BoardCode
+		public String boardDetail(@RequestParam(value = "boardCode", required = false) String boardCode
 								 ,Model model) {
 			
-			CommunityBoard boardDetail = communityBoardService.communityBoardDetail(BoardCode);
+			CommunityBoard boardDetail = communityBoardService.communityBoardDetail(boardCode);
 			
 			model.addAttribute("title", "게시판 상세 화면");
 			model.addAttribute("boardDetail", boardDetail);

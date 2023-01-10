@@ -2,107 +2,119 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
+	
+	<th:block layout:fragment="customScript">
+		<script>
+			$(function(){
+				$(document).on('click', '.submitBtn', function(){
+					let boardContents = $('#summernote').summernote('code');
+					$('.summernote').val(boardContents);
+					$('#saveForm').submit();
+				});
+			});
+		</script>
+	</th:block>
 
-<th:block layout:fragment="customCrumbbar">
-	<!-- begin row -->
-	<div class="row">
-		<div class="col-md-12 m-b-30">
-			<!-- begin page title -->
-			<div class="d-block d-lg-flex flex-nowrap align-items-center">
-				<div class="page-title mr-4 pr-4 border-right">
-					<h1>게시판 등록</h1>
+	<th:block layout:fragment="customCrumbbar">
+		<!-- begin row -->
+		<div class="row">
+			<div class="col-md-12 m-b-30">
+				<!-- begin page title -->
+				<div class="d-block d-lg-flex flex-nowrap align-items-center">
+					<div class="page-title mr-4 pr-4 border-right">
+						<h1>게시판 등록</h1>
+					</div>
+					<div class="breadcrumb-bar align-items-center">
+						<nav>
+							<ol class="breadcrumb p-0 m-b-0">
+								<li class="breadcrumb-item"><a href="index.html"><i
+										class="ti ti-home"></i></a></li>
+								<li class="breadcrumb-item">게시판 리스트</li>
+								<li class="breadcrumb-item active text-primary"
+									aria-current="page">게시판 등록</li>
+							</ol>
+						</nav>
+					</div>
+					<div
+						class="ml-auto d-flex align-items-center secondary-menu text-center">
+						<a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Todo list"> <i
+							class="fe fe-edit btn btn-icon text-primary"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Projects"> <i
+							class="fa fa-lightbulb-o btn btn-icon text-success"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Task"> <i
+							class="fa fa-check btn btn-icon text-warning"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Calendar"> <i
+							class="fa fa-calendar-o btn btn-icon text-cyan"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Analytics"> <i
+							class="fa fa-bar-chart-o btn btn-icon text-danger"></i>
+						</a>
+					</div>
 				</div>
-				<div class="breadcrumb-bar align-items-center">
-					<nav>
-						<ol class="breadcrumb p-0 m-b-0">
-							<li class="breadcrumb-item"><a href="index.html"><i
-									class="ti ti-home"></i></a></li>
-							<li class="breadcrumb-item">게시판 리스트</li>
-							<li class="breadcrumb-item active text-primary"
-								aria-current="page">게시판 등록</li>
-						</ol>
-					</nav>
-				</div>
-				<div
-					class="ml-auto d-flex align-items-center secondary-menu text-center">
-					<a href="javascript:void(0);" class="tooltip-wrapper"
-						data-toggle="tooltip" data-placement="top" title=""
-						data-original-title="Todo list"> <i
-						class="fe fe-edit btn btn-icon text-primary"></i>
-					</a> <a href="javascript:void(0);" class="tooltip-wrapper"
-						data-toggle="tooltip" data-placement="top" title=""
-						data-original-title="Projects"> <i
-						class="fa fa-lightbulb-o btn btn-icon text-success"></i>
-					</a> <a href="javascript:void(0);" class="tooltip-wrapper"
-						data-toggle="tooltip" data-placement="top" title=""
-						data-original-title="Task"> <i
-						class="fa fa-check btn btn-icon text-warning"></i>
-					</a> <a href="javascript:void(0);" class="tooltip-wrapper"
-						data-toggle="tooltip" data-placement="top" title=""
-						data-original-title="Calendar"> <i
-						class="fa fa-calendar-o btn btn-icon text-cyan"></i>
-					</a> <a href="javascript:void(0);" class="tooltip-wrapper"
-						data-toggle="tooltip" data-placement="top" title=""
-						data-original-title="Analytics"> <i
-						class="fa fa-bar-chart-o btn btn-icon text-danger"></i>
-					</a>
-				</div>
+				<!-- end page title -->
 			</div>
-			<!-- end page title -->
 		</div>
-	</div>
-</th:block>
-<th:block layout:fragment="customContents">
-	<div class="content">
-		<section>
-			<form id="saveForm" method="post" autocomplete="off">
-				<!--/* 게시글 수정인 경우, 서버로 전달할 게시글 번호 (PK) */-->
-				<input type="hidden" id="id" name="id" th:if="${post != null}"
-					th:value="${post.id}" />
-
-				<!--/* 서버로 전달할 공지글 여부 */-->
-				<input type="hidden" id="noticeYn" name="noticeYn" />
-				<table class="tb tb_row">
-					<colgroup>
-						<col style="width: 15%;" />
-						<col style="width: 35%;" />
-						<col style="width: 15%;" />
-						<col style="width: 35%;" />
-					</colgroup>
-					<tbody>
-
-						<tr>
-							<th>제목 <!-- <span class="es">필수 입력</span> --></th>
-							<td colspan="2"><input class="form-control" type="text"
-								id="BoardName" name="BoardName" maxlength="50"
-								placeholder="제목을 입력해 주세요." /></td>
-						</tr>
-
-						<tr>
-							<th>이름 <!-- <span class="es">필수 입력</span> --></th>
-							<td colspan="2"><input class="form-control" type="text"
-								id="MemberNum" name="MemberNum" maxlength="10"
-								placeholder="이름을 입력해 주세요." /></td>
-						</tr>
-
-						<tr>
-							<th>내용 <!-- <span class="es">필수 입력</span> --></th>
-							<td colspan="4"><div id="summernote" class="summernote" ></div>
-							<!-- <textarea class="form-control" id="content"
-									name="content" cols="50" rows="10" placeholder="내용을 입력해 주세요."></textarea> --></td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
-			<p class="btn_set" style="margin-left: 150px; margin-top: 8px;">
-				<button type="submit"
-					class="btn btn-round btn-outline-primary" >저장</button>
-				<!-- 뒤로가기 버튼을 누르면 리스트 화면으로 돌아간다. -->
-				<a th:href="@{/community/boardList}"
-					class="btn btn-round btn-outline-light" >뒤로</a>
-			</p>
-		</section>
-	</div>
-	<!--/* .content */-->
-</th:block>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<div class="content">
+			<section>
+				<form action="/community/boardInsert" id="saveForm" method="post" autocomplete="off">
+					<!--/* 게시글 수정인 경우, 서버로 전달할 게시글 번호 (PK) */-->
+					<input type="hidden" id="id" name="id" th:if="${post != null}"
+						th:value="${post.id}" />
+	
+					<!--/* 서버로 전달할 공지글 여부 */-->
+					<input type="hidden" id="noticeYn" name="noticeYn" />
+					<table class="tb tb_row">
+						<colgroup>
+							<col style="width: 15%;" />
+							<col style="width: 35%;" />
+							<col style="width: 15%;" />
+							<col style="width: 35%;" />
+						</colgroup>
+						<tbody>
+	
+							<tr>
+								<th>제목 <!-- <span class="es">필수 입력</span> --></th>
+								<td colspan="2"><input class="form-control" type="text"
+									id="boardName" name="boardName" maxlength="50"
+									placeholder="제목을 입력해 주세요." /></td>
+							</tr>
+	
+							<tr>
+								<th>이름 <!-- <span class="es">필수 입력</span> --></th>
+								<td colspan="2"><input class="form-control" type="text"
+									id="memberNum" name="memberNum" maxlength="10"
+									placeholder="이름을 입력해 주세요." /></td>
+							</tr>
+	
+							<tr>
+								<th>내용 <!-- <span class="es">필수 입력</span> --></th>
+								<td colspan="4"><input id="summernote" class="summernote" name="BoardContent" />
+								<!-- <textarea class="form-control" id="BoardContent"
+										name="BoardContent" cols="50" rows="10" placeholder="내용을 입력해 주세요."></textarea> --></td>
+							</tr>
+						</tbody>
+					</table>
+				<p class="btn_set" style="margin-left: 150px; margin-top: 8px;">
+					<button type="button"
+						class="btn btn-round btn-outline-primary submitBtn" >저장</button>
+					<!-- 뒤로가기 버튼을 누르면 리스트 화면으로 돌아간다. -->
+					<a th:href="@{/community/boardList}"
+						class="btn btn-round btn-outline-light" >뒤로</a>
+				</p>
+				</form>
+			</section>
+		</div>
+		<!--/* .content */-->
+	</th:block>
 </html>

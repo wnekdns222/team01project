@@ -10,7 +10,7 @@
 			<!-- begin page title -->
 			<div class="d-block d-lg-flex flex-nowrap align-items-center">
 				<div class="page-title mr-4 pr-4 border-right">
-					<h1>게시판 등록</h1>
+					<h1>게시판 상세 페이지</h1>
 				</div>
 				<div class="breadcrumb-bar align-items-center">
 					<nav>
@@ -19,11 +19,11 @@
 									class="ti ti-home"></i></a></li>
 							<li class="breadcrumb-item">게시판 리스트</li>
 							<li class="breadcrumb-item active text-primary"
-								aria-current="page">게시판 등록</li>
+								aria-current="page">게시판 상세 페이지</li>
 						</ol>
 					</nav>
 				</div>
-				<div
+				<div	
 					class="ml-auto d-flex align-items-center secondary-menu text-center">
 					<a href="javascript:void(0);" class="tooltip-wrapper"
 						data-toggle="tooltip" data-placement="top" title=""
@@ -73,31 +73,31 @@
 						<tr>
 							<th scope="row">등록일</th>
 							<td colspan="2"><input class="form-control" type="text"
-								id="BoardRegDate" name="BoardRegDate" th:value="${boardDetail.BoardRegDate}" readonly /></td>
+								id="boardRegDate" name="boardRegDate" th:value="${boardDetail.boardRegDate}" readonly /></td>
 						</tr>
 
 						<tr>
 							<th>제목 <!-- <span class="es">필수 입력</span> --></th>
 							<td colspan="2"><input class="form-control" type="text"
-								id="BoardName" name="BoardName" maxlength="50" readonly="readonly" th:value="${boardDetail.BoardName}"/></td>
+								id="boardName" name="boardName" maxlength="50" readonly="readonly" th:value="${boardDetail.boardName}"/></td>
 						</tr>
 
 						<tr>
 							<th>이름 <!-- <span class="es">필수 입력</span> --></th>
 							<td colspan="2"><input class="form-control" type="text" readonly="readonly"
-								id="writer" name="writer" maxlength="10"/></td>
+								id="memberNum" name="memberNum" th:value="${boardDetail.memberNum}" maxlength="10"/></td>
 						</tr>
 						<tr>
 							<th>파일</th>
 							<td colspan="2" class="custom-file"><input type="file"
-								class="BoardFile" id="BoardFile" readonly="readonly" th:value="${boardDetail.BoardFile}"> <label
-								class="BoardFile" for="customFile">파일찾기</label></td>
+								class="boardFile" id="boardFile" readonly="readonly" th:value="${boardDetail.boardFile}"> <label
+								class="boardFile" for="customFile">파일찾기</label></td>
 						</tr>
 
 						<tr>
 							<th>내용 <!-- <span class="es">필수 입력</span> --></th>
 							<td colspan="4">
-							<div id="summernote" class="summernote" >[[${boardDetail.BoardContent}]]</div>
+							<div id="summernote" class="summernote" >[[${boardDetail.boardContent}]]</div> 
 							<!-- <textarea class="form-control" id="content"
 									name="content" cols="50" rows="10" placeholder="내용을 입력해 주세요."></textarea> --></td>
 						</tr>
