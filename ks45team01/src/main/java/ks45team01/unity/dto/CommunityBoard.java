@@ -12,6 +12,7 @@ public class CommunityBoard {
 	private String boardRegDate;
 	private String boardUpdateDate;
 	private String boardViewCount;
+	
 	public String getBoardCode() {
 		return boardCode;
 	}
