@@ -12,6 +12,9 @@ import ks45team01.unity.dto.VacationType;
 @Mapper
 public interface VacationMapper {
 	
+	//자동코드 생성
+	public String getCommonNewCode(String table, String column);
+	
 	//휴가대분류 목록 조회
 	public List<VacationCategory> getVacationCategory();
 	
@@ -23,4 +26,43 @@ public interface VacationMapper {
 	
 	//휴가기준 목록
 	public List<VacationStandard> getVacationStandard();
+	
+	//휴가대분류 비동기 수정
+	public void updateVacationCategoryA();
+	
+	//휴가 중분류 비동기 수정
+	public void updateVacationSortA();
+		
+	//휴가 종류 비동기 수정
+	public void updateVacationTypeA();
+	
+	//휴가 기준 비동기 수정
+	public void updateVacationStandardA();
+	
+	//휴가 종류 등록
+	public void addVacationType(VacationType vacationType);
+	
+	//특정 휴가 종류 조회
+	public VacationType getVacationTypeByNum(String vacationTypeNum);
+	
+	//특정 휴가 종류 수정
+	public void updateVacationType(VacationType vacationType);
+	
+	//휴가 대분류 입력
+	public void addVacationCategory(VacationCategory vacationCategory);
+	
+	//휴가 대분류 특정 조회
+	public VacationCategory getVacationCategoryByNum(String vacationCategoryNum);
+	
+	//휴가 대분류 수정
+	public void updateVacationCategory(VacationCategory vacationCategory);
+	
+	//휴가 중분류 입력
+	public void addVacationSort(VacationSort vacationSort);
+	
+	//특정 휴가 중분류 조회
+	public VacationSort getVacationSortByNum(String vacationSortNum);
+	
+	//휴가 중분류 수정
+	public void updateVacationSort(VacationSort vacationSort);
 }
