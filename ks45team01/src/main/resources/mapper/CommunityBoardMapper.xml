@@ -15,6 +15,25 @@
 		<result property="boardUpdateDate" 	column="board_update_date"/>
 		<result property="boardViewCount" 	column="board_view_count"/>
 	</resultMap>
+	<delete id="communityBoardDelete" parameterType="String">
+		DELETE FROM tb_board WHERE board_code=#{boardCode};
+	</delete>
+	<update id="communityBoardModify" parameterType="CommunityBoard">
+			UPDATE tb_board
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="boardName != null and boardName != '' ">
+			 	,board_name = #{boardName} 
+			</if>		
+			<if test="boardContent != null and boardContent != '' ">
+				,board_content = #{boardContent} 
+			</if>
+			<if test="boardUpdateDate != null and boardUpdateDate != '' ">
+				,board_update_date = NOW()
+			</if>
+		</trim>
+		WHERE 
+			board_code = #{boardCode};
+	</update>
 	<select id="getCommonNewCode" parameterType="String" resultType="String">
 			SELECT
 	            CASE

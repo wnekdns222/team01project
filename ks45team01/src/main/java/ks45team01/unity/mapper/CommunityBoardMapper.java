@@ -22,4 +22,7 @@ public interface CommunityBoardMapper {
 	
 	// 자동증가 함수
 	String getCommonNewCode(String table, String column);
+	
+	int communityBoardDelete(String boardCode);
+	
 }
