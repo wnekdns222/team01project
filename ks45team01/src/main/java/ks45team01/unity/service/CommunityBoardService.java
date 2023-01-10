@@ -24,17 +24,31 @@ public class CommunityBoardService {
 		return communityBoardList;
 	}
 	
-	public CommunityBoard communityBoardDetail(String BoardCode) {
+	/**
+	 * 커뮤니티 게시글 상세보기
+	 * @return communityBoardDetail
+	 */
+	
+	public CommunityBoard communityBoardDetail(String boardCode) {
 		
-		CommunityBoard communityBoardDetail = communityBoardMapper.communityBoardDetail(BoardCode);
+		CommunityBoard communityBoardDetail = communityBoardMapper.communityBoardDetail(boardCode);
 		
 		return communityBoardDetail;
 	}
 	
 	public void communityBoardAdd(CommunityBoard communityBoard) {
 		
-		String BoardCode = communityBoardMapper.getCommonNewCode("tb_board", "board_code");
-		communityBoard.setBoardCode(BoardCode);
+		String boardCode = communityBoardMapper.getCommonNewCode("tb_board", "board_code");
+		communityBoard.setBoardCode(boardCode);
 		communityBoardMapper.communityBoardAdd(communityBoard);
+	}
+	
+	public int communityBoardModify(CommunityBoard communityBoard) {
+		
+		return communityBoardMapper.communityBoardModify(communityBoard);
+	}
+	public int communityBoardDelete(String boardCode) {
+		
+		return communityBoardMapper.communityBoardDelete(boardCode);
 	}
 }

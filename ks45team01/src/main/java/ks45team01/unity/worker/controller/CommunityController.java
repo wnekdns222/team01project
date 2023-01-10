@@ -36,11 +36,37 @@ public class CommunityController {
 			return "community/noticeInsert";
 		}
 		
+		@GetMapping("/boardDelete")
+		public String boardDelete(String boardCode) {
+			communityBoardService.communityBoardDelete(boardCode);
+			
+			return "redirect:/community/boardList";
+		}
+		
+		@PostMapping("/boardModify")
+		public String boardModify(CommunityBoard communityBoard) {
+			communityBoardService.communityBoardModify(communityBoard);
+			
+			return "redirect:/community/boardList";
+		}
+		
+		@GetMapping("/boardModify")
+		public String boardModifyForm (@RequestParam(value = "boardCode", required = false) String boardCode
+								   ,Model model) {
+			
+			CommunityBoard boardDetail = communityBoardService.communityBoardDetail(boardCode);
+			model.addAttribute("title", "게시판 수정 화면");
+			model.addAttribute("boardDetail", boardDetail);
+			
+			return "community/boardModify";
+		}
+		
+		
 		@GetMapping("/boardDetail")
-		public String boardDetail(@RequestParam(value = "BoardCode", required = false) String BoardCode
+		public String boardDetail(@RequestParam(value = "boardCode", required = false) String boardCode
 								 ,Model model) {
 			
-			CommunityBoard boardDetail = communityBoardService.communityBoardDetail(BoardCode);
+			CommunityBoard boardDetail = communityBoardService.communityBoardDetail(boardCode);
 			
 			model.addAttribute("title", "게시판 상세 화면");
 			model.addAttribute("boardDetail", boardDetail);

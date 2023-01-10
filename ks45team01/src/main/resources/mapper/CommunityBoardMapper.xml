@@ -4,17 +4,36 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team01.unity.mapper.CommunityBoardMapper">
 	<resultMap type="CommunityBoard" 	id="communityBoardResultMap">
-		<id property="BoardCode" 			column="board_code"/>
-		<result property="CommunityCode" 	column="community_code"/>
-		<result property="BoardName" 		column="board_name"/>
-		<result property="MemberNum" 		column="member_num"/>
-		<result property="BoardContent" 	column="board_content"/>
-		<result property="BoardFile" 		column="board_file"/>
-		<result property="BoardFilePath" 	column="board_file_path"/>
-		<result property="BoardRegDate" 	column="board_reg_date"/>
-		<result property="BoardUpdateDate" 	column="board_update_date"/>
-		<result property="BoardViewCount" 	column="board_view_count"/>
+		<id property="boardCode" 			column="board_code"/>
+		<result property="communityCode" 	column="community_code"/>
+		<result property="boardName" 		column="board_name"/>
+		<result property="memberNum" 		column="member_num"/>
+		<result property="boardContent" 	column="board_content"/>
+		<result property="boardFile" 		column="board_file"/>
+		<result property="boardFilePath" 	column="board_file_path"/>
+		<result property="boardRegDate" 	column="board_reg_date"/>
+		<result property="boardUpdateDate" 	column="board_update_date"/>
+		<result property="boardViewCount" 	column="board_view_count"/>
 	</resultMap>
+	<delete id="communityBoardDelete" parameterType="String">
+		DELETE FROM tb_board WHERE board_code=#{boardCode};
+	</delete>
+	<update id="communityBoardModify" parameterType="CommunityBoard">
+			UPDATE tb_board
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="boardName != null and boardName != '' ">
+			 	,board_name = #{boardName} 
+			</if>		
+			<if test="boardContent != null and boardContent != '' ">
+				,board_content = #{boardContent} 
+			</if>
+			<if test="boardUpdateDate != null and boardUpdateDate != '' ">
+				,board_update_date = NOW()
+			</if>
+		</trim>
+		WHERE 
+			board_code = #{boardCode};
+	</update>
 	<select id="getCommonNewCode" parameterType="String" resultType="String">
 			SELECT
 	            CASE
@@ -28,7 +47,7 @@
 	<insert id="communityBoardAdd" parameterType="CommunityBoard">
 		INSERT INTO tb_board
 		(board_code, board_name, board_content, board_reg_date)
-		VALUES (#{BoardCode}, #{BoardName}, #{BoardContent}, NOW())
+		VALUES (#{boardCode}, #{boardName}, #{boardContent}, NOW())
 	</insert>
 	<select id="communityBoardList" resultType="List" resultMap="communityBoardResultMap">
 		SELECT
@@ -42,7 +61,7 @@
 		FROM 
 			tb_board
 		WHERE
-			board_code = #{BoardCode};
+			board_code = #{boardCode};
 	</select>
 	
 </mapper>
