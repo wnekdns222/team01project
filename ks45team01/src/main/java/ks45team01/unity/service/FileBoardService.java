@@ -60,9 +60,12 @@ public class FileBoardService {
 	}
 	
 	/**
-	 * 파일 게시글 등록
+	 * 파일 등록
+	 * @param uploadfile
+	 * @param fileRealPath
 	 * @param fileBoard
 	 */
+	
 	public void addBoardFile(MultipartFile[] uploadfile, String fileRealPath
 							,FileBoard fileBoard) {
 		
@@ -157,6 +160,25 @@ public class FileBoardService {
 		
 		return fileBoardList;
 	}
+	
+	/**
+	 * 파일 목록 조회
+	 * @return fileMapper.getFileList
+	 */
+	public List<FileDto> getFileList(){
+		return fileMapper.getFileList();
+	}
+	
+	/**
+	 * 하나의 파일 조회
+	 * @param fileIdx
+	 * @return fileMapper.getFileInfoByIdx(fileIdx)
+	 */
+	public FileDto getFileInfoByIdx(String fileIdx) {
+		return fileMapper.getFileInfoByIdx(fileIdx);
+	}
+	
+	
 //	/**
 //	 * 파일 등록처리
 //	 * @param uploadfile

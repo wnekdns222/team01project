@@ -128,6 +128,9 @@ public class FileBoardController {
 	@GetMapping("/{serviceType}")
 	public String marketingList(@PathVariable(name="serviceType") String serviceType
 								,Model model) {
+		
+		List<FileBoard> fileBoardList = fileBoardService.fileBoardList();
+		
 		List<FileBoard> servieList = null;
 		String title = null;
 		if(serviceType != null) {
@@ -158,6 +161,7 @@ public class FileBoardController {
 
 		model.addAttribute("title", title);
 		model.addAttribute(serviceType, servieList);
+		model.addAttribute("fileBoardList", fileBoardList);
 		
 		return "fileBoard/" + serviceType;
 		

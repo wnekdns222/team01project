@@ -34,17 +34,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:unless="${#lists.isEmpty(managementSupportList)}" th:each="m : ${managementSupportList}">
+				<tr th:unless="${#lists.isEmpty(fileBoardList)}" th:each="m : ${fileBoardList}">
 					<th th:text=${m.fileBoardNum} scope="col"></th>
 					<td>
 						<a th:href="@{/fileBoard/fileBoardView(fileBoardNum = ${m.fileBoardNum})}">[[${m.fileBoardTitle}]]</a>
 					</td>
-					<td th:text=${m.fileBoardRegistrant}></td>
-					<td>부장</td>
-					<td>경영지원부서</td>
+					<td th:text=${m.memberList.memberName}></td>
+					<td th:text=${m.memberPositionList.positionName}></td>
+					<td th:text=${m.memberDepartmentList.departmentName}></td>
 					<td th:text=${m.fileRegDate}></td>
 				</tr>
-				<tr th:if="${#lists.isEmpty(managementSupportList)}" th:each="m : ${managementSupportList}">
+				<tr th:if="${#lists.isEmpty(fileBoardList)}" th:each="m : ${fileBoardList}">
 					<td colspan="6">등록된 파일이 없습니다.</td>
 				</tr>
 			</tbody>
