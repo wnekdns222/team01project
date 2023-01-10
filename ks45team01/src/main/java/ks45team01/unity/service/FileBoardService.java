@@ -3,17 +3,28 @@ package ks45team01.unity.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import ks45team01.unity.dto.FileBoard;
 import ks45team01.unity.dto.FileBoardCate;
+import ks45team01.unity.dto.FileDto;
 import ks45team01.unity.mapper.FileBoardMapper;
+import ks45team01.unity.mapper.FileMapper;
+import ks45team01.unity.util.FileUtil;
 
 @Service
+@Transactional
 public class FileBoardService {
 	
 	private final FileBoardMapper fileBoardMapper;
-	public FileBoardService(FileBoardMapper fileBoardMapper) {
+	private final FileUtil fileUtil;
+	private final FileMapper fileMapper;
+	
+	public FileBoardService(FileBoardMapper fileBoardMapper, FileUtil fileUtil, FileMapper fileMapper) {
 		this.fileBoardMapper = fileBoardMapper;
+		this.fileUtil = fileUtil;
+		this.fileMapper = fileMapper;
 	}
 	
 	public void addFileBoardCate(FileBoardCate fileBoardCate) {
@@ -52,8 +63,17 @@ public class FileBoardService {
 	 * 파일 게시글 등록
 	 * @param fileBoard
 	 */
-	public void addBoardFile(FileBoard fileBoard) {
+	public void addBoardFile(MultipartFile[] uploadfile, String fileRealPath
+							,FileBoard fileBoard) {
 		
+		List<FileDto> fileList= fileUtil.parseFileInfo(uploadfile, fileRealPath);
+		
+		System.out.println(fileList);
+		
+		if(fileList != null) fileMapper.addFile(fileList);
+		
+		fileUtil.parseFileInfo(uploadfile, fileRealPath);
+		fileMapper.addFile(fileList);
 		fileBoardMapper.addBoardFile(fileBoard);
 	}
 	
@@ -81,13 +101,20 @@ public class FileBoardService {
 		return serviceTypeList;
 	}
 	
-	/**
-	 * 카테고리 및 전체 목록 조회
-	 * @return fileBoardCateList
-	 */
 	public List<FileBoard> fileBoardCateList(){
 		
 		List<FileBoard> fileBoardCateList = fileBoardMapper.fileBoardCateList();
+		
+		return fileBoardCateList;
+	}
+	
+	/**
+	 * 카테고리 부분 조회 (중복제거)
+	 * @return fileBoardCateList
+	 */
+	public List<FileBoard> fileBoardCatePartList(){
+		
+		List<FileBoard> fileBoardCateList = fileBoardMapper.fileBoardCatePartList();
 		
 		return fileBoardCateList;
 	}
@@ -123,4 +150,25 @@ public class FileBoardService {
 		
 		return fileBoardCateDelete;
 	}
+	
+	public List<FileBoard> fileBoardList(){
+		
+		List<FileBoard> fileBoardList = fileBoardMapper.fileBoardList();
+		
+		return fileBoardList;
+	}
+//	/**
+//	 * 파일 등록처리
+//	 * @param uploadfile
+//	 * @param fileRealPath
+//	 */
+//	public void fileUpload(MultipartFile[] uploadfile, String fileRealPath) {
+//		
+//		List<FileDto> fileList= fileUtil.parseFileInfo(uploadfile, fileRealPath);
+//		
+//		System.out.println(fileList);
+//		
+//		if(fileList != null) fileMapper.addFile(fileList);
+//		
+//	}
 }

@@ -2,6 +2,8 @@ package ks45team01.unity.worker.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
 import ks45team01.unity.dto.FileBoard;
 import ks45team01.unity.service.FileBoardService;
 
@@ -24,12 +28,15 @@ public class FileBoardController {
 	}
 	
 	
+	private static final Logger log = LoggerFactory.getLogger(FileBoardController.class);
+
+	
 	@GetMapping("/fileBoardDelete")
 	public String fileDelete(String fileBoardNum) {
 		
 		fileBoardService.boardFileDelete(fileBoardNum);
 		
-		return "redirect:/file/fileList";
+		return "redirect:/fileBoard/fileList";
 	}
 	
 	/**
@@ -42,7 +49,7 @@ public class FileBoardController {
 		
 		fileBoardService.boardFileUpdate(fileBoard);
 		
-		return "redirect:/file/fileList";
+		return "redirect:/fileBoard/fileList";
 	}
 	
 	/**
@@ -56,6 +63,8 @@ public class FileBoardController {
 							,Model model) {
 		
 		FileBoard boardFileView = fileBoardService.boardFileView(fileBoardNum);
+		
+		log.info("fileBoardNum : {}" , fileBoardNum);
 		
 		model.addAttribute("title", "파일게시글수정");
 		model.addAttribute("boardFileView", boardFileView);
@@ -88,20 +97,30 @@ public class FileBoardController {
 	 */
 	
 	@PostMapping("/addBoardFile")
-	public String addBoardFile(FileBoard fileBoard) {
+	public String addBoardFile(@RequestParam MultipartFile[] uploadfile, Model model, HttpServletRequest request
+							  ,FileBoard fileBoard) {
+		String serverName = request.getServerName();
+		String fileRealPath = "";
+		if("localhost".equals(serverName)) {				
+			fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
+			fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+		}else {
+			// 실제 배포 파일 패스
+			fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
+		}
+				
+		fileBoardService.addBoardFile(uploadfile, fileRealPath, fileBoard);
 		
-		fileBoardService.addBoardFile(fileBoard);
-		
-		return "redirect:/file/fileList";
+		return "redirect:/fileBoard/fileBoardList";
 	}
 	
 	@GetMapping("/addBoardFile")
 	public String addFileBoardForm(Model model) {
 		
-		List<FileBoard> fileBoardCateList = fileBoardService.fileBoardCateList();
+		List<FileBoard> fileBoardCatePartList = fileBoardService.fileBoardCatePartList();
 			
 		model.addAttribute("title", "파일게시글등록");
-		model.addAttribute("fileBoardCateList", fileBoardCateList);
+		model.addAttribute("fileBoardCatePartList", fileBoardCatePartList);
 		
 		return "fileBoard/addBoardFile";
 	}
@@ -144,4 +163,20 @@ public class FileBoardController {
 		
 	}
 	
+	/**
+	 * 파일 전체 목록 조회
+	 * @param model
+	 * @return
+	 */
+	
+	@GetMapping("/fileList")
+	public String fileBoardList(Model model) {
+		
+		List<FileBoard> fileBoardList = fileBoardService.fileBoardList();
+		
+		model.addAttribute("title", "파일전체목록");
+		model.addAttribute("fileBoardList", fileBoardList);
+		
+		return "fileBoard/fileList";
+	}
 }
