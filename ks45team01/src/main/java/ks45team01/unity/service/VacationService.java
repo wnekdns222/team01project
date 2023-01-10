@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.VacationCategory;
+import ks45team01.unity.dto.VacationInformation;
 import ks45team01.unity.dto.VacationSort;
 import ks45team01.unity.dto.VacationStandard;
 import ks45team01.unity.dto.VacationType;
@@ -16,6 +20,9 @@ import ks45team01.unity.mapper.VacationMapper;
 @Service
 @Transactional
 public class VacationService {
+
+	
+	private static final Logger log = LoggerFactory.getLogger(VacationService.class);
 
 	
 	private final VacationMapper vacationMapper;
@@ -141,6 +148,25 @@ public class VacationService {
 	 */
 	public void updateVacationSort(VacationSort vacationSort) {
 		vacationMapper.updateVacationSort(vacationSort);
+	}
+	/**
+	 * 근속연수에 따른 사원이름 조회
+	 */
+	public List<MemberList> getMemberNameByLength(String length) {
+		List<MemberList> memberNameList = vacationMapper.getMemberNameByLength(length);
+		return memberNameList;
+	}
+	/**
+	 * 휴가 정보 등록
+	 */
+	public void addVacationInfo(VacationInformation vacationInformation) {
+		
+		String vacationInfoNum = vacationMapper.getCommonNewCode("tb_vacation_information", "vacation_info_num");	
+		log.info("휴가입력 pk:{}",vacationInfoNum);
+		vacationInformation.setVacationInfoNum(vacationInfoNum);
+		VacationStandard vacationStandard  = vacationMapper.getVacationStandardByLength(vacationInformation.getLengthOfService());
+		vacationInformation.setServiceNum(vacationStandard.getServiceNum());
+		vacationMapper.addVacationInfo(vacationInformation);
 	}
 }	
 
