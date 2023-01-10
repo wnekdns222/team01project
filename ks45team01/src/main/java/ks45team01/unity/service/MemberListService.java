@@ -108,6 +108,13 @@ public Map<String, Object> getMemberList(int currentPage) {
 		return paramMap;
 	}
 
+	public MemberList memberlistOne(String memberNum) {
+		
+		MemberList memberlistOne = memberListMapper.memberlistOne(memberNum);
+		
+		return memberlistOne;
+		
+	}
 
 
 }

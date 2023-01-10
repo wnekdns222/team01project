@@ -34,28 +34,21 @@
 			</div>
 
 			<div class="card-body">
-
-				아이디 <input type="text" class="form-control" name="inputReadonly"
-					id="inputReadonly" placeholder="Readonly text" readonly>
-				이메일 <input type="email" class="form-control" name="inputEmail"
-					id="inputEmail" placeholder="name@example.com"> 이름 <input
-					type="text" class="form-control" name="inputText" id="inputText"
-					placeholder="Text Input"> 성별 <select class="form-control"
-					id="formControlSelect">
-					<option>남</option>
-					<option>여</option>
-				</select>
-				 전화번호 <input type="text" class="form-control" name="inputText"
-							  id="inputText" placeholder="Text Input"> 
+				<form id="addForm" th:action="@{/member/MemberModify}" method="post">
+				아이디 <input type="text" class="form-control" name="inputReadonly" id="inputReadonly" placeholder="Readonly text" readonly>
+				이메일 <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="name@example.com">
+				 이름 <input type="text" class="form-control" name="inputText" id="inputText" placeholder="Text Input">
+				 성별 <select class="form-control" id="formControlSelect">
+							<option>남</option>
+							<option>여</option>
+					</select>
+				 전화번호 <input type="text" class="form-control" name="inputText" id="inputText" placeholder="Text Input"> 
 					
-				<div class="m-t-20">
-				<div class="l-h-40">
-				<button type="button" class="btn btn-outline-primary">수정</button>
-				<button type="button" class="btn btn-outline-primary">취소</button>
-				</div>
-				</div>
+				<button type="submit">등록</button>
+			<button type="button" onclick="location.href='/form/formList';">취소</button>
+				
 			
-			
+			</form>
 			
 			
 		

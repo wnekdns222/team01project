@@ -35,31 +35,27 @@
 
 			<div class="card-body">
 
-				아이디 <input type="text" class="form-control" name="inputReadonly"
-					id="inputReadonly" placeholder="Readonly text" readonly>
-				이메일 <input type="email" class="form-control" name="inputEmail"
-					id="inputEmail" placeholder="name@example.com"> 이름 <input
-					type="text" class="form-control" name="inputText" id="inputText"
-					placeholder="Text Input"> 성별 <select class="form-control"
-					id="formControlSelect">
-					<option>남</option>
-					<option>여</option>
+				아이디 <input type="text" class="form-control" th:name="${memberListOne.memberNum}" th:id="${memberListOne.memberNum}" th:value="${memberListOne.memberNum}" readonly>
+				이메일 <input type="email" class="form-control" th:name="${memberListOne.memberEmail}" th:id="${memberListOne.memberEmail}" th:value="${memberListOne.memberEmail}" placeholder="name@example.com">
+				이름 <input type="text" class="form-control" th:name="${memberListOne.memberName}" th:id="${memberListOne.memberName}" th:value="${memberListOne.memberName}" placeholder="Text Input"> 
+				성별 <select class="form-control" id="GenderSelect">
+					<option value="남" th:selected="${memberListOne.memberGender == '남'}">남</option>
+					<option value="여" th:selected="${memberListOne.memberGender == '여'}">여</option>
 				</select>
-				 전화번호 <input type="text" class="form-control" name="inputText"
-							  id="inputText" placeholder="Text Input"> 
+				 전화번호 <input type="text" class="form-control" name="inputText" id="inputText" placeholder="Text Input" th:value="${memberListOne.memberPhone}"> 
 					부서명 <select class="form-control" id="formControlSelect">
+					<option th:each="mmdl : ${memberModifyDepartmentList}" th:value="${mmdl.departmentNum}" th:text="${mmdl.departmentName}" th:selected="${memberListOne.memberDepartmentList.departmentName == mmdl.departmentName}"></option>
 					
-					<option th:each="mml : ${memberModifyList}" th:value="${mml.memberDepartmentList.departmentName}" th:utext="${mml.memberDepartmentList.departmentName}"></option>
-					
-				</select> 직급명 <select class="form-control" id="formControlSelect">
-					<option th:each="mml : ${memberModifyList}" th:value="${mml.memberPositionList.positionName}" th:utext="${mml.memberPositionList.positionName}"></option>
-					
-
+				</select>
+				직급명<select class="form-control" id="formControlSelect">
+					<option th:each="mmpl : ${memberModifyPositionList}" th:value="${mmpl.positionNum}" th:utext="${mmpl.positionName}" th:selected="${memberListOne.memberPositionList.positionName == mmpl.positionName}"></option>
 				</select>
 				<div class="m-t-20">
 				<div class="l-h-40">
 				<button type="button" class="btn btn-outline-primary">수정</button>
 				<button type="button" class="btn btn-outline-primary">취소</button>
+				
+				<h5 th:text="${memberListOne.memberPositionList.positionName}"></h5>
 				</div>
 				</div>
 			</div>
