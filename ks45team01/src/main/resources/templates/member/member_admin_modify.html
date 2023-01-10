@@ -47,18 +47,21 @@
 				</select>
 				 전화번호 <input type="text" class="form-control" name="inputText"
 							  id="inputText" placeholder="Text Input"> 
+					부서명 <select class="form-control" id="formControlSelect">
 					
+					<option th:each="mml : ${memberModifyList}" th:value="${mml.memberDepartmentList.departmentName}" th:utext="${mml.memberDepartmentList.departmentName}"></option>
+					
+				</select> 직급명 <select class="form-control" id="formControlSelect">
+					<option th:each="mml : ${memberModifyList}" th:value="${mml.memberPositionList.positionName}" th:utext="${mml.memberPositionList.positionName}"></option>
+					
+
+				</select>
 				<div class="m-t-20">
 				<div class="l-h-40">
 				<button type="button" class="btn btn-outline-primary">수정</button>
 				<button type="button" class="btn btn-outline-primary">취소</button>
 				</div>
 				</div>
-			
-			
-			
-			
-		
 			</div>
 		</div>
 	</div>

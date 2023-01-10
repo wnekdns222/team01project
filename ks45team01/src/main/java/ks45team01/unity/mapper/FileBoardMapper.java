@@ -20,10 +20,13 @@ public interface FileBoardMapper {
 	// 파일 상세보기
 	FileBoard boardFileView(String fileBoardNum);
 	
-	// 파일 서비스별 (인사, 마케팅) 목록
+	// 파일 서비스별 목록
 	List<FileBoard> fileServiceTypeList(String serviceType);
 	
-	// 파일 카테고리 목록
+	// 파일 카테고리 부분목록(중복제거)
+	List<FileBoard> fileBoardCatePartList();
+	
+	// 파일 카테고리 전체 조회
 	List<FileBoard> fileBoardCateList();
 	
 	// 파일 카테고리 등록
@@ -37,4 +40,7 @@ public interface FileBoardMapper {
 	
 	// 파일 카테고리 삭제
 	int fileBoardCateDelete(String fileCategoryCode);
+	
+	// 파일 게시글 전체목록 조회
+	List<FileBoard> fileBoardList();
 }

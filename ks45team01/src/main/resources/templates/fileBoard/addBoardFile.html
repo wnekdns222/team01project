@@ -10,51 +10,51 @@
 					<div class="breadcrumb-list">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="/">Home</a></li>
-							<li class="breadcrumb-item"><a href="/file/fileList">파일목록</a></li>
+							<li class="breadcrumb-item"><a href="/fileBoard/fileList">파일목록</a></li>
 							<li class="breadcrumb-item active" aria-current="page">파일등록</li>
 						</ol>
-					</div>
-				</div>
-				<div class="col-md-4 col-lg-4">
-					<div class="widgetbar">
-						<button class="btn btn-primary-rgba">
-							<i class="feather icon-plus mr-2"></i>Actions
-						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<form id="addBoardFile" th:action="@{/fileBoard/addBoardFile}" method="post">
-			<label for="fileBoardTitle">파일명</label>
-			<div style="width: 800px;">
-				<input type="text" class="form-control" id="fileBoardTitle" name="fileBoardTitle"
-					placeholder="파일명을 입력해주세요" />
-			</div>
-			<div>
-	            <select id="fileCategoryCode" name="fileCategoryCode">
-	            	<th:block th:if="${not #lists.isEmpty(fileBoardCateList)}" 
-	            	          th:each="f : ${fileBoardCateList}">
-	            	<option th:value="${f.FileBoardCate.fileCategoryCode}">[[${f.FileBoardCate.fileCategoryName}]]</option>
-	            	</th:block>
-	            	<th:block th:unless="${not #lists.isEmpty(fileBoardCateList)}">								
-								<option>등록된 카테고리가 없습니다</option>
-					</th:block>
-	            </select>
-           </div>  
+		<form id="addBoardFile" th:action="@{/fileBoard/addBoardFile}"
+			enctype="multipart/form-data" method="post">
+			<table>
+				<tr>
+					<td><label for="fileBoardTitle">파일명</label>
+						<div style="width: 300px;">
+							<input type="text" class="form-control" id="fileBoardTitle"
+								name="fileBoardTitle" placeholder="파일명을 입력해주세요" />
+						</div></td>
+					<td><label for="fileCategoryName">카테고리</label>
+						<div style="width: 200px;">
+							<select class="form-control" id="fileCategoryCode"
+								name="fileCategoryCode">
+								<th:block th:if="${not #lists.isEmpty(fileBoardCatePartList)}"
+									th:each="f : ${fileBoardCatePartList}">
+									<option th:value="${f.FileBoardCate.fileCategoryCode}">[[${f.FileBoardCate.fileCategoryName}]]</option>
+								</th:block>
+								<th:block th:unless="${not #lists.isEmpty(fileBoardCatePartList)}">
+									<option>등록된 카테고리가 없습니다</option>
+								</th:block>
+							</select>
+						</div></td>
+				</tr>
+			</table>
 			<label for="fileBoardRegistrant">작성자</label>
 			<div style="width: 800px;">
 				<input type="text" class="form-control" id="fileBoardRegistrant"
 					name="fileBoardRegistrant" placeholder="작성자를 입력해주세요" /> <label
 					for="Contents">내용</label>
-				<textarea class="form-control" name="fileBoardContents" id="fileBoardContents"
-					placeholder="내용을 입력해주세요" style="height: 150px; width: 800px;"></textarea>
+				<textarea class="form-control" name="fileBoardContents"
+					id="fileBoardContents" placeholder="내용을 입력해주세요"
+					style="height: 150px; width: 800px;"></textarea>
 			</div>
 			<div style="margin-top: 20px; margin-left: 300px;">
-				<button type="submit" class="btn btn-primary">등록</button>
-				<button type="button" class="btn btn-primary"
-					onclick="location.href='/file/fileList';">취소</button>
+				<button type="submit" class="btn btn-outline-success">등록</button>
+				<a class="btn btn-outline-success" href="/fileBoard/fileList">취소</a>
 			</div>
 		</form>
 	</th:block>
