@@ -17,7 +17,6 @@
 				</div>
 			</div>
 		</div>
-	  <a href="/reservation/meetingroomReservationInsert" id="exportExcel" class="btn btn-primary" style="float:right; margin-bottom:8px;">예약하기</a>
 	<th:block layout:fragment="customContents">
 		<table class="table table-hover">
                   <thead>
@@ -28,6 +27,7 @@
                           <th scope="col">회의실 위치</th>
                           <th scope="col">회의실 수용인원</th>
                           <th scope="col">회의실 상세정보</th>
+                          <th scope="col"></th>
                       </tr>
                   </thead>
                   <tbody>
@@ -39,6 +39,12 @@
 					<td th:text="${l.meetLocation}"></td>
 					<td th:text="${l.meetCapacity}"></td> 
 					<td th:text="${l.meetDetail}"></td>
+					<th:block th:if="${#lists.isEmpty(reservation)}"
+								  th:each="r : ${reservation}">
+					<td>
+						<a th:href="@{/reservation/meetingroomReservationInsert(reservationNum=${r.reservationNum})}" href="javascript:void(0)" class="btn btn-round btn-outline-primary">예약</a>
+					</td>
+					</th:block>
 					</tr>
                   </tbody>
               </table>

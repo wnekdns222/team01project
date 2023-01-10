@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ks45team01.unity.dto.Meetingroom;
+import ks45team01.unity.dto.Reservation;
 import ks45team01.unity.mapper.ReservationMapper;
 
 @Service
@@ -42,6 +43,25 @@ public class ReservationService {
 		
 		reservationMapper.deleteMeetingroom(meetingroom);
 		
+	}
+	
+	public List<Reservation> getReservationList(){
+		
+		List<Reservation> reservationList = reservationMapper.getReservationList();
+		
+		return reservationList;
+	}
+	
+	public Reservation getReservationById(String reservationNum) {
+		
+		Reservation reservation = reservationMapper.getReservationById(reservationNum);
+		
+		return reservation;
+	}
+	
+	public void insertmeetingroomReservation (Reservation reservation) {
+		
+		reservationMapper.insertMeetingroomReservation(reservation);
 	}
 	
 }
