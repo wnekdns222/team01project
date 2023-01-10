@@ -11,7 +11,7 @@
 					<div class="breadcrumb-list">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="/">Home</a></li>
-							<li class="breadcrumb-item"><a href="/file/fileList">파일목록</a></li>
+							<li class="breadcrumb-item"><a href="/fileBoard/fileList">파일목록</a></li>
 							<li class="breadcrumb-item active" aria-current="page">파일수정</li>
 						</ol>
 					</div>
@@ -22,7 +22,7 @@
 	<th:block layout:fragment="customContents">
 		<form id="fileBoardUpdate" th:action="@{/fileBoard/fileBoardUpdate}" method="post">
 			<input type="hidden" name="fileBoardNum" th:value="${boardFileView.fileBoardNum}"/>
-			<label for="fileBoardTitle">서식명</label>
+			<label for="fileBoardTitle">파일명</label>
 			<div style="width: 800px;">
 				<input type="text" class="form-control" id="fileBoardTitle" name="fileBoardTitle" th:value="${boardFileView.fileBoardTitle}"/>
 			</div>
@@ -40,8 +40,8 @@
 				<input name="fileAttach" type="file"/>
 			</div>
 			<div style="margin-left: 300px; margin-top: 8px;">
-			<button type="submit" class="btn btn-outline-success">등록</button>
-			<button type="button" class="btn btn-outline-success" onclick="location.href='/fileBoard/hrList';">취소</button>
+				<button type="submit" class="btn btn-outline-success">등록</button>
+				<a class="btn btn-outline-success" href="/fileBoard/fileList">취소</a>
 			</div>
 		</form>
 	</th:block>

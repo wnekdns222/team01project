@@ -36,7 +36,7 @@ public class FileBoardController {
 		
 		fileBoardService.boardFileDelete(fileBoardNum);
 		
-		return "redirect:/file/fileList";
+		return "redirect:/fileBoard/fileList";
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class FileBoardController {
 		
 		fileBoardService.boardFileUpdate(fileBoard);
 		
-		return "redirect:/file/fileList";
+		return "redirect:/fileBoard/fileList";
 	}
 	
 	/**
@@ -117,10 +117,10 @@ public class FileBoardController {
 	@GetMapping("/addBoardFile")
 	public String addFileBoardForm(Model model) {
 		
-		List<FileBoard> fileBoardCateList = fileBoardService.fileBoardCateList();
+		List<FileBoard> fileBoardCatePartList = fileBoardService.fileBoardCatePartList();
 			
 		model.addAttribute("title", "파일게시글등록");
-		model.addAttribute("fileBoardCateList", fileBoardCateList);
+		model.addAttribute("fileBoardCatePartList", fileBoardCatePartList);
 		
 		return "fileBoard/addBoardFile";
 	}
@@ -169,7 +169,7 @@ public class FileBoardController {
 	 * @return
 	 */
 	
-	@GetMapping("/fileBoardList")
+	@GetMapping("/fileList")
 	public String fileBoardList(Model model) {
 		
 		List<FileBoard> fileBoardList = fileBoardService.fileBoardList();
@@ -177,6 +177,6 @@ public class FileBoardController {
 		model.addAttribute("title", "파일전체목록");
 		model.addAttribute("fileBoardList", fileBoardList);
 		
-		return "fileBoard/fileBoardList";
+		return "fileBoard/fileList";
 	}
 }

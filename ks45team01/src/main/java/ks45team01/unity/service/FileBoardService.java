@@ -101,13 +101,20 @@ public class FileBoardService {
 		return serviceTypeList;
 	}
 	
-	/**
-	 * 카테고리 및 전체 목록 조회
-	 * @return fileBoardCateList
-	 */
 	public List<FileBoard> fileBoardCateList(){
 		
 		List<FileBoard> fileBoardCateList = fileBoardMapper.fileBoardCateList();
+		
+		return fileBoardCateList;
+	}
+	
+	/**
+	 * 카테고리 부분 조회 (중복제거)
+	 * @return fileBoardCateList
+	 */
+	public List<FileBoard> fileBoardCatePartList(){
+		
+		List<FileBoard> fileBoardCateList = fileBoardMapper.fileBoardCatePartList();
 		
 		return fileBoardCateList;
 	}

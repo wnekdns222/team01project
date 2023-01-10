@@ -24,13 +24,13 @@
 			<result property="categoryUseOrNot" 			column="category_use_or_not"/>
 		</association>
 		<association property="memberPositionList" javaType="MemberPositionList">
-			<id property="positionNum" column="position_num"/>
-			<result property="positionName" column="position_name"/>
-			<result property="memberNum" column="member_num"/>
-			<result property="positionRegDate" column="position_reg_date"/>
-			<result property="positionUpdateDate" column="position_update_date"/>
-			<result property="positionModifier" column="position_modifier"/>
-			<result property="useOrNot" column="use_or_not"/>
+			<id property="positionNum" 				column="position_num"/>
+			<result property="positionName" 		column="position_name"/>
+			<result property="memberNum"			column="member_num"/>
+			<result property="positionRegDate" 		column="position_reg_date"/>
+			<result property="positionUpdateDate" 	column="position_update_date"/>
+			<result property="positionModifier" 	column="position_modifier"/>
+			<result property="useOrNot" 			column="use_or_not"/>
 		</association>
 	</resultMap>
 	<delete id="fileBoardCateDelete" parameterType="String">
@@ -67,14 +67,20 @@
 		VALUES (sf_fileBoardCateNum(), #{fileCategoryName}, #{fileCategoryRegistrant}, NOW());
 	</insert>
 	<select id="fileBoardCateList" resultType="List" resultMap="fileBoardResultMap">
-		/* 파일 카테고리 조회 및 전체 조회 중복제거 */
+		SELECT 
+			*
+		FROM 
+			tb_fileboard_category;
+	</select>
+	<select id="fileBoardCatePartList" resultType="List" resultMap="fileBoardResultMap">
+		/* 파일 카테고리 코드, 이름 조회 및 중복제거 */
 		SELECT 
 		DISTINCT
 			 f.file_category_code
 			,fc.file_category_name
 		FROM 
 			tb_fileboard_category AS fc
-			INNER JOIN 
+			LEFT JOIN 
 			tb_file_board AS f
 			ON 
 			fc.file_category_code = f.file_category_code;

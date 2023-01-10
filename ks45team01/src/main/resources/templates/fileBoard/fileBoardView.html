@@ -11,7 +11,7 @@
 					<div class="breadcrumb-list">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="/">Home</a></li>
-							<li class="breadcrumb-item"><a href="/file/fileList">파일목록</a></li>
+							<li class="breadcrumb-item"><a href="/fileBoard/fileList">파일목록</a></li>
 							<li class="breadcrumb-item active" aria-current="page">파일번호</li>
 						</ol>
 					</div>
@@ -52,12 +52,12 @@
 			</tr>
 		</table>
 		<div style="text-align: center;">
-			<button type="button" class="btn btn-outline-success"
-				th:onclick="|location.href='@{/fileBoard/fileBoardUpdate(fileBoardNum=${boardFileView.fileBoardNum})}'|">수정</button>
-			<button type="button" class="btn btn-outline-success"
-				th:onclick="|location.href='@{/fileBoard/${serviceType}'|">목록</button>
-			<button type="button" class="btn btn-outline-success"
-				th:onclick="|location.href='@{/fileBoard/fileBoardDelete(fileBoardNum=${boardFileView.fileBoardNum})}'|">삭제</button>
+			<a class="btn btn-outline-success"
+				th:href="@{/fileBoard/fileBoardUpdate(fileBoardNum=${boardFileView.fileBoardNum})}">수정</a>
+			<a type="button" class="btn btn-outline-success"
+				th:href="@{/fileBoard/fileList}">목록</a>
+			<a type="button" class="btn btn-outline-success"
+				th:href="@{/fileBoard/fileBoardDelete(fileBoardNum=${boardFileView.fileBoardNum})}">삭제</a>
 		</div>
 	</th:block>
 </html>
