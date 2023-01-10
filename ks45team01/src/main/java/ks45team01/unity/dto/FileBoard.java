@@ -15,6 +15,8 @@ public class FileBoard {
 	
 	private FileBoardCate fileBoardCate;
 
+	private MemberPositionList memberPositionList;
+
 	public String getFileBoardNum() {
 		return fileBoardNum;
 	}
@@ -103,6 +105,14 @@ public class FileBoard {
 		this.fileBoardCate = fileBoardCate;
 	}
 
+	public MemberPositionList getMemberPositionList() {
+		return memberPositionList;
+	}
+
+	public void setMemberPositionList(MemberPositionList memberPositionList) {
+		this.memberPositionList = memberPositionList;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -128,6 +138,8 @@ public class FileBoard {
 		builder.append(fileGroupCode);
 		builder.append(", fileBoardCate=");
 		builder.append(fileBoardCate);
+		builder.append(", memberPositionList=");
+		builder.append(memberPositionList);
 		builder.append("]");
 		return builder.toString();
 	}
