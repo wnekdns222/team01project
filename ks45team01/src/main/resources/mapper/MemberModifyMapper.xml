@@ -39,6 +39,25 @@
 	</association>
 	
 	</resultMap>
+	<resultMap type ="MemberPositionList" id="MemberPositionListMap">
+		<id property="positionNum" 				column="position_num"/>
+		<result property="positionName" 		column="position_name"/>
+		<result property="memberNum" 			column="member_num"/>
+		<result property="positionRegDate" 		column="position_reg_date"/>
+		<result property="positionUpdateDate" 	column="position_update_date"/>
+		<result property="positionModifier" 	column="position_modifier"/>
+		<result property="useOrNot" 			column="use_or_not"/>
+	</resultMap>
+	
+	<resultMap type ="memberDepartmentList" id="memberDepartmentListMap">
+		<id property="departmentNum" 				column="department_num"/>
+		<result property="departmentName" 		column="department_name"/>
+		<result property="memberNum" 			column="member_num"/>
+		<result property="departmentRegDate" 		column="department_reg_date"/>
+		<result property="departmentUpdateDate" 	column="department_update_date"/>
+		<result property="departmentModifier" 	column="department_modifier"/>
+		<result property="useOrNot" 			column="use_or_not"/>
+	</resultMap>
 	
 	
 	
@@ -56,8 +75,24 @@
 		tb_department_list AS dl
 		ON
 		m.member_department_num = dl.department_num
-
 	</select>
 	
+	<select id="memberModifyDepartmentList" resultMap="memberDepartmentListMap">
+	/*부서 목록 */
+	SELECT
+		*
+	FROM
+		tb_department_list
+	
+	</select>
+	
+	<select id="MemberModifyPositionList" resultMap="MemberPositionListMap">
+	/*부서 목록 */
+	SELECT
+		*
+	FROM
+		tb_position_list
+	
+	</select>
 
 </mapper>

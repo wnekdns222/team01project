@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
+import ks45team01.unity.dto.MemberPositionList;
 import ks45team01.unity.service.MemberListService;
 import ks45team01.unity.service.MemberModifyService;
 
@@ -29,7 +31,6 @@ public class AdminMemberController {
 	
 	public AdminMemberController(MemberModifyService memberModifyService
 								,MemberListService memberListService) {
-		
 		
 		this.memberModifyService = memberModifyService;
 		this.memberListService = memberListService;
@@ -65,12 +66,19 @@ public class AdminMemberController {
 	
 	
 	@GetMapping("/MemberAdminModify")
-	public String GetMemberModify(Model model) {
+	public String GetMemberModify(String memberNum
+								  ,Model model) {
 		
+		List<MemberDepartmentList> memberModifyDepartmentList = memberModifyService.memberModifyDepartmentList();
+		List<MemberPositionList> memberModifyPositionList = memberModifyService.memberModifyPositionList();
 		List<MemberList> memberModifyList = memberModifyService.memberModifyList();
+		MemberList memberListOne = memberListService.memberlistOne(memberNum);
 		
 		model.addAttribute("title","사원수정화면");
 		model.addAttribute("memberModifyList", memberModifyList);
+		model.addAttribute("memberListOne", memberListOne);
+		model.addAttribute("memberModifyDepartmentList" ,memberModifyDepartmentList);
+		model.addAttribute("memberModifyPositionList" ,memberModifyPositionList);
 	return "member/member_admin_modify";
 	}
 	

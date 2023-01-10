@@ -39,7 +39,24 @@
 	</association>
 	
 	</resultMap>
-	
+	<select id="memberlistOne" resultMap="MemberListResultMap" parameterType="String">
+		/*사원 한명에 대한 정보 값*/
+		SELECT
+			*
+		FROM
+			tb_member AS m
+		INNER JOIN 
+			tb_position_list AS pl
+			ON
+			m.member_position_num = pl.position_num
+		INNER JOIN 
+			tb_department_list AS dl
+		ON
+			m.member_department_num = dl.department_num
+		<where>
+			m.member_num = #{memberNum};
+			</where>
+	</select>
 	
 	<select id="getMemberListCnt" resultType="int">
 	/*사원 이력테이블 전체 행의 갯수*/
