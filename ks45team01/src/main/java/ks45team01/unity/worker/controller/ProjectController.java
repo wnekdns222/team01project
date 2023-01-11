@@ -7,14 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.ProjectBoard;
 import ks45team01.unity.dto.ProjectList;
+import ks45team01.unity.dto.ProjectMember;
 import ks45team01.unity.dto.ProjectRequest;
 import ks45team01.unity.dto.ProjectUnit;
 import ks45team01.unity.service.MemberListService;
 import ks45team01.unity.service.ProjectBoardService;
 import ks45team01.unity.service.ProjectListService;
+import ks45team01.unity.service.ProjectMemberInsertService;
 import ks45team01.unity.service.ProjectRequestService;
 import ks45team01.unity.service.ProjectUnitService;
 
@@ -36,16 +39,19 @@ public class ProjectController {
 	private final ProjectBoardService projectBoardService;
 	private final ProjectRequestService projectRequestService;
 	private final MemberListService memberListService;
+	private final ProjectMemberInsertService projectMemberInsertService;
 	public ProjectController(ProjectListService projectListService
 							,ProjectUnitService projectUnitService
 							,ProjectBoardService projectBoardService
 							,ProjectRequestService projectRequestService
-							,MemberListService memberListService) {
+							,MemberListService memberListService
+							,ProjectMemberInsertService projectMemberInsertService) {
 		this.projectListService = projectListService;
 		this.projectUnitService = projectUnitService;
 		this.projectBoardService = projectBoardService;
 		this.projectRequestService = projectRequestService;
 		this.memberListService = memberListService;
+		this.projectMemberInsertService = projectMemberInsertService;
 	}
 	
 	
@@ -108,7 +114,14 @@ public class ProjectController {
 	
 	@GetMapping("/projectMemberInsert")
 	public String GetProjectMemberInsert(Model model) {
-		model.addAttribute("projectMemberInsert","프로젝트멤버리스트등록화면");
+		List<ProjectMember> projectMember = projectMemberInsertService.projectMemberList();
+		List<MemberDepartmentList> memberDepartmentList = projectMemberInsertService.memberDepartmentList();
+		List<MemberList> memberList = projectMemberInsertService.memberList();
+		
+		model.addAttribute("title","프로젝트멤버리스트등록화면");
+		model.addAttribute("memberDepartmentList",memberDepartmentList);
+		model.addAttribute("projectMember",projectMember);
+		model.addAttribute("memberList",memberList);
 	return "project/project_member_insert";
 	}
 	

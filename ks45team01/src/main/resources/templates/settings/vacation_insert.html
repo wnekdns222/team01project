@@ -9,7 +9,7 @@
 			<!-- begin page title -->
 			<div class="d-block d-lg-flex flex-nowrap align-items-center">
 				<div class="page-title mr-4 pr-4 border-right">
-					<h1>휴가부여</h1>
+					<h1>연차부여</h1>
 				</div>
 				<div class="breadcrumb-bar align-items-center">
 					<nav>
@@ -18,7 +18,7 @@
 									class="ti ti-home"></i></a></li>
 							<li class="breadcrumb-item">휴가기준 설정</li>
 							<li class="breadcrumb-item active text-primary"
-								aria-current="page">휴가부여</li>
+								aria-current="page">연차부여</li>
 						</ol>
 					</nav>
 				</div>
@@ -28,69 +28,71 @@
 	<!-- end page title -->
 </th:block>
 <th:block layout:fragment="customContents">
-	<form th:action="@{/settings/vacationInsert}" method="post">
-		<div class="form-group">
-			<label for="lengthOfService">근속연수</label> <select class="form-control"
-				id="lengthOfService" name="lengthOfService" required>
-				<option></option>
-				<th:block th:each="s : ${standard}">
-				<option th:text="${s.lengthOfService}"></option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="useVacationYear">사용연도</label> <select class="form-control"
-				id="useVacationYear" name="useVacationYear" required>
-				<option></option>
-				<th:block th:each="num : ${#numbers.sequence(2023, 2050)}">
-				<option th:text="|${num}|"></option>
-			</select>
-		</div>
-		<div class="duallistbox">
-				<div class="box2 col-md-6">
-				</div>
+	<th:block th:fragment="vacationInsert">
+		<form th:action="@{/settings/vacationInsert}" method="post"
+			style="margin-top: 20px; margin-bottom: 20px; width: 90%; margin-left: 20px;">
+			<div class="form-group">
+				<label for="lengthOfService">근속연수</label> <select
+					class="form-control" id="lengthOfService" name="lengthOfService"
+					style="width: 300px;" required>
+					<option></option>
+					<th:block th:each="s : ${standard}">
+						<option th:text="${s.lengthOfService}"></option>
+					</th:block>
+				</select>
 			</div>
-			<select multiple="multiple" size="10" id="duallistbox" name="memberName"
-				style="display: none;">
+			<div class="form-group">
+				<label for="useVacationYear">사용연도</label> <select
+					class="form-control" id="useVacationYear" name="useVacationYear"
+					style="width: 300px;" required>
+					<option></option>
+					<th:block th:each="num : ${#numbers.sequence(2023, 2050)}">
+						<option th:text="|${num}|"></option>
+				</select>
+			</div>
+			<div class="duallistbox">
+				<div class="box2 col-md-6"></div>
+			</div>
+			<label for="memberName">사원이름</label> <select multiple="multiple"
+				size="10" id="duallistbox" name="memberName" style="display: none;">
 			</select>
-		<div class="form-group">
-			<label for="memberNum">사원번호</label>
-			<input type="hidden" name="memberNum" id="memberNum" >
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
-	</form>
-</th:block>
+			<div class="form-group">
+				<input type="hidden" name="memberNum" id="memberNum">
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</th:block>
 
-<!-- 사용자 지정 js 파일 -->
-	
+	<!-- 사용자 지정 js 파일 -->
+
 	<th:block layout:fragment="customJs">
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</th:block>
-	
-<!-- 사용자 지정 js script -->
-<th:block layout:fragment="customScript">
 
-	<script>
-	
-		$('#lengthOfService').change(function(){
-			
-			const length = $('#lengthOfService option:selected').text();
-			alert(length);
-			let request = $.ajax({
-				url:"/settings/checkMember",
-				method : "GET",
-				data : { 'length' : length },
-				dataType : "json",
-				success : function(memberNameList,standard){
-					console.log(memberNameList);
-					console.log(memberNameList[0].memberName);
-					$(memberNameList).each(function(idx){
-						const option = $("<option value="+idx+">"+memberNameList[idx].memberName+"</option>");
-		                $('#duallistbox').append(option);
-		                $('#memberNum').val(memberNameList[idx].memberNum);
-					})
-					$('#duallistbox').bootstrapDualListbox('refresh', true);
-				} 
-			})
-		})
-	</script>
+	<!-- 사용자 지정 js script -->
+	<th:block layout:fragment="customScript">
+		<script>
+			$('#lengthOfService').change(function() {
+				const length = $('#lengthOfService option:selected').text();
+				let request = $.ajax({
+										url : "/settings/checkMember",
+										method : "GET",
+										data : {'length' : length},
+										dataType : "json",
+										success : function(memberNameList,standard) {
+										console.log(memberNameList);
+										console.log(memberNameList[0].memberName);
+										$(memberNameList).each(
+											function(idx) {
+												const option = $("<option value="+idx+">"
+														+ memberNameList[idx].memberName
+														+ "</option>");
+												$('#duallistbox').append(option);
+												$('#memberNum').val(memberNameList[idx].memberNum);
+											})
+											$('#duallistbox').bootstrapDualListbox('refresh', true);
+										}
+							})
+				})
+		</script>
 </html>

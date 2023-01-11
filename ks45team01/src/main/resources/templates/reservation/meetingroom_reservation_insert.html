@@ -27,32 +27,31 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<div class="card-body">
 		    <h6 class="card-subtitle"></h6>
-		    <form th:object="${reservation}" th:action="@{/reservation/meetingroomReservationInsert}" method="post">
-		    		<input type="hidden"  th:value="*{reservationNum}" name="reservationNum" >
-		        <div class="form-group" style="margin:20px 0px 15px 0px;">
-		            <label for="exampleInputPassword1">회의실</label>
-		            <select class="form-control" id="reservation" name="reservation">
-		            	<th:block th:if="${not #lists.isEmpty(reservation)}" 
-		            	          th:each="r : ${reservation}">
-		            	<option th:text="${r.reservationNum}">
-		            	</option>
-		            	</th:block>
-		            	<th:block th:unless="${not #lists.isEmpty(reservation)}">								
-									<option>등록된 회의실이 없습니다</option>
-						</th:block>
-		            </select>  
-		        </div>
-		        <label for="exampleInputPassword1">시작시간</label>
-		        <div class="form-group" id="startDate">
-                 	<input class="form-control" type="datetime-local" id="DateLocal" >
+		    <form th:object="${reservation}" th:each="l : ${reservation}" th:action="@{/reservation/meetingroomReservationInsert}" method="post">
+	        		<div class="form-group">
+                    	<label for="exampleInputPassword1">회의실 명</label>
+                   	 	<input type="text" class="form-control" id="exampleInputPassword1" name="meetName" th:value="${l.meetingroom.meetName}" readonly="readonly">
+                	</div>
+                <div class="form-group" id="startDate">
+			        <label for="exampleInputPassword1">시작시간</label>
+                 	<input class="form-control" type="date" min="todaytime" id="Date" >
+                </div>	
+                <div class="form-group" id="startDate">
+                 	<input class="form-control" type="time" id="Time" >
                 </div>
-                <label for="exampleInputPassword1">종료시간</label>
-		        <div class="form-group" id="endDate">
-                  	<input class="form-control" type="datetime-local" id="EndDateLocal">
+                <div class="form-group" id="startDate">
+			        <label for="exampleInputPassword1">종료시간</label>
+                 	<input class="form-control" type="date" id="EndDate" >
+                </div>	
+                <div class="form-group" id="startDate">
+                 	<input class="form-control" type="time" id="EndTime" >
                 </div>
                 <label for="exampleInputPassword1">예약내용</label>
                 	<textarea class="form-control" rows="3"></textarea>
 		        <button type="submit" class="btn btn-primary" style="margin:80px 0px 0px 0px;">확인</button>
+		    		<input type="hidden"  th:value="*{reservationNum}" name="reservationNum" >
+		    		<input type="hidden"  th:value="${l.meetingroom.meetUsableStart}" name="meetUsableStart">
+		    		<input type="hidden"  th:value="${l.meetingroom.meetUsableEnd}" name="meetUsableEnd">
 		    </form>
 		</div>
 	</th:block>
@@ -65,28 +64,54 @@
 	// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
 	var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
 	// new Date(today-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
-	var today = new Date(now_utc-timeOff).toISOString().substring(0, 16);
+	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+	var todaytime = new Date().toTimeString().split('')[0];
 	 
-	document.getElementById("DateLocal").setAttribute("min", today);
-	document.getElementById("EndDateLocal").setAttribute("min", today);
+	document.getElementById("Date").setAttribute("min", today);
+	document.getElementById("EndDate").setAttribute("min", today);
+	document.getElementById("Time").setAttribute("min", todaytime);
 	
 	 
-     // 제이쿼리 change 함수
-     $("#DateLocal").change(function(){
+     // 제이쿼리 change 함수 오늘 이전 날짜 선택 금지
+     $("#Date").change(function(){
          // 변경된 값으로 비교 후 alert 표출
          if($(this).val() < today){
              alert("시간을 다시 선택해주세요");
          }
+         
      });
      
-     const datelocal = document.querySelector("#DateLocal");
-     
-     $("#EndDateLocal").change(function(){
+     $("#Time").change(function(){
          // 변경된 값으로 비교 후 alert 표출
-         if($(this).val() < $("#DateLocal").val()){
+        /*  if($(this).val() < todaytime){
+             alert(" ");
+         } */
+     });
+     
+     
+     //시작시간 이전시간 금지 
+     $("#EndDate").change(function(){
+         // 변경된 값으로 비교 후 alert 표출
+         if($(this).val() < $("#Date").val()){
+             alert("시작시간보다 늦은시간으로 선택해주세요");
+         }
+/*          if($(this).val() < $(".meetUsableStart").val()){
+        	 alert("이용 불가능한 시간입니다")
+         }
+         if($(this).val() > $(".meetUsableEnd").val()){
+        	 alert("이용 불가능한 시간입니다")
+         } */
+     });
+     
+     $("#EndTime").change(function(){
+         // 변경된 값으로 비교 후 alert 표출
+         if($(this).val() < $("#Date").val()){
              alert("시작시간보다 늦은시간으로 선택해주세요");
          }
      });
+     
+     
+     
      
 	</script>
 	</th:block>

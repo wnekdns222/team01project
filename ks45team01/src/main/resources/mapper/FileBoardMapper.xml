@@ -151,7 +151,19 @@
 		SELECT 
 			*
 		FROM 
-			tb_file_board
+			tb_file_board AS f
+			INNER JOIN 
+			tb_position_list AS p
+			ON 
+			f.file_board_registrant = p.position_member_num
+			INNER JOIN 
+			tb_department_list AS d
+			ON 
+			p.position_member_num = d.member_num
+			INNER JOIN 
+			tb_member AS m
+			ON
+			d.member_num = m.member_num
 		WHERE file_category_code = #{serviceType};
 	</select>
 	<select id="fileBoardList" resultType="List" resultMap="fileBoardResultMap">
@@ -171,7 +183,6 @@
 			INNER JOIN 
 			tb_member AS m
 			ON
-			d.member_num = m.member_num
-			WHERE f.file_category_code=#{fileCategoryCode};
+			d.member_num = m.member_num;
 	</select>
 </mapper>

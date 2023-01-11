@@ -59,9 +59,14 @@ public class ReservationService {
 		return reservation;
 	}
 	
-	public void insertmeetingroomReservation (Reservation reservation) {
+	public void insertReservation (Reservation reservation) {
 		
-		reservationMapper.insertMeetingroomReservation(reservation);
+		reservationMapper.insertReservation(reservation);
+	}
+	
+	public void modifyReservation (Reservation reservation) {
+		
+		reservationMapper.modifyReservation(reservation);
 	}
 	
 }
