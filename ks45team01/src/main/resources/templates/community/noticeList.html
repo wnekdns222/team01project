@@ -65,7 +65,7 @@
 		<div class="page-wrapper">
 			<div class="container-fluid">
 				<div class="col-lg-12">
-					<!--게시판 넓이 -->
+					<!--공지사항 넓이 -->
 					<div class="row">
 						<div class="col-lg-4">
 							<h1 class="page-header">공지사항 리스트</h1>
@@ -74,8 +74,8 @@
 							<div class="form-row">
 								<div class="form-group col-lg-9">
 									<select name="searchKey" class="form-control col-lg-3 mr-3">
-										<option value="BoardName">제목</option>
-										<option value="BoardName">등록자</option>
+										<option value="noticeName">제목</option>
+										<option value="noticeName">등록자</option>
 									</select> <input type="text" class="form-control col-lg-4 h-100 "
 										name="searchValue" placeholder="검색">
 									<button class="btn btn-primary form-control col-lg-2 h-100"
@@ -91,164 +91,58 @@
 										작성</button>
 								</div>
 							</div>
-							</div>
-
-							<div class="col-12 col-lg-12">
-								<div class="card card-statistics">
-									<div class="card-header"></div>
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="card card-statistics">
-												<div class="card-body">
-													<div class="datatable-wrapper table-responsive">
-														<table id="datatable"
-															class="display compact table table-striped table-bordered">
-															<thead>
-																<tr>
-																	<th>No.</th>
-																	<th>제목</th>
-																	<th>내용</th>
-																	<th>첨부파일</th>
-																	<th>등록 날짜</th>
-																	<th>수정 날짜</th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td>Tiger Nixon</td>
-																	<td>System Architect</td>
-																	<td>Edinburgh</td>
-																	<td>61</td>
-																	<td>2011/04/25</td>
-																	<td>2022-12-11</td>
-																</tr>
-																<tr>
-																	<td>Garrett Winters</td>
-																	<td>Accountant</td>
-																	<td>Tokyo</td>
-																	<td>63</td>
-																	<td>2011/07/25</td>
-																	<td>2022-10-14</td>
-																</tr>
-																<tr>
-																	<td>Ashton Cox</td>
-																	<td>Junior Technical Author</td>
-																	<td>San Francisco</td>
-																	<td>66</td>
-																	<td>2009/01/12</td>
-																	<td>2022-12-04</td>
-																</tr>
-																<tr>
-																	<td>Cedric Kelly</td>
-																	<td>Senior Javascript Developer</td>
-																	<td>Edinburgh</td>
-																	<td>22</td>
-																	<td>2012/03/29</td>
-																	<td>2022-10-03</td>
-																</tr>
-																<tr>
-																	<td>Airi Satou</td>
-																	<td>Accountant</td>
-																	<td>Tokyo</td>
-																	<td>33</td>
-																	<td>2008/11/28</td>
-																	<td>2022-12-27</td>
-																</tr>
-																<tr>
-																	<td>Brielle Williamson</td>
-																	<td>Integration Specialist</td>
-																	<td>New York</td>
-																	<td>61</td>
-																	<td>2012/12/02</td>
-																	<td>2022-12-29</td>
-																</tr>
-																<tr>
-																	<td>Herrod Chandler</td>
-																	<td>Sales Assistant</td>
-																	<td>San Francisco</td>
-																	<td>59</td>
-																	<td>2012/08/06</td>
-																	<td>2022-11-04</td>
-																</tr>
-																<tr>
-																	<td>Rhona Davidson</td>
-																	<td>Integration Specialist</td>
-																	<td>Tokyo</td>
-																	<td>55</td>
-																	<td>2010/10/14</td>
-																	<td>2022-11-15</td>
-																</tr>
-																<tr>
-																	<td>Cedric Kelly</td>
-																	<td>Senior Javascript Developer</td>
-																	<td>Edinburgh</td>
-																	<td>22</td>
-																	<td>2012/03/29</td>
-																	<td>2022-10-11</td>
-																</tr>
-																<tr>
-																	<td>Airi Satou</td>
-																	<td>Accountant</td>
-																	<td>Tokyo</td>
-																	<td>33</td>
-																	<td>2008/11/28</td>
-																	<td>2022-10-03</td>
-																</tr>
-																<tr>
-																	<td>Brielle Williamson</td>
-																	<td>Integration Specialist</td>
-																	<td>New York</td>
-																	<td>61</td>
-																	<td>2012/12/02</td>
-																	<td>2022-11-03</td>
-																</tr>
-																<tr>
-																	<td>Herrod Chandler</td>
-																	<td>Sales Assistant</td>
-																	<td>San Francisco</td>
-																	<td>59</td>
-																	<td>2012/08/06</td>
-																	<td>2022-11-29</td>
-																</tr>
-																<tr>
-																	<td>Rhona Davidson</td>
-																	<td>Integration Specialist</td>
-																	<td>Tokyo</td>
-																	<td>55</td>
-																	<td>2010/10/14</td>
-																	<td>2022-11-24</td>
-																</tr>
-															</tbody>
-															<!-- 이런식으로 db연결해야함.. -->
-															<!--                                                       <c:forEach items="${alm}" var="alm" varStatus="status">
-												          <tr>
-												            <td>${alm.ora_id}</td>
-												            <td>${alm.ora_pw}</td>
-												            <td>${alm.ora_level}</td>
-												            <td>${alm.ora_name}</td>
-												            <td>${alm.ora_email}</td>
-												        	<td>
-												<a href="<%= request.getContextPath() %>/Mup/m_update_form.ksmart_m?send_id=${alm.ora_id}"><button type="button" class="btn btn-info">수정버튼</button></a>
-																			수정버튼 클릭시 경로 확장자 ksmart_m으로 변경 후 작업 시작			
-														</td>
-														<td>
-												<a href="<%= request.getContextPath() %>/Mdel/m_delete_pro.ksmart_m?send_id=${alm.ora_id}"><button type="button" class="btn btn-primary">삭제버튼</button></a>
-																			삭제버튼 클릭시 경로 확장자 ksmart_m으로 변경 후 작업 시작			
-														</td> -->
-														</table>
-													</div>
+							<!-- <div class="input-group col-6"></div> -->
+						</div>
+						<div class="col-12 col-lg-12">
+							<div class="card card-statistics">
+								<div class="card-header"></div>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="card card-statistics">
+											<div class="card-body">
+												<div class="datatable-wrapper table-responsive">
+													<table id="datatable"
+														class="display compact table table-striped table-bordered">
+														<thead>
+															<tr>
+																<th>No.</th>
+																<th>제목</th>
+																<th>첨부파일</th>
+																<th>등록 날짜</th>
+																<th>수정 날짜</th>
+																<th>조회수</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr th:unless="${#lists.isEmpty(communityNoticeList)}"
+																th:each="cn : ${communityNoticeList}">
+																<td th:text="${cn.noticeCode}"></td>
+																<td><a
+																	th:href="@{/community/noticeDetail(noticeCode=${cn.noticeCode})}">[[${cn.noticeName}]]</a>
+																</td>
+																<td th:text="${cn.noticeFile}"></td>
+																<td th:text="${cn.noticeRegDate}"></td>
+																<td th:text="${cn.noticeUpdateDate}"></td>
+																<td th:text="${cn.noticeViewCount}"></td>
+															</tr>
+															<tr th:if="${#lists.isEmpty(communityNoticeList)}">
+																<td colspan="6"></td>
+															</tr>
+														</tbody>
+													</table>
 												</div>
 											</div>
 										</div>
 									</div>
-									<!-- end row -->
 								</div>
-								<!-- end container-fluid -->
 							</div>
+							<!-- end row -->
 						</div>
+						<!-- end container-fluid -->
 					</div>
 				</div>
 			</div>
+		</div>
 	</th:block>
 </body>
 </html>
