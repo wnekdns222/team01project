@@ -34,44 +34,13 @@
 			<label for="workNum">인원설정</label>
 			<div class="form-group mb-0">
 				<select class="js-basic-single form-control" name="state">
-					<optgroup label="Alaskan/Hawaiian Time Zone">
-						<option value="AK">Alaska</option>
-						<option value="HI">Hawaii</option>
+					<optgroup th:each="dl : ${memberDepartmentList}" th:label="${dl.departmentName}">
+						<th:block th:each="ml : ${memberList}">
+							<option th:if="${dl.departmentNum == ml.departmentNum}" th:value="${ml.memberNum}" th:text="${ml.memberName}"></option>
+						</th:block>
+						<!-- <option th:each="ml : ${memberList}" th:value="${ml.departmentName}" th:text=""></option> -->
 					</optgroup>
-					<optgroup label="Pacific Time Zone">
-						<option value="CA">California</option>
-						<option value="NV">Nevada</option>
-						<option value="OR">Oregon</option>
-						<option value="WA">Washington</option>
-					</optgroup>
-					<optgroup label="Mountain Time Zone">
-						<option value="AZ">Arizona</option>
-						<option value="CO">Colorado</option>
-						<option value="ID">Idaho</option>
-						<option value="MT">Montana</option>
-						<option value="NE">Nebraska</option>
-						<option value="NM">New Mexico</option>
-						<option value="ND">North Dakota</option>
-						<option value="UT">Utah</option>
-						<option value="WY">Wyoming</option>
-					</optgroup>
-					<optgroup label="Central Time Zone">
-						<option value="AL">Alabama</option>
-						<option value="AR">Arkansas</option>
-						<option value="IL">Illinois</option>
-						<option value="IA">Iowa</option>
-						<option value="KS">Kansas</option>
-						<option value="KY">Kentucky</option>
-						<option value="LA">Louisiana</option>
-						<option value="MN">Minnesota</option>
-						<option value="MS">Mississippi</option>
-						<option value="MO">Missouri</option>
-						<option value="OK">Oklahoma</option>
-						<option value="SD">South Dakota</option>
-						<option value="TX">Texas</option>
-						<option value="TN">Tennessee</option>
-						<option value="WI">Wisconsin</option>
-					</optgroup>
+					
 				</select>
 			</div>
 		</div>
@@ -80,7 +49,7 @@
 			<label for="writeChangeReason">담당업무 상세내용</label>
 			<textarea class="form-control" name="writeChangeReason"
 				id="writeChangeReason" rows="3" placeholder="Textarea text">
-	                     </textarea>
+	        </textarea>
 		</div>
 
 
@@ -102,7 +71,7 @@
 						</div>
 					</div>
 					<div class="card-body py-0 table-responsive">
-						<table class="table clients-contant-table mb-0">
+						<table class="table clients-contant-table mb-0" th:each="pm : ${projectMember}">
 							<thead>
 								<tr>
 									<th scope="col">인원배정자</th>
@@ -120,42 +89,20 @@
 												<img src="/assets/img/avtar/01.jpg" class="img-fluid"
 													alt="Clients-01">
 											</div>
-											<p class="font-weight-bold">id001</p>
-											<p class="font-weight-bold">주혀눙</p>
+											<p class="font-weight-bold" th:text="${pm.memberNum}"></p>
+											<p class="font-weight-bold" th:text="${pm.memberList.memberName}"></p>
 										</div>
 									</td>
-									<td>20/07/2018</td>
-									<td>-</td>
-									<td>회계관리 총책임자</td>
+									<td th:text="${pm.joinStartDate}"></td>
+									<td th:text="${pm.joinEndDate}"></td>
+									<td th:text="${pm.joinContent}"></td>
 									<td><a href="/project/projectMemberModify"
 										class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i
 											class="ti ti-pencil"></i></a> <a href="javascript:void(0)"
 										class="btn btn-icon btn-outline-danger btn-round"><i
 											class="ti ti-close"></i></a></td>
 								</tr>
-								<tr>
-									<td>
-										<div class="d-flex align-items-center">
-											<div class="bg-img mr-4">
-												<img src="/assets/img/avtar/01.jpg" class="img-fluid"
-													alt="Clients-01">
-											</div>
-											<p class="font-weight-bold">id001</p>
-											<p class="font-weight-bold">주혀눙</p>
-										</div>
-									</td>
-									<td>20/07/2018</td>
-									<td>20/07/2018</td>
-									<td>커피고르기 총담당자</td>
-									<td>
-										<a href="/project/projectMemberModify" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
-											<i class="ti ti-pencil"></i>
-										</a> 
-										<a href="javascript:void(0)" class="btn btn-icon btn-outline-danger btn-round">
-											<i class="ti ti-close"></i>
-										</a>
-									</td>
-								</tr>
+								
 
 							</tbody>
 						</table>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.ProjectMemberInsertMapper">
+	<resultMap type="projectMember" id="projectMemberResultMap">
+		<id property="projectJoinNum" column="project_join_num"/>
+		<result property="projectNum" column="project_num"/>
+		<result property="memberNum" column="member_num"/>
+		<result property="joinStartDate" column="join_start_date"/>
+		<result property="joinEndDate" column="join_end_date"/>
+		<result property="joinContent" column="join_content"/>	
+	
+	<association property ="memberList" javaType="MemberList">
+	<id property="memberNum" column="member_num"/>
+		<result property="memberPw" column="member_pw"/>
+		<result property="memberName" column="member_name"/>
+		<result property="memberGender" column="member_gender"/>
+		<result property="memberEmail" column="member_email"/>
+		<result property="memberBirth" column="member_birth"/>
+		<result property="memberPhone" column="member_phone"/>	
+		<result property="memberDormant" column="member_dormant"/>
+		<result property="memberDormantDate" column="member_dormant_date"/>	
+		<result property="departmentNum" column="department_num"/>	
+		<result property="positionNum" column="position_num"/>	
+		<result property="memberInsertDate" column="member_insert_date"/>	
+	</association>
+	
+	
+	
+	</resultMap>
+	
+	<resultMap type="memberList" id="MemberListMap">
+		<id property="memberNum" column="member_num"/>
+		<result property="memberPw" column="member_pw"/>
+		<result property="memberName" column="member_name"/>
+		<result property="memberGender" column="member_gender"/>
+		<result property="memberEmail" column="member_email"/>
+		<result property="memberBirth" column="member_birth"/>
+		<result property="memberPhone" column="member_phone"/>	
+		<result property="memberDormant" column="member_dormant"/>
+		<result property="memberDormantDate" column="member_dormant_date"/>	
+		<result property="departmentNum" column="department_num"/>	
+		<result property="positionNum" column="position_num"/>	
+		<result property="memberInsertDate" column="member_insert_date"/>	
+	
+	<association property ="memberDepartmentList" javaType="memberDepartmentList">
+		<id property="departmentNum" 				column="department_num"/>
+		<result property="departmentName" 		column="department_name"/>
+		<result property="memberNum" 			column="member_num"/>
+		<result property="departmentRegDate" 		column="department_reg_date"/>
+		<result property="departmentUpdateDate" 	column="department_update_date"/>
+		<result property="departmentModifier" 	column="department_modifier"/>
+		<result property="useOrNot" 			column="use_or_not"/>
+	</association>
+	
+	</resultMap>
+	
+	<resultMap type ="memberDepartmentList" id="memberDepartmentListMap">
+		<id property="departmentNum" 				column="department_num"/>
+		<result property="departmentName" 		column="department_name"/>
+		<result property="memberNum" 			column="member_num"/>
+		<result property="departmentRegDate" 		column="department_reg_date"/>
+		<result property="departmentUpdateDate" 	column="department_update_date"/>
+		<result property="departmentModifier" 	column="department_modifier"/>
+		<result property="useOrNot" 			column="use_or_not"/>
+	</resultMap>
+	
+	<select id="projectMemberList" resultMap="projectMemberResultMap">
+	SELECT
+	*
+	FROM
+	tb_member AS m
+	INNER JOIN
+	tb_project_member AS pm
+	ON
+	m.member_num = pm.member_num
+
+	</select>
+	
+	<select id="memberDepartmentList" resultMap="memberDepartmentListMap">
+	SELECT
+	*
+	FROM
+	tb_department_list
+	WHERE
+	use_or_not = 'Y'
+	</select>
+	
+	<select id="memberList" resultMap="MemberListMap">
+	SELECT
+	*
+	FROM
+	tb_member AS m
+	INNER JOIN
+	tb_department_list AS dl
+	ON
+	m.member_department_num = dl.department_num
+	</select>
+</mapper>
