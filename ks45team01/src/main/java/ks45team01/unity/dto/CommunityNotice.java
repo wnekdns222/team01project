@@ -4,8 +4,8 @@ public class CommunityNotice {
 	
 	private String noticeCode;
 	private String communityCode;
-	private String noticename;
-	private String membernum;
+	private String noticeName;
+	private String memberNum;
 	private String noticeContent;
 	private String noticeFile;
 	private String noticeFilePath;
@@ -25,17 +25,17 @@ public class CommunityNotice {
 	public void setCommunityCode(String communityCode) {
 		this.communityCode = communityCode;
 	}
-	public String getNoticename() {
-		return noticename;
+	public String getNoticeName() {
+		return noticeName;
 	}
-	public void setNoticename(String noticename) {
-		this.noticename = noticename;
+	public void setNoticeName(String noticeName) {
+		this.noticeName = noticeName;
 	}
-	public String getMembernum() {
-		return membernum;
+	public String getMemberNum() {
+		return memberNum;
 	}
-	public void setMembernum(String membernum) {
-		this.membernum = membernum;
+	public void setMemberNum(String memberNum) {
+		this.memberNum = memberNum;
 	}
 	public String getNoticeContent() {
 		return noticeContent;
@@ -81,10 +81,10 @@ public class CommunityNotice {
 		builder.append(noticeCode);
 		builder.append(", communityCode=");
 		builder.append(communityCode);
-		builder.append(", noticename=");
-		builder.append(noticename);
-		builder.append(", membernum=");
-		builder.append(membernum);
+		builder.append(", noticeName=");
+		builder.append(noticeName);
+		builder.append(", memberNum=");
+		builder.append(memberNum);
 		builder.append(", noticeContent=");
 		builder.append(noticeContent);
 		builder.append(", noticeFile=");
@@ -101,8 +101,6 @@ public class CommunityNotice {
 		return builder.toString();
 	}
 	
-	
-	
-	}
+}
 	
 	
