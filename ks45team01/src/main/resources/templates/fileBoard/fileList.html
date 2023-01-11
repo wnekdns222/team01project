@@ -39,9 +39,9 @@
 					<td>
 						<a th:href="@{/fileBoard/fileBoardView(fileBoardNum = ${f.fileBoardNum})}">[[${f.fileBoardTitle}]]</a>
 					</td>
-					<td th:text=${f.fileBoardRegistrant}></td>
+					<td th:text=${f.memberList.memberName}></td>
 					<td th:text=${f.memberPositionList.positionName}></td>
-					<td>인사과</td>
+					<td th:text=${f.memberDepartmentList.departmentName}></td>
 					<td th:text=${f.fileRegDate}></td>
 				</tr>
 				<tr th:if="${#lists.isEmpty(fileBoardList)}" th:each="f : ${fileBoardList}">

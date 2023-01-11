@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.VacationCategory;
+import ks45team01.unity.dto.VacationInformation;
 import ks45team01.unity.dto.VacationSort;
 import ks45team01.unity.dto.VacationStandard;
 import ks45team01.unity.dto.VacationType;
@@ -65,4 +67,13 @@ public interface VacationMapper {
 	
 	//휴가 중분류 수정
 	public void updateVacationSort(VacationSort vacationSort);
+	
+	//근속연수에 따른 사원이름 조회
+	public List<MemberList> getMemberNameByLength(String lenth);
+	
+	//연차 등록
+	public void addVacationInfo(VacationInformation vacationInformation);
+	
+	//특정 휴가기준 조회
+	public VacationStandard getVacationStandardByLength(String lengthOfService);
 }

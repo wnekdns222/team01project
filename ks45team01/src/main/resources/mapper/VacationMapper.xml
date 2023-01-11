@@ -43,6 +43,51 @@
 		<result property="correctMemberNum" column="correct_member_num" />
 		<result property="correctCate" column="correct_date" />
 	</resultMap>
+	<resultMap type="MemberList" id="MemberListResultMap">
+		<id property="memberNum" column="member_num"/>
+		<result property="memberPw" column="member_pw"/>
+		<result property="memberName" column="member_name"/>
+		<result property="memberGender" column="member_gender"/>
+		<result property="memberEmail" column="member_email"/>
+		<result property="memberBirth" column="member_birth"/>
+		<result property="memberPhone" column="member_phone"/>	
+		<result property="memberDormant" column="member_dormant"/>
+		<result property="memberDormantDate" column="member_dormant_date"/>	
+		<result property="departmentNum" column="department_num"/>	
+		<result property="positionNum" column="position_num"/>	
+		<result property="memberInsertDate" column="member_insert_date"/>
+		</resultMap>
+	<resultMap type="VacationInformation" id="vacationInformationMap">
+		<id property="vacationInfoNum" column="vacation_info_num"/>
+		<result property="memberNum" column="member_num"/>
+		<result property="serviceNum" column="service_num"/>
+		<result property="lengthOfService" column="length_of_service"/>
+		<result property="addVacation" column="add_vacation"/>
+		<result property="rewardVacationNumber" column="reward_vacation_number"/>
+		<result property="replaceVacationDay" column="replace_vacation_day"/>	
+		<result property="remainVacationDay" column="remain_vacation_day"/>
+		<result property="remainVacationTime" column="remain_vacation_time"/>
+		<result property="vacationStandardUse" column="vacation_standard_use"/>
+		<result property="useVacationYear" column="use_vacation_year"/>
+		<result property="regMemberNum" column="reg_member_num"/>	
+		<result property="regDate" column="reg_date"/>
+		<result property="correctMemberNum" column="correct_member_num"/>
+		<result property="correctDate" column="correct_date"/>
+			<association property="MemberList" javaType="MemberList">
+					<id property="memberNum" column="member_num"/>
+					<result property="memberPw" column="member_pw"/>
+					<result property="memberName" column="member_name"/>
+					<result property="memberGender" column="member_gender"/>
+					<result property="memberEmail" column="member_email"/>
+					<result property="memberBirth" column="member_birth"/>
+					<result property="memberPhone" column="member_phone"/>	
+					<result property="memberDormant" column="member_dormant"/>
+					<result property="memberDormantDate" column="member_dormant_date"/>	
+					<result property="departmentNum" column="department_num"/>	
+					<result property="positionNum" column="position_num"/>	
+					<result property="memberInsertDate" column="member_insert_date"/>
+			</association>	
+	</resultMap>
 	<select id="getCommonNewCode" parameterType="String" resultType="String">
 		/* 자동증가코드 */
 		SELECT
@@ -230,4 +275,36 @@
 		,correct_date=NOW()
 		WHERE vacation_sort_num=#{vacationSortNum};
 	</update>
+	<select id="getMemberNameByLength" parameterType="String" resultType="List" resultMap="MemberListResultMap">
+		/* 근속연수에 따른 사원이름 */
+		select
+			*
+		from
+			tb_member 
+		where
+			${length} = timestampdiff(year, member_insert_date, curdate());
+	</select>
+	<insert id="addVacationInfo" parameterType="VacationInformation">
+		/* 연차 등록 */
+		INSERT INTO tb_vacation_standard
+			(vacation_info_num,
+			member_num,
+			service_num, 
+			length_of_service, 
+			add_vacation, 
+			use_vacation_year, 
+			reg_date
+			)
+		VALUES ( #{vacationInfoNum}, #{memberNum}, #{serviceNum}, #{lengthOfService}, #{addVacation}, #{useVacationYear}, NOW());
+	</insert>
+	<select id="getVacationStandardByLength" parameterType ="String" resultMap ="vacationStandardMap">
+		SELECT
+			*
+		from
+			tb_vacation_standard AS s
+		WHERE
+			s.length_of_service = #{lengthOfService}
+			and
+		s.vacation_standard_use = 'Y';
+	</select>
 </mapper>

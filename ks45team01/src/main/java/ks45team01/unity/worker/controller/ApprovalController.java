@@ -50,11 +50,35 @@ public class ApprovalController {
 	 */
 	
 	@GetMapping("draftInsert")
-	public String approvalInsert(Model model) {
+	public String draftInsert(Model model) {
 		
 		model.addAttribute("title", "기안작성");
 		
 		return "approval/draftInsert";
+	}
+	
+	@GetMapping("odInsert")
+	public String odInsert(Model model) {
+		
+		model.addAttribute("title", "공문작성");
+		
+		return "approval/odInsert";
+	}
+	
+	@GetMapping("proposalInsert")
+	public String proposalInsert(Model model) {
+		
+		model.addAttribute("title", "기획작성");
+		
+		return "approval/proposalInsert";
+	}
+	
+	@GetMapping("letterApprovalInsert")
+	public String letterApprovalInsert(Model model) {
+		
+		model.addAttribute("title", "품의서작성");
+		
+		return "approval/letterApprovalInsert";
 	}
 	
 	@GetMapping("approvalDoneView")
