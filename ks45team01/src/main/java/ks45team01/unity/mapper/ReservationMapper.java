@@ -23,5 +23,8 @@ public interface ReservationMapper {
 	
 	public Reservation getReservationById(String reservationNum);
 	
-	public void insertMeetingroomReservation(Reservation reservation);
+	public void insertReservation(Reservation reservation);
+	
+	public void modifyReservation(Reservation reservation);
+
 }

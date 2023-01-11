@@ -26,38 +26,41 @@
 		<result property="reservationEndTime"  column="reservation_end_time" />
 		<result property="reservationContents"  column="reservation_contents" />
 		<result property="reservationInsertDate"  column="reservation_insert_date" />
-		<result property="memberNum"  column="member_num" />
+		<result property="applicantMemberNum"  column="applicant_member_num" />
 		<result property="reservationUpdateDate"  column="reservation_update_date" />
 		<result property="reservationUpdateMember"  column="reservation_update_member" />
-		<collection property="meetingroom" javaType="Meetingroom">
+		<association property="meetingroom" javaType="Meetingroom">
 			<id property="meetNum" column="meet_num" />
 			<result property="meetName" column="meet_name"/>
-		</collection>		
+			<result property="meetLocation"  column="meet_location" />
+			<result property="meetUsableStart"  column="meet_usable_start" />
+			<result property="meetUsableEnd"  column="meet_usable_End" />
+			<result property="meetRegDate"  column="meet_reg_date" />
+			<result property="memberNum"  column="member_num" />
+			<result property="meetUpdateMember"  column="meet_update_member" />
+			<result property="meetCapacity"  column="meet_capacity" />
+			<result property="meetStatus"  column="meet_status" />
+			<result property="meetRejectReason"  column="meet_reject_reason" />
+			<result property="meetDetail"  column="meet_detail" />
+			<result property="meetManager"  column="meet_manager" />
+		</association>		
 	</resultMap>
 	<select id="getReservationList" resultMap="reservationResultMap">
 		/* 예약 조회 */
 		SELECT 
-			r.reservation_num
-		   ,r.meet_num
-		   ,r.reservation_start_time
-		   ,r.reservation_end_time
-		   ,m.meet_name
+			*
 		FROM
 			tb_meetingroom as m
 			INNER JOIN
 			tb_meet_reservation as r
 			ON
 			m.meet_num = r.meet_num
-		ORDER BY m.meet_num;		
+	
 	</select>
 	<select id="getReservationById" parameterType="String" resultMap="reservationResultMap">
 		/* 회의실 조회 */
 		SELECT 
-			r.reservation_num
-		   ,r.meet_num
-		   ,r.reservation_start_time
-		   ,r.reservation_end_time
-		   ,m.meet_name
+			*
 		FROM 
 			tb_meetingroom as m
 			INNER JOIN
@@ -65,7 +68,7 @@
 			ON
 			m.meet_num = r.meet_num	
 		WHERE
-			reservation_num = #{reservationNum};
+			r.reservation_num = #{reservationNum};
 	</select>
 	<select id="getMeetingroomList" resultMap="meetingroomResultMap">
 		/* 회의실 조회 */
