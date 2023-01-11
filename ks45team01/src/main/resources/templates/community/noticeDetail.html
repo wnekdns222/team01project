@@ -55,9 +55,10 @@
 <th:block layout:fragment="customContents">
 	<div class="content">
 		<section>
-			<form action="/community/noticeModify" method="post">
+			<form id="saveForm" method="post" autocomplete="off">
 				<!--/* 게시글 수정인 경우, 서버로 전달할 게시글 번호 (PK) */-->
-				<input type="hidden" name="noticeCode" th:value="${noticeDetail.noticeCode}" />
+				<input type="hidden" id="id" name="id" th:if="${post != null}"
+					th:value="${post.id}" />
 
 				<!--/* 서버로 전달할 공지글 여부 */-->
 				<input type="hidden" id="noticeYn" name="noticeYn" />
@@ -78,7 +79,7 @@
 						<tr>
 							<th>제목 <!-- <span class="es">필수 입력</span> --></th>
 							<td colspan="2"><input class="form-control" type="text"
-								id="noticeName" name="noticeName" maxlength="50" th:value="${noticeDetail.noticeName}"/></td>
+								id="noticeName" name="noticeName" maxlength="50" readonly="readonly" th:value="${noticeDetail.noticeName}"/></td>
 						</tr>
 
 						<tr>
@@ -102,14 +103,15 @@
 						</tr>
 					</tbody>
 				</table>
+			</form>
 			<p class="btn_set" style="margin-left: 150px; margin-top: 8px;">
-				<button type="submit" id="saveBtn"
-					class="btn btn-round btn-outline-primary" >저장</button>
+				<a class="btn btn-round btn-outline-primary" th:href="@{/community/noticeModify(noticeCode=${noticeDetail.noticeCode})}">수정</a>
 				<!-- 뒤로가기 버튼을 누르면 리스트 화면으로 돌아간다. -->
+				<a th:href="@{/community/noticeDelete(noticeCode=${noticeDetail.noticeCode})}"
+					class="btn btn-round btn-outline-danger" >삭제</a>
 				<a th:href="@{/community/noticeList}"
 					class="btn btn-round btn-outline-light" >뒤로</a>
 			</p>
-			</form>
 		</section>
 	</div>
 	<!--/* .content */-->

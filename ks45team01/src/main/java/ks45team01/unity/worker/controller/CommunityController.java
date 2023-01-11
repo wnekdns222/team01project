@@ -10,39 +10,140 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team01.unity.dto.CommunityBoard;
+import ks45team01.unity.dto.CommunityNotice;
 import ks45team01.unity.service.CommunityBoardService;
+import ks45team01.unity.service.CommunityNoticeService;
 
 @Controller
 @RequestMapping("/community")
 public class CommunityController {
 	
 		private final CommunityBoardService communityBoardService;
-		public CommunityController(CommunityBoardService communityBoardService) {
+		private final CommunityNoticeService communityNoticeService; 
+		
+		public CommunityController(CommunityBoardService communityBoardService, CommunityNoticeService communityNoticeService) {
 			this.communityBoardService = communityBoardService;
+			this.communityNoticeService = communityNoticeService;
 		}
-	
-		//공지사항 화면 Notice
+		/**
+		 * 공지사항 삭제 
+		 * @param noticeCode
+		 * @return
+		 */
+		@GetMapping("/noticeDelete")
+		public String noticeDelete(String noticeCode) {
+			communityNoticeService.communityNoticeDelete(noticeCode);
+			
+			return "redirect:/community/noticeList";
+		}
+		/**
+		 * 공지사항 수정 처리
+		 * @param communityNotice
+		 * @return
+		 */
+		@PostMapping("/noticeModify")
+		public String noticeModify(CommunityNotice communityNotice) {
+			communityNoticeService.communityNoticeModify(communityNotice);
+			
+			return "redirect:/community/noticeList";
+		}
+		
+		/**
+		 * 공지사항 수정 
+		 * @param noticeCode
+		 * @param model
+		 * @return
+		 */
+		@GetMapping("/noticeModify")
+		public String noticeModifyForm (@RequestParam(value = "noticeCode", required = false) String noticeCode
+								   ,Model model) {
+			
+			CommunityNotice noticeDetail = communityNoticeService.communityNoticeDetail(noticeCode);
+			model.addAttribute("title", "공지사항 수정 화면");
+			model.addAttribute("noticeDetail", noticeDetail);
+			
+			return "community/noticeModify";
+		}
+		
+		/**
+		 * 공지사항 상세 화면
+		 * @param noticeCode
+		 * @param model
+		 * @return
+		 */
+		@GetMapping("/noticeDetail")
+		public String noticeDetail(@RequestParam(value = "noticeCode", required = false) String noticeCode
+								 ,Model model) {
+			
+			CommunityNotice noticeDetail = communityNoticeService.communityNoticeDetail(noticeCode);
+			
+			model.addAttribute("title", "공지사항 상세 화면");
+			model.addAttribute("noticeDetail", noticeDetail);
+			
+			return "community/noticeDetail";
+			
+		}
+		
+		/**
+		 * 공지사항 리스트 조회
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/noticeList")
-		public String getNotice (Model model) {   
+		public String getNotice(Model model) { 
+			
+			List<CommunityNotice> communityNoticeList = communityNoticeService.communityNoticeList();
+			
 			model.addAttribute("title", "공지사항 화면");
+			model.addAttribute("communityNoticeList", communityNoticeList);
 			
 			return "community/noticeList";
 		}
-		//공지사항 등록화면 Notice
+		
+		/**
+		 * 공지사항 등록
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/noticeInsert")
-		public String noticeInsert(Model model) {   
+		public String noticeInsert(Model model) {  
+			
+			List<CommunityNotice> communityNoticeList = communityNoticeService.communityNoticeList();
+			
 			model.addAttribute("title", "공지사항 등록 화면");
+			model.addAttribute("communityNoticeList", communityNoticeList);
 			
 			return "community/noticeInsert";
 		}
 		
+		/**
+		 * 공지사항 등록 처리
+		 * @param communityNotice
+		 * @return
+		 */
+		@PostMapping("/noticeInsert")
+			public String communityNoticeAdd(CommunityNotice communityNotice) {
+				
+				communityNoticeService.communityNoticeAdd(communityNotice);
+				
+				return "redirect:/community/noticeList";
+		}
+		/**
+		 * 게시판 삭제 
+		 * @param boardCode
+		 * @return
+		 */
 		@GetMapping("/boardDelete")
 		public String boardDelete(String boardCode) {
 			communityBoardService.communityBoardDelete(boardCode);
 			
 			return "redirect:/community/boardList";
 		}
-		
+		/**
+		 * 게시판 수정 처리
+		 * @param communityBoard
+		 * @return
+		 */
 		@PostMapping("/boardModify")
 		public String boardModify(CommunityBoard communityBoard) {
 			communityBoardService.communityBoardModify(communityBoard);
@@ -50,6 +151,12 @@ public class CommunityController {
 			return "redirect:/community/boardList";
 		}
 		
+		/**
+		 * 게시판 수정 
+		 * @param boardCode
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/boardModify")
 		public String boardModifyForm (@RequestParam(value = "boardCode", required = false) String boardCode
 								   ,Model model) {
@@ -61,7 +168,12 @@ public class CommunityController {
 			return "community/boardModify";
 		}
 		
-		
+		/**
+		 * 게시판 상세 화면
+		 * @param boardCode
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/boardDetail")
 		public String boardDetail(@RequestParam(value = "boardCode", required = false) String boardCode
 								 ,Model model) {
@@ -75,7 +187,11 @@ public class CommunityController {
 			
 		}
 		
-		//게시판 화면 Board
+		/**
+		 * 게시판 리스트 조회
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/boardList")
 		public String getBoard(Model model) { 
 			
@@ -86,7 +202,12 @@ public class CommunityController {
 			
 			return "community/boardList";
 		}
-		//게시판 등록화면 Board
+		
+		/**
+		 * 게시판 등록
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/boardInsert")
 		public String boardInsert(Model model) {  
 			
@@ -98,6 +219,11 @@ public class CommunityController {
 			return "community/boardInsert";
 		}
 		
+		/**
+		 * 게시판 등록 처리
+		 * @param communityBoard
+		 * @return
+		 */
 		@PostMapping("/boardInsert")
 			public String communityBoardAdd(CommunityBoard communityBoard) {
 				
