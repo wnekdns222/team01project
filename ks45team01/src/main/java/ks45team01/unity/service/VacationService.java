@@ -166,7 +166,17 @@ public class VacationService {
 		vacationInformation.setVacationInfoNum(vacationInfoNum);
 		VacationStandard vacationStandard  = vacationMapper.getVacationStandardByLength(vacationInformation.getLengthOfService());
 		vacationInformation.setServiceNum(vacationStandard.getServiceNum());
+		vacationInformation.setAddVacation(vacationStandard.getAddVacation());
 		vacationMapper.addVacationInfo(vacationInformation);
+	}
+	
+	/**
+	 * 전사원 휴가 정보 조회
+	 */
+	public List<VacationInformation> getVacationInfoAll(){
+		List<VacationInformation> info = vacationMapper.getVacationInfoAll();
+		
+		return info;
 	}
 }	
 

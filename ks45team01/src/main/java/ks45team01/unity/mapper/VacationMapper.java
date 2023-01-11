@@ -76,4 +76,7 @@ public interface VacationMapper {
 	
 	//특정 휴가기준 조회
 	public VacationStandard getVacationStandardByLength(String lengthOfService);
+	
+	//전사원 휴가 정보 조회
+	public List<VacationInformation> getVacationInfoAll();
 }
