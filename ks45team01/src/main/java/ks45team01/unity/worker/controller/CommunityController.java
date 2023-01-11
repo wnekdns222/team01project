@@ -21,14 +21,22 @@ public class CommunityController {
 			this.communityBoardService = communityBoardService;
 		}
 	
-		//공지사항 화면 Notice
+		/**
+		 * 공지사항 리스트 조회
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/noticeList")
 		public String getNotice (Model model) {   
 			model.addAttribute("title", "공지사항 화면");
 			
 			return "community/noticeList";
 		}
-		//공지사항 등록화면 Notice
+		/**
+		 * 공지사항  등록
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/noticeInsert")
 		public String noticeInsert(Model model) {   
 			model.addAttribute("title", "공지사항 등록 화면");
@@ -36,13 +44,22 @@ public class CommunityController {
 			return "community/noticeInsert";
 		}
 		
+		/**
+		 * 게시판 삭제 
+		 * @param boardCode
+		 * @return
+		 */
 		@GetMapping("/boardDelete")
 		public String boardDelete(String boardCode) {
 			communityBoardService.communityBoardDelete(boardCode);
 			
 			return "redirect:/community/boardList";
 		}
-		
+		/**
+		 * 게시판 수정 처리
+		 * @param communityBoard
+		 * @return
+		 */
 		@PostMapping("/boardModify")
 		public String boardModify(CommunityBoard communityBoard) {
 			communityBoardService.communityBoardModify(communityBoard);
@@ -50,6 +67,12 @@ public class CommunityController {
 			return "redirect:/community/boardList";
 		}
 		
+		/**
+		 * 게시판 수정 
+		 * @param boardCode
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/boardModify")
 		public String boardModifyForm (@RequestParam(value = "boardCode", required = false) String boardCode
 								   ,Model model) {
@@ -61,7 +84,12 @@ public class CommunityController {
 			return "community/boardModify";
 		}
 		
-		
+		/**
+		 * 게시판 상세 화면
+		 * @param boardCode
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/boardDetail")
 		public String boardDetail(@RequestParam(value = "boardCode", required = false) String boardCode
 								 ,Model model) {
@@ -75,7 +103,11 @@ public class CommunityController {
 			
 		}
 		
-		//게시판 화면 Board
+		/**
+		 * 게시판 리스트 조회
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/boardList")
 		public String getBoard(Model model) { 
 			
@@ -86,7 +118,12 @@ public class CommunityController {
 			
 			return "community/boardList";
 		}
-		//게시판 등록화면 Board
+		
+		/**
+		 * 게시판 등록
+		 * @param model
+		 * @return
+		 */
 		@GetMapping("/boardInsert")
 		public String boardInsert(Model model) {  
 			
@@ -98,6 +135,11 @@ public class CommunityController {
 			return "community/boardInsert";
 		}
 		
+		/**
+		 * 게시판 등록 처리
+		 * @param communityBoard
+		 * @return
+		 */
 		@PostMapping("/boardInsert")
 			public String communityBoardAdd(CommunityBoard communityBoard) {
 				
