@@ -18,7 +18,7 @@ public interface MemberListMapper {
 	int getMemberListCnt();
 	
 	
-	// 서식글 상세보기
+	// 회원 한명 조회
 	MemberList memberlistOne(String memberNum);
 	
 }

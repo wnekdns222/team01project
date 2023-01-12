@@ -60,7 +60,7 @@ public class ProjectList {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("projectList [projectNum=");
+		builder.append("ProjectList [projectNum=");
 		builder.append(projectNum);
 		builder.append(", memberNum=");
 		builder.append(memberNum);
@@ -101,8 +101,9 @@ public class ProjectList {
 		builder.append("]");
 		return builder.toString();
 	}
-
 	
+
+
 	
 	
 }

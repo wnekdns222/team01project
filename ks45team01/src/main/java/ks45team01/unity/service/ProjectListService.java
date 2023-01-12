@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import ks45team01.unity.dto.ProjectList;
+import ks45team01.unity.dto.ProjectUnit;
 import ks45team01.unity.mapper.ProjectListMapper;
 
 @Service
@@ -34,4 +35,19 @@ public class ProjectListService {
 	}
 	
 	
+	//Project join projectUnit
+	public List<ProjectUnit> ProjectUnit() {
+		
+		List<ProjectUnit> ProjectUnit = projectListMapper.ProjectUnit();
+		
+		return ProjectUnit;
+	}
+	
+	//프로젝트 1개 조회
+	public ProjectList ProjectListOne(String projectNum) {
+		
+		ProjectList projectListOne = projectListMapper.ProjectListOne(projectNum);
+		
+		return projectListOne;
+	}
 }

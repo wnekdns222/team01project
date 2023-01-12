@@ -42,4 +42,12 @@ public class ProjectMemberInsertService {
 		return memberList;
 	}
 	
+	public void ProjectMemberInsert(ProjectMember projectMember) {
+		
+		String projectJoinNum = projectMemberInsertMapper.getCommonNewCode("tb_project_member", "project_join_num");
+		projectMember.setProjectJoinNum(projectJoinNum);
+		projectMemberInsertMapper.ProjectMemberInsert(projectMember);
+		
+		
+	}
 }
