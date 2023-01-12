@@ -74,9 +74,21 @@ public interface VacationMapper {
 	//연차 등록
 	public void addVacationInfo(VacationInformation vacationInformation);
 	
+	//총연차 등록
+	public void updateRemainVacation(String vacationInfoNum);
+	
 	//특정 휴가기준 조회
 	public VacationStandard getVacationStandardByLength(String lengthOfService);
 	
 	//전사원 휴가 정보 조회
 	public List<VacationInformation> getVacationInfoAll();
+	
+	//사원 이름 조회
+	public List<MemberList> getMemberList();
+	
+	//특정 사원 휴가 정보 조회
+	public String getVacationInfoByNameAndYear(VacationInformation vacationInformation);
+	
+	//기타 휴가 등록
+	public void updateVacationInfo(VacationInformation vacationInformation);
 }
