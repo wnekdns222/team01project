@@ -28,27 +28,31 @@
 </th:block>
 <th:block layout:fragment="customContents">
 
-	<form>
+	<form th:action="@{/project/projectMemberInsert}" method="post">
 	<h2>인원추가</h2>
 		<div class="form-group">
 			<label for="workNum">인원설정</label>
 			<div class="form-group mb-0">
-				<select class="js-basic-single form-control" name="state">
+				<select class="js-basic-single form-control" name="memberNum" id="memberNum">
 					<optgroup th:each="dl : ${memberDepartmentList}" th:label="${dl.departmentName}">
 						<th:block th:each="ml : ${memberList}">
-							<option th:if="${dl.departmentNum == ml.departmentNum}" th:value="${ml.memberNum}" th:text="${ml.memberName}"></option>
+							<option th:if="${dl.departmentNum == ml.departmentNum}" th:value="${ml.memberNum}">[[${ml.memberName}]]</option>
 						</th:block>
 						<!-- <option th:each="ml : ${memberList}" th:value="${ml.departmentName}" th:text=""></option> -->
 					</optgroup>
 					
 				</select>
+				
 			</div>
 		</div>
+<!-- 		<input type="hidden" name="projectNum" id="projectNum" th:value="${projectListOne.projectNum}"/> -->
+		<input type="text" name="projectNum" id="projectNum" th:value="${projectListOne.projectNum}"/>
+		
 		
 		<div class="form-group">
 			<label for="writeChangeReason">담당업무 상세내용</label>
-			<textarea class="form-control" name="writeChangeReason"
-				id="writeChangeReason" rows="3" placeholder="Textarea text">
+			<textarea class="form-control" name="joinContent"
+				id="joinContent" rows="3" placeholder="Textarea text">
 	        </textarea>
 		</div>
 
@@ -71,7 +75,7 @@
 						</div>
 					</div>
 					<div class="card-body py-0 table-responsive">
-						<table class="table clients-contant-table mb-0" th:each="pm : ${projectMember}">
+						<table class="table clients-contant-table mb-0">
 							<thead>
 								<tr>
 									<th scope="col">인원배정자</th>
@@ -82,7 +86,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<tr th:each="pm : ${projectMember}">
 									<td>
 										<div class="d-flex align-items-center">
 											<div class="bg-img mr-4">

@@ -66,6 +66,25 @@
 		<result property="useOrNot" 			column="use_or_not"/>
 	</resultMap>
 	
+	
+	<select id="getCommonNewCode" parameterType="String" resultType="String">
+		/* 자동증가코드 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT(#{column}, '_1')
+			ELSE
+				CONCAT(#{column},'_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT(#{column}, '_'), -1) AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${table} ;
+	</select>
+	
+	<insert id="ProjectMemberInsert" parameterType="ProjectMember">
+	INSERT INTO tb_project_member
+	(project_join_num, project_num, member_num, join_start_date, join_content)
+	VALUES (#{projectJoinNum}, #{projectNum}, #{memberNum}, NOW(), #{joinContent});
+	</insert>
+	
 	<select id="projectMemberList" resultMap="projectMemberResultMap">
 	SELECT
 	*
