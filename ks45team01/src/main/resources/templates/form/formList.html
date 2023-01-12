@@ -23,16 +23,14 @@
 		</div>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<div th:fragment="searchFragment">
-			<form th:action="@{/form/formList}" method="get">
-				<select name="searchKey">
-					<option value="formName">서식명</option>
-					<option value="formRegiStrant">작성자</option>
-				</select>
-				<input type="text" name="searchValue" placeholder="검색어를 입력해주세요."/>
-				<button class="btn btn-outline-success" type="submit" style="height: 35px;">검색</button>
-			</form>
-		</div>
+		<form th:action="@{/form/formList}" method="get" style="float: right; margin-bottom: 10px;">
+			<select name="searchKey" style="height: 27px;">
+				<option value="formName">서식명</option>
+				<option value="formRegiStrant">작성자</option>
+			</select>
+			<input type="text" name="searchValue" placeholder="검색어를 입력해주세요."/>
+			<button class="btn btn-outline-success" type="submit" style="height: 35px;">검색</button>
+		</form>
 		<th:block th:text="'서식 개수 : ' + ${cnt}" />
 		<table class="table table-bordered">
 			<thead>
@@ -40,6 +38,8 @@
 					<th>서식번호</th>
 					<th>서식명</th>
 					<th>작성자</th>
+					<th>부서명</th>
+					<th>직급명</th>
 					<th>작성일자</th>
 				</tr>
 			</thead>
@@ -48,7 +48,9 @@
 					<td th:text="${f.formNum}"></td>
 					<td><a th:href="@{/form/formView(formNum=${f.formNum})}">
 							[[${f.formName}]] </a></td>
-					<td th:text="${f.formRegiStrant}"></td>
+					<td th:text="${f.memberList.memberName}"></td>
+					<td th:text="${f.memberPositionList.positionName}"></td>
+					<td th:text="${f.memberDepartmentList.departmentName}"></td>
 					<td th:text="${f.formCommentRegDate}"></td>
 				</tr>
 				<tr th:if="${#lists.isEmpty(formList)}">

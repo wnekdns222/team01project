@@ -36,12 +36,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>appdoc_2</td>
+				<tr th:unless="${#lists.isEmpty(draftList)}" th:each="d : ${draftList}">
+					<td th:text="${d.draftDocNum}"></td>
 					<td><a th:href="@{/approval/draftView}">공문서</a></td>
-					<td>2022-11-15</td>
-					<td>2022-12-02</td>
-					<th scope="row">진행중</th>
+					<td th:text="${d.reportDate}"></td>
+					<td th:text="${d.draftDeadline}"></td>
+					<th th:text="${d.approvalFinalState}" scope="row">진행중</th>
 				</tr>
 			</tbody>
 		</table>
