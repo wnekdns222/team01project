@@ -168,6 +168,7 @@ public class VacationService {
 		vacationInformation.setServiceNum(vacationStandard.getServiceNum());
 		vacationInformation.setAddVacation(vacationStandard.getAddVacation());
 		vacationMapper.addVacationInfo(vacationInformation);
+		vacationMapper.updateRemainVacation(vacationInfoNum);
 	}
 	
 	/**
@@ -178,5 +179,24 @@ public class VacationService {
 		
 		return info;
 	}
+	/**
+	 * 사원 정보 조회
+	 */
+	public List<MemberList> getMemberList(){
+		List<MemberList> memberList = vacationMapper.getMemberList();
+		return memberList;
+	}
+	/**
+	 * 기타 사원 휴가 등록
+	 */
+	public void updateVacationInfo(VacationInformation vacationInformation) {
+		
+		String vacationInfoNum = vacationMapper.getVacationInfoByNameAndYear(vacationInformation);
+		vacationInformation.setVacationInfoNum(vacationInfoNum);
+		log.info("기타 휴가 등록 서비스:{}",vacationInformation);
+		vacationMapper.updateVacationInfo(vacationInformation);
+		vacationMapper.updateRemainVacation(vacationInfoNum);
+	}
+	
 }	
 

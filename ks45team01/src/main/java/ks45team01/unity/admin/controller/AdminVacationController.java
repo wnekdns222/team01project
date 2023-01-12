@@ -167,13 +167,16 @@ public class AdminVacationController {
 		/**
 		 * 휴가 부여 화면
 		 */
-		@GetMapping("settings/vacationInsertAll")
-		public String GetVacationInserAll(Model model) {
-			List<VacationStandard> standard = vacationMapper.getVacationStandard();		
-			model.addAttribute("title","휴가부여");
-			model.addAttribute("standard", standard);
-			return "settings/vacation_insert_all";
-		}
+		
+		  @GetMapping("settings/vacationInsertAll") 
+		  public String GetVacationInserAll(Model model) { 
+			  List<VacationStandard> standard = vacationMapper.getVacationStandard(); model.addAttribute("title","휴가부여");
+			  model.addAttribute("standard", standard); List<MemberList> memberList =
+					  vacationService.getMemberList(); log.info("사원정보 조회 :{}",memberList);
+					  model.addAttribute("memberList", memberList); 
+					  return "settings/vacation_insert_all"; 
+		  }
+		 
 		/**
 		 * 연차등록 화면
 		 * @return
@@ -212,12 +215,23 @@ public class AdminVacationController {
 			return "redirect:/vacation/vacationInfoAllList";
 		}
 		/**
-		 * 기타 휴가 등록
+		 * 기타 휴가 등록 화면
 		 */
-		@GetMapping("settings/vacationInsertOther")
-		public String addVacationOthers() {
-			
-			return "settings/vacation_insert_all";
+		@GetMapping("settings/vacation_insert_other:: vacationInsertOther")
+		public String addVacationOthers(Model model) {
+			List<MemberList> memberList = vacationService.getMemberList();
+			log.info("사원정보 조회 :{}",memberList);
+			model.addAttribute("memberList", memberList);
+			return "settings/vacation_insert_other";
+		}
+		/**
+		 * 기타 휴가 등록 처리
+		 */
+		@PostMapping("settings/vacationInsertOther")
+		public String addVacationOthers(VacationInformation vacationInformation) { 
+			log.info("기타 휴가 등록 정보:{}",vacationInformation);
+			vacationService.updateVacationInfo(vacationInformation);
+			return "redirect:/vacation/vacationInfoAllList";
 		}
 		/**
 		 * 휴가 중분류 입력 화면

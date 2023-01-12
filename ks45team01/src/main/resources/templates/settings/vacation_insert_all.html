@@ -43,9 +43,9 @@
                                     <div class="card-body table-responsive p-0 tab-pane fade active show" id="home" role="tabpanel">
                                         <div th:include="~{settings/vacation_insert:: vacationInsert}"></div>
                                     </div>
-                                    <div class="card-body table-responsive p-0 tab-pane fade" id="other" role="tabpanel">
+                                     <div class="card-body table-responsive p-0 tab-pane fade" id="other" role="tabpanel">
                                        <div th:include="~{settings/vacation_insert_other:: vacationInsertOhter}"></div>
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -85,5 +85,9 @@
 										}
 							})
 				})
+				const today = new Date();
+				const year = today.getFullYear();
+		
+				$('#useVacationYear').val(year);
 		</script>
 </html>
