@@ -90,9 +90,11 @@ public class CommunityController {
 		 * @return
 		 */
 		@GetMapping("/noticeList")
-		public String getNotice(Model model) { 
+		public String getNotice(@RequestParam(value="searchKey", required = false) String searchKey
+   								,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue
+								,Model model) { 
 			
-			List<CommunityNotice> communityNoticeList = communityNoticeService.communityNoticeList();
+			List<CommunityNotice> communityNoticeList = communityNoticeService.getNoticeCode(searchKey, searchValue);			
 			
 			model.addAttribute("title", "공지사항 화면");
 			model.addAttribute("communityNoticeList", communityNoticeList);

@@ -51,5 +51,25 @@ public class CommunityNoticeService {
 		
 		return communityNoticeMapper.communityNoticeDelete(noticeCode);
 	}
-
+	
+	/**
+	 * 목록 조회
+	 * @return List<CommunityNotice>
+	 */
+	public List<CommunityNotice> getNoticeCode(String searchKey, String searchValue){
+		
+		
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "noticeName":
+				searchKey = "notice_name";
+				break;
+			case "memberNum":
+				searchKey = "member_num";
+				break;
+			}
+		}
+		return communityNoticeMapper.getNoticeList(searchKey, searchValue);
+		
+	}
 }
