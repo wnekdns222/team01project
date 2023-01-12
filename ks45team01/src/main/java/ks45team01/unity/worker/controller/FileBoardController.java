@@ -60,7 +60,7 @@ public class FileBoardController {
 	
 	@GetMapping("/fileBoardUpdate")
 	public String fileUpdateForm(@RequestParam(value = "fileBoardNum", required = false) String fileBoardNum
-							,Model model) {
+								,Model model) {
 		
 		FileBoard boardFileView = fileBoardService.boardFileView(fileBoardNum);
 		
@@ -111,7 +111,7 @@ public class FileBoardController {
 				
 		fileBoardService.addBoardFile(uploadfile, fileRealPath, fileBoard);
 		
-		return "redirect:/fileBoard/fileBoardList";
+		return "redirect:/fileBoard/fileList";
 	}
 	
 	@GetMapping("/addBoardFile")

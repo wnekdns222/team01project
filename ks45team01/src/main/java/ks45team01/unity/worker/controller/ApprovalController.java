@@ -1,13 +1,23 @@
 package ks45team01.unity.worker.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ks45team01.unity.dto.Approval;
+import ks45team01.unity.service.ApprovalService;
+
 @Controller
 @RequestMapping("/approval")
 public class ApprovalController {
+	
+	private final ApprovalService approvalService;
+	public ApprovalController(ApprovalService approvalService) {
+		this.approvalService = approvalService;
+	}
 	
 	@GetMapping("workCorrectInsert")
 	public String workCorrectInsert(Model model) {
@@ -213,8 +223,10 @@ public class ApprovalController {
 	 */
 	@GetMapping("/draftList")
 	public String draftList(Model model) {
-		
+
+		List<Approval> draftList = approvalService.draftList();
 		model.addAttribute("title", "기안함");
+		model.addAttribute("draftList", draftList);
 		
 		return "approval/draftList";
 	}
