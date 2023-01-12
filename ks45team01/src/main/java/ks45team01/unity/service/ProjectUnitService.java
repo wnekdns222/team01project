@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import ks45team01.unity.dto.ProjectUnit;
-import ks45team01.unity.mapper.ProjectUnitMapper;
+import ks45team01.unity.mapper.ProjectListMapper;
 
 @Service
 public class ProjectUnitService {
 
 	
-	private final ProjectUnitMapper projectUnitMapper;
-	public ProjectUnitService(ProjectUnitMapper projectUnitMapper) {
-		this.projectUnitMapper = projectUnitMapper;
+	private final ProjectListMapper projectListMapper;
+	public ProjectUnitService(ProjectListMapper projectListMapper) {
+		this.projectListMapper = projectListMapper;
 	}
 	
 	/**
@@ -21,7 +21,7 @@ public class ProjectUnitService {
 	 */
 	public List<ProjectUnit> projectUnitList(){
 		
-		List<ProjectUnit> projectUnit = projectUnitMapper.projectUnitList();
+		List<ProjectUnit> projectUnit = projectListMapper.projectUnitList();
 		
 		return projectUnit;
 	}

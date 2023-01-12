@@ -2,6 +2,7 @@ package ks45team01.unity.worker.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ks45team01.unity.dto.MemberDepartmentList;
@@ -142,17 +144,34 @@ public class ProjectController {
 	
 	@GetMapping("/projectMemberInsert")
 	public String getProjectMemberInsertForm(String projectNum
-											,Model model) {
+											,Model model
+											,@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage) {
 		List<ProjectMember> projectMember = projectMemberInsertService.projectMemberList();
 		List<MemberDepartmentList> memberDepartmentList = projectMemberInsertService.memberDepartmentList();
+		
 		ProjectList projectListOne = projectListService.ProjectListOne(projectNum);
-		List<MemberList> memberList = projectMemberInsertService.memberList();
+		List<MemberList> memberList = projectMemberInsertService.memberList(null);
+		Map<String, Object> paramMap = projectMemberInsertService.getMemberList(currentPage);
+		
+		
 		System.out.println(projectNum + "<-- projectNum GetProjectMemberInsertForm");
+		
+		int lastPage = (int) paramMap.get("lastPage");
+		int startPageNum = (int) paramMap.get("startPageNum");
+		int endPageNum = (int) paramMap.get("endPageNum");
+		
 		model.addAttribute("title","프로젝트멤버리스트등록화면");
 		model.addAttribute("memberDepartmentList",memberDepartmentList);
 		model.addAttribute("projectMember",projectMember);
 		model.addAttribute("memberList",memberList);
 		model.addAttribute("projectListOne",projectListOne);
+		
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		
+		
 	return "project/project_member_insert";
 	}
 	
