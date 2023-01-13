@@ -58,14 +58,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:if="${not #lists.isEmpty(category)}"
+						<tr  th:if="${not #lists.isEmpty(category)}"
 							th:each="c : ${category}">
-							<td  id="typeCode" class="hidden" th:text="${c.vacationCategoryNum}"></td>
+							<td id="typeCode" class="hidden" th:text="${c.vacationCategoryNum}"></td>
 							<td th:text="${c.vacationCategoryName}"></td>
 							<td>
 								<div class="form-group">
 									<div class="checkbox checbox-switch switch-primary">
-										<label> <input type="checkbox" name="categoryVacationUse" 
+										<label> <input type="checkbox" name="categoryUse" 
 											th:checked="${c.vacationUse}"/> <span></span>
 										</label>
 									</div>
@@ -102,13 +102,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:if="${not #lists.isEmpty(sort)}" th:each="s : ${sort}">
+						<tr class="trClass" th:if="${not #lists.isEmpty(sort)}" th:each="s : ${sort}">
 							<td id="typeCode" class="hidden" th:text="${s.vacationSortNum}"></td>
 							<td th:text="${s.vacationSortName}"></td>
 							<td>
 								<div class="form-group">
 									<div class="checkbox checbox-switch switch-primary">
-										<label> <input type="checkbox" name="sortVacationUse" 
+										<label> <input type="checkbox" name="sortVacationUse" id="sortVacationUse"
 											th:checked="${s.vacationUse}" /> <span></span>
 										</label>
 									</div>
@@ -156,7 +156,7 @@
 							<td>
 								<div class="form-group">
 									<div class="checkbox checbox-switch switch-primary">
-										<label> <input type="checkbox" name="typeVacationUse" 
+										<label> <input type="checkbox" name="typeVacationUse" id="typeVacationUse"
 											th:checked="${t.vacationUse}" /> <span></span>
 										</label>
 									</div>
@@ -203,7 +203,7 @@
 							<td>
 								<div class="form-group">
 									<div class="checkbox checbox-switch switch-primary">
-										<label> <input type="checkbox" name="vacationStandardUse" 
+										<label> <input type="checkbox" name="vacationStandardUse" id="vacationStandardUse"
 											th:checked="${st.vacationStandardUse}" /> <span></span>
 										</label>
 									</div>
@@ -221,38 +221,32 @@
 </th:block>
 
 <!-- 사용자 지정 js 파일 -->
-	
-	<th:block layout:fragment="customJs">
-		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	</th:block>
+
+<th:block layout:fragment="customJs">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</th:block>	
 	
 <!-- 사용자 지정 js script -->
 <th:block layout:fragment="customScript">
 
 	<script>
 	
-	
-	const $categoryVacationUseBtn = document.querySelectorAll('input[name="categoryVacationUse"]');
-	const $sortVacationUseBtn = document.querySelectorAll('input[name="sortVacationUse"]');
-	const $typeVacationUseBtn = document.querySelectorAll('input[name="typeVacationUse"]');
-	const $vacationStandardUseBtn = document.querySelectorAll('input[name="vacationStandardUse"]');
-	const url = '';
-	
-	
-	    function useBtn(btn){
-				 if($(btn).is(':checked')){
-					//const check =  $(btn).is(":checked")=="on" ? 'ON' : 'OFF';
-					const check = $(btn).attr("checked");
-					const checkId = $(btn).parent('div').parent('div').parent('tr').child('td').text();
+	 function useBtn(btn,idx){
+	    	let check = '';
+	    	let checkId ='';
+				 if($(btn).is(':checked')==true){
+					$(btn).attr('value', 'on');
+					check = $(btn).val();
+				    checkId =  $(btn).parents(':eq(0)').text();
 					alert(`true : ${check}`);
 					console.log(`${checkId}`);
-				}else if($(btn).is(':checked')==false){
-					const check = $(btn).attr("checked","off");
-					const checkId = $(btn).parent('div').parent('div').parent('tr').child('td').text();
+				}else{
+					$(btn).attr('value', 'off');
+					check = $(btn).val();
+					checkId = $(btn).parents(':eq(0)').text();
 					alert(`false : ${check}`);
 					console.log(`${checkId}`);
 				}
-	
 		 function ajax_Start(url,check){
 			$.ajax({
 	            url:url,
@@ -269,30 +263,14 @@
 		 	});
 		 	}
 	    }
-	    
-	    $($categoryVacationUseBtn).each(function(){
-			this.addEventListener('click', function(){
+		
+		 $("input[name=categoryUse]").each(function(idx,item){
+			$(item).change(function(){
+				console.log(item);
 				const url='/settings/vacationCategoryModifyA(vacationCategoryNum=${c.checkId},vacationUse=${c.vacationUse})';
-				useBtn($categoryVacationUseBtn);
+				useBtn(item,idx);
 			});
 	    });
-	    $($sortVacationUseBtn).each(function(){
-			this.addEventListener('click', function(){
-				const url='/settings/vacationSortModifyA(vacationSortNum=${s.vacationSortNum},vacationUse=${s.vacationUse})';
-				useBtn($sortVacationUseBtn);
-			});
-	    });
-	    $($typeVacationUseBtn).each(function(){
-			this.addEventListener('click', function(){
-				const url='/settings/vacationTypeModifyA(vacationTypeNum=${t.vacationTypeNum},vacationUse=${t.vacationUse})';
-				useBtn($typeVacationUseBtn);
-			});
-	    });
-	    $($vacationStandardUseBtn).each(function(){
-			this.addEventListener('click', function(){
-				const url='/settings/vacationStandardModifyA(vacationStandardNum=${st.vacationStandardNum},vacationUse=${st.vacationStandardUse})';
-				useBtn($vacationStandardUseBtn);
-			});
-	    });
-</script>
+	
+	</script>
 </html>

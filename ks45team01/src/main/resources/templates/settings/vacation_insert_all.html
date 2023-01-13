@@ -54,15 +54,13 @@
                
          
 	</th:block>
-		<!-- 사용자 지정 js 파일 -->
-
-	<th:block layout:fragment="customJs">
-		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	</th:block>
 
 	<!-- 사용자 지정 js script -->
 	<th:block layout:fragment="customScript">
 		<script>
+		$("#duallistbox").bootstrapDualListbox({
+		    // see next for specifications
+		});
 			$('#lengthOfService').change(function() {
 				const length = $('#lengthOfService option:selected').text();
 				let request = $.ajax({
