@@ -64,6 +64,7 @@
 									class="btn btn-primary mt-2">프로젝트 생성</a>
 				</div>
 			</div>
+	
 			<div class="card-body">
 				<div class="row">
 					<div class="col-sm-3" th:each="pl : ${projectList}">
@@ -89,8 +90,9 @@
 								<a th:href="@{/project/projectDetail(projectNum=${pl.projectNum})}" class="btn btn-primary mt-2">들어가기</a>
 								<a th:href="@{/project/projectMemberInsert(projectNum=${pl.projectNum})}"
 									class="btn btn-primary mt-2">인원설정</a>
-
 								<h6 th:text="|인원수 : ${pl.projectJoin}|"></h6>
+								
+							
 							</div>
 						</div>
 					</div>
@@ -132,6 +134,7 @@
 									their desires.</p>
 								<a href="javascript:void(0)" class="btn btn-primary mt-2">완료폴더로
 									이동</a> <a href="javascript:void(0)" class="btn btn-primary mt-2">삭제</a>
+									
 							</div>
 						</div>
 					</div>

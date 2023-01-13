@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ks45team01.unity.mapper.MemberPositionListMapper">
+<mapper namespace="ks45team01.unity.mapper.MemberListMapper">
 	<resultMap type="MemberPositionList" id="MemberPositionListResultMap">
 		<id property="positionNum" column="position_num"/>
 		<result property="positionName" column="position_name"/>

@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ks45team01.unity.dto.ProjectBoard;
-import ks45team01.unity.mapper.ProjectBoardMapper;
+import ks45team01.unity.mapper.ProjectListMapper;
 @Service
 public class ProjectBoardService {
 
 
 
 	
-	private final ProjectBoardMapper projectBoardMapper;
-	public ProjectBoardService(ProjectBoardMapper projectBoardMapper) {
-		this.projectBoardMapper = projectBoardMapper;
+	private final ProjectListMapper projectListMapper;
+	public ProjectBoardService(ProjectListMapper projectListMapper) {
+		this.projectListMapper = projectListMapper;
 	}
 	
 	/**
@@ -23,7 +23,7 @@ public class ProjectBoardService {
 	 */
 	public List<ProjectBoard> projectBoardList(){
 		
-		List<ProjectBoard> projectBoard = projectBoardMapper.projectBoardList();
+		List<ProjectBoard> projectBoard = projectListMapper.projectBoardList();
 		
 		return projectBoard;
 	}

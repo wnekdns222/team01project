@@ -54,6 +54,15 @@
 	<where>
 	project_num = #{projectNum}
 	</where>
+	</select> 
+
+	<select id="ProjectmemberCnt" resultType="int" parameterType="String">
+		SELECT
+		COUNT(1)
+		FROM
+		tb_project_member AS pm
+		WHERE
+		pm.project_num = #{projectNum}
 	</select>
-	
+
 </mapper>

@@ -85,13 +85,13 @@ public class MemberController {
 	}
 	
 	@GetMapping("/MemberInsert")
-	public String GetMemberInsert(Model model) {
+	public String getMemberInsert(Model model) {
 		model.addAttribute("title","사원등록화면");
 	return "member/member_insert";
 	}
 	
 	@GetMapping("/MemberModify")
-	public String GetMemberModify(Model model) {
+	public String getMemberModify(Model model) {
 		
 		List<MemberList> memberModifyList = memberModifyService.memberModifyList();
 		
@@ -101,13 +101,13 @@ public class MemberController {
 	}
 	
 	@GetMapping("/MemberDelete")
-	public String GetMemberDelete(Model model) {
+	public String getMemberDelete(Model model) {
 		model.addAttribute("title","사원삭제화면");
 	return "member/member_delete";
 	}
 	
 	@GetMapping("/MemberDepartmentList")
-	public String GetMemberDepartmentList(Model model) {
+	public String getMemberDepartmentList(Model model) {
 		
 		List<MemberDepartmentList> memberDepartmentList = memberDepartmentListService.memberDepartmentList(); 	
 		model.addAttribute("title","부서목록화면");
@@ -117,7 +117,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/MemberDepartmentInsert")
-	public String GetMemberDepartmentInsert(Model model) {
+	public String getMemberDepartmentInsert(Model model) {
 		
 		model.addAttribute("title","부서등록화면");
 	return "member/member_department_insert";
@@ -125,14 +125,14 @@ public class MemberController {
 	
 	
 	@GetMapping("/MemberDepartmentModify")
-	public String GetMemberDepartmentModify(Model model) {
+	public String getMemberDepartmentModify(Model model) {
 		
 		model.addAttribute("title", "부서수정화면");
 		return "member/member_department_modify";
 	}
 	
 	@GetMapping("/MemberPositionList")
-	public String GetMemberPositionList(Model model) {
+	public String getMemberPositionList(Model model) {
 		
 		List<MemberPositionList> memberPositionList = memberPositionListService.memberPositionList();
 		
@@ -142,19 +142,19 @@ public class MemberController {
 	}
 	
 	@GetMapping("/MemberPositionInsert")
-	public String GetMemberPositionInsert(Model model) {
+	public String getMemberPositionInsert(Model model) {
 		model.addAttribute("title","직급등록화면");
 	return "member/member_position_insert";
 	}
 	
 	@GetMapping("/MemberPositionModify")
-	public String GetMemberPositionModify(Model model) {
+	public String getMemberPositionModify(Model model) {
 		model.addAttribute("title","직급수정화면");
 	return "member/member_position_modify";
 	}
 	
 	@GetMapping("/MemberLevelList")
-	public String GetMemberLevelList(Model model) {
+	public String getMemberLevelList(Model model) {
 		
 		List<MemberLevel> memberLevelList = memberLevelService.memberLevelList();
 		
@@ -164,13 +164,13 @@ public class MemberController {
 	}
 	
 	@GetMapping("/MemberLevelInsert")
-	public String GetMemberLevelInsert(Model model) {
+	public String getMemberLevelInsert(Model model) {
 		model.addAttribute("title","사원권환등록 화면");
 	return "member/member_level_insert";
 	}
 	
 	@GetMapping("/MemberLevelModify")
-	public String GetMemberLevelModify(String levelCode
+	public String getMemberLevelModify(String levelCode
 									   ,Model model) {
 		
 		MemberLevel memberLevelDetail = memberLevelService.memberLevelDetail(levelCode);
@@ -183,19 +183,19 @@ public class MemberController {
 	
 	
 	@GetMapping("/MemberPasswordModify")
-	public String GetMemberPasswordModify(Model model) {
+	public String getMemberPasswordModify(Model model) {
 		model.addAttribute("title","사원패스워드 변경 화면");
 	return "member/member_password_modify";
 	}
 	
 	@GetMapping("/MemberAdmin")
-	public String GetMemberAdmin(Model model) {
+	public String getMemberAdmin(Model model) {
 		model.addAttribute("title","사원 관리페이지");
 	return "member/memberAdmin";
 	}
 	
 	@GetMapping("/MemberDepartMentManige")
-	public String GetMemberDepartMentManige(Model model) {
+	public String getMemberDepartMentManige(Model model) {
 		
 		List<DepartmentManage> departmentManage = departmentManageService.departmentManageSe();
 		
@@ -205,7 +205,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/MemberPositionManige")
-	public String GetMemberPositionManige(Model model) {
+	public String getMemberPositionManige(Model model) {
 		
 		List<PositionManage> positionManage = positionManageService.positionManageSe();
 		
