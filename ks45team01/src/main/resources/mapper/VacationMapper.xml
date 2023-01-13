@@ -43,7 +43,7 @@
 		<result property="correctMemberNum" column="correct_member_num" />
 		<result property="correctCate" column="correct_date" />
 	</resultMap>
-	<resultMap type="MemberList" id="MemberListResultMap">
+	<resultMap type="MemberList" id="memberListResultMap">
 		<id property="memberNum" column="member_num"/>
 		<result property="memberPw" column="member_pw"/>
 		<result property="memberName" column="member_name"/>
@@ -64,7 +64,10 @@
 		<result property="lengthOfService" column="length_of_service"/>
 		<result property="addVacation" column="add_vacation"/>
 		<result property="rewardVacationNumber" column="reward_vacation_number"/>
-		<result property="replaceVacationDay" column="replace_vacation_day"/>	
+		<result property="replaceVacationDay" column="replace_vacation_day"/>
+		<result property="rewardVacationNumber" column="reward_vacation_number"/>
+		<result property="sickVacationDay" column="sick_vacation_day"/>		
+		<result property="personalBuisinessVacationDay" column="personal_buisiness_vacation_day"/>
 		<result property="remainVacationDay" column="remain_vacation_day"/>
 		<result property="remainVacationTime" column="remain_vacation_time"/>
 		<result property="vacationStandardUse" column="vacation_standard_use"/>
@@ -73,7 +76,7 @@
 		<result property="regDate" column="reg_date"/>
 		<result property="correctMemberNum" column="correct_member_num"/>
 		<result property="correctDate" column="correct_date"/>
-			<association property="MemberList" javaType="MemberList">
+			<association property="memberList" javaType="MemberList">
 					<id property="memberNum" column="member_num"/>
 					<result property="memberPw" column="member_pw"/>
 					<result property="memberName" column="member_name"/>
@@ -88,6 +91,20 @@
 					<result property="memberInsertDate" column="member_insert_date"/>
 			</association>	
 	</resultMap>
+	<resultMap type="MemberList" id="memberListMap">
+		<id property="memberNum" column="member_num"/>
+		<result property="memberPw" column="member_pw"/>
+		<result property="memberName" column="member_name"/>
+		<result property="memberGender" column="member_gender"/>
+		<result property="memberEmail" column="member_email"/>
+		<result property="memberBirth" column="member_birth"/>
+		<result property="memberPhone" column="member_phone"/>	
+		<result property="memberDormant" column="member_dormant"/>
+		<result property="memberDormantDate" column="member_dormant_date"/>	
+		<result property="departmentNum" column="department_num"/>	
+		<result property="positionNum" column="position_num"/>	
+		<result property="memberInsertDate" column="member_insert_date"/>	
+	</resultMap> 
 	<select id="getCommonNewCode" parameterType="String" resultType="String">
 		/* 자동증가코드 */
 		SELECT
@@ -275,7 +292,7 @@
 		,correct_date=NOW()
 		WHERE vacation_sort_num=#{vacationSortNum};
 	</update>
-	<select id="getMemberNameByLength" parameterType="String" resultType="List" resultMap="MemberListResultMap">
+	<select id="getMemberNameByLength" parameterType="String" resultType="List" resultMap="memberListResultMap">
 		/* 근속연수에 따른 사원이름 */
 		select
 			*
@@ -286,7 +303,7 @@
 	</select>
 	<insert id="addVacationInfo" parameterType="VacationInformation">
 		/* 연차 등록 */
-		INSERT INTO tb_vacation_standard
+		INSERT INTO tb_vacation_information
 			(vacation_info_num,
 			member_num,
 			service_num, 
@@ -297,7 +314,15 @@
 			)
 		VALUES ( #{vacationInfoNum}, #{memberNum}, #{serviceNum}, #{lengthOfService}, #{addVacation}, #{useVacationYear}, NOW());
 	</insert>
+	<update id="updateRemainVacation" parameterType="String">
+		/* 총연차 수 계산 */
+			UPDATE tb_vacation_information
+			SET
+				remain_vacation_day=sf_remainVacation(#{vacationInfoNum})
+			WHERE vacation_info_num=#{vacationInfoNum};
+	</update>
 	<select id="getVacationStandardByLength" parameterType ="String" resultMap ="vacationStandardMap">
+		/* 특정 휴가기준 조회 */
 		SELECT
 			*
 		from
@@ -307,4 +332,65 @@
 			and
 		s.vacation_standard_use = 'Y';
 	</select>
+	<select id="getVacationInfoAll" resultType="List" resultMap="vacationInformationMap">
+		/* 전사원 휴가 정보 조회 */
+		SELECT
+			*
+		FROM	
+			tb_vacation_information AS v
+		INNER JOIN
+			tb_member AS m
+			on
+			v.member_num = m.member_num;
+	</select>
+	<select id="getMemberList" resultType="List" resultMap="memberListMap">
+	/* 사원 조회 */
+		SELECT
+			*
+		FROM
+			tb_member;
+	</select>
+	<select id="getVacationInfoByNameAndYear" resultType="String">
+		/* 휴가 정보 pk 값 조회 */
+		SELECT
+			i.vacation_info_num
+		FROM
+			tb_member AS m
+			INNER join
+			tb_vacation_information AS i
+			on
+			m.member_num = i.member_num
+			where
+			i.use_vacation_year = #{useVacationYear}
+			and
+			m.member_num = #{memberNum};
+	</select> 
+	<update id="updateVacationInfo" parameterType="VacationInformation" >
+		UPDATE tb_vacation_information
+		<trim prefix="SET" prefixOverrides=",">
+		<if test="rewardVacationNumber != null and rewardVacationNumber != ''">
+		reward_vacation_number=#{rewardVacationNumber},
+		</if>
+		<if test="replaceVacationDay != null and replaceVacationDay != ''">
+		replace_vacation_day=#{replaceVacationDay},
+		</if>
+		<if test="sickVacationDay != null and sickVacationDay != ''">
+		sick_vacation_day=#{sickVacationDay},
+		</if>
+		<if test="personalBuisinessVacationDay != null and personalBuisinessVacationDay != ''">
+		personal_buisiness_vacation_day=#{personalBuisinessVacationDay},
+		</if>
+		<if test="remainVacationTime != null and remainVacationTime != ''">
+		remain_vacation_time=0,
+		</if>
+		<if test="rewardVacationNumber != null and rewardVacationNumber != ''">
+		use_vacation_year=#{useVacationYear},
+		</if>
+		<if test="correctMemberNum != null and correctMemberNum != ''">
+		correct_member_num=#{correctMemberNum},
+		</if>
+		</trim>
+		correct_date=NOW()
+		WHERE vacation_info_num=#{vacationInfoNum};
+	</update>
 </mapper>

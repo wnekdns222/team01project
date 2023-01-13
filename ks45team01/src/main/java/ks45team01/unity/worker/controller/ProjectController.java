@@ -1,20 +1,28 @@
 package ks45team01.unity.worker.controller;
 
+
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.ProjectBoard;
 import ks45team01.unity.dto.ProjectList;
+import ks45team01.unity.dto.ProjectMember;
 import ks45team01.unity.dto.ProjectRequest;
 import ks45team01.unity.dto.ProjectUnit;
 import ks45team01.unity.service.MemberListService;
 import ks45team01.unity.service.ProjectBoardService;
 import ks45team01.unity.service.ProjectListService;
+import ks45team01.unity.service.ProjectMemberInsertService;
 import ks45team01.unity.service.ProjectRequestService;
 import ks45team01.unity.service.ProjectUnitService;
 
@@ -23,6 +31,9 @@ import ks45team01.unity.service.ProjectUnitService;
 @RequestMapping("/project")
 
 public class ProjectController {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(ProjectController.class);
 
 	/**
 	 *  http://localhost/project/projectList접속시  
@@ -36,27 +47,37 @@ public class ProjectController {
 	private final ProjectBoardService projectBoardService;
 	private final ProjectRequestService projectRequestService;
 	private final MemberListService memberListService;
+	private final ProjectMemberInsertService projectMemberInsertService;
 	public ProjectController(ProjectListService projectListService
 							,ProjectUnitService projectUnitService
 							,ProjectBoardService projectBoardService
 							,ProjectRequestService projectRequestService
-							,MemberListService memberListService) {
+							,MemberListService memberListService
+							,ProjectMemberInsertService projectMemberInsertService) {
 		this.projectListService = projectListService;
 		this.projectUnitService = projectUnitService;
 		this.projectBoardService = projectBoardService;
 		this.projectRequestService = projectRequestService;
 		this.memberListService = memberListService;
+		this.projectMemberInsertService = projectMemberInsertService;
 	}
 	
 	
 	@GetMapping("/projectList")
-	public String GetProjectList(Model model) {
-		List<ProjectList> projectList = projectListService.projectListSe();
+	public String getProjectList(Model model
+								,String projectNum) {
 		
+		List<ProjectList> projectList = projectListService.projectListSe();
+		List<ProjectUnit> ProjectUnit = projectListService.ProjectUnit();
+		ProjectList projectListOne = projectListService.ProjectListOne(projectNum);
+		
+		model.addAttribute("projectListOne",projectListOne);
 		model.addAttribute("projectList", projectList);
+		model.addAttribute("ProjectUnit",ProjectUnit);
 		model.addAttribute("title","프로젝트메인화면");
 		return "project/project";
 	}
+	
 	
 	
 	/*
@@ -70,7 +91,7 @@ public class ProjectController {
 	 */
 	
 	@GetMapping("/projectInsert")
-	public String GetProjectInsert(Model model) {
+	public String getProjectInsert(Model model) {
 		
 		List<ProjectUnit> projectUnit = projectUnitService.projectUnitList();
 		
@@ -81,7 +102,7 @@ public class ProjectController {
 	
 	
 	@GetMapping("/projectModify")
-	public String GetProjectModify(/* 등록자 아이디에 따른 수정권한 하기
+	public String getProjectModify(/* 등록자 아이디에 따른 수정권한 하기
 			 */Model model) {
 		
 		/**
@@ -100,15 +121,38 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/projectMember")
-	public String GetProjectMemberList(Model model) {
+	public String getProjectMemberList(Model model) {
 		model.addAttribute("projectMember","프로젝트멤버리스트화면");
 	return "project/project_member";
 	}
 	
 	
+	@PostMapping("/projectMemberInsert")
+	public String getProjectMemberInsert(ProjectMember projectMember
+										,String projectNum
+										,RedirectAttributes reAttr) {
+		
+		projectListService.ProjectListOne(projectNum);
+		projectMemberInsertService.ProjectMemberInsert(projectMember);
+		log.info("프로젝트 멤버 추가 정보:{}",projectMember);
+		reAttr.addAttribute("projectNum", projectNum);
+		
+		return "redirect:/project/projectMemberInsert";
+	}
+	
 	@GetMapping("/projectMemberInsert")
-	public String GetProjectMemberInsert(Model model) {
-		model.addAttribute("projectMemberInsert","프로젝트멤버리스트등록화면");
+	public String getProjectMemberInsertForm(String projectNum
+											,Model model) {
+		List<ProjectMember> projectMember = projectMemberInsertService.projectMemberList();
+		List<MemberDepartmentList> memberDepartmentList = projectMemberInsertService.memberDepartmentList();
+		ProjectList projectListOne = projectListService.ProjectListOne(projectNum);
+		List<MemberList> memberList = projectMemberInsertService.memberList();
+		System.out.println(projectNum + "<-- projectNum GetProjectMemberInsertForm");
+		model.addAttribute("title","프로젝트멤버리스트등록화면");
+		model.addAttribute("memberDepartmentList",memberDepartmentList);
+		model.addAttribute("projectMember",projectMember);
+		model.addAttribute("memberList",memberList);
+		model.addAttribute("projectListOne",projectListOne);
 	return "project/project_member_insert";
 	}
 	

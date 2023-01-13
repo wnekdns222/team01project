@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
-
+<head>
+	<title th:text=${title}></title>
+</head>
 <th:block layout:fragment="customCrumbbar">
 	<div class="row">
 		<div class="col-md-12 m-b-30">
@@ -37,26 +39,28 @@
 				<th scope="col">기본연차휴가일수</th>
 				<th scope="col">포상휴가일수</th>
 				<th scope="col">대체휴가일수</th>
+				<th scope="col">경조사휴가일수</th>
+				<th scope="col">병가일수</th>
 				<th scope="col">휴가잔여일</th>
 				<th scope="col">휴가잔여시간</th>
 				<th scope="col">사용연도</th>
 			</tr>
 		</thead>
 		<tbody>
-			<!-- <tr th:if="${not #lists.isEmpty(worktypeList)}" th:each="wt : ${worktypeList}">
-                  <td th:text="${wt.workTypeNum}"></td>
-                  <td th:text="${wt.memberNum}"></td>
-                  <td th:text="${wt.workName}"></td>
-                  <td th:text="${wt.workDate}"></td>
-                  <td th:text="${wt.attendanceTime}"></td>
-                  <td th:text="${wt.leaveWorkTime}"></td>
-                  <td th:text="${wt.workTypeUsePeriod}"></td>
-                  <td>
-						<a th:href="@{/settings/workTypeModify(workTypeNum=${wt.workTypeNum})}">수정</a>
-					</td>
+			<tr th:if="${not #lists.isEmpty(infoList)}" th:each="i : ${infoList}">
+                  <td th:text="${i.memberList.memberName}"></td>
+                  <td th:text="${i.lengthOfService}"></td>
+                  <td th:text="${i.addVacation}"></td>
+                  <td th:text="${i.rewardVacationNumber}"></td>
+                  <td th:text="${i.replaceVacationDay}"></td>
+                  <td th:text="${i.personalBuisinessVacationDay}"></td>
+                  <td th:text="${i.sickVacationDay}"></td>
+                  <td th:text="${i.remainVacationDay}"></td>
+                  <td th:text="${i.remainVacationTime}"></td>
+                  <td th:text="${i.useVacationYear}"></td>
               </tr>
-              <tr th:unless="${not #lists.isEmpty(worktypeList)}">
-              </tr> -->
+              <tr th:unless="${not #lists.isEmpty(infoList)}">
+              </tr>
 		</tbody>
 	</table>
 

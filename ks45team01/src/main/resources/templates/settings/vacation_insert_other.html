@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<head>
+	<!-- plugin stylesheets -->
+	<link rel="stylesheet" type="text/css" href="assets/css/vendors.css">
+	<!-- app style -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<th:block layout:fragment="customCrumbbar">
+	<div class="row">
+		<div class="col-md-12 m-b-30">
+			<!-- begin page title -->
+			<div class="d-block d-lg-flex flex-nowrap align-items-center">
+				<div class="page-title mr-4 pr-4 border-right">
+					<h1>기타 휴가부여</h1>
+				</div>
+				<div class="breadcrumb-bar align-items-center">
+					<nav>
+						<ol class="breadcrumb p-0 m-b-0">
+							<li class="breadcrumb-item"><a href="/"><i
+									class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item">휴가기준 설정</li>
+							<li class="breadcrumb-item active text-primary"
+								aria-current="page">기타 휴가부여</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end page title -->
+</th:block>
+<th:block layout:fragment="customContents">
+	 <th:block th:fragment="vacationInsertOhter"> 
+		<form th:action="@{/settings/vacationInsertOther}" method="post"
+			style="margin-top: 20px; margin-bottom: 20px; width: 90%; margin-left: 20px;">
+			<div class="form-group">
+				<label for="rewardVacationNumber">포상휴가</label> <select
+					class="form-control" id="rewardVacationNumber"
+					name="rewardVacationNumber" style="width: 300px;" >
+					<option></option>
+					<th:block th:each="num : ${#numbers.sequence(1, 10)}">
+						<option th:text="|${num}|"></option>
+					</th:block>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="replaceVacationDay">대체휴가</label> <select
+					class="form-control" id="replaceVacationDay"
+					name="replaceVacationDay" style="width: 300px;" >
+					<option></option>
+					<th:block th:each="num : ${#numbers.sequence(1, 10)}">
+						<option th:text="|${num}|"></option>
+					</th:block>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="personalBuisinessVacationDay">경조사휴가</label> <select
+					class="form-control" id="personalBuisinessVacationDay"
+					name="personalBuisinessVacationDay" style="width: 300px;" >
+					<option></option>
+					<th:block th:each="num : ${#numbers.sequence(1, 10)}">
+						<option th:text="|${num}|"></option>
+					</th:block>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="sickVacationDay">병가</label> <select class="form-control"
+					id="sickVacationDay" name="sickVacationDay" style="width: 300px;">
+					<option></option>
+					<th:block th:each="num : ${#numbers.sequence(1, 10)}">
+						<option th:text="|${num}|"></option>
+					</th:block>
+				</select>
+			</div>
+			<div class="duallistbox">
+				<div class="box2 col-md-6"></div>
+			</div>
+			<label for="memberName">사원이름</label> 
+			<select multiple="multiple"
+				size="10" id="duallistbox" name="memberNum" style="display: none;">
+				<option></option>
+					<th:block th:each="l : ${memberList}">
+						<option th:value="${l.memberNum}">[[${l.memberName}]]</option>
+					</th:block>
+			</select>
+			<div class="form-group">
+				<input type="hidden" id="useVacationYear" name="useVacationYear" >
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</th:block>
+
+	<!-- 사용자 지정 js 파일 -->
+
+	<th:block layout:fragment="customJs">
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</th:block>
+
+	<!-- 사용자 지정 js script -->
+	<th:block layout:fragment="customScript">
+		<script>
+		const today = new Date();
+		const year = today.getFullYear();
+		
+			$('#useVacationYear').val(year);
+		</script>
+</html>
