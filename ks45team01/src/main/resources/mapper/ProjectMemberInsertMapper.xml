@@ -67,6 +67,7 @@
 	</resultMap>
 	
 	
+	
 	<select id="getCommonNewCode" parameterType="String" resultType="String">
 		/* 자동증가코드 */
 		SELECT
@@ -85,7 +86,7 @@
 	VALUES (#{projectJoinNum}, #{projectNum}, #{memberNum}, NOW(), #{joinContent});
 	</insert>
 	
-	<select id="projectMemberList" resultMap="projectMemberResultMap">
+	<select id="projectMemberList" resultMap="projectMemberResultMap" parameterType="String" resultType="String">
 	SELECT
 	*
 	FROM
@@ -94,8 +95,10 @@
 	tb_project_member AS pm
 	ON
 	m.member_num = pm.member_num
-	ORDER BY
-	join_start_date ASC
+	WHERE
+	pm.project_num = #{projectNum}
+	ORDER BY 
+	length(project_join_num)
 	</select>
 	
 	<select id="memberDepartmentList" resultMap="memberDepartmentListMap">
@@ -136,4 +139,7 @@
 		LIMIT #{startRowNum}, #{rowPerPage};
 		</if>
 	</select>
+	
+	
+	
 </mapper>

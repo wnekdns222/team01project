@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
+import ks45team01.unity.dto.ProjectList;
 import ks45team01.unity.dto.ProjectMember;
 import ks45team01.unity.mapper.ProjectListMapper;
 
@@ -23,9 +24,9 @@ public class ProjectMemberInsertService {
 	
 	
 
-	public List<ProjectMember> projectMemberList() {
+	public List<ProjectMember> projectMemberList(String projectNum) {
 
-		List<ProjectMember> projectMemberList = projectListMapper.projectMemberList();
+		List<ProjectMember> projectMemberList = projectListMapper.projectMemberList(projectNum);
 
 		return projectMemberList;
 	}
@@ -105,4 +106,15 @@ public Map<String, Object> getMemberList(int currentPage) {
 		
 		
 	}
+	
+	
+	//프로젝트 등록 회원 카운트 조회
+			public int ProjectmemberCnt(String projectnum) {
+				int projectMemberCnt = projectListMapper.ProjectmemberCnt(projectnum);
+				
+				return projectMemberCnt;
+			}
+
+	
+	
 }

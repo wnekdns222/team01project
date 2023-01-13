@@ -139,6 +139,7 @@ public class ProjectController {
 		log.info("프로젝트 멤버 추가 정보:{}",projectMember);
 		reAttr.addAttribute("projectNum", projectNum);
 		
+		
 		return "redirect:/project/projectMemberInsert";
 	}
 	
@@ -146,12 +147,13 @@ public class ProjectController {
 	public String getProjectMemberInsertForm(String projectNum
 											,Model model
 											,@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage) {
-		List<ProjectMember> projectMember = projectMemberInsertService.projectMemberList();
+		List<ProjectMember> projectMember = projectMemberInsertService.projectMemberList(projectNum);
 		List<MemberDepartmentList> memberDepartmentList = projectMemberInsertService.memberDepartmentList();
 		
 		ProjectList projectListOne = projectListService.ProjectListOne(projectNum);
 		List<MemberList> memberList = projectMemberInsertService.memberList(null);
 		Map<String, Object> paramMap = projectMemberInsertService.getMemberList(currentPage);
+		int ProjectmemberCnt = projectMemberInsertService.ProjectmemberCnt(projectNum);
 		
 		
 		System.out.println(projectNum + "<-- projectNum GetProjectMemberInsertForm");
@@ -165,6 +167,7 @@ public class ProjectController {
 		model.addAttribute("projectMember",projectMember);
 		model.addAttribute("memberList",memberList);
 		model.addAttribute("projectListOne",projectListOne);
+		model.addAttribute("ProjectmemberCnt",ProjectmemberCnt);
 		
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
