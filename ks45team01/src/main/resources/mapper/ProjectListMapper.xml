@@ -64,5 +64,21 @@
 		WHERE
 		pm.project_num = #{projectNum}
 	</select>
+	
+	<update id="projectMemberCntUpdate" parameterType="ProjectList">
+	UPDATE
+	tb_project AS p
+	SET
+	p.project_join = (SELECT
+	COUNT(1)
+	FROM
+	tb_project_member AS pm
+	WHERE
+	pm.project_num = #{projectNum})
+	<where>
+	p.project_num = #{projectNum}
+	</where>
+	</update>
+
 
 </mapper>

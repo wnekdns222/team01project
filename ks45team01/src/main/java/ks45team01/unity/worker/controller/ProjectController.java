@@ -2,8 +2,6 @@ package ks45team01.unity.worker.controller;
 
 
 import java.util.List;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -136,6 +134,7 @@ public class ProjectController {
 		
 		projectListService.ProjectListOne(projectNum);
 		projectMemberInsertService.ProjectMemberInsert(projectMember);
+		projectMemberInsertService.projectMemberCntUpdate(projectNum);
 		log.info("프로젝트 멤버 추가 정보:{}",projectMember);
 		reAttr.addAttribute("projectNum", projectNum);
 		
@@ -147,20 +146,15 @@ public class ProjectController {
 	public String getProjectMemberInsertForm(String projectNum
 											,Model model
 											,@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage) {
+		
 		List<ProjectMember> projectMember = projectMemberInsertService.projectMemberList(projectNum);
 		List<MemberDepartmentList> memberDepartmentList = projectMemberInsertService.memberDepartmentList();
-		
 		ProjectList projectListOne = projectListService.ProjectListOne(projectNum);
 		List<MemberList> memberList = projectMemberInsertService.memberList(null);
-		Map<String, Object> paramMap = projectMemberInsertService.getMemberList(currentPage);
 		int ProjectmemberCnt = projectMemberInsertService.ProjectmemberCnt(projectNum);
 		
 		
 		System.out.println(projectNum + "<-- projectNum GetProjectMemberInsertForm");
-		
-		int lastPage = (int) paramMap.get("lastPage");
-		int startPageNum = (int) paramMap.get("startPageNum");
-		int endPageNum = (int) paramMap.get("endPageNum");
 		
 		model.addAttribute("title","프로젝트멤버리스트등록화면");
 		model.addAttribute("memberDepartmentList",memberDepartmentList);
@@ -169,10 +163,6 @@ public class ProjectController {
 		model.addAttribute("projectListOne",projectListOne);
 		model.addAttribute("ProjectmemberCnt",ProjectmemberCnt);
 		
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("lastPage", lastPage);
-		model.addAttribute("startPageNum", startPageNum);
-		model.addAttribute("endPageNum", endPageNum);
 		
 		
 	return "project/project_member_insert";
