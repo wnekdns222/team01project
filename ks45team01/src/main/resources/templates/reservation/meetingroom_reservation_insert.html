@@ -31,10 +31,11 @@
                 </div>
                 	
                 <div class="form-group">
-			        <label for="exampleInputPassword1">시작시간</label>
-                 	<input class="form-control" type="date" min="todaytime" id="Date" >
+			        <label for="exampleInputPassword1">예약날짜</label>
+                 	<input class="form-control" type="date" id="Date" >
                 </div>	
                 <div class="form-group">
+               		<label for="exampleInputPassword1">시작시간</label>
 		            <select class="form-control" id="reservationStartTime" name=reservationStartTime>
 		            	<option value="00:00">00:00</option>
 		            	<option value="00:30">00:30</option>
@@ -87,10 +88,7 @@
 		            </select>
 		        </div>
                 <div class="form-group">
-			        <label for="exampleInputPassword1">종료시간</label>
-                 	<input class="form-control" type="date" id="EndDate" >
-                </div>
-                <div class="form-group">
+                	<label for="exampleInputPassword1">종료시간</label>
                  	<select class="form-control" id="reservationEndTime" name=reservationEndTime>
 		            	<option value="00:00">00:00</option>
 		            	<option value="00:30">00:30</option>
@@ -146,8 +144,8 @@
                 	<textarea class="form-control" rows="3"></textarea>
 		        <button type="submit" class="btn btn-primary" style="margin:80px 0px 0px 0px;">확인</button>
 		    		<input type="hidden"  th:value="*{reservationNum}" name="reservationNum" >
-		    		<input type="hidden"  th:value="${l.meetingroom.meetUsableStart}" name="meetUsableStart">
-		    		<input type="hidden"  th:value="${l.meetingroom.meetUsableEnd}" name="meetUsableEnd">
+		    		<input type="hidden"  th:value="*{reservationStartTime}" name="reservationStartTime">
+		    		<input type="hidden"  th:value="*{reservationEndTime}" name="reservationEndTime">
 		    </form>
 		</div>
 	</th:block>
@@ -161,42 +159,46 @@
 	var now_utc = Date.now() // 지금 날짜를 밀리초로
 	// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
 	var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
-	// new Date(today-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
-	var date = new Date(now_utc-timeOff).toISOString().split("T")[0];
-	document.getElementById("Date").setAttribute("min", date);
-	document.getElementById("EndDate").setAttribute("min", date);
+	// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+	document.getElementById("Date").setAttribute("min", today);
 	
-     // 제이쿼리 change 함수 오늘 이전 '시간' 선택 금지
+     // 제이쿼리 change 함수 오늘 이전 '날짜' 선택 금지
      $("#Date").change(function(){
          // 변경된 값으로 비교 후 alert 표출
          if($(this).val() < today){
-             alert("시간을 다시 선택해주세요");
+             alert("날짜를 다시 선택해주세요");
          }
          
      });
 
-     //시작시간 이전시간 금지 
-     $("#EndDate").change(function(){
-         // 변경된 값으로 비교 후 alert 표출
-         if($(this).val() < $("#Date").val()){
-             alert("시작시간보다 늦은시간으로 선택해주세요");
-         }
-     });
-     
+   		var first;
+   		var second;
+   		
+    //시작시간을 숫자로 변환
    	$("#reservationStartTime").change(function(){
-   		const startselected = $("#reservationStartTime option:selected").val();
-   		const first = startselected.substr(0,2) + startselected.substr(3,2);
+   		var startselected = $("#reservationStartTime option:selected").val();
+   		first = startselected.substr(0,2) + startselected.substr(3,2);
    		console.log(first);
-
+   		
    	});
-   	
+    
+   	//종료시간을 숫자로 변환
    	$("#reservationEndTime").change(function(){
-   		const endselected = $("#reservationEndTime option:selected").val();
-   		const first = endselected.substr(0,2) + endselected.substr(3,2);
-   		console.log(first);
+   		var endselected = $("#reservationEndTime option:selected").val();
+   		second = endselected.substr(0,2) + endselected.substr(3,2);
+   		console.log(second);
+   		
+   		//
+   		if(first >= second){
+   	   		alert("시간을 다시 선택하세요");
+   	   	}
    	   		
    	});
-     
+	
+   	$("select [name=reservationStartTime]").attr("disabled",true);
+	
+
 	</script>
 	</th:block>
 </html>
