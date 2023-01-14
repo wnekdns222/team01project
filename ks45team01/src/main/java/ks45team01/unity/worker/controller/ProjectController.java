@@ -127,10 +127,25 @@ public class ProjectController {
 	}
 	
 	
+	
+	@GetMapping("/projectMemberDelete")
+	public String getProjectMemberDelete(@RequestParam(value="projectJoinNum") String projectJoinNum
+										) {
+		
+		
+		projectMemberInsertService.projectMemberDelete(projectJoinNum);
+		log.info("프로젝트 멤버 추가 정보:{}",projectJoinNum);
+		
+		
+		return "/project/projectMemberInsert";
+	}
+	
+	
 	@PostMapping("/projectMemberInsert")
 	public String getProjectMemberInsert(ProjectMember projectMember
 										,String projectNum
-										,RedirectAttributes reAttr) {
+										,RedirectAttributes reAttr
+										,Model model) {
 		
 		projectListService.ProjectListOne(projectNum);
 		projectMemberInsertService.ProjectMemberInsert(projectMember);

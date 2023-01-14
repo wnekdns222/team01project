@@ -52,8 +52,7 @@
 		<div class="form-group">
 			<label for="writeChangeReason">담당업무 상세내용</label>
 			<textarea class="form-control" name="joinContent"
-				id="joinContent" rows="3" placeholder="Textarea text">
-	        </textarea>
+				id="joinContent" rows="3" placeholder="내용을 입력해주세요"></textarea>
 		</div>
 		
 
@@ -81,6 +80,7 @@
 								<div class="card card-statistics">
 									<div class="card-body">
 										<div class="datatable-wrapper table-responsive">
+											<form th:action="@{/project/projectMemberInsert}" method="post"></form>
 											<table id="datatable"
 												class="display compact table table-striped table-bordered">
 
@@ -95,6 +95,7 @@
 												</thead>
 												<tbody>
 													<tr th:each="pm : ${projectMember}">
+													
 														<td>
 															<div class="d-flex align-items-center">
 																<div class="bg-img mr-4">
@@ -109,11 +110,14 @@
 														<td th:text="${pm.joinStartDate}"></td>
 														<td th:text="${pm.joinEndDate}"></td>
 														<td th:text="${pm.joinContent}"></td>
-														<td><a href="/project/projectMemberModify"
-															class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i
-																class="ti ti-pencil"></i></a> <a href="javascript:void(0)"
-															class="btn btn-icon btn-outline-danger btn-round"><i
-																class="ti ti-close"></i></a></td>
+														<td>
+														<a href="/project/projectMemberModify" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+														<i class="ti ti-pencil"></i>
+														</a>
+														<a class="btn btn-icon btn-outline-danger btn-round" th:href="@{/project/projectMemberDelete(projectJoinNum=${pm.projectJoinNum})}" >
+														<i class="ti ti-close"></i>
+														</a>
+														</td>
 													</tr>
 
 
