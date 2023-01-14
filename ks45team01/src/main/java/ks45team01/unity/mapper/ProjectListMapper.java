@@ -36,6 +36,9 @@ public interface ProjectListMapper {
 	//프로젝트 담당 인원수 업데이트
 	int projectMemberCntUpdate(String projectNum);
 	
+	//프로젝트 멤버 삭제
+	int projectMemberDelete(String projectJoinNum);
+	
 			
 	//projectBoard
 			

@@ -140,6 +140,15 @@
 		</if>
 	</select>
 	
+	<delete id="projectMemberDelete" parameterType="String">
+	DELETE
+	FROM
+	tb_project_member AS pm
+	WHERE
+	pm.project_join_num = #{projectJoinNum}
+	
+	</delete>
+	
 	
 	
 </mapper>
