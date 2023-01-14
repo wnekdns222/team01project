@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ks45team01.unity.dto.ProjectRequest;
-import ks45team01.unity.mapper.ProjectRequestMapper;
+import ks45team01.unity.mapper.ProjectListMapper;
 
 @Service
 public class ProjectRequestService {
@@ -18,9 +18,9 @@ public class ProjectRequestService {
 	 */
 	
 	
-	private final ProjectRequestMapper projectRequestMapper;
-	public ProjectRequestService(ProjectRequestMapper projectRequestMapper) {
-		this.projectRequestMapper = projectRequestMapper;
+	private final ProjectListMapper projectListMapper;
+	public ProjectRequestService(ProjectListMapper projectListMapper) {
+		this.projectListMapper = projectListMapper;
 	}
 	
 	/**
@@ -29,7 +29,7 @@ public class ProjectRequestService {
 	 */
 	public List<ProjectRequest> projectRequestList(){
 		
-		List<ProjectRequest> ProjectRequestList = projectRequestMapper.projectRequestList();
+		List<ProjectRequest> ProjectRequestList = projectListMapper.projectRequestList();
 		
 		return ProjectRequestList;
 	}

@@ -31,20 +31,17 @@
                       </tr>
                   </thead>
                   <tbody>
-                    <tr th:unless="${#lists.isEmpty(meetingroomList)}"
-					th:each="l : ${meetingroomList}">	
-					<td th:text="${l.meetName}"></td>
-					<td th:text="${l.meetUsableStart}"></td>
-					<td th:text="${l.meetUsableEnd}"></td>
-					<td th:text="${l.meetLocation}"></td>
-					<td th:text="${l.meetCapacity}"></td> 
-					<td th:text="${l.meetDetail}"></td>
-					<th:block th:if="${#lists.isEmpty(reservation)}"
-								  th:each="r : ${reservation}">
+                    <tr th:unless="${#lists.isEmpty(reservationList)}"
+					th:each="l : ${reservationList}" th:object="${l.meetingroom}">
+					<td th:text="*{meetName}"></td>
+					<td th:text="*{meetUsableStart}"></td>
+					<td th:text="*{meetUsableEnd}"></td>
+					<td th:text="*{meetLocation}"></td>
+					<td th:text="*{meetCapacity}"></td> 
+					<td th:text="*{meetDetail}"></td>
 					<td>
-						<a th:href="@{/reservation/meetingroomReservationInsert(reservationNum=${r.reservationNum})}" href="javascript:void(0)" class="btn btn-round btn-outline-primary">예약</a>
+						<a th:href="@{/reservation/meetingroomReservationInsert(reservationNum=${l.reservationNum})}" href="javascript:void(0)" class="btn btn-round btn-outline-primary">예약</a>
 					</td>
-					</th:block>
 					</tr>
                   </tbody>
               </table>

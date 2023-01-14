@@ -50,7 +50,51 @@
 		<result property="correctMemberNum" column="correct_member_num" />
 		<result property="correctDate" column="correct_date" />
 	</resultMap>
-	
+	<resultMap type="WorkUnusual" id="workUnusualJoinResultMap">
+		<id property="workUnusualNum" column="work_unusual_num" />
+		<result property="workNum" column="work_num" />
+		<result property="memberNum" column="member_num" />
+		<result property="writeAttendanceDay" column="write_attendance_day" />
+		<result property="writeAttendanceTime" column="wirte_attendance_time" />
+		<result property="writeLeaveworkTime" column="write_leavework_time" />
+		<result property="writeChangeReason" column="write_change_reason" />
+		<result property="vacationCategoryNum" column="vacation_category_num" />
+		<result property="vacationSortNum" column="vacation_sort_num" />
+		<result property="vacationTypeNum" column="vacation_type_num" />
+		<result property="regMemberNum" column="reg_member_num" />
+		<result property="regDate" column="reg_date" />
+		<result property="correctMemberNum" column="correct_member_num" />
+		<result property="correctDate" column="correct_date" />
+		<association property="vacationCategory" javaType="VacationCategory">
+			<id property="vacationCategoryNum" 	column="vacation_category_num" />
+			<result property="vacationCategoryName" column="vacation_category_name" />
+			<result property="memberNum" column="member_num" />
+			<result property="regDate" column="reg_date" />
+			<result property="vacationUse" column="vacation_use" />
+			<result property="correctMemberNum" column="correct_member_num" />
+			<result property="correctDate" column="correct_date" />
+		</association>
+		<association property="vacationSort" javaType="VacationSort">
+			<id property="vacationSortNum" 	column="vacation_sort_num" />
+			<result property="vacationSortName" column="vacation_sort_name" />
+			<result property="memberNum" column="member_num" />
+			<result property="regDate" column="reg_date" />
+			<result property="vacationUse" column="vacation_use" />
+			<result property="correctMemberNum" column="correct_member_num" />
+			<result property="correctDate" column="correct_date" />
+		</association>
+		<association property="vacationType" javaType="VacationType">
+			<id property="vacationTypeNum" 	column="vacation_type_num" />
+			<result property="vacationName" column="vacation_name" />
+			<result property="vacationType" column="vacation_type" />
+			<result property="subtractUnit" column="subtract_unit" />
+			<result property="vacationUse" column="vacation_use" />
+			<result property="memberNum" column="member_num" />
+			<result property="regDate" column="reg_date" />
+			<result property="correctMemberNum" column="correct_member_num" />
+			<result property="correctCate" column="correct_date" />
+		</association>
+	</resultMap>
 	<select id="getCommonNewCode" parameterType="String">
 	/* 자동증가코드 */
 	
@@ -72,7 +116,7 @@
 	where
 		w.attendance_day = t.work_date;
 	</select>
-	<select id="getAuthorityWorkInfo" resultType="List" resultMap="workUnusualResultMap">
+	<select id="getAuthorityWorkInfo" resultType="List" resultMap="workUnusualJoinResultMap">
 	/* 비정상근태 등록 조회 */	
 	SELECT 
 	*

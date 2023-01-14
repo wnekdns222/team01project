@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team01.unity.mapper.ProjectListMapper">
+		
 	<resultMap type="projectList" id="projectListResultMap">
 		<id property="projectNum" column="project_num"/>
 		<result property="memberNum" column="member_num"/>
@@ -14,11 +15,70 @@
 		<result property="projectJoin" column="project_join"/>	
 	</resultMap>
 	
+	<resultMap type="ProjectUnit" id="ProjectUnitMap">
+		<id property="projectUnitNum" 			column="project_unit_num"/>
+		<result property="projectNum" 		column="project_num"/>
+		<result property="unitContents" 			column="unit_contents"/>
+		<result property="memberInsertNum" 		column="member_insert_num"/>
+		<result property="projectUnitRegDate" 	column="project_unit_reg_date"/>
+		<result property="memberUpdateNum" 	column="member_UpdateNum"/>
+		<result property="projectUnitUpdateDate" 			column="project_unit_update_date"/>
+	</resultMap>
 	
+
+	<!-- 프로젝트 전체 검색문 -->	
 	<select id="projectListSe" resultMap="projectListResultMap">
 		SELECT 
 			*
 		FROM 
 			tb_project
 	</select>
+	
+	
+	<!-- 프로젝트 단위업무 전체 조회문 -->
+	<select id="ProjectUnit" resultMap="ProjectUnitMap">
+	SELECT
+	*
+	FROM
+	tb_project_unit
+
+	</select>
+
+
+	<!-- 프로젝트 한개 조회명령문 -->
+	<select id="ProjectListOne" resultMap="projectListResultMap" parameterType="String">
+	SELECT
+	*
+	FROM
+	tb_project
+	<where>
+	project_num = #{projectNum}
+	</where>
+	</select> 
+
+	<select id="ProjectmemberCnt" resultType="int" parameterType="String">
+		SELECT
+		COUNT(1)
+		FROM
+		tb_project_member AS pm
+		WHERE
+		pm.project_num = #{projectNum}
+	</select>
+	
+	<update id="projectMemberCntUpdate" parameterType="ProjectList">
+	UPDATE
+	tb_project AS p
+	SET
+	p.project_join = (SELECT
+	COUNT(1)
+	FROM
+	tb_project_member AS pm
+	WHERE
+	pm.project_num = #{projectNum})
+	<where>
+	p.project_num = #{projectNum}
+	</where>
+	</update>
+
+
 </mapper>

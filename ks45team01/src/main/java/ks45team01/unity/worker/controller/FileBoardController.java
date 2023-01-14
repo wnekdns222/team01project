@@ -60,7 +60,7 @@ public class FileBoardController {
 	
 	@GetMapping("/fileBoardUpdate")
 	public String fileUpdateForm(@RequestParam(value = "fileBoardNum", required = false) String fileBoardNum
-							,Model model) {
+								,Model model) {
 		
 		FileBoard boardFileView = fileBoardService.boardFileView(fileBoardNum);
 		
@@ -111,7 +111,7 @@ public class FileBoardController {
 				
 		fileBoardService.addBoardFile(uploadfile, fileRealPath, fileBoard);
 		
-		return "redirect:/fileBoard/fileBoardList";
+		return "redirect:/fileBoard/fileList";
 	}
 	
 	@GetMapping("/addBoardFile")
@@ -129,7 +129,6 @@ public class FileBoardController {
 	public String marketingList(@PathVariable(name="serviceType") String serviceType
 								,Model model) {
 		
-		List<FileBoard> fileBoardList = fileBoardService.fileBoardList();
 		
 		List<FileBoard> servieList = null;
 		String title = null;
@@ -161,7 +160,7 @@ public class FileBoardController {
 
 		model.addAttribute("title", title);
 		model.addAttribute(serviceType, servieList);
-		model.addAttribute("fileBoardList", fileBoardList);
+		model.addAttribute("servieList", servieList);
 		
 		return "fileBoard/" + serviceType;
 		

@@ -29,26 +29,34 @@ public class ReservationController {
 	@GetMapping("/meetingroomReservationList")
 	public String meetingroomList(Model model) {
 			
+		
+		List<Reservation> reservationList = reservationService.getReservationList();
 		List<Meetingroom> meetingroomList = reservationService.getMeetingroomList();
 		
 		model.addAttribute("title", "회의실 목록");
+		model.addAttribute("reservationList", reservationList);
 		model.addAttribute("meetingroomList", meetingroomList);
 		
 		return "/reservation/meetingroom_reservation_list";
 	}
 	
-	
 	//예약하기 화면
 	@GetMapping("/meetingroomReservationInsert")
-	public String insertMeetingroomReservation(@RequestParam(value="reservationNum",required=false) String reservationNum,Model model) {
+	public String insertReservation(@RequestParam(value="reservationNum",required=false) String reservationNum,Model model) {
 		
 		Reservation reservation = reservationService.getReservationById(reservationNum);
+		List<Reservation> reservationList = reservationService.getReservationList();
+
 		
 		model.addAttribute("title", "회의실 목록");
 		model.addAttribute("reservation", reservation);
+		model.addAttribute("reservationList", reservationList);
+
+		
 		
 		
 		return "/reservation/meetingroom_reservation_insert";
 	}
+	
 	
 }

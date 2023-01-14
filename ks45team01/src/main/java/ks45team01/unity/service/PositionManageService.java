@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import ks45team01.unity.dto.PositionManage;
-import ks45team01.unity.mapper.PositionManageMapper;
+import ks45team01.unity.mapper.MemberListMapper;
+
 
 @Service
 public class PositionManageService {
@@ -17,9 +18,9 @@ public class PositionManageService {
 	 */
 	
 	
-	private final PositionManageMapper positionManageMapper;
-	public PositionManageService(PositionManageMapper positionManageMapper) {
-		this.positionManageMapper = positionManageMapper;
+	private final MemberListMapper memberListMapper;
+	public PositionManageService(MemberListMapper memberListMapper) {
+		this.memberListMapper = memberListMapper;
 	}
 	
 	/**
@@ -28,7 +29,7 @@ public class PositionManageService {
 	 */
 	public List<PositionManage> positionManageSe(){
 		
-		List<PositionManage> positionManage = positionManageMapper.positionManageSe();
+		List<PositionManage> positionManage = memberListMapper.positionManageSe();
 		
 		return positionManage;
 	}

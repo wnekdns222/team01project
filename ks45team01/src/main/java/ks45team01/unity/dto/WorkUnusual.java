@@ -16,6 +16,10 @@ public class WorkUnusual {
 	private String regDate;
 	private String correctMemberNum;
 	private String correctDate;
+	
+	private VacationCategory vacationCategory;
+	private VacationSort vacationSort;
+	private VacationType vacationType;
 	public String getWorkUnusualNum() {
 		return workUnusualNum;
 	}
@@ -100,6 +104,24 @@ public class WorkUnusual {
 	public void setCorrectDate(String correctDate) {
 		this.correctDate = correctDate;
 	}
+	public VacationCategory getVacationCategory() {
+		return vacationCategory;
+	}
+	public void setVacationCategory(VacationCategory vacationCategory) {
+		this.vacationCategory = vacationCategory;
+	}
+	public VacationSort getVacationSort() {
+		return vacationSort;
+	}
+	public void setVacationSort(VacationSort vacationSort) {
+		this.vacationSort = vacationSort;
+	}
+	public VacationType getVacationType() {
+		return vacationType;
+	}
+	public void setVacationType(VacationType vacationType) {
+		this.vacationType = vacationType;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -131,9 +153,17 @@ public class WorkUnusual {
 		builder.append(correctMemberNum);
 		builder.append(", correctDate=");
 		builder.append(correctDate);
+		builder.append(", vacationCategory=");
+		builder.append(vacationCategory);
+		builder.append(", vacationSort=");
+		builder.append(vacationSort);
+		builder.append(", vacationType=");
+		builder.append(vacationType);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 	
 	
 }

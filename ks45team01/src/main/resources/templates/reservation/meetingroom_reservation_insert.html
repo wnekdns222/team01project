@@ -3,11 +3,8 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/default}">
 	<head>
-	<style>
-      .ab {
-        background-color: blue;
-      }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<th:block layout:fragment="customCrumbbar">
 		<div class="breadcrumbbar">
@@ -27,32 +24,128 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<div class="card-body">
 		    <h6 class="card-subtitle"></h6>
-		    <form th:object="${reservation}" th:action="@{/reservation/meetingroomReservationInsert}" method="post">
-		    		<input type="hidden"  th:value="*{reservationNum}" name="reservationNum" >
-		        <div class="form-group" style="margin:20px 0px 15px 0px;">
-		            <label for="exampleInputPassword1">회의실</label>
-		            <select class="form-control" id="reservation" name="reservation">
-		            	<th:block th:if="${not #lists.isEmpty(reservation)}" 
-		            	          th:each="r : ${reservation}">
-		            	<option th:text="${r.reservationNum}">
-		            	</option>
-		            	</th:block>
-		            	<th:block th:unless="${not #lists.isEmpty(reservation)}">								
-									<option>등록된 회의실이 없습니다</option>
-						</th:block>
-		            </select>  
-		        </div>
-		        <label for="exampleInputPassword1">시작시간</label>
-		        <div class="form-group" id="startDate">
-                 	<input class="form-control" type="datetime-local" id="DateLocal" >
+		    <form th:object="${reservation}" th:each="l : ${reservation}" th:action="@{/reservation/meetingroomReservationInsert}" method="post">
+	        	<div class="form-group">
+                    <label for="exampleInputPassword1">회의실 명</label>
+                   	 <input type="text" class="form-control" id="exampleInputPassword1" name="meetName" th:value="${l.meetingroom.meetName}" readonly="readonly">
                 </div>
-                <label for="exampleInputPassword1">종료시간</label>
-		        <div class="form-group" id="endDate">
-                  	<input class="form-control" type="datetime-local" id="EndDateLocal">
+                	
+                <div class="form-group">
+			        <label for="exampleInputPassword1">예약날짜</label>
+                 	<input class="form-control" type="date" id="Date" >
+                </div>	
+                <div class="form-group">
+               		<label for="exampleInputPassword1">시작시간</label>
+		            <select class="form-control" id="reservationStartTime" name=reservationStartTime>
+		            	<option value="00:00">00:00</option>
+		            	<option value="00:30">00:30</option>
+		            	<option value="01:00">01:00</option>
+		            	<option value="01:30">01:30</option>
+		            	<option value="02:00">02:00</option>
+		            	<option value="02:30">02:30</option>
+		            	<option value="03:00">03:00</option>
+		            	<option value="03:30">03:30</option>
+		            	<option value="04:00">04:00</option>
+		            	<option value="04:30">04:30</option>
+		            	<option value="05:00">05:00</option>
+		            	<option value="05:30">05:30</option>
+		            	<option value="06:00">06:00</option>
+		            	<option value="06:30">06:30</option>
+		            	<option value="07:00">07:00</option>
+		            	<option value="07:30">07:30</option>
+		            	<option value="08:00">08:00</option>
+		            	<option value="08:30">08:30</option>
+		            	<option value="09:00">09:00</option>
+		            	<option value="09:30">09:30</option>
+		            	<option value="10:00">10:00</option>
+		            	<option value="10:30">10:30</option>
+		            	<option value="11:00">11:00</option>
+		            	<option value="11:30">11:30</option>
+		            	<option value="12:00">12:00</option>
+		            	<option value="12:30">12:30</option>
+		            	<option value="13:00">13:00</option>
+		            	<option value="13:30">13:30</option>
+		            	<option value="14:00">14:00</option>
+		            	<option value="14:30">14:30</option>
+		            	<option value="15:00">15:00</option>
+		            	<option value="15:30">15:30</option>
+		            	<option value="16:00">16:00</option>
+		            	<option value="16:30">16:30</option>
+		            	<option value="17:00">17:00</option>
+		            	<option value="17:30">17:30</option>
+		            	<option value="18:00">18:00</option>
+		            	<option value="18:30">18:30</option>
+		            	<option value="19:00">19:00</option>
+		            	<option value="19:30">19:30</option>
+		            	<option value="20:00">20:00</option>
+		            	<option value="20:30">20:30</option>
+		            	<option value="21:00">21:00</option>
+		            	<option value="21:30">21:30</option>
+		            	<option value="22:00">22:00</option>
+		            	<option value="22:30">22:30</option>
+		            	<option value="23:00">23:00</option>
+		            	<option value="23:30">23:30</option>
+		            </select>
+		        </div>
+                <div class="form-group">
+                	<label for="exampleInputPassword1">종료시간</label>
+                 	<select class="form-control" id="reservationEndTime" name=reservationEndTime>
+		            	<option value="00:00">00:00</option>
+		            	<option value="00:30">00:30</option>
+		            	<option value="01:00">01:00</option>
+		            	<option value="01:30">01:30</option>
+		            	<option value="02:00">02:00</option>
+		            	<option value="02:30">02:30</option>
+		            	<option value="03:00">03:00</option>
+		            	<option value="03:30">03:30</option>
+		            	<option value="04:00">04:00</option>
+		            	<option value="04:30">04:30</option>
+		            	<option value="05:00">05:00</option>
+		            	<option value="05:30">05:30</option>
+		            	<option value="06:00">06:00</option>
+		            	<option value="06:30">06:30</option>
+		            	<option value="07:00">07:00</option>
+		            	<option value="07:30">07:30</option>
+		            	<option value="08:00">08:00</option>
+		            	<option value="08:30">08:30</option>
+		            	<option value="09:00">09:00</option>
+		            	<option value="09:30">09:30</option>
+		            	<option value="10:00">10:00</option>
+		            	<option value="10:30">10:30</option>
+		            	<option value="11:00">11:00</option>
+		            	<option value="11:30">11:30</option>
+		            	<option value="12:00">12:00</option>
+		            	<option value="12:30">12:30</option>
+		            	<option value="13:00">13:00</option>
+		            	<option value="13:30">13:30</option>
+		            	<option value="14:00">14:00</option>
+		            	<option value="14:30">14:30</option>
+		            	<option value="15:00">15:00</option>
+		            	<option value="15:30">15:30</option>
+		            	<option value="16:00">16:00</option>
+		            	<option value="16:30">16:30</option>
+		            	<option value="17:00">17:00</option>
+		            	<option value="17:30">17:30</option>
+		            	<option value="18:00">18:00</option>
+		            	<option value="18:30">18:30</option>
+		            	<option value="19:00">19:00</option>
+		            	<option value="19:30">19:30</option>
+		            	<option value="20:00">20:00</option>
+		            	<option value="20:30">20:30</option>
+		            	<option value="21:00">21:00</option>
+		            	<option value="21:30">21:30</option>
+		            	<option value="22:00">22:00</option>
+		            	<option value="22:30">22:30</option>
+		            	<option value="23:00">23:00</option>
+		            	<option value="23:30">23:30</option>
+		            </select>
                 </div>
                 <label for="exampleInputPassword1">예약내용</label>
                 	<textarea class="form-control" rows="3"></textarea>
 		        <button type="submit" class="btn btn-primary" style="margin:80px 0px 0px 0px;">확인</button>
+		    		<input type="hidden"  th:value="*{reservationNum}" name="reservationNum" >
+		    		<input type="hidden"  th:value="*{reservationStartTime}" name="reservationStartTime">
+		    		<input type="hidden"  th:value="*{reservationEndTime}" name="reservationEndTime">
 		    </form>
 		</div>
 	</th:block>
@@ -61,33 +154,51 @@
 	</th:block>
 	<th:block layout:fragment="customScript">
 	<script>
+	
+	//오늘 이전 '날짜' 선택 금지
 	var now_utc = Date.now() // 지금 날짜를 밀리초로
 	// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
 	var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
-	// new Date(today-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
-	var today = new Date(now_utc-timeOff).toISOString().substring(0, 16);
-	 
-	document.getElementById("DateLocal").setAttribute("min", today);
-	document.getElementById("EndDateLocal").setAttribute("min", today);
+	// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+	document.getElementById("Date").setAttribute("min", today);
 	
-	 
-     // 제이쿼리 change 함수
-     $("#DateLocal").change(function(){
+     // 제이쿼리 change 함수 오늘 이전 '날짜' 선택 금지
+     $("#Date").change(function(){
          // 변경된 값으로 비교 후 alert 표출
          if($(this).val() < today){
-             alert("시간을 다시 선택해주세요");
+             alert("날짜를 다시 선택해주세요");
          }
+         
      });
-     
-     const datelocal = document.querySelector("#DateLocal");
-     
-     $("#EndDateLocal").change(function(){
-         // 변경된 값으로 비교 후 alert 표출
-         if($(this).val() < $("#DateLocal").val()){
-             alert("시작시간보다 늦은시간으로 선택해주세요");
-         }
-     });
-     
+
+   		var first;
+   		var second;
+   		
+    //시작시간을 숫자로 변환
+   	$("#reservationStartTime").change(function(){
+   		var startselected = $("#reservationStartTime option:selected").val();
+   		first = startselected.substr(0,2) + startselected.substr(3,2);
+   		console.log(first);
+   		
+   	});
+    
+   	//종료시간을 숫자로 변환
+   	$("#reservationEndTime").change(function(){
+   		var endselected = $("#reservationEndTime option:selected").val();
+   		second = endselected.substr(0,2) + endselected.substr(3,2);
+   		console.log(second);
+   		
+   		//
+   		if(first >= second){
+   	   		alert("시간을 다시 선택하세요");
+   	   	}
+   	   		
+   	});
+	
+   	$("select [name=reservationStartTime]").attr("disabled",true);
+	
+
 	</script>
 	</th:block>
 </html>
