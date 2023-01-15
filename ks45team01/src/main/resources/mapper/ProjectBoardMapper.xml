@@ -15,10 +15,14 @@
 	</resultMap>
 	
 	
-	<select id="projectBoardList" resultMap="ProjectBoardResultMap">
+	<select id="projectBoardList" resultMap="ProjectBoardResultMap" parameterType="String"> 
 		SELECT 
 			*
 		FROM 
 			tb_project_board
+		WHERE
+			project_num= #{projectNum}
 	</select>
+	
+	
 </mapper>
