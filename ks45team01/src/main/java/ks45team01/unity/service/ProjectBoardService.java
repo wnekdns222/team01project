@@ -21,9 +21,9 @@ public class ProjectBoardService {
 	 * 파일 목록
 	 * @return
 	 */
-	public List<ProjectBoard> projectBoardList(){
+	public List<ProjectBoard> projectBoardList(String projectNum){
 		
-		List<ProjectBoard> projectBoard = projectListMapper.projectBoardList();
+		List<ProjectBoard> projectBoard = projectListMapper.projectBoardList(projectNum);
 		
 		return projectBoard;
 	}

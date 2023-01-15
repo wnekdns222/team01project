@@ -128,16 +128,19 @@ public class ProjectController {
 	
 	
 	
-	@GetMapping("/projectMemberDelete")
+	@RequestMapping("/projectMemberDelete")
 	public String getProjectMemberDelete(@RequestParam(value="projectJoinNum") String projectJoinNum
+										,@RequestParam(value="projectNum") String projectNum
+										,RedirectAttributes reAttr
 										) {
 		
-		
+		projectListService.ProjectListOne(projectNum);
 		projectMemberInsertService.projectMemberDelete(projectJoinNum);
 		log.info("프로젝트 멤버 추가 정보:{}",projectJoinNum);
+		reAttr.addAttribute("projectNum", projectNum);
 		
 		
-		return "/project/projectMemberInsert";
+		return "redirect:/project/projectMemberInsert";
 	}
 	
 	
@@ -221,9 +224,10 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/projectDetail")
-	public String GetProjectDetail(Model model) {
-		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
-		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList();
+	public String GetProjectDetail(Model model
+								  ,String projectNum) {
+		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList(projectNum);
+		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList(projectNum);
 		List<MemberList> memberList = memberListService.memberListSe("","");
 		
 		model.addAttribute("title","프로젝트내부 디테일 화면");
@@ -234,10 +238,11 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/project_home:: projectHomeTab1")
-	public String GetProjectHome(Model model) {
+	public String GetProjectHome(Model model
+								,String projectNum) {
 		
-		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
-		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList();
+		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList(projectNum);
+		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList(projectNum);
 		
 		model.addAttribute("title","프로젝트내부 홈 화면");
 		model.addAttribute("projectBoardList",projectBoardList);
