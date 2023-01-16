@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.LoginMapper">
+ 	<resultMap type="MemberList" id="memberResultMap">
+		<id property="memberNum" column="m_num" />
+		<result property="memberPw" 				column="m_pw" />
+		<result property="memberName" 			column="m_name" />
+		<result property="memberGender" 	 column="m_gender" />
+		<result property="memberEmail" 			column="m_email" />
+		<result property="memberBirth" 			column="m_birth" />
+		<result property="memberPhone" 			column="m_phone" />
+		<result property="memberDormant" 		column="m_dormant" />
+		<result property="memberDormantDate" 		column="m_dormant_date" />
+		<result property="departmentNum" 		column="departmentNum" />
+		<result property="positionNum" 		column="position_num" />
+		<result property="memberInsertDate" 		column="m_insert_date" />
+	</resultMap> 
+	<!-- 회원가입 -->
+	<insert id="addMember" parameterType="MemberList">
+	INSERT INTO 
+	tb_member
+		(member_num, 
+		member_pw, 
+		member_name, 
+		member_gender, 
+		member_email, 
+		member_birth, 
+		member_phone,  
+		member_department_num, 
+		member_position_num, 
+		member_insert_date)
+VALUES 
+		(#{memberNum}, #{memberPw}, #{memberName}, #{memberGender}, #{memberEmail}, #{memberBirth}, #{memberPhone}, #{departmentNum}, #{positionNum}, NOW());
+	</insert>
+	<!-- 회원가입 유효성 검사 -->
+	<select id="checkMemberNum" parameterType="String" resultType="boolean">
+	SELECT 
+		if(COUNT(*) = 1, 1, 0)
+	FROM
+		tb_member AS m
+	WHERE
+		m.member_num=#{memberNum};
+	
+	</select>
+	<!-- <resultMap type="LoginHistory" id="loginResultMap">
+		<id 		property="loginNum" 		column="login_num"/>
+		<result 	property="loginId"   			column="login_num"/>
+		<result 	property="loginDate"   		column="login_Date"/>
+		<result 	property="logoutDate"   	column="logout_Date"/>
+		<association property="member" javaType="Member">
+			<id property="memberNum" column="m_num" />
+			<result property="memberPw" 				column="m_pw" />
+			<result property="memberLevel" 			column="m_level" />
+			<result property="memberLevelName" 	 column="level_name" />
+			<result property="memberName" 			column="m_name" />
+			<result property="memberEmail" 			column="m_email" />
+			<result property="memberAddr" 			column="m_addr" />
+		</association>
+	</resultMap>-->
+	
+	<select id="checkPwById" resultType="String">
+	SELECT 
+		*
+	FROM
+		tb_member AS m
+	WHERE
+		m.member_num = #{memberNum}
+	;
+	</select>
+	
+	<!-- <select id="getLoginHistory" parameterType="map" resultMap="loginResultMap">
+		/* 로그인 이력 조회 */
+		SELECT
+		   l.login_date
+		  ,l.logout_date
+		  ,m.m_num
+		  ,m.m_name
+		  ,m.m_email
+		  ,ml.level_name
+		FROM
+			tb_login AS l
+			INNER join
+			tb_member as m
+			on
+			l.login_num = m.m_num
+			INNER join
+			tb_member_level AS ml
+			on
+			ml.level_num = m.m_level
+		ORDER BY l.login_date DESC
+		<if test="startRowNum != null and startRowNum > -1">
+			LIMIT #{startRowNum}, #{rowPerPage};
+		</if>
+	</select>
+	
+	<select id="getLoginHistoryCnt" resultType = "int">
+		 /* 로그인 이력테이블의 전체 행의 갯수 */
+		SELECT
+			COUNT(1)
+		FROM
+			tb_login;	
+	</select> -->
+	</mapper>
+	
