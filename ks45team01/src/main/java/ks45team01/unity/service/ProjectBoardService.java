@@ -29,4 +29,11 @@ public class ProjectBoardService {
 	}
 	
 	
+	public void projectBoardInsert(ProjectBoard projectBoard) {
+		String projectBoardNum = projectListMapper.projectBoardCode("tb_project_board","project_board_num");
+		projectBoard.setProjectBoardNum(projectBoardNum);
+		projectListMapper.projectBoardInsert(projectBoard);
+		
+	
+	}
 }

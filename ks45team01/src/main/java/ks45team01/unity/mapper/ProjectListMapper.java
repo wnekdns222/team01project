@@ -43,6 +43,12 @@ public interface ProjectListMapper {
 	// 프로젝트 게시글 조회
 	List<ProjectBoard> projectBoardList(String projectNum);
 	
+	//자동증가 코드
+			String projectBoardCode (String table,String column);
+			
+	//프로젝트 게시글 등록
+			void projectBoardInsert(ProjectBoard ProjectBoard);
+	
 	
 	//projectList
 	// 프로젝트 업무 조회
