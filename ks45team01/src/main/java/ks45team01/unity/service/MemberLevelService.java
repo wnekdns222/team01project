@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ks45team01.unity.dto.MemberLevel;
-import ks45team01.unity.mapper.MemberLevelMapper;
+import ks45team01.unity.mapper.MemberListMapper;
+
+
+
 
 @Service
 public class MemberLevelService {
@@ -18,9 +21,9 @@ public class MemberLevelService {
 	 */
 	
 	
-	private final MemberLevelMapper memberLevelMapper;
-	public MemberLevelService(MemberLevelMapper memberLevelMapper) {
-		this.memberLevelMapper = memberLevelMapper;
+	private final MemberListMapper memberListMapper;
+	public MemberLevelService(MemberListMapper memberListMapper) {
+		this.memberListMapper = memberListMapper;
 	}
 	
 	/**
@@ -29,7 +32,7 @@ public class MemberLevelService {
 	 */
 	public List<MemberLevel> memberLevelList(){
 		
-		List<MemberLevel> memberLevelList = memberLevelMapper.memberLevelList();
+		List<MemberLevel> memberLevelList = memberListMapper.memberLevelList();
 		
 		return memberLevelList;
 	}
@@ -41,7 +44,7 @@ public class MemberLevelService {
 	 */
 	public MemberLevel memberLevelDetail(String levelCode) {
 		
-		MemberLevel memberLevelDetail = memberLevelMapper.memberLevelDetail(levelCode);
+		MemberLevel memberLevelDetail = memberListMapper.memberLevelDetail(levelCode);
 		
 		return memberLevelDetail;
 	}

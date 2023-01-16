@@ -63,5 +63,16 @@
 		WHERE
 			notice_code = #{noticeCode};
 	</select>
-	
+	<select id="getNoticeList" resultMap="communityNoticeResultMap">
+		/* 커뮤니티 공지사항 목록 */
+		SELECT 
+			*
+		FROM 
+			tb_notice
+	<where>
+		<if test="searchKey != null and searchKey != ''">
+			${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+		</if>
+	</where>
+	</select>
 </mapper>

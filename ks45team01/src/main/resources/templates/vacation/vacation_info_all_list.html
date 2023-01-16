@@ -39,6 +39,8 @@
 				<th scope="col">기본연차휴가일수</th>
 				<th scope="col">포상휴가일수</th>
 				<th scope="col">대체휴가일수</th>
+				<th scope="col">경조사휴가일수</th>
+				<th scope="col">병가일수</th>
 				<th scope="col">휴가잔여일</th>
 				<th scope="col">휴가잔여시간</th>
 				<th scope="col">사용연도</th>
@@ -51,6 +53,8 @@
                   <td th:text="${i.addVacation}"></td>
                   <td th:text="${i.rewardVacationNumber}"></td>
                   <td th:text="${i.replaceVacationDay}"></td>
+                  <td th:text="${i.personalBuisinessVacationDay}"></td>
+                  <td th:text="${i.sickVacationDay}"></td>
                   <td th:text="${i.remainVacationDay}"></td>
                   <td th:text="${i.remainVacationTime}"></td>
                   <td th:text="${i.useVacationYear}"></td>

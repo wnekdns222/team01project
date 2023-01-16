@@ -13,7 +13,7 @@
 	</resultMap>
 	
 	<insert id="addFile" parameterType="list">
-		INSERT INTO tb_file
+		INSERT IGNORE INTO tb_file
 		(
 			 file_idx
 			,file_new_name

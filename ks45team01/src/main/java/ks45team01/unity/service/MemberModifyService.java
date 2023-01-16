@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.MemberPositionList;
-import ks45team01.unity.mapper.MemberModifyMapper;
+import ks45team01.unity.mapper.MemberListMapper;
+
 
 @Service
 public class MemberModifyService {
@@ -19,10 +20,10 @@ public class MemberModifyService {
 	 * fileMapper) { this.fileMapper = fileMapper; }
 	 */
 
-	private final MemberModifyMapper memberModifyMapper;
+	private final MemberListMapper memberListMapper;
 
-	public MemberModifyService(MemberModifyMapper memberModifyMapper) {
-		this.memberModifyMapper = memberModifyMapper;
+	public MemberModifyService(MemberListMapper memberListMapper) {
+		this.memberListMapper = memberListMapper;
 	}
 
 	//직급리스트 부서리스트 멤버리스트 조인
@@ -30,7 +31,7 @@ public class MemberModifyService {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
-		List<MemberList> memberModifyList = memberModifyMapper.memberModifyList(paramMap);
+		List<MemberList> memberModifyList = memberListMapper.memberModifyList(paramMap);
 		return memberModifyList;
 	}
 
@@ -38,14 +39,14 @@ public class MemberModifyService {
 	//부서 리스트 표시
 	public List<MemberDepartmentList> memberModifyDepartmentList() {
 
-		List<MemberDepartmentList> memberModifyDepartmentList = memberModifyMapper.memberModifyDepartmentList();
+		List<MemberDepartmentList> memberModifyDepartmentList = memberListMapper.memberModifyDepartmentList();
 		return memberModifyDepartmentList;
 	}
 	
 	// 직급 리스트 표시
 	public List<MemberPositionList> memberModifyPositionList() {
 		
-		List<MemberPositionList>  memberModifyPositionList = memberModifyMapper.MemberModifyPositionList();
+		List<MemberPositionList>  memberModifyPositionList = memberListMapper.MemberModifyPositionList();
 		
 		return memberModifyPositionList;
 	}

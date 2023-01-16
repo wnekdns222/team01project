@@ -23,5 +23,10 @@ public interface CommunityNoticeMapper {
 		// 자동증가 함수
 		String getCommonNewCode(String table, String column);
 		
+		// 커뮤니티 공지사항 삭제
 		int communityNoticeDelete(String noticeCode);
+		
+		// 커뮤니티 공지사항 목록 조회
+		public List<CommunityNotice> getNoticeList(String searchKey, String searchValue);
+		
 }
