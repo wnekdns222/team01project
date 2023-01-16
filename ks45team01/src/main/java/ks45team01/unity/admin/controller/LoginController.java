@@ -1,27 +1,29 @@
 package ks45team01.unity.admin.controller;
 
 
-import java.lang.reflect.Member;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import ks45team01.unity.dto.LoginHistory;
+import ks45team01.unity.dto.MemberList;
+import ks45team01.unity.mapper.LoginMapper;
 import ks45team01.unity.service.LoginService;
 
 @Controller
 @RequestMapping("/Login")
 public class LoginController {
+	
+	private final LoginService loginService;
+	private final LoginMapper loginMapper;
+	
+	public LoginController(LoginService loginservice, LoginMapper loginMapper) {
+		this.loginService  = loginservice;
+		this.loginMapper = loginMapper;
+	}
 
 //	@PostMapping("/loginMain")
 //	public String login(	@RequestParam(name="memberNum") String memberNum
@@ -66,13 +68,33 @@ public class LoginController {
 		return "login/login";
 	}
 
-//			//로그인 화면(회원가입 화면)
-//			@GetMapping("/loginInsert")
-//			public String getLoginInsert(Model model) {   
-//				model.addAttribute("title", "회원가입화면");
-//				
-//				return "login/loginInsert";
-//			}
+			//로그인 화면(회원가입 화면)
+			@GetMapping("/loginInsert")
+			public String getLoginInsert(Model model) {   
+				model.addAttribute("title", "회원가입화면");
+				
+				return "login/loginInsert";
+			}
+			
+			//회원 가입 
+			@PostMapping("/loginInsert")
+			public String getLoginInsert(MemberList memberList) {
+				
+				loginService.addMember(memberList);
+				
+				return "redirect:/Login/loginMain";
+			}
+			
+			//회원가입 아이디 유효성 검사
+			@GetMapping("/checkId")
+			@ResponseBody
+			public boolean checkMemberNum(@RequestParam(value="memberNum") String memberNum) {
+				boolean isChecked = false;
+				
+				isChecked = loginMapper.checkMemberNum(memberNum);
+				
+				return isChecked;
+			}
 			
 //			@GetMapping("/logout")
 //			public String logout(HttpSession session) {

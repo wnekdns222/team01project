@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import ks45team01.unity.admin.controller.LoginController;
 import ks45team01.unity.dto.LoginHistory;
 import ks45team01.unity.dto.MemberList;
 
@@ -17,7 +18,11 @@ public interface LoginMapper {
 	//로그인
 	public MemberList checkPwById(String memberNum);
 	
+	//회원가입
+	public void addMember(MemberList memberList);
 	
+	//회원가입 유효성 검사
+	public boolean checkMemberNum(String memberNum);
 	//	//로그인 이력 조회
 //	public List<LoginHistory> getLoginHistory(Map<String, Object> paramMap);
 //	//로그인 이력 테이블의 전체 행의 갯수

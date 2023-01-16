@@ -17,6 +17,33 @@
 		<result property="positionNum" 		column="position_num" />
 		<result property="memberInsertDate" 		column="m_insert_date" />
 	</resultMap> 
+	<!-- 회원가입 -->
+	<insert id="addMember" parameterType="MemberList">
+	INSERT INTO 
+	tb_member
+		(member_num, 
+		member_pw, 
+		member_name, 
+		member_gender, 
+		member_email, 
+		member_birth, 
+		member_phone,  
+		member_department_num, 
+		member_position_num, 
+		member_insert_date)
+VALUES 
+		(#{memberNum}, #{memberPw}, #{memberName}, #{memberGender}, #{memberEmail}, #{memberBirth}, #{memberPhone}, #{departmentNum}, #{positionNum}, NOW());
+	</insert>
+	<!-- 회원가입 유효성 검사 -->
+	<select id="checkMemberNum" parameterType="String" resultType="boolean">
+	SELECT 
+		if(COUNT(*) = 1, 1, 0)
+	FROM
+		tb_member AS m
+	WHERE
+		m.member_num=#{memberNum};
+	
+	</select>
 	<!-- <resultMap type="LoginHistory" id="loginResultMap">
 		<id 		property="loginNum" 		column="login_num"/>
 		<result 	property="loginId"   			column="login_num"/>
