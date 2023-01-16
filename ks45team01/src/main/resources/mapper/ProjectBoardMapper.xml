@@ -15,10 +15,31 @@
 	</resultMap>
 	
 	
-	<select id="projectBoardList" resultMap="ProjectBoardResultMap">
+	<select id="projectBoardList" resultMap="ProjectBoardResultMap" parameterType="String"> 
 		SELECT 
 			*
 		FROM 
 			tb_project_board
+		WHERE
+			project_num= #{projectNum}
 	</select>
+	
+	<select id="projectBoardCode" parameterType="String" resultType="String">
+	/* 자동증가코드 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT(#{column}, '_1')
+			ELSE
+				CONCAT(#{column},'_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT(#{column}, '_'), -1) AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${table} ;
+	</select>
+	
+	<insert id="projectBoardInsert" parameterType="ProjectBoard">
+	INSERT INTO tb_project_board
+	(project_board_num, project_num, member_num, project_board_title, project_board_content, project_board_reg_date)
+	VALUES (#{projectBoardNum}, #{projectNum},#{memberNum},#{projectBoardTitle},#{projectBoardContent}, NOW())
+	</insert>
+	
 </mapper>

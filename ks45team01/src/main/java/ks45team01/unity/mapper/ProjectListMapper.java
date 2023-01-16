@@ -17,9 +17,7 @@ import ks45team01.unity.dto.ProjectUnitMember;
 @Mapper
 public interface ProjectListMapper {
 	
-	//projectList
-			// 프로젝트리퀘스트
-			List<ProjectRequest> projectRequestList();
+	
 	
 	// 프로젝트 리스트
 	List<ProjectList> projectListSe();
@@ -36,11 +34,25 @@ public interface ProjectListMapper {
 	//프로젝트 담당 인원수 업데이트
 	int projectMemberCntUpdate(String projectNum);
 	
+	//프로젝트 멤버 삭제
+	int projectMemberDelete(String projectJoinNum);
+	
 			
 	//projectBoard
 			
-	// 회원 멤버전체 조회
-	List<ProjectBoard> projectBoardList();
+	// 프로젝트 게시글 조회
+	List<ProjectBoard> projectBoardList(String projectNum);
+	
+	//자동증가 코드
+			String projectBoardCode (String table,String column);
+			
+	//프로젝트 게시글 등록
+			void projectBoardInsert(ProjectBoard ProjectBoard);
+	
+	
+	//projectList
+	// 프로젝트 업무 조회
+	List<ProjectRequest> projectRequestList(String projectNum);
 	
 	
 	

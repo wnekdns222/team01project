@@ -127,10 +127,28 @@ public class ProjectController {
 	}
 	
 	
+	
+	@RequestMapping("/projectMemberDelete")
+	public String getProjectMemberDelete(@RequestParam(value="projectJoinNum") String projectJoinNum
+										,@RequestParam(value="projectNum") String projectNum
+										,RedirectAttributes reAttr
+										) {
+		
+		projectListService.ProjectListOne(projectNum);
+		projectMemberInsertService.projectMemberDelete(projectJoinNum);
+		log.info("프로젝트 멤버 추가 정보:{}",projectJoinNum);
+		reAttr.addAttribute("projectNum", projectNum);
+		
+		
+		return "redirect:/project/projectMemberInsert";
+	}
+	
+	
 	@PostMapping("/projectMemberInsert")
 	public String getProjectMemberInsert(ProjectMember projectMember
 										,String projectNum
-										,RedirectAttributes reAttr) {
+										,RedirectAttributes reAttr
+										,Model model) {
 		
 		projectListService.ProjectListOne(projectNum);
 		projectMemberInsertService.ProjectMemberInsert(projectMember);
@@ -206,34 +224,57 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/projectDetail")
-	public String GetProjectDetail(Model model) {
-		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
-		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList();
+	public String GetProjectDetail(Model model
+								  ,String projectNum
+								  ,RedirectAttributes reAttr) {
+		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList(projectNum);
+		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList(projectNum);
 		List<MemberList> memberList = memberListService.memberListSe("","");
 		
+		
 		model.addAttribute("title","프로젝트내부 디테일 화면");
+		model.addAttribute("projectNum",projectNum);
 		model.addAttribute("projectBoardList",projectBoardList);
 		model.addAttribute("projectRequestList",projectRequestList);
 		model.addAttribute("memberList",memberList);
+		reAttr.addAttribute("projectNum", projectNum);
 	return "project/project_detail";
 	}
 	
 	@GetMapping("/project_home:: projectHomeTab1")
-	public String GetProjectHome(Model model) {
+	public String GetProjectHome(Model model
+								,String projectNum) {
 		
-		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
-		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList();
+		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList(projectNum);
+		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList(projectNum);
 		
 		model.addAttribute("title","프로젝트내부 홈 화면");
+		model.addAttribute("projectNum",projectNum);
 		model.addAttribute("projectBoardList",projectBoardList);
 		model.addAttribute("projectRequestList",projectRequestList);
 	return "project/project_home";
 	}
 	
 	
+	@PostMapping("/projectBoardInsert")
+	public String getProjectBoardInsert(ProjectBoard projectBoard
+										,String projectNum
+										,RedirectAttributes reAttr) {
+		
+		
+		projectBoardService.projectBoardInsert(projectBoard);
+		
+		System.out.println(projectBoard + "<-- projectBoard GetProjectMemberInsertForm");
+		reAttr.addAttribute("projectNum", projectNum);
+		
+		return "redirect:/project/projectDetail";
+		
+	}
+	
 	@GetMapping("/projectBoardInsert")
-	public String projectBoardInsert(Model model) {
+	public String projectBoardInsert(Model model, @RequestParam(value="projectNum", required = false) String projectNum) {
 		model.addAttribute("projectBoardInsert","프로젝트내부 게시글 생성화면");
+		model.addAttribute("projectNum", projectNum);
 	return "project/project_home/project_board_insert";
 	}
 	

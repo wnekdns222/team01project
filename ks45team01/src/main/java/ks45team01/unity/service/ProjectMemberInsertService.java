@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
-import ks45team01.unity.dto.ProjectList;
 import ks45team01.unity.dto.ProjectMember;
 import ks45team01.unity.mapper.ProjectListMapper;
 
@@ -75,6 +74,14 @@ public class ProjectMemberInsertService {
 				
 				return projectMemberCntUpdate;
 			}
+	
+	//프로젝트 멤버 삭제 
+			public int projectMemberDelete(String projectJoinNum) {
+				int  projectMemberDelete = projectListMapper.projectMemberDelete(projectJoinNum);
+				
+				return projectMemberDelete;
+			}
 			
+	
 	
 }

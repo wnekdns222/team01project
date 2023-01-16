@@ -21,12 +21,19 @@ public class ProjectBoardService {
 	 * 파일 목록
 	 * @return
 	 */
-	public List<ProjectBoard> projectBoardList(){
+	public List<ProjectBoard> projectBoardList(String projectNum){
 		
-		List<ProjectBoard> projectBoard = projectListMapper.projectBoardList();
+		List<ProjectBoard> projectBoard = projectListMapper.projectBoardList(projectNum);
 		
 		return projectBoard;
 	}
 	
 	
+	public void projectBoardInsert(ProjectBoard projectBoard) {
+		String projectBoardNum = projectListMapper.projectBoardCode("tb_project_board","project_board_num");
+		projectBoard.setProjectBoardNum(projectBoardNum);
+		projectListMapper.projectBoardInsert(projectBoard);
+		
+	
+	}
 }

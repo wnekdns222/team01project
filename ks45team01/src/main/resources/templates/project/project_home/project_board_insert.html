@@ -27,26 +27,27 @@
 	</th:block>
 	<th:block layout:fragment="customContents">
 
-
+<form th:action="@{/project/projectBoardInsert}" method="post">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card card-statistics">
 				<div class="card-header">
 					<div class="card-heading">
 						<h4 class="card-title">게시글 내용</h4>
-						<input class="form-control form-control-lg" type="text"
+						<input type="hidden" name="memberNum" id="memberNum" th:value="id001"/>
+					<input type="hidden" name="projectNum" id="projectNum" th:value="${projectNum}"/>
+						<input class="form-control form-control-lg" type="text" id="projectBoardTitle" name="projectBoardTitle"
 						placeholder="제목을 입력하세요">
 					</div>
 				</div>
 				<div class="card-body">
-					<div id="summernote" class="summernote"></div>
-					<button type="submit" class="btn btn-primary"
-					onclick="location.href='/project/projectDetail'">등록</button>
+					 <textarea class="form-control" placeholder="Message" id="projectBoardContent" name="projectBoardContent" rows="7"></textarea>
+					<button type="submit" class="btn btn-primary">등록</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
+</form>
 
 
 </th:block>

@@ -33,7 +33,7 @@
 		<div class="form-group">
 			<label for="workNum">인원설정</label>
 			<div class="form-group mb-0">
-				<select class="js-basic-single form-control" name="memberNum" id="memberNum">
+				<select class="js-basic-single form-control memberNum" name="memberNum" id="memberNum">
 					<optgroup th:each="dl : ${memberDepartmentList}" th:label="${dl.departmentName}">
 						<th:block th:each="ml : ${memberList}">
 							<option th:if="${dl.departmentNum == ml.departmentNum}" th:value="${ml.memberNum}">[[${ml.memberName}]]</option>
@@ -52,12 +52,11 @@
 		<div class="form-group">
 			<label for="writeChangeReason">담당업무 상세내용</label>
 			<textarea class="form-control" name="joinContent"
-				id="joinContent" rows="3" placeholder="Textarea text">
-	        </textarea>
+				id="joinContent" rows="3" placeholder="내용을 입력해주세요"></textarea>
 		</div>
 		
 
-		<button type="submit" class="btn btn-primary">인원추가완료</button>
+		<button type="submit" class="btn btn-primary submitBtn">인원추가완료</button>
 	</form>
 
 
@@ -81,6 +80,7 @@
 								<div class="card card-statistics">
 									<div class="card-body">
 										<div class="datatable-wrapper table-responsive">
+											<form th:action="@{/project/projectMemberInsert}" method="post"></form>
 											<table id="datatable"
 												class="display compact table table-striped table-bordered">
 
@@ -95,6 +95,7 @@
 												</thead>
 												<tbody>
 													<tr th:each="pm : ${projectMember}">
+													
 														<td>
 															<div class="d-flex align-items-center">
 																<div class="bg-img mr-4">
@@ -109,11 +110,14 @@
 														<td th:text="${pm.joinStartDate}"></td>
 														<td th:text="${pm.joinEndDate}"></td>
 														<td th:text="${pm.joinContent}"></td>
-														<td><a href="/project/projectMemberModify"
-															class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i
-																class="ti ti-pencil"></i></a> <a href="javascript:void(0)"
-															class="btn btn-icon btn-outline-danger btn-round"><i
-																class="ti ti-close"></i></a></td>
+														<td>
+														<a href="/project/projectMemberModify" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+														<i class="ti ti-pencil"></i>
+														</a>
+														<a class="btn btn-icon btn-outline-danger btn-round" th:href="@{/project/projectMemberDelete(projectJoinNum=${pm.projectJoinNum},projectNum=${projectListOne.projectNum})}" >
+														<i class="ti ti-close"></i>
+														</a>
+														</td>
 													</tr>
 
 
@@ -132,5 +136,45 @@
 	</div>
 
 </th:block>
+<th:block layout:fragment="customScript">
+<script>
+$(function() {
+	const $idData = document.getElementById('memberNum');
+	
+	$('.submitBtn').click(function(){
+		
+		let check = false;
+		
+		fetch("/project/projectDetail")
+		.then(response => response.json())
+		.then(memberList => {
+			consloe.log({memberList});
+			memberList.forEach(function(item){
+				for(let key in item){
+					if($(memberNum).val() == item[key]) {
+						check = true;
+					}
+				}
+			})
+			console.log(check);
+			if(check){
+				alert(`아이디가  중복입니다.`);
+				$idData.focus();
+			}else{
+				alert("사용가능한 아이디 입니다.");
+			}
 
+			
+			
+		});
+		
+		
+	});
+
+});
+
+
+</script>
+
+</th:block>
 </html>
