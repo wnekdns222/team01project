@@ -83,5 +83,12 @@ public class ProjectMemberInsertService {
 			}
 			
 	
+			
+	//프로젝트 아이디 조회 카운트
+			public int projectIdCnt (String memberNum,String projectNum) {
+				int projectIdCnt = projectListMapper.projectIdCnt(memberNum, projectNum);
+				
+				return projectIdCnt;
+			}
 	
 }

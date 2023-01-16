@@ -28,21 +28,23 @@
 </th:block>
 <th:block layout:fragment="customContents">
 
-	<form th:action="@{/project/projectMemberInsert}" method="post">
+	<form method="post" autocomplete="off">
 	<h2>인원추가</h2>
 		<div class="form-group">
 			<label for="workNum">인원설정</label>
 			<div class="form-group mb-0">
+			
+					
 				<select class="js-basic-single form-control memberNum" name="memberNum" id="memberNum">
 					<optgroup th:each="dl : ${memberDepartmentList}" th:label="${dl.departmentName}">
 						<th:block th:each="ml : ${memberList}">
-							<option th:if="${dl.departmentNum == ml.departmentNum}" th:value="${ml.memberNum}">[[${ml.memberName}]]</option>
+							<option th:if="${dl.departmentNum == ml.departmentNum}" id="identification" th:value="${ml.memberNum}">[[${ml.memberName}]]</option>
 						</th:block>
-						<!-- <option th:each="ml : ${memberList}" th:value="${ml.departmentName}" th:text=""></option> -->
+					
 					</optgroup>
 					
 				</select>
-				
+				<button type="button" id="idOverlap" onclick="fn_idOverlap();">중복확인</button>
 			</div>
 		</div>
 <!-- 		<input type="hidden" name="projectNum" id="projectNum" th:value="${projectListOne.projectNum}"/> -->
@@ -56,7 +58,7 @@
 		</div>
 		
 
-		<button type="submit" class="btn btn-primary submitBtn">인원추가완료</button>
+		<button type="submit" class="btn btn-primary submit" disabled="disabled">인원추가완료</button>
 	</form>
 
 
@@ -137,41 +139,26 @@
 
 </th:block>
 <th:block layout:fragment="customScript">
-<script>
-$(function() {
-	const $idData = document.getElementById('memberNum');
-	
-	$('.submitBtn').click(function(){
+<script type="text/javascript">
+function fn_idOverlap() {
+	$.ajax({
+		url : "/project/idOverlap",
+		type : "post",
+		dataType : "json",
+		data : { "memberNum" : $("#memberNum").val(), "projectNum" : $("#projectNum").val()},
 		
-		let check = false;
-		
-		fetch("/project/projectDetail")
-		.then(response => response.json())
-		.then(memberList => {
-			consloe.log({memberList});
-			memberList.forEach(function(item){
-				for(let key in item){
-					if($(memberNum).val() == item[key]) {
-						check = true;
-					}
-				}
-			})
-			console.log(check);
-			if(check){
-				alert(`아이디가  중복입니다.`);
-				$idData.focus();
-			}else{
+		success : function(data) {
+			if(data >= 1) {
+				alert("중복된 아이디 입니다.");
+				$(".submit").attr("disabled", "disabled");
+			} else if(data == 0) {
 				alert("사용가능한 아이디 입니다.");
+				$(".submit").removeAttr("disabled");
 			}
-
-			
-			
-		});
-		
-		
-	});
-
-});
+		}
+	})
+}
+console.log(identification)
 
 
 </script>
