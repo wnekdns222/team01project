@@ -53,6 +53,18 @@ public class CommunityNoticeService {
 	}
 	
 	/**
+	 * 공지사항 수정을위한 목록 조회
+	 * @return List<CommunityNotice>
+	 */
+	public List<CommunityNotice> noticeList(){
+		
+		List<CommunityNotice> noticeList = communityNoticeMapper.noticeList();
+		
+		return noticeList;
+	}
+	
+	
+	/**
 	 * 목록 조회
 	 * @return List<CommunityNotice>
 	 */
