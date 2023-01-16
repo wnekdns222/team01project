@@ -28,7 +28,7 @@
 </th:block>
 <th:block layout:fragment="customContents">
 
-	<form method="post" autocomplete="off">
+	<form th:action="@{/project/projectMemberInsert}" method="post">
 	<h2>인원추가</h2>
 		<div class="form-group">
 			<label for="workNum">인원설정</label>
@@ -158,7 +158,12 @@ function fn_idOverlap() {
 		}
 	})
 }
-console.log(identification)
+
+const select = document.getElementById("memberNum");
+select.addEventListener("change", function(e) {
+	$(".submit").attr("disabled", "disabled");
+});
+
 
 
 </script>
