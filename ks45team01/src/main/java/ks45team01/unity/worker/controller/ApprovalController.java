@@ -19,7 +19,7 @@ public class ApprovalController {
 		this.approvalService = approvalService;
 	}
 	
-	@GetMapping("workCorrectInsert")
+	@GetMapping("/workCorrectInsert")
 	public String workCorrectInsert(Model model) {
 		
 		model.addAttribute("title", "근태정정신청");
@@ -33,7 +33,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("vacationInsert")
+	@GetMapping("/vacationInsert")
 	public String vacationInsert(Model model) {
 		
 		model.addAttribute("title", "휴가신청");
@@ -46,7 +46,7 @@ public class ApprovalController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("finalApproverList")
+	@GetMapping("/finalApproverList")
 	public String finalApproverList(Model model) {
 		
 		model.addAttribute("title", "전결/대결 리스트");
@@ -59,7 +59,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("draftInsert")
+	@GetMapping("/draftInsert")
 	public String draftInsert(Model model) {
 		
 		model.addAttribute("title", "기안작성");
@@ -67,7 +67,7 @@ public class ApprovalController {
 		return "approval/draftInsert";
 	}
 	
-	@GetMapping("odInsert")
+	@GetMapping("/odInsert")
 	public String odInsert(Model model) {
 		
 		model.addAttribute("title", "공문작성");
@@ -75,7 +75,7 @@ public class ApprovalController {
 		return "approval/odInsert";
 	}
 	
-	@GetMapping("proposalInsert")
+	@GetMapping("/proposalInsert")
 	public String proposalInsert(Model model) {
 		
 		model.addAttribute("title", "기획작성");
@@ -83,7 +83,7 @@ public class ApprovalController {
 		return "approval/proposalInsert";
 	}
 	
-	@GetMapping("letterApprovalInsert")
+	@GetMapping("/letterApprovalInsert")
 	public String letterApprovalInsert(Model model) {
 		
 		model.addAttribute("title", "품의서작성");
@@ -91,7 +91,7 @@ public class ApprovalController {
 		return "approval/letterApprovalInsert";
 	}
 	
-	@GetMapping("approvalDoneView")
+	@GetMapping("/pprovalDoneView")
 	public String approvalDoneView(Model model) {
 		
 		model.addAttribute("title", "결재완료상세보기");
@@ -105,7 +105,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("approvalDoneList")
+	@GetMapping("/approvalDoneList")
 	public String approvalDoneList(Model model) {
 		
 		model.addAttribute("title", "결재완료함");
@@ -113,16 +113,27 @@ public class ApprovalController {
 		return "approval/approvalDoneList";
 	}
 	
+	@GetMapping("/approvalView")
+	public String approvalView(String draftDocNum
+							  ,Model model) {
+		Approval draftView = approvalService.draftView(draftDocNum);
+		model.addAttribute("title", "결재상세페이지");
+		model.addAttribute("draftView", draftView);
+		
+		return "approval/approvalView";
+	}
 	/**
 	 * 결재함 리스트 
 	 * @param model
 	 * @return
 	 */
 	
-	@GetMapping("approvalList")
+	@GetMapping("/approvalList")
 	public String approvalList(Model model) {
 		
+		List<Approval> approvalList = approvalService.approvalList();
 		model.addAttribute("title", "결재함");
+		model.addAttribute("approvalList", approvalList);
 		
 		return "approval/approvalList";
 	}
@@ -133,7 +144,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("rejectList")
+	@GetMapping("/rejectList")
 	public String rejectList(Model model) {
 		
 		model.addAttribute("title", "반려함");
@@ -147,7 +158,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("circularList")
+	@GetMapping("/circularList")
 	public String circularList(Model model) {
 		
 		model.addAttribute("title", "회람함");
@@ -155,7 +166,7 @@ public class ApprovalController {
 		return "approval/circularList";
 	}
 	
-	@GetMapping("referrerView")
+	@GetMapping("/referrerView")
 	public String referrerView(Model model) {
 		
 		model.addAttribute("title", "참조문서 상세보기");
@@ -168,7 +179,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("referrerList")
+	@GetMapping("/referrerList")
 	public String referrerList(Model model) {
 		
 		model.addAttribute("title", "참조함");
@@ -180,7 +191,7 @@ public class ApprovalController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("receiverView")
+	@GetMapping("/receiverView")
 	public String receiverView(Model model) {
 		
 		model.addAttribute("title", "수신문서 상세보기");
@@ -194,7 +205,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("receiverList")
+	@GetMapping("/receiverList")
 	public String receiverList(Model model) {
 		
 		model.addAttribute("title", "수신함");
@@ -208,10 +219,13 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("draftView")
-	public String draftView(Model model) {
+	@GetMapping("/draftView")
+	public String draftView(String draftDocNum
+						   ,Model model) {
 		
+		Approval draftView = approvalService.draftView(draftDocNum);
 		model.addAttribute("title", "기안상세보기");
+		model.addAttribute("draftView", draftView);
 		
 		return "approval/draftView";
 	}
