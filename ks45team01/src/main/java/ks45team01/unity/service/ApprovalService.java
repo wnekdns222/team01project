@@ -17,7 +17,24 @@ public class ApprovalService {
 		this.approvalMapper = approvalMapper;
 	}
 	
+	/**
+	 * 기안문서 목록 조회
+	 * @return approvalMapper.draftList
+	 */
 	public List<Approval> draftList(){
 		return approvalMapper.draftList();
+	}
+	
+	/**
+	 * 개별 기안문서 상세보기
+	 * @param draftDocNum
+	 * @return approvalMapper.draftView(draftDocNum)
+	 */
+	public Approval draftView(String draftDocNum) {
+		return approvalMapper.draftView(draftDocNum);
+	}
+	
+	public List<Approval> approvalList(){
+		return approvalMapper.approvalList();
 	}
 }
