@@ -77,7 +77,8 @@ public interface ProjectListMapper {
 		//자동증가 코드
 		String getCommonNewCode (String table,String column);
 		
-		
+		//아이디 중복체크
+		int projectIdCnt (String memberNum,String projectNum);
 		
 		
 		

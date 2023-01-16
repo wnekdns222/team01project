@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ks45team01.unity.dto.MemberDepartmentList;
@@ -185,6 +187,17 @@ public class ProjectController {
 		
 	return "project/project_member_insert";
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/idOverlap", method = RequestMethod.POST)
+	public int projectIdCnt(String memberNum
+							,String projectNum) {
+		int result = projectMemberInsertService.projectIdCnt(memberNum, projectNum);
+		return result;
+	}
+	
+	
 	
 	
 	@GetMapping("/projectMemberModify")
