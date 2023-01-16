@@ -48,6 +48,7 @@ public class CommunityController {
 			return "redirect:/community/noticeList";
 		}
 		
+		
 		/**
 		 * 공지사항 수정 
 		 * @param noticeCode
@@ -59,8 +60,13 @@ public class CommunityController {
 								   ,Model model) {
 			
 			CommunityNotice noticeDetail = communityNoticeService.communityNoticeDetail(noticeCode);
+			
+			List<CommunityNotice> noticeList = communityNoticeService.noticeList();
+			System.out.println(noticeList);
+			
 			model.addAttribute("title", "공지사항 수정 화면");
 			model.addAttribute("noticeDetail", noticeDetail);
+			model.addAttribute("noticeList", noticeList);
 			
 			return "community/noticeModify";
 		}
