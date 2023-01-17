@@ -17,4 +17,22 @@ public interface ApprovalMapper {
 	
 	// 결재 진행 목록 조회
 	List<Approval> approvalList();
+	
+	// 결재 완료 목록 조회
+	List<Approval> approvalDoneList();
+	
+	// 반려사유 등록
+	void addRejectReason(String approvalProcessNum, String rejectReasonMember, String rejectReason, String rejectDate);
+	
+	// 반려함 목록 조회
+	List<Approval> rejectList();
+	
+	// 결재자 추가
+	void addApprovalMember(Approval approval);
+	
+	// 기안 작성
+	void addDraftInsert(Approval approval);
+	
+	// 자동증가 코드
+	String getCommonNewCode(String table, String column);
 }

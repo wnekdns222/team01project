@@ -1,7 +1,7 @@
 package ks45team01.unity.mapper;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,7 +19,7 @@ public interface FormBoardMapper {
 	FormBoard getFormBoard(int formNum);
 	// 서식글 개수
 	int formBoardCount();
-	
 	// 서식글 목록
-	List<FormBoard> formList(String searchKey, String searchValue);
+	List<FormBoard> formList(Map<String,Object> paramMap);
+	
 }
