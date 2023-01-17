@@ -5,6 +5,7 @@ public class Reservation {
 	
 	private String reservationNum;
 	private String meetNum;
+	private String reservationDate;
 	private String reservationStartTime;
 	private String reservationEndTime;
 	private String reservationContents;
@@ -14,16 +15,6 @@ public class Reservation {
 	private String reservationUpdateMember;
 	
 	private Meetingroom meetingroom;
-	
-	public Meetingroom getMeetingroom() {
-		return meetingroom;
-	}
-
-	public void setMeetingroom(Meetingroom meetingroom) {
-		this.meetingroom = meetingroom;
-	}
-
-
 
 	public String getReservationNum() {
 		return reservationNum;
@@ -39,6 +30,14 @@ public class Reservation {
 
 	public void setMeetNum(String meetNum) {
 		this.meetNum = meetNum;
+	}
+
+	public String getReservationDate() {
+		return reservationDate;
+	}
+
+	public void setReservationDate(String reservationDate) {
+		this.reservationDate = reservationDate;
 	}
 
 	public String getReservationStartTime() {
@@ -97,6 +96,13 @@ public class Reservation {
 		this.reservationUpdateMember = reservationUpdateMember;
 	}
 
+	public Meetingroom getMeetingroom() {
+		return meetingroom;
+	}
+
+	public void setMeetingroom(Meetingroom meetingroom) {
+		this.meetingroom = meetingroom;
+	}
 
 	@Override
 	public String toString() {
@@ -105,6 +111,8 @@ public class Reservation {
 		builder.append(reservationNum);
 		builder.append(", meetNum=");
 		builder.append(meetNum);
+		builder.append(", reservationDate=");
+		builder.append(reservationDate);
 		builder.append(", reservationStartTime=");
 		builder.append(reservationStartTime);
 		builder.append(", reservationEndTime=");
@@ -124,9 +132,5 @@ public class Reservation {
 		builder.append("]");
 		return builder.toString();
 	}
-
-	
-
-	
-
+		
 }
