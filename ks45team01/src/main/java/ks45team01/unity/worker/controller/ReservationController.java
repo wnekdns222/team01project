@@ -2,8 +2,8 @@ package ks45team01.unity.worker.controller;
 
 import java.util.List;
 
-
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +19,8 @@ import ks45team01.unity.service.ReservationService;
 public class ReservationController {
 			
 	
+	private static final Logger log = LoggerFactory.getLogger(ReservationController.class);
+
 	private final ReservationService reservationService;
 	
 	public ReservationController(ReservationService reservationService){
@@ -47,15 +49,35 @@ public class ReservationController {
 		Reservation reservation = reservationService.getReservationById(reservationNum);
 		List<Reservation> reservationList = reservationService.getReservationList();
 
-		
 		model.addAttribute("title", "회의실 목록");
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("reservationList", reservationList);
 
-		
-		
-		
 		return "/reservation/meetingroom_reservation_insert";
+	}
+	
+	//내 예약확인화면
+	@GetMapping("/meetingroomReservationMine")
+	public String getReservationList(Model model) {
+		
+		List<Reservation> reservationList = reservationService.getReservationList();
+		
+		model.addAttribute("reservationList", reservationList);
+		
+		return "/reservation/meetingroom_reservation_mine";
+	}
+	
+	//예약 수정화면
+	@GetMapping("/meetingroomReservationModify")
+	public String modifyMeetingroomReservation(@RequestParam(value="reservationNum", required=false) String reservationNum,Model model) {
+		
+		log.info("meetingroomReservation: {}", reservationNum);
+		
+		Reservation reservation = reservationService.getReservationById(reservationNum);
+		
+		model.addAttribute("reservation", reservation);
+
+		return "reservation/meetingroom_reservation_modify";
 	}
 	
 	

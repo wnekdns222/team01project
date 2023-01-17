@@ -22,6 +22,7 @@
 	<resultMap type="Reservation" id="reservationResultMap">
 		<id		property="reservationNum"	column="reservation_num" />
 		<result property="meetNum"  column="meet_num" />
+		<result property="reservationDate"  column="reservation_date" />
 		<result property="reservationStartTime"  column="reservation_start_time" />
 		<result property="reservationEndTime"  column="reservation_end_time" />
 		<result property="reservationContents"  column="reservation_contents" />
