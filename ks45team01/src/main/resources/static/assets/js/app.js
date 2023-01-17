@@ -13152,8 +13152,13 @@ var checkin = $('.range-from').datepicker({
         if (rangeslider.length > 0) {
                 //slider-1
                 $("#slider-1").ionRangeSlider();
+                //slider-1 클래스
+                $(".slider-1").ionRangeSlider({
+					min: 0,
+					max:100
+				});
                 //slider-2
-                $(".slider-2").ionRangeSlider({
+                $("#slider-2").ionRangeSlider({
                     min: 100,
                     max: 1000,
                     from: 550

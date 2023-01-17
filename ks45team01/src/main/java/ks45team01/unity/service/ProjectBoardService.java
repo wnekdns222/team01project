@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ks45team01.unity.dto.ProjectBoard;
+import ks45team01.unity.dto.ProjectListPost;
 import ks45team01.unity.mapper.ProjectListMapper;
 @Service
 public class ProjectBoardService {
@@ -26,6 +27,12 @@ public class ProjectBoardService {
 		List<ProjectBoard> projectBoard = projectListMapper.projectBoardList(projectNum);
 		
 		return projectBoard;
+	}
+	
+	
+	public List<ProjectListPost> projectListPostList(String projectNum){
+		List<ProjectListPost> projectListPostList = projectListMapper.projectListPostList(projectNum);
+		return projectListPostList;
 	}
 	
 	

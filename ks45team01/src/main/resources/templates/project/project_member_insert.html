@@ -149,10 +149,10 @@ function fn_idOverlap() {
 		
 		success : function(data) {
 			if(data >= 1) {
-				alert("중복된 아이디 입니다.");
+				alert("중복된 사원 입니다.");
 				$(".submit").attr("disabled", "disabled");
 			} else if(data == 0) {
-				alert("사용가능한 아이디 입니다.");
+				alert("사용가능한 사원 입니다.");
 				$(".submit").removeAttr("disabled");
 			}
 		}
@@ -161,6 +161,7 @@ function fn_idOverlap() {
 
 const select = document.getElementById("memberNum");
 select.addEventListener("change", function(e) {
+	alert("값이 변경되어 중복체크를 다시해주세요");
 	$(".submit").attr("disabled", "disabled");
 });
 

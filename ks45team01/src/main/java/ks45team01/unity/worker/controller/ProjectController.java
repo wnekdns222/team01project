@@ -18,6 +18,7 @@ import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.ProjectBoard;
 import ks45team01.unity.dto.ProjectList;
+import ks45team01.unity.dto.ProjectListPost;
 import ks45team01.unity.dto.ProjectMember;
 import ks45team01.unity.dto.ProjectRequest;
 import ks45team01.unity.dto.ProjectUnit;
@@ -33,7 +34,7 @@ import ks45team01.unity.service.ProjectUnitService;
 @RequestMapping("/project")
 
 public class ProjectController {
-	
+
 	
 	private static final Logger log = LoggerFactory.getLogger(ProjectController.class);
 
@@ -244,12 +245,16 @@ public class ProjectController {
 		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList(projectNum);
 		List<MemberList> memberList = memberListService.memberListSe("","");
 		
+		List<ProjectListPost> projectListPost = projectBoardService.projectListPostList(projectNum);
+		
+		log.info("ProjectListPost : {}", projectListPost);
 		
 		model.addAttribute("title","프로젝트내부 디테일 화면");
 		model.addAttribute("projectNum",projectNum);
 		model.addAttribute("projectBoardList",projectBoardList);
 		model.addAttribute("projectRequestList",projectRequestList);
 		model.addAttribute("memberList",memberList);
+		model.addAttribute("projectListPost",projectListPost);
 		reAttr.addAttribute("projectNum", projectNum);
 	return "project/project_detail";
 	}
@@ -260,11 +265,13 @@ public class ProjectController {
 		
 		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList(projectNum);
 		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList(projectNum);
+		List<ProjectListPost> projectListPost = projectBoardService.projectListPostList(projectNum);
 		
 		model.addAttribute("title","프로젝트내부 홈 화면");
 		model.addAttribute("projectNum",projectNum);
 		model.addAttribute("projectBoardList",projectBoardList);
 		model.addAttribute("projectRequestList",projectRequestList);
+		model.addAttribute("projectListPost",projectListPost);
 	return "project/project_home";
 	}
 	

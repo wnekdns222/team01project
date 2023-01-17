@@ -9,6 +9,7 @@ import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.ProjectBoard;
 import ks45team01.unity.dto.ProjectList;
+import ks45team01.unity.dto.ProjectListPost;
 import ks45team01.unity.dto.ProjectMember;
 import ks45team01.unity.dto.ProjectRequest;
 import ks45team01.unity.dto.ProjectUnit;
@@ -97,5 +98,7 @@ public interface ProjectListMapper {
 		// 회원 멤버전체 조회
 		List<ProjectUnitMember> projectUnitMemberList(); 
 		
+		
+		List<ProjectListPost> projectListPostList(String projectNum);
 }
 
