@@ -16,6 +16,8 @@ public class Approval {
 	
 	private ApprovalProcess approvalProcess;
 
+	private ApprovalLine approvalLine;
+
 	public String getDraftDocNum() {
 		return draftDocNum;
 	}
@@ -112,6 +114,14 @@ public class Approval {
 		this.approvalProcess = approvalProcess;
 	}
 
+	public ApprovalLine getApprovalLine() {
+		return approvalLine;
+	}
+
+	public void setApprovalLine(ApprovalLine approvalLine) {
+		this.approvalLine = approvalLine;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -139,6 +149,8 @@ public class Approval {
 		builder.append(approvalFinalState);
 		builder.append(", approvalProcess=");
 		builder.append(approvalProcess);
+		builder.append(", approvalLine=");
+		builder.append(approvalLine);
 		builder.append("]");
 		return builder.toString();
 	}

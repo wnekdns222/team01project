@@ -34,7 +34,38 @@ public class ApprovalService {
 		return approvalMapper.draftView(draftDocNum);
 	}
 	
+	/**
+	 * 결재 진행 목록 조회
+	 * @return approvalMapper.approvalList
+	 */
 	public List<Approval> approvalList(){
 		return approvalMapper.approvalList();
+	}
+	/**
+	 * 결재 완료 목록 조회
+	 * @return approvalMapper.approvalDoneList
+	 */
+	public List<Approval> approvalDoneList(){
+		return approvalMapper.approvalDoneList();
+	}
+	
+	/**
+	 * 반려사유 등록
+	 * @param approvalProcessNum
+	 * @param rejectReasonMember
+	 * @param rejectReason
+	 * @param rejectDate
+	 */
+	public void addRejectReason(String approvalProcessNum, String rejectReasonMember, String rejectReason, String rejectDate) {
+		approvalMapper.addRejectReason(approvalProcessNum, rejectReasonMember, rejectReason, rejectDate);
+	}
+	
+	public List<Approval> rejectList(){
+		return approvalMapper.rejectList();
+	}
+	public void addDraftInsert(Approval approval) {
+		String draftDocNum = approvalMapper.getCommonNewCode("tb_draft_document", "draft_doc_num");
+		approval.setDraftDocNum(draftDocNum);
+		approvalMapper.addDraftInsert(approval);
 	}
 }

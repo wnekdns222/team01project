@@ -115,8 +115,11 @@
 			dl.member_num = m.member_num
 	<where>
 		<if test="searchKey != null and searchKey != ''">
-			${searchKey} LIKE CONCAT('%', #{searchValue}, '%');
+			${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
 		</if>
 	</where>
+		<if test="startRowNum !=null and startRowNum > -1">
+			LIMIT #{startRowNum}, #{rowPerPage};
+		</if>
 	</select>
 </mapper>

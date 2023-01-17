@@ -27,7 +27,6 @@
 		</div>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<form id="addRejectReason" th:action="@{/approval/draftView}" method="post">
 		<table class="table table-hover">
 			<tr>
 				<td style="font-family:돋음; font-size:12" height="16">
@@ -82,19 +81,17 @@
 					<div align="center">반려사유</div>
 				</td>
 				<td style="font-family:돋음; font-size:12">
-					<textarea rows="4" cols="50" id="rejectReason" name="rejectReason"></textarea>
+					<textarea rows="4" cols="50" id="rejectReason" name="rejectReason" disabled="disabled">[[${draftView.approvalProcess.rejectReason}]]</textarea>
 				</td>
 				<td style="font-family:돋음; font-size:12" height="16">
 					<div align="left">반려자
-						<input type="text" id="rejectReasonMember" name="rejectReasonMember"/>
+						<input type="text" id="rejectReasonMember" name="rejectReasonMember" disabled="disabled" th:value="${draftView.approvalProcess.rejectReasonMember}"/>
 					</div>
 				</td>
 			</tr>
 		</table>
 		<div style="text-align: center;">
-			<button type="submit" class="btn btn-outline-success">반려</button>
 			<a th:href="@{/approval/draftList}" class="btn btn-outline-success">목록</a>
 		</div>
-		</form>
 	</th:block>
 </html>
