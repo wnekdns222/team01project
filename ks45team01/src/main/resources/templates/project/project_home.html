@@ -32,7 +32,7 @@
 		<ul class="nav nav-tabs" role="tablist">
 
 			<li class="nav-item">
-			<input type="text" name="projectNum" id="projectNum" th:value="${projectNum}"/>
+			<input type="hidden" name="projectNum" id="projectNum" th:value="${projectNum}"/>
 				<button class="btn btn-light addBoardBtn" >게시글 등록</button>
 			</li>
 
@@ -55,14 +55,49 @@
 
 		</ul>
 	</div>
+	
+	
 	<h3>전체</h3>
-	<div class="row" th:each="pbl : ${projectBoardList}">
+	
+	
+	
+	<table class="table table-dark">
+			<thead>
+				<tr>
+					<th scope="col">직급관리번호</th>
+					<th scope="col">사원번호</th>
+					<th scope="col">직급코드</th>
+					<th scope="col">직급 등록 일자</th>
+					<th scope="col">직급변경일시</th>
+					<th scope="col">등록자</th>
+					<th scope="col">등록일자</th>
+					<th scope="col">수정자</th>
+					<th scope="col">수정일자</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="plp : ${projectListPost}">
+					<td scope="row"></td>
+					<td th:text="${plp.postIdx}"></td>
+					<td th:text="${plp.postType}"></td>
+					<td th:text="${4}"></td>
+					<td th:text="${5}"></td>
+					<td th:text="${6}"></td>
+					<td th:text="${7}"></td>
+					<td th:text="${8}"></td>
+					<td th:text="${9}">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	<div class="row" th:each="plp : ${projectListPost}" th:if="${plp.postType} == '일반'">
 		<div class="col-md-12">
 			<div class="card card-statistics">
 				<div class="card-header">
 					<div>
 					<!-- 멤버아이디 db값 가져오기  -->
-					<h5> 작성자 : [[${pbl.memberNum}]]  작성일자 : [[${pbl.projectBoardRegDate}]]</h5>
+					<h5> 작성자 : [[${plp.projectBoard.memberNum}]]  작성일자 : [[${plp.projectBoard.projectBoardRegDate}]]</h5>
 					<!-- 멤버아이디 db값 가져오기  -->
 					</div>
 					<div>
@@ -71,13 +106,13 @@
 						</div>
 					<div class="card-heading">
 					<!-- 프로젝트보드제목 db연결 -->
-						<input class="form-control form-control-lg" type="text" disabled="disabled" th:value="${pbl.projectBoardTitle}" style="background-color: white;"/>
+						<input class="form-control form-control-lg" type="text" disabled="disabled" th:value="${plp.projectBoard.projectBoardTitle}" style="background-color: white;"/>
 					</div>
 				</div>
 				<div class="card-body">
 					<h5>내용</h5>
 					<textarea class="form-control" placeholder="Message" id="Textarea1"
-						rows="10" th:text="${pbl.projectBoardContent}" readonly style="background-color: white;"></textarea>
+						rows="10" th:text="${plp.projectBoard.projectBoardContent}" readonly style="background-color: white;"></textarea>
 						<div class="d-flex flex-column comment-section">
 									<div class="bg-white p-2">
 										<div class="d-flex flex-row user-info">
@@ -97,19 +132,7 @@
 												ut aliquip ex ea commodo consequat.</p>
 										</div>
 									</div>
-									<div class="bg-white">
-										<div class="d-flex flex-row fs-12">
-											<div class="like p-2 cursor">
-												<i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span>
-											</div>
-											<div class="like p-2 cursor">
-												<i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span>
-											</div>
-											<div class="like p-2 cursor">
-												<i class="fa fa-share"></i><span class="ml-1">Share</span>
-											</div>
-										</div>
-									</div>
+									
 									<div class="bg-light p-2">
 										<div class="d-flex flex-row align-items-start">
 											<img class="rounded-circle"
