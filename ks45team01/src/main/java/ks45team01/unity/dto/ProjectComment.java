@@ -6,7 +6,7 @@ public class ProjectComment {
 	private String projectDitailNum;
 	private String projectCommentRegistrant;
 	private String projectCommentContent;
-	private String projectCommnetRegDate;
+	private String projectCommentRegDate;
 	public String getProjectCommentNum() {
 		return projectCommentNum;
 	}
@@ -37,11 +37,11 @@ public class ProjectComment {
 	public void setProjectCommentContent(String projectCommentContent) {
 		this.projectCommentContent = projectCommentContent;
 	}
-	public String getProjectCommnetRegDate() {
-		return projectCommnetRegDate;
+	public String getProjectCommentRegDate() {
+		return projectCommentRegDate;
 	}
-	public void setProjectCommnetRegDate(String projectCommnetRegDate) {
-		this.projectCommnetRegDate = projectCommnetRegDate;
+	public void setProjectCommentRegDate(String projectCommentRegDate) {
+		this.projectCommentRegDate = projectCommentRegDate;
 	}
 	@Override
 	public String toString() {
@@ -56,26 +56,8 @@ public class ProjectComment {
 		builder.append(projectCommentRegistrant);
 		builder.append(", projectCommentContent=");
 		builder.append(projectCommentContent);
-		builder.append(", projectCommnetRegDate=");
-		builder.append(projectCommnetRegDate);
-		builder.append(", getProjectCommentNum()=");
-		builder.append(getProjectCommentNum());
-		builder.append(", getProjectNum()=");
-		builder.append(getProjectNum());
-		builder.append(", getProjectDitailNum()=");
-		builder.append(getProjectDitailNum());
-		builder.append(", getProjectCommentRegistrant()=");
-		builder.append(getProjectCommentRegistrant());
-		builder.append(", getProjectCommentContent()=");
-		builder.append(getProjectCommentContent());
-		builder.append(", getProjectCommnetRegDate()=");
-		builder.append(getProjectCommnetRegDate());
-		builder.append(", getClass()=");
-		builder.append(getClass());
-		builder.append(", hashCode()=");
-		builder.append(hashCode());
-		builder.append(", toString()=");
-		builder.append(super.toString());
+		builder.append(", projectCommentRegDate=");
+		builder.append(projectCommentRegDate);
 		builder.append("]");
 		return builder.toString();
 	}

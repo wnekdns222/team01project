@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ks45team01.unity.dto.ProjectBoard;
+import ks45team01.unity.dto.ProjectComment;
 import ks45team01.unity.dto.ProjectListPost;
 import ks45team01.unity.mapper.ProjectListMapper;
 @Service
@@ -43,4 +44,13 @@ public class ProjectBoardService {
 		
 	
 	}
+
+	public void projectCommentInsert(ProjectComment ProjectComment) {
+
+		String projectCommentNum = projectListMapper.projectCommentCode("tb_project_comment", "project_comment_num");
+		ProjectComment.setProjectCommentNum(projectCommentNum);
+		projectListMapper.projectCommentInsert(ProjectComment);
+
+	}
+	
 }

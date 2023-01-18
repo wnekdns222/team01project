@@ -1,6 +1,5 @@
 package ks45team01.unity.dto;
 
-import java.util.List;
 
 public class ProjectListPost {
 	private String postIdx;
