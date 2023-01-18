@@ -43,7 +43,7 @@ public class AdminReservationController {
 		return "reservation/meetingroom_list";
 	}
 	
-	//회의실 수정
+		//회의실 수정
 		@GetMapping("/meetingroomModify")
 		public String modifyMeetingroom(@RequestParam(value="meetNum", required=false) String meetNum,Model model) {
 			
@@ -54,7 +54,7 @@ public class AdminReservationController {
 			return "reservation/meetingroom_modify";
 		}
 		
-	//회의실 수정
+		//회의실 수정
 		@PostMapping("/meetingroomModify")
 		public String modifyMeetingroom(Meetingroom meetingroom) {
 			
@@ -65,13 +65,25 @@ public class AdminReservationController {
 		
 		
 		}
-	//회의실 삭제
+		//회의실 삭제
 		@GetMapping("/meetingroomDelete")
 		public String deleteMeetingroom(Meetingroom meetingroom) {
 			
 			reservationService.deleteMeetingroom(meetingroom);
 			
 			return "redirect:/reservation/meetingroomList";
+			
+		}
+		
+		//회의실 추가
+		@GetMapping("/meetingroomInsert")
+		public String insertMeetingroom(Model model) {
+			
+			List<Meetingroom> meetingroomList = reservationService.getMeetingroomList();
+			
+			model.addAttribute("meetingroomList", meetingroomList);
+			
+			return "/reservation/meetingroom_insert";
 			
 		}
 	

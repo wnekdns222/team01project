@@ -7,8 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team01.unity.dto.Meetingroom;
 import ks45team01.unity.dto.Reservation;
@@ -54,6 +57,16 @@ public class ReservationController {
 		model.addAttribute("reservationList", reservationList);
 
 		return "/reservation/meetingroom_reservation_insert";
+	}
+	
+	// 예약
+	@PostMapping("/meetingroomReservationInsert")
+	@ResponseBody
+	public String insertReservation(@RequestBody Reservation reservation) {
+		
+		log.info("reservation : {}", reservation);
+		
+		return "/reservation/meetingroomReservationList";
 	}
 	
 	//내 예약확인화면
