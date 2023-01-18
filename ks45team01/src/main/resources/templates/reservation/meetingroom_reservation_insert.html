@@ -33,7 +33,7 @@
                 	
                 <div class="form-group">
 			        <label for="exampleInputPassword1">예약날짜</label>
-                 	<input class="form-control" type="date" id="reservationDate" >
+                 	<input class="form-control"type="date" name="reservationDate" id="reservationDate" >
                 </div>	
                 <div class="form-group">
                		<label for="exampleInputPassword1">시작시간</label>
@@ -142,7 +142,7 @@
 		            </select>
                 </div>
                 <label for="exampleInputPassword1">예약내용</label>
-                	<textarea class="form-control" rows="3"></textarea>
+                	<textarea class="form-control" rows="3" name="reservationContents"></textarea>
 		        <button type="button" id="submitBtn" class="btn btn-primary" style="margin:80px 0px 0px 0px;">확인</button>
 		    </form>
 		</div>
@@ -153,7 +153,7 @@
 	<th:block layout:fragment="customScript">
 	<script>
 	
-	//오늘 이전 '날짜' 선택 금지
+	
 	var now_utc = Date.now() // 지금 날짜를 밀리초로
 	// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
 	var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
@@ -161,19 +161,11 @@
 	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
 	document.getElementById("reservationDate").setAttribute("min", today);
 	
-     // 제이쿼리 change 함수 오늘 이전 '날짜' 선택 금지
-     $("#reservationDate").change(function(){
-         // 변경된 값으로 비교 후 alert 표출
-         if($(this).val() < today){
-             alert("날짜를 다시 선택해주세요");
-         }
-         
-     });
 
-   		var first;
-   		var second;
-   		
     //시작시간을 숫자로 변환
+   	var first;
+   	var second;
+   		
    	$("#reservationStartTime").change(function(){
    		var startselected = $("#reservationStartTime option:selected").val();
    		first = startselected.substr(0,2) + startselected.substr(3,2);
@@ -187,30 +179,69 @@
    		second = endselected.substr(0,2) + endselected.substr(3,2);
    		console.log(second);
    		
-   		//
    		if(first >= second){
    	   		alert("시간을 다시 선택하세요");
    	   	}
    	   		
    	});
    	
-  //조건에 안맞을 시 버튼 클릭하면 alert창 뜨게 하기
+  	//조건에 안맞을 시 버튼 클릭하면 alert창 뜨게 하기
    	$('#submitBtn').click(function(){
    		let isSubmit = true;
    		
    		if(first >= second){
    	   		alert("시간을 다시 선택하세요");
    	   		
-   	   	isSubmit = false;
-   	   	
-   	   	return false;
+	   	   	isSubmit = false;
+	   	   	
+	   	   	return false;
    		}
-   	if(isSubmit) $('#insertReservation').submit();
+   		
+	   	if(isSubmit) {
+	   		const insertReservationObj = {};
+	   		
+	   		const insertReservationInputArray = $('#insertReservation input');
+	   		const insertReservationSelects = $('#insertReservation select');
+	   		const insertReservationTextareas = $('#insertReservation textarea');
+	   		
+	   		for(let insertReservationInput of insertReservationInputArray){
+	   			let objKey = $(insertReservationInput).attr('name');
+	   			let objValue = $(insertReservationInput).val();
+	   			insertReservationObj[objKey] = objValue;
+	   		}
+	   		for(let insertReservationSelect of insertReservationSelects){
+	   			let objKey = $(insertReservationSelect).attr('name');
+	   			let objValue = $(insertReservationSelect).val();
+	   			insertReservationObj[objKey] = objValue;
+	   		}
+	   		for(let insertReservationTextarea of insertReservationTextareas){
+	   			let objKey = $(insertReservationTextarea).attr('name');
+	   			let objValue = $(insertReservationTextarea).val();
+	   			insertReservationObj[objKey] = objValue;
+	   		}
+	   		
+	   		console.log(insertReservationObj)
+	   		
+	   		const request = $.ajax({
+			  url: '/reservation/meetingroomReservationInsert',
+			  method: 'POST',
+			  data: JSON.stringify(insertReservationObj),
+			  contentType: 'application/json; charset=utf-8',
+			  dataType: 'text'
+			});
+			 
+			request.done(function( res ) {
+			  location.href = res;
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+			  alert( "Request failed: " + textStatus );
+			});
+			
+	   		//$('#insertReservation').submit();
+	   	}
    	});
-   	
-   	
-	
-   	
+  	
 	
 	</script>
 	</th:block>
