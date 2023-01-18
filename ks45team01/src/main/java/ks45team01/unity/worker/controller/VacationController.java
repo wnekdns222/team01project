@@ -1,5 +1,6 @@
 package ks45team01.unity.worker.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -30,12 +31,12 @@ public class VacationController {
 	 */
 		@GetMapping("vacation/vacationInfoList")
 		public String getVacationInfoById(Model model,
-										  @RequestParam(value="vacationInfoNum", required=false)String vacationInfoNum,
 										  @RequestParam(value="memberNum", required=false)String memberNum) {
 			
-				Map<String,Object> vacationInfo = vacationService.getVacationInfoByInfoNum(vacationInfoNum);
-				VacationInformation vacationInformation = (VacationInformation) vacationInfo.get("info");
-				VacationApproval vacationApproval = (VacationApproval) vacationInfo.get("approval");
+				Map<String,Object> vacationInfo = vacationService.getVacationInfoBymemberNum(memberNum);
+				log.info("컨트롤러로 가져온 vacationInfoMap{}:",vacationInfo);
+				List<VacationInformation> vacationInformation = (List<VacationInformation>) vacationInfo.get("info");
+				List<VacationApproval> vacationApproval = (List<VacationApproval>) vacationInfo.get("approval");
 				
 				log.info("휴가 정보 조회:{}",vacationInformation);
 				log.info("휴가 사용정보 조회:{}",vacationApproval);

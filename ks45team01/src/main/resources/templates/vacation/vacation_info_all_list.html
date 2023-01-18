@@ -60,7 +60,7 @@
                   <td th:text="${i.remainVacationTime}"></td>
                   <td th:text="${i.useVacationYear}"></td>
                   <td>
-					<a th:href="@{/vacation/vacationInfoList(vacationInfoNum=${i.vacationInfoNum})}">선택</a>
+					<a th:href="@{/vacation/vacationInfoList(memberNum=${i.memberNum})}">선택</a>
 				  </td>
               </tr>
               <tr th:unless="${not #lists.isEmpty(infoList)}">

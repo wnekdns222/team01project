@@ -76,6 +76,26 @@
 		<result property="regDate" column="reg_date"/>
 		<result property="correctMemberNum" column="correct_member_num"/>
 		<result property="correctDate" column="correct_date"/>
+	</resultMap>
+	<resultMap type="VacationInformation" id="vacationInformationMemberMap">
+		<id property="vacationInfoNum" column="vacation_info_num"/>
+		<result property="memberNum" column="member_num"/>
+		<result property="serviceNum" column="service_num"/>
+		<result property="lengthOfService" column="length_of_service"/>
+		<result property="addVacation" column="add_vacation"/>
+		<result property="rewardVacationNumber" column="reward_vacation_number"/>
+		<result property="replaceVacationDay" column="replace_vacation_day"/>
+		<result property="rewardVacationNumber" column="reward_vacation_number"/>
+		<result property="sickVacationDay" column="sick_vacation_day"/>		
+		<result property="personalBuisinessVacationDay" column="personal_buisiness_vacation_day"/>
+		<result property="remainVacationDay" column="remain_vacation_day"/>
+		<result property="remainVacationTime" column="remain_vacation_time"/>
+		<result property="vacationStandardUse" column="vacation_standard_use"/>
+		<result property="useVacationYear" column="use_vacation_year"/>
+		<result property="regMemberNum" column="reg_member_num"/>	
+		<result property="regDate" column="reg_date"/>
+		<result property="correctMemberNum" column="correct_member_num"/>
+		<result property="correctDate" column="correct_date"/>
 			<association property="memberList" javaType="MemberList">
 					<id property="memberNum" column="member_num"/>
 					<result property="memberPw" column="member_pw"/>
@@ -124,7 +144,7 @@
 		<result property="regDate" column="reg_date"/>
 		<result property="correctMemberNum" column="correct_member_num"/>
 		<result property="correctDate" column="correct_date"/>
-			<collection property="vacationApproval" javaType="VacationApproval">
+			<collection property="vacationApproval" javaType="list" ofType="VacationApproval">
 					<id property="vacationApprovalNum" column="vacation_approval_num"/>
 					<result property="draftDocNum" column="draft_doc_num"/>
 					<result property="vacationTypeNum" column="vacation_type_num"/>
@@ -133,7 +153,8 @@
 					<result property="draftSend" column="draft_send"/>
 					<result property="vacationStartDate" column="vacation_start_date"/>	
 					<result property="vacationEndDate" column="vacation_end_date"/>
-					<result property="totalVacationUseDate" column="total_vacation_use_date"/>	
+					<result property="totalVacationUseDate" column="total_vacation_use_date"/>
+					<result property="totalVacationUseTime" column="total_vacation_use_Time"/>	
 					<result property="vacationReason" column="vacation_reason"/>	
 					<result property="positionNum" column="position_num"/>	
 					<result property="emergencyContact" column="emergency_contact"/>
@@ -141,6 +162,25 @@
 					<result property="approvalDeadline" column="approval_deadline"/>	
 			</collection>	
 	</resultMap> 
+	
+	<resultMap type="VacationApproval" id="vacationApprovalMap">
+		<id property="vacationApprovalNum" column="vacation_approval_num"/>
+		<result property="draftDocNum" column="draft_doc_num"/>
+		<result property="vacationTypeNum" column="vacation_type_num"/>
+		<result property="vacationTitle" column="vacation_title"/>
+		<result property="memberNum" column="member_num"/>
+		<result property="draftSend" column="draft_send"/>
+		<result property="vacationStartDate" column="vacation_start_date"/>	
+		<result property="vacationEndDate" column="vacation_end_date"/>
+		<result property="totalVacationUseDate" column="total_vacation_use_date"/>
+		<result property="totalVacationUseTime" column="total_vacation_use_time"/>	
+		<result property="vacationReason" column="vacation_reason"/>	
+		<result property="positionNum" column="position_num"/>	
+		<result property="emergencyContact" column="emergency_contact"/>
+		<result property="replaceMember" column="replace_member"/>	
+		<result property="approvalDeadline" column="approval_deadline"/>	
+	</resultMap>
+	
 	<select id="getCommonNewCode" parameterType="String" resultType="String">
 		/* 자동증가코드 */
 		SELECT
@@ -372,7 +412,7 @@
 			and
 		s.vacation_standard_use = 'Y';
 	</select>
-	<select id="getVacationInfoAll" resultType="List" resultMap="vacationInformationMap">
+	<select id="getVacationInfoAll" resultType="List" resultMap="vacationInformationMemberMap">
 		/* 전사원 휴가 정보 조회 */
 		SELECT
 			*
@@ -477,16 +517,20 @@
 		</trim>
 		WHERE service_num=#{serviceNum};
 	</update>
-	<select id="getVacationInfoByInfoNum" parameterType="String" resultMap="vacationInformationMap">
-		/* 특정 휴가 조회 InfoNum */
+	<select id="getVacationInfoByInfoNum" parameterType="String" resultType="List" resultMap="vacationInformationMemberMap">
+		/* 특정 휴가 조회 */
 		SELECT
 			*
 		FROM
-			tb_vacation_information 
+			tb_vacation_information as i
+			inner join
+			tb_member as m
+			on
+			i.member_num=m.member_num
 		where
-			vacation_info_num = #{vacationInfoNum};	
+			i.member_num = #{member_Num};	
 	</select>
-	<select id="getVacationApprovalBymemberNum" parameterType="String" resultMap="vacationInformationJoinMap">
+	<select id="getVacationApprovalBymemberNum" parameterType="String" resultType="List" resultMap="vacationApprovalMap">
 		/* 특정 휴가 사용 조회 */
 		SELECT
 			*

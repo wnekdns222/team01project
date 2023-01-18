@@ -102,9 +102,9 @@ public interface VacationMapper {
 	//특정 휴가 기준 수정
 	public void updateVacationStandard(VacationStandard vacationStandard);
 	
-	//특정 휴가 조회 InfoNum
-	public VacationInformation getVacationInfoByInfoNum(String vacationInfoNum); 
+	//특정 휴가 조회 
+	public List<VacationInformation> getVacationInfoByInfoNum(String memberNum); 
 	
 	//특정 휴가 사용 조회
-	public VacationApproval getVacationApprovalBymemberNum(String memberNum);
+	public List<VacationApproval> getVacationApprovalBymemberNum(String memberNum);
 }
