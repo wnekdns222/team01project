@@ -26,7 +26,7 @@
 		</div>
 	</th:block>
 	<th:block layout:fragment="customContents">
-				<form id="draftInsert" th:action="@{/approval/draftInsert}" method="post">
+		<form id="draftInsert" th:action="@{/approval/draftInsert}" method="post">
 			<label for="draftTitle">결재명</label>
 			<div style="width: 800px;">
 				<input type="text" class="form-control" id="draftTitle" name="draftTitle"
@@ -40,12 +40,13 @@
 				<textarea class="form-control" name="draftContents" id="draftContents"
 					placeholder="내용을 입력해주세요" style="height: 150px; width: 800px;"></textarea>
 			</div>
-			<div style="margin-top: 8px;">
-				<input type="date" id="draftDeadline" name="draftDeadline"/>
+			<label for="draftTitle">기한시점</label>
+			<div style="width: 800px;">
+				<input type="date" id="draftDeadline" name="draftDeadline" class="form-control"/>
 			</div>
 			<div style="margin-top: 8px;" id="box">
 				<label for="approvalMemberNum">결재자</label>
-				<input type="text"><input type="button" value="추가" onclick="add_textbox()">
+				<input type="text" id="approvalMemberNum" name="approvalMemberNum"><input type="button" value="추가" onclick="add_textbox()">
 			</div>
 			<div style="margin-top: 20px; margin-left: 300px;">
 				<button type="submit" class="btn btn-outline-success">등록</button>
@@ -58,7 +59,8 @@
         const add_textbox = () => {
             const box = document.getElementById("box");
             const newS = document.createElement('span');
-            newS.innerHTML = "<label for='approvalMemberNum'>결재자</label> <input type='text'><input type='button' value='삭제' onclick='remove(this)'> ";
+            newS.innerHTML = `<label for="approvalMemberNum">결재자</label> <input type="text" name="approvalMemberNum"><input type="hidden" name="draftDocNum"><input type="button" value="삭제" onclick="remove(this)">`;
+            
             box.appendChild(newS);
         }
         const remove = (obj) => {

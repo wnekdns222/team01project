@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ks45team01.unity.dto.Approval;
+import ks45team01.unity.dto.ApprovalLine;
 import ks45team01.unity.mapper.ApprovalMapper;
 
 @Service
@@ -48,6 +49,12 @@ public class ApprovalService {
 	public List<Approval> approvalDoneList(){
 		return approvalMapper.approvalDoneList();
 	}
+	public void approvalApprove(String draftDocNum, String processStatus) {
+		approvalMapper.approvalApprove(draftDocNum, processStatus);
+	}
+	public int approvalDoneProcess(String approvalProcessNum, String draftDocNum) {
+		return approvalMapper.approvalDoneProcess(approvalProcessNum, draftDocNum);
+	}
 	
 	/**
 	 * 반려사유 등록
@@ -56,16 +63,34 @@ public class ApprovalService {
 	 * @param rejectReason
 	 * @param rejectDate
 	 */
-	public void addRejectReason(String approvalProcessNum, String rejectReasonMember, String rejectReason, String rejectDate) {
-		approvalMapper.addRejectReason(approvalProcessNum, rejectReasonMember, rejectReason, rejectDate);
+	public void addRejectReason(String draftDocNum, String approvalProcessNum, String rejectReasonMember, String rejectReason, String rejectDate) {
+		approvalMapper.addRejectReason(draftDocNum, approvalProcessNum, rejectReasonMember, rejectReason, rejectDate);
 	}
 	
+	public int rejectProcess(String approvalFinalState, String draftDocNum) {
+		return approvalMapper.rejectProcess(approvalFinalState, draftDocNum);
+	}
+	
+	/**
+	 * 반려문서 목록조회
+	 * @return approvalMapper.rejectList
+	 */
 	public List<Approval> rejectList(){
 		return approvalMapper.rejectList();
 	}
+	public Approval rejectView(String draftDocNum) {
+		return approvalMapper.rejectView(draftDocNum);
+	}
+	/**
+	 * 기안문서 등록
+	 * @param approval
+	 */
 	public void addDraftInsert(Approval approval) {
 		String draftDocNum = approvalMapper.getCommonNewCode("tb_draft_document", "draft_doc_num");
 		approval.setDraftDocNum(draftDocNum);
 		approvalMapper.addDraftInsert(approval);
+	}
+	public void addApprovalMember(List<ApprovalLine> approvalLineList) {
+		approvalMapper.addApprovalMember(approvalLineList);
 	}
 }
