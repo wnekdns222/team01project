@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.ProjectBoard;
+import ks45team01.unity.dto.ProjectComment;
 import ks45team01.unity.dto.ProjectList;
 import ks45team01.unity.dto.ProjectListPost;
 import ks45team01.unity.dto.ProjectMember;
@@ -50,6 +51,17 @@ public interface ProjectListMapper {
 	//프로젝트 게시글 등록
 			void projectBoardInsert(ProjectBoard ProjectBoard);
 	
+	//프로젝트 홈 게시글 및 업무 리스트
+			List<ProjectListPost> projectListPostList(String projectNum);
+			
+			//댓글 등록
+			void projectCommentInsert(ProjectComment ProjectComment);
+			
+			//댓글 자동증가 코드
+			String projectCommentCode (String table,String column);
+			
+	
+			
 	
 	//projectList
 	// 프로젝트 업무 조회
@@ -99,6 +111,6 @@ public interface ProjectListMapper {
 		List<ProjectUnitMember> projectUnitMemberList(); 
 		
 		
-		List<ProjectListPost> projectListPostList(String projectNum);
+
 }
 

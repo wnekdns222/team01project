@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.ProjectBoard;
+import ks45team01.unity.dto.ProjectComment;
 import ks45team01.unity.dto.ProjectList;
 import ks45team01.unity.dto.ProjectListPost;
 import ks45team01.unity.dto.ProjectMember;
@@ -237,6 +238,20 @@ public class ProjectController {
 	return "project/project_unit_member_modify";
 	}
 	
+	
+	@PostMapping("/projectDetail")
+		public String getProjectDetail(ProjectComment ProjectComment
+				 					  ,String projectNum
+									  ,RedirectAttributes reAttr) {
+		projectBoardService.projectCommentInsert(ProjectComment);
+		reAttr.addAttribute("projectNum", projectNum);
+		
+		log.info("프로젝트 댓글{}:",ProjectComment);
+		
+		return "redirect:/project/projectDetail";
+	}
+	
+	
 	@GetMapping("/projectDetail")
 	public String GetProjectDetail(Model model
 								  ,String projectNum
@@ -247,7 +262,8 @@ public class ProjectController {
 		
 		List<ProjectListPost> projectListPost = projectBoardService.projectListPostList(projectNum);
 		
-		log.info("ProjectListPost : {}", projectListPost);
+		
+		log.info("projectListPost : {}", projectListPost);
 		
 		model.addAttribute("title","프로젝트내부 디테일 화면");
 		model.addAttribute("projectNum",projectNum);
@@ -255,6 +271,8 @@ public class ProjectController {
 		model.addAttribute("projectRequestList",projectRequestList);
 		model.addAttribute("memberList",memberList);
 		model.addAttribute("projectListPost",projectListPost);
+	
+		
 		reAttr.addAttribute("projectNum", projectNum);
 	return "project/project_detail";
 	}
@@ -265,13 +283,17 @@ public class ProjectController {
 		
 		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList(projectNum);
 		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList(projectNum);
-		List<ProjectListPost> projectListPost = projectBoardService.projectListPostList(projectNum);
+
+		
 		
 		model.addAttribute("title","프로젝트내부 홈 화면");
 		model.addAttribute("projectNum",projectNum);
 		model.addAttribute("projectBoardList",projectBoardList);
 		model.addAttribute("projectRequestList",projectRequestList);
-		model.addAttribute("projectListPost",projectListPost);
+
+		
+		
+	
 	return "project/project_home";
 	}
 	
