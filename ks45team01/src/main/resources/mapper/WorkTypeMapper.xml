@@ -3,6 +3,34 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team01.unity.mapper.WorkTypeMapper">
+	<resultMap type="WorkType" id="workTypeJoinResultMap">
+		<id		property="workTypeNum"	column="work_type_num" />
+		<result property="memberNum"  column="member_num" />
+		<result property="workName"  column="work_name" />
+		<result property="workDate"  column="work_date" />
+		<result property="attendanceTime"  column="attendance_time_type" />
+		<result property="leaveWorkTime"  column="leavework_time_type" />
+		<result property="regMemberNum"  column="reg_member_num" />
+		<result property="regDate"  column="reg_date" />
+		<result property="correctMemberNum"  column="correct_member_num" />
+		<result property="correctDate"  column="correct_date" />
+		<result property="use"  column="use" />
+		<result property="workTypeUsePeriod"  column="work_type_use_period" />
+			<association property="memberList" javaType="MemberList">
+					<id property="memberNum" column="member_num"/>
+					<result property="memberPw" column="member_pw"/>
+					<result property="memberName" column="member_name"/>
+					<result property="memberGender" column="member_gender"/>
+					<result property="memberEmail" column="member_email"/>
+					<result property="memberBirth" column="member_birth"/>
+					<result property="memberPhone" column="member_phone"/>	
+					<result property="memberDormant" column="member_dormant"/>
+					<result property="memberDormantDate" column="member_dormant_date"/>	
+					<result property="departmentNum" column="department_num"/>	
+					<result property="positionNum" column="position_num"/>	
+					<result property="memberInsertDate" column="member_insert_date"/>
+			</association>
+	</resultMap>
 	<resultMap type="WorkType" id="workTypeResultMap">
 		<id		property="workTypeNum"	column="work_type_num" />
 		<result property="memberNum"  column="member_num" />
@@ -17,29 +45,28 @@
 		<result property="use"  column="use" />
 		<result property="workTypeUsePeriod"  column="work_type_use_period" />
 	</resultMap>
-	
-	<select id="getAllWorkType" resultMap="workTypeResultMap" parameterType="map">
+		
+	<select id="getAllWorkType" resultMap="workTypeJoinResultMap" parameterType="map">
 		/* 근무유형 조회 */
 		SELECT
-			t.work_type_num
-			,t.member_num
-			,t.work_name
-			,t.work_date
-			,t.attendance_time_type
-			,t.leavework_time_type
-			,t.reg_member_num
-			,t.reg_date
-			,t.correct_member_num
-			,t.correct_date
-			,t.`use`
-			,t.work_type_use_period
+			*
 		FROM
-		tb_work_type AS t
+		tb_work_type as t
+		inner join
+		tb_member as m
+		on
+		t.member_num = m.member_num
+		<where>
+		<if test="searchKey != null and searchKey != ''">
+			${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+		</if>
+		</where>
 		ORDER BY t.work_date 
 		<if test="startRowNum !=null and startRowNum > -1">
 			LIMIT #{startRowNum}, #{rowPerPage};
 		</if>
 	</select>
+	
 	<select id="countAllWorkType" resultType="int">
 		/* 근태 유형 테이블 전체 행의 갯수  */
 		select

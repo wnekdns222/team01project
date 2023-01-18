@@ -36,24 +36,24 @@
 	<input type="hidden"
 				class="form-control" th:value="*{vacationTypeNum}" name="vacationTypeNum">
 		<div class="form-group">
-			<label for="vacationName">휴가명</label> <input type="text"
-				class="form-control" th:value="*{vacationName}" name="vacationName" readonly>
+			<label for="vacationName">휴가명</label> 
+			<input type="text" class="form-control" th:value="*{vacationName}" name="vacationName" readonly>
 		</div>
 		<div class="form-group">
-			<label for="vacationType">최대 사용일수</label> <input type="text"
-				class="form-control" th:value="*{vacationType}" name="vacationType" >
+			<label for="vacationType">최대 사용일수</label> 
+			<input type="text" class="form-control" th:value="*{vacationType}" name="vacationType" >
 		</div>
 		<div class="form-group">
-			<label for="subtractUnit">차감단위</label> <input type="text"
-				class="form-control" name="subtractUnit" th:value="*{subtractUnit}" >
+			<label for="subtractUnit">차감단위</label> 
+			<input type="text" class="form-control" name="subtractUnit" th:value="*{subtractUnit}" >
 		</div>
 		<div class="form-group">
-			<label for="correctMemberNum">등록 사원번호</label> <input type="text"
-				class="form-control" name="correctMemberNum" th:value="*{memberNum}" >
+			<label for="correctMemberNum">등록 사원번호</label> 
+			<input type="text" class="form-control" name="correctMemberNum" th:value="*{memberNum}" >
 		</div>
-		<div class="form-group">
-			<label for="vacationUse">사용유무</label> <input type="text"
-				class="form-control" name="vacationUse" th:value="*{vacationUse}" >
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" id="use" name="vacationUse" required>
+			<label class="form-check-label" for="use"> 사용여부 </label>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
