@@ -75,6 +75,7 @@ public class AdminReservationController {
 			
 		}
 		
+		
 		//회의실 추가
 		@GetMapping("/meetingroomInsert")
 		public String insertMeetingroom(Model model) {
@@ -86,5 +87,13 @@ public class AdminReservationController {
 			return "/reservation/meetingroom_insert";
 			
 		}
-	
+		
+		//회의실 추가
+		@PostMapping("/meetingroomInsert")
+		public String insertMeetingroom(Meetingroom meetingroom, Model model) {
+			
+			reservationService.insertMeetingroom(meetingroom);
+			
+			return "redirect:/reservation/meetingroomList";
+		}
 }
