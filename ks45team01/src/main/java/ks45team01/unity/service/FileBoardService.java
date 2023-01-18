@@ -1,6 +1,7 @@
 package ks45team01.unity.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -176,6 +177,11 @@ public class FileBoardService {
 	 */
 	public FileDto getFileInfoByIdx(String fileIdx) {
 		return fileMapper.getFileInfoByIdx(fileIdx);
+	}
+	
+	public Map<String, Object> result(String fileCategoryCode){
+		
+		return fileMapper.result(fileCategoryCode);
 	}
 	
 	

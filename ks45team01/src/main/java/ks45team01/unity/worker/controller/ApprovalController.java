@@ -1,5 +1,6 @@
 package ks45team01.unity.worker.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team01.unity.dto.Approval;
+import ks45team01.unity.dto.ApprovalLine;
 import ks45team01.unity.service.ApprovalService;
 
 @Controller
@@ -66,9 +68,23 @@ public class ApprovalController {
 	 * @return
 	 */
 	@PostMapping("/draftInsert")
-	public String draftInsert(Approval approval) {
+	public String draftInsert(Approval approval
+							 ,String approvalLineNum, String draftDocNum, @RequestParam(name="approvalMemberNum", required = false) String[] approvalMemberNums) {
 		
-		approvalService.addDraftInsert(approval);
+		if(approvalMemberNums != null) {
+			List<ApprovalLine> approvalLineList = new ArrayList<ApprovalLine>();
+			ApprovalLine approvalLine = null;
+			for(String approvalMemberNum : approvalMemberNums) {
+				approvalLine = new ApprovalLine();
+				approvalLine.setDraftDocNum(draftDocNum);
+				approvalLine.setApprovalLineNum(approvalLineNum);
+				approvalLine.setApprovalMemberNum(approvalMemberNum);
+				approvalLineList.add(approvalLine);
+			}
+			approvalService.addDraftInsert(approval);
+			approvalService.addApprovalMember(approvalLineList);
+		}
+		
 		return "redirect:/approval/draftList";
 	}
 	
@@ -136,6 +152,15 @@ public class ApprovalController {
 		return "approval/approvalDoneView";
 	}
 	
+	@PostMapping("/approvalView")
+	public String approvalDoneProcess(String approvalProcessNum, String draftDocNum, String processStatus) {
+		
+		approvalService.approvalApprove(draftDocNum, processStatus);
+		approvalService.approvalDoneProcess(approvalProcessNum, draftDocNum);
+		
+		return "redirect:/approval/approvalList";
+	}
+	
 	/**
 	 * 결재완료함 
 	 * @param model
@@ -187,7 +212,6 @@ public class ApprovalController {
 	public String rejectList(Model model) {
 		
 		List<Approval> rejectList = approvalService.rejectList();
-		log.info("반려목록 : {}", rejectList);
 		model.addAttribute("title", "반려함");
 		model.addAttribute("rejectList", rejectList);
 		
@@ -197,9 +221,9 @@ public class ApprovalController {
 	public String rejectView(@RequestParam(value = "draftDocNum", required = false) String draftDocNum
 							,Model model) {
 		
-		Approval draftView = approvalService.draftView(draftDocNum);
+		Approval rejectView = approvalService.rejectView(draftDocNum);
 		model.addAttribute("title", "반려문서");
-		model.addAttribute("draftView", draftView);
+		model.addAttribute("rejectView", rejectView);
 		
 		return "approval/rejectView";
 	}
@@ -282,8 +306,9 @@ public class ApprovalController {
 		return "approval/draftView";
 	}
 	@PostMapping("/draftView")
-	public String addRejectReason(String approvalProcessNum, String rejectReasonMember, String rejectReason, String rejectDate) {
-		approvalService.addRejectReason(approvalProcessNum, rejectReasonMember, rejectReason, rejectDate);
+	public String addRejectReason(String approvalFinalState, String draftDocNum, String approvalProcessNum, String rejectReasonMember, String rejectReason, String rejectDate) {
+		approvalService.addRejectReason(draftDocNum, approvalProcessNum, rejectReasonMember, rejectReason, rejectDate);
+		approvalService.rejectProcess(approvalFinalState, draftDocNum);
 		log.info("반려등록 : {}", approvalProcessNum, rejectReasonMember, rejectReason, rejectDate);
 		return "redirect:/approval/approvalList";
 	}
