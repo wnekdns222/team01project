@@ -11,6 +11,7 @@ public class VacationApproval {
 	private String vacationStartDate;
 	private String vacationEndDate;
 	private String totalVacationUseDate;
+	private String totalVacationUseTime;
 	private String vacationReason;
 	private String emergencyContact;
 	private String replaceMember;
@@ -69,6 +70,12 @@ public class VacationApproval {
 	public void setTotalVacationUseDate(String totalVacationUseDate) {
 		this.totalVacationUseDate = totalVacationUseDate;
 	}
+	public String getTotalVacationUseTime() {
+		return totalVacationUseTime;
+	}
+	public void setTotalVacationUseTime(String totalVacationUseTime) {
+		this.totalVacationUseTime = totalVacationUseTime;
+	}
 	public String getVacationReason() {
 		return vacationReason;
 	}
@@ -114,6 +121,8 @@ public class VacationApproval {
 		builder.append(vacationEndDate);
 		builder.append(", totalVacationUseDate=");
 		builder.append(totalVacationUseDate);
+		builder.append(", totalVacationUseTime=");
+		builder.append(totalVacationUseTime);
 		builder.append(", vacationReason=");
 		builder.append(vacationReason);
 		builder.append(", emergencyContact=");
@@ -125,5 +134,6 @@ public class VacationApproval {
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 }

@@ -222,13 +222,14 @@ public class VacationService {
 	/**
 	 * 특정 사원 연차 조회
 	 */
-	public Map<String,Object> getVacationInfoByInfoNum(String vacationInfoNum) {
-			VacationInformation vacationInformation = vacationMapper.getVacationInfoByInfoNum(vacationInfoNum);
-			String memberNum = vacationInformation.getMemberNum();
-			VacationApproval vacationApproval = vacationMapper.getVacationApprovalBymemberNum(memberNum);
+	public Map<String,Object> getVacationInfoBymemberNum(String memberNum) {
+			List<VacationInformation> vacationInformation = vacationMapper.getVacationInfoByInfoNum(memberNum);
+			List<VacationApproval> vacationApproval = vacationMapper.getVacationApprovalBymemberNum(memberNum);
+			log.info("서비스-연차사용정보:{}",vacationApproval);
+			log.info("서비스-연차정보:{}",vacationInformation);
 			
 			Map<String, Object> vacationInfo = new HashMap();
-			vacationInfo.put("Info", vacationInformation);
+			vacationInfo.put("info", vacationInformation);
 			vacationInfo.put("approval", vacationApproval);
 		return vacationInfo;
 	}
