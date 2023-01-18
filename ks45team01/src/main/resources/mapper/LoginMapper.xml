@@ -4,18 +4,18 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team01.unity.mapper.LoginMapper">
  	<resultMap type="MemberList" id="memberResultMap">
-		<id property="memberNum" column="m_num" />
-		<result property="memberPw" 				column="m_pw" />
-		<result property="memberName" 			column="m_name" />
-		<result property="memberGender" 	 column="m_gender" />
-		<result property="memberEmail" 			column="m_email" />
-		<result property="memberBirth" 			column="m_birth" />
-		<result property="memberPhone" 			column="m_phone" />
-		<result property="memberDormant" 		column="m_dormant" />
-		<result property="memberDormantDate" 		column="m_dormant_date" />
-		<result property="departmentNum" 		column="departmentNum" />
-		<result property="positionNum" 		column="position_num" />
-		<result property="memberInsertDate" 		column="m_insert_date" />
+		<id property="memberNum" column="member_num" />
+		<result property="memberPw" 				column="member_pw" />
+		<result property="memberName" 			column="member_name" />
+		<result property="memberGender" 	 column="member_gender" />
+		<result property="memberEmail" 			column="member_email" />
+		<result property="memberBirth" 			column="member_birth" />
+		<result property="memberPhone" 			column="member_phone" />
+		<result property="memberDormant" 		column="member_dormant" />
+		<result property="memberDormantDate" 		column="member_dormant_date" />
+		<result property="departmentNum" 		column="member_department_num" />
+		<result property="positionNum" 		column="member_position_num" />
+		<result property="memberInsertDate" 		column="member_insert_date" />
 	</resultMap> 
 	<!-- 회원가입 -->
 	<insert id="addMember" parameterType="MemberList">
@@ -59,10 +59,14 @@ VALUES
 			<result property="memberAddr" 			column="m_addr" />
 		</association>
 	</resultMap>-->
-	
-	<select id="checkPwById" resultType="String">
+	<!-- 로그인 -->
+	<select id="checkPwById" parameterType="String" resultMap="memberResultMap">
 	SELECT 
-		*
+		 m.member_num
+		,m.member_pw
+		,m.member_position_num
+		,m.member_name
+		,m.member_department_num
 	FROM
 		tb_member AS m
 	WHERE
