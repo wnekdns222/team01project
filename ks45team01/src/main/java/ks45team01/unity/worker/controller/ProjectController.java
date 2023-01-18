@@ -239,6 +239,18 @@ public class ProjectController {
 	}
 	
 	
+	@RequestMapping("/projectCommentDelete")
+		public String getProjectCommentDelete(@RequestParam(value="projectCommentNum") String projectCommentNum
+																					  ,String projectNum
+																					,RedirectAttributes reAttr) {
+		
+		projectBoardService.projectCommentDelete(projectCommentNum);
+		reAttr.addAttribute("projectNum",projectNum);
+		
+		return "redirect:/project/projectDetail";
+	}
+	
+	
 	@PostMapping("/projectDetail")
 		public String getProjectDetail(ProjectComment ProjectComment
 				 					  ,String projectNum

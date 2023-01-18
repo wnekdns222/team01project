@@ -45,6 +45,7 @@ public class ProjectBoardService {
 	
 	}
 
+	//댓글 등록 및 자동증가 코드
 	public void projectCommentInsert(ProjectComment ProjectComment) {
 
 		String projectCommentNum = projectListMapper.projectCommentCode("tb_project_comment", "project_comment_num");
@@ -53,4 +54,10 @@ public class ProjectBoardService {
 
 	}
 	
+	//댓글 삭제
+	public int projectCommentDelete(String projectCommentNum) {
+		int projectCommentDelete = projectListMapper.projectCommentDelete(projectCommentNum);
+		
+		return projectCommentDelete;
+	}
 }

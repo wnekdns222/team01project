@@ -98,8 +98,7 @@
 						<div class="card-header">
 							<div>
 								<!-- 멤버아이디 db값 가져오기  -->
-								<h5>작성자 : [[${plp.projectBoard.memberNum}]] 작성일자 :
-									[[${plp.projectBoard.projectBoardRegDate}]]</h5>
+								<h5>작성자 : [[${plp.projectBoard.memberNum}]] 작성일자 : [[${plp.projectBoard.projectBoardRegDate}]]</h5>
 								<!-- 멤버아이디 db값 가져오기  -->
 							</div>
 							<div>
@@ -132,6 +131,10 @@
 											<div class="d-flex flex-column justify-content-start ml-2">
 												<span class="d-block font-weight-bold name" th:text="${cl.projectCommentRegistrant}"></span> 
 												<span class="date text-black-50" th:text="${cl.projectCommentRegDate}"></span>
+											</div>		
+											<div class="float-right">
+											<a href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0"><i class="ti ti-pencil"></i></a>
+                                      		<a th:href="@{/project/projectCommentDelete(projectCommentNum=${cl.projectCommentNum},projectNum=${plp.projectNum})}" class="btn btn-icon btn-outline-danger btn-round"><i class="ti ti-close"></i></a>			
 											</div>
 										</div>
 										

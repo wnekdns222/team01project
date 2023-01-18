@@ -203,4 +203,14 @@
 	VALUES (#{projectCommentNum}, #{projectNum}, #{projectDitailNum}, 'id001', #{projectCommentContent}, NOW())
 	</insert>
 	
+	
+	<delete id="projectCommentDelete" parameterType="String">
+	DELETE
+	FROM
+		tb_project_comment AS pc
+	WHERE
+		pc.project_comment_num = #{projectCommentNum}
+	
+	
+	</delete>
 </mapper>

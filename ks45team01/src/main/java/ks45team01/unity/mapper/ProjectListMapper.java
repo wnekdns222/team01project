@@ -60,7 +60,8 @@ public interface ProjectListMapper {
 			//댓글 자동증가 코드
 			String projectCommentCode (String table,String column);
 			
-	
+			//댓글 삭제
+			int projectCommentDelete(String projectCommentNum);
 			
 	
 	//projectList
