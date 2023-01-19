@@ -43,4 +43,6 @@ public interface FileBoardMapper {
 	
 	// 파일 게시글 전체목록 조회
 	List<FileBoard> fileBoardList();
+	
+	List<FileBoardCate> result(String fileCategoryCode);
 }

@@ -46,7 +46,7 @@
 			<label for="fileBoardRegistrant">작성자</label>
 			<div style="width: 800px;">
 				<input type="text" class="form-control" id="fileBoardRegistrant"
-					name="fileBoardRegistrant" placeholder="작성자를 입력해주세요" /> <label
+					name="fileBoardRegistrant" th:value="${session.SID}" readonly="readonly"/> <label
 					for="Contents">내용</label>
 				<textarea class="form-control" name="fileBoardContents"
 					id="fileBoardContents" placeholder="내용을 입력해주세요"

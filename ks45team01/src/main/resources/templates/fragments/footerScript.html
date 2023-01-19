@@ -7,25 +7,5 @@
     <!-- custom app -->
     <script src="/assets/js/app.js"></script>
     
-    <script>
-    		
-			$('.modifyBtn').click(function(){
-	    		const fileCategoryCode = $('.modifyBtn').val();
-	    		
-				$.ajax({
-					 	url: "/fileBoardCate/ajaxTest",
-			            type: "GET",
-			            data: fileCategoryCode,
-			            contentType: "application/json; charset=utf-8;",
-			            success: function(data){
-			              	alert('성공');
-			            },
-			            error: function(){
-			                alert("error");
-			            }
-				});
-			});
-			
-		</script>
 	</th:block>
 </html>

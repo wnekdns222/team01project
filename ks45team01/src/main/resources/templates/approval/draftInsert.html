@@ -35,7 +35,7 @@
 			<label for="registrantNum">작성자</label>
 			<div style="width: 800px;">
 				<input type="text" class="form-control" id="registrantNum"
-					name="registrantNum" placeholder="작성자를 입력해주세요" /> <label
+					name="registrantNum" th:value="${session.SID}" /> <label
 					for="Contents">내용</label>
 				<textarea class="form-control" name="draftContents" id="draftContents"
 					placeholder="내용을 입력해주세요" style="height: 150px; width: 800px;"></textarea>

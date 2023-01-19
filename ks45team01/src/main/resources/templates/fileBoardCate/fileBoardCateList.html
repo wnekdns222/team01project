@@ -3,7 +3,7 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/default}">
 	
-	<th:block layout:fragment="customCrumbbar"></th:block>
+	<th:block layout:fragment="customCrumbbar">
 		<div class="breadcrumbbar">
 			<div class="row align-items-center">
 				<div class="col-md-8 col-lg-10">
@@ -16,28 +16,29 @@
 					</div>
 				</div>
 		<div style="text-align: right;">
-			<button class="btn btn-outline-success" onclick="location.href='/fileBoardCate/addFileBoardCate';">카테고리등록
-			</button>
+			<a class="btn btn-outline-success" href="/fileBoardCate/addFileBoardCate">카테고리등록</a>
 		</div>
 			</div>
 		</div>
+	</th:block>
 	<th:block layout:fragment="customContents">
 		<form id="fileBoardCateModify" th:action="@{/fileBoardCate/fileBoardCateModify}" method="post">
-			<input type="hidden" name="fileCategoryCode"/>
+			<h4>카테고리 수정</h4>
+			<input type="hidden" name="fileCategoryCode" id="fileCategoryCode"/>
 			<label for="fileCategoryName">카테고리명</label>
 			<div style="width: 800px;">
 				<input type="text" class="form-control" id="fileCategoryName" name="fileCategoryName"/>
 			</div>
 				<label for="fileBoardRegistrant">작성자</label>
 			<div style="width: 800px;">
-				<input type="text" class="form-control" id="fileBoardRegistrant" name="fileBoardRegistrant"readonly="readonly"/>
+				<input type="text" class="form-control" id="fileBoardRegistrant" name="fileCategoryRegistrant"readonly="readonly"/>
 			</div>
 				<label for="fileCategoryModifier">수정자</label>
 			<div style="width: 800px;">
-				<input type="text" class="form-control" id="fileCategoryModifier" name="fileCategoryModifier"/>
+				<input type="text" class="form-control" id="fileCategoryModifier" name="fileCategoryModifier" required/>
 			</div>
-			<div style="margin-left: 350px; margin-top: 8px; margin-bottom: 8px;">
-			<button type="submit" class="btn btn-outline-success">저장</button>
+			<div style="margin-left: 730px; margin-top: 8px; margin-bottom: 8px;">
+				<button type="submit" class="btn btn-outline-success">저장</button>
 			</div>
 		</form>
 		<table class="table table-bordered">
@@ -50,8 +51,6 @@
 					<th>부서</th>
 					<th>등록일</th>
 					<th>수정자</th>
-					<th>직급</th>
-					<th>부서</th>
 					<th>수정일자</th>
 					<th>사용 여부</th>
 					<th>수정</th>
@@ -60,22 +59,20 @@
 			</thead>
 			<tbody>
 				<tr th:unless="${#lists.isEmpty(fileBoardCateList)}" th:each="f : ${fileBoardCateList}" style="text-align: center;">
-					<th id="fileCategoryCode2" th:text=${f.fileBoardCate.fileCategoryCode} scope="col"></th>
+					<th id="fileBoardCate" th:text=${f.fileBoardCate.fileCategoryCode} scope="col"></th>
 					<td th:text=${f.fileBoardCate.fileCategoryName}></td>
-					<td th:text=${f.fileBoardCate.fileCategoryRegistrant}></td>
-					<td>부장</td>
-					<td>인사과</td>
-					<td th:text=${f.fileBoardCate.fileCategoryRegDate}></td>
-					<td th:text=${f.fileBoardCate.fileCategoryModifier}></td>
-					<td>부장</td>
-					<td>인사과</td>
-					<td th:text=${f.fileBoardCate.fileCategoryModificationDate}></td>
-					<td th:text=${f.fileBoardCate.categoryUseOrNot}></td>
+					<td th:text=${f.memberList.memberName}></td>
+					<td th:text="${f.memberPositionList.positionName}"></td>
+					<td th:text="${f.memberDepartmentList.departmentName}"></td>
+					<td th:text="${f.fileBoardCate.fileCategoryRegDate}"></td>
+					<td th:text="${f.fileBoardCate.fileCategoryModifier}"></td>
+					<td th:text="${f.fileBoardCate.fileCategoryModificationDate}"></td>
+					<td th:text="${f.fileBoardCate.categoryUseOrNot}"></td>
 					<td>
-						<button th:value="${f.fileCategoryCode}" class="modifyBtn" type="submit">수정</button>
+						<button th:value="${f.fileCategoryCode}" class="btn btn-round btn-outline-info" name="modifyBtn" type="submit">수정</button>
 					</td>
 					<td>
-						<a th:href="@{/fileBoardCate/fileBoardCateDelete(fileCategoryCode=${f.fileCategoryCode})}">삭제</a>
+						<a class="btn btn-round btn-outline-danger" th:href="@{/fileBoardCate/fileBoardCateDelete(fileCategoryCode=${f.fileCategoryCode})}" type="submit">삭제</a>
 					</td>
 				</tr>
 				<tr th:if="${#lists.isEmpty(fileBoardCateList)}" th:each="f : ${fileBoardCateList}">
@@ -83,5 +80,28 @@
 				</tr>
 			</tbody>
 		</table>
+	</th:block>
+	<th:block layout:fragment="customScript">
+		<script>
+			$('button[name=modifyBtn]').click(function(){
+	    		const fileCategoryCode = $(this).val();
+				$.ajax({
+					 	url: "/fileBoardCate/ajaxTest",
+			            type: "GET",
+			            data: {fileCategoryCode},
+			            contentType: 'application/json; charset=utf-8',
+			            dataType: "json",
+			            success: function(result){
+			            			$('#fileCategoryCode').val(result[0].fileCategoryCode);
+			            			$('#fileCategoryName').val(result[0].fileCategoryName);
+			            			$('#fileBoardRegistrant').val(result[0].fileCategoryRegistrant);
+			            },
+			            error: function(){
+			                alert("error");
+			            }
+				});
+			});
+			
+		</script>
 	</th:block>
 </html>

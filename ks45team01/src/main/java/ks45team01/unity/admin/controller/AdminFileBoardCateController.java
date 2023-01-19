@@ -1,7 +1,6 @@
 package ks45team01.unity.admin.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,8 +27,8 @@ public class AdminFileBoardCateController {
 		this.fileBoardService = fileBoardService;
 	}
 	
-	@GetMapping("fileBoardCateDelete")
-	public String fileBoardCateDelete(String fileCategoryCode) {
+	@GetMapping("/fileBoardCateDelete")
+	public String fileBoardCateDelete(@RequestParam(value = "fileCategoryCode", required = false) String fileCategoryCode) {
 		
 		fileBoardService.fileBoardCateDelete(fileCategoryCode);
 		
@@ -44,7 +41,8 @@ public class AdminFileBoardCateController {
 	 * @return
 	 */
 	@PostMapping("/fileBoardCateModify")
-	public String fileBoardCateModify(FileBoardCate fileBoardCate) {
+	public String fileBoardCateModify(FileBoardCate fileBoardCate
+									 ,Model model) {
 		
 		fileBoardService.fileBoardCateModify(fileBoardCate);
 		
@@ -100,7 +98,7 @@ public class AdminFileBoardCateController {
 	@GetMapping("/fileBoardCateList")
 	public String fileBoardCateList(Model model) {
 		
-		List<FileBoard> fileBoardCateList = fileBoardService.fileBoardCateList();
+		List<FileBoard> fileBoardCateList = fileBoardService.fileBoardCatePartList();
 		
 		model.addAttribute("title", "파일게시글 카테고리 목록");
 		model.addAttribute("fileBoardCateList", fileBoardCateList);
@@ -110,9 +108,11 @@ public class AdminFileBoardCateController {
 	
 	@GetMapping("/ajaxTest")
 	@ResponseBody
-	public Map<String, Object> ajaxTest(@RequestBody String fileCategoryCode) {
+	public List<FileBoardCate> ajaxTest(@RequestParam(value = "fileCategoryCode", required = false) String fileCategoryCode) {
 		
-		Map<String, Object> result = fileBoardService.result(fileCategoryCode);
+		log.info("파일카테로그 : {}", fileCategoryCode);
+		List<FileBoardCate> result = fileBoardService.result(fileCategoryCode);
+		log.info("result로그 : {}", result);
 		
 		return result;
 	}
