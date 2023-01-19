@@ -60,4 +60,16 @@ public class ProjectBoardService {
 		
 		return projectCommentDelete;
 	}
+	
+	public ProjectBoard projectBoardOne(String projectBoardNum) {
+		ProjectBoard projectBoardOne= projectListMapper.projectBoardOne(projectBoardNum);
+		
+		return projectBoardOne;
+	}
+	
+	public int projectboardUpdate(String projectBoardTitle,String projectBoardContent ,String projectBoardNum) {
+		int projectboardUpdate = projectListMapper.projectboardUpdate(projectBoardTitle, projectBoardContent, projectBoardNum);
+		
+		return projectboardUpdate;
+	}
 }

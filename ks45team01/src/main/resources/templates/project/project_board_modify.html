@@ -26,7 +26,45 @@
 		<br><br>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<h1>프로젝트내부 게시글 수정 화면</h1>
+				<div class="row">
+			<form class="col-md-12" th:action="@{/project/projectBoardModify}" method="post">
+				<div class="col-md-12" th:if="${} == '일반'">
+					<input type="hidden" id="projectDitailNum" name="projectDitailNum" th:value="${plp.postIdx}" /> 
+					<input type="hidden" id="projectNum" name="projectNum" th:value="${plp.projectNum}" />
+					<div class="card card-statistics">
+						<div class="card-header">
+							<div>
+								<!-- 멤버아이디 db값 가져오기  -->
+								<h5>작성자 : [[${plp.projectBoard.memberNum}]] 작성일자 : [[${plp.projectBoard.projectBoardRegDate}]]</h5>
+								<!-- 멤버아이디 db값 가져오기  -->
+							</div>
+							<div>
+								<h4 class="card-title">
+									게시글 제목
+									<button type="button" class="btn btn-primary"
+										onclick="location.href='/project/projectBoardModify'"
+										style="float: right;">수정</button>
+								</h4>
+							</div>
+							<div class="card-heading">
+								<!-- 프로젝트보드제목 db연결 -->
+								<input class="form-control form-control-lg" type="text"
+									disabled="disabled"
+									th:value="${plp.projectBoard.projectBoardTitle}"
+									style="background-color: white;" />
+							</div>
+						</div>
+						<div class="card-body">
+							<h5>내용</h5>
+							<textarea class="form-control" placeholder="Message"
+								id="Textarea1" rows="10"
+								th:text="${plp.projectBoard.projectBoardContent}" readonly style="background-color: white;"></textarea>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
 	</th:block>
 	
 </html>

@@ -210,7 +210,27 @@
 		tb_project_comment AS pc
 	WHERE
 		pc.project_comment_num = #{projectCommentNum}
-	
-	
 	</delete>
+	
+	<select id="projectBoardOne" resultMap="ProjectBoardResultMap" parameterType="String">
+	SELECT
+	*
+	FROM
+	tb_project_board AS pb
+	WHERE
+	pb.project_board_num = #{projectBoardNum}
+	</select>
+	
+	<update id="projectboardUpdate" parameterType="ProjectBoard">
+	UPDATE
+	tb_project_board AS pb
+	SET
+	pb.project_board_title = #{projectBoardTitle}
+	,pb.project_board_content=#{projectBoardContent}
+	,pb.project_board_modifier='id001'
+	,pb.project_board_update_date = NOW()
+	WHERE
+	pb.project_board_num = #{projectBoardNum}
+	
+	</update>
 </mapper>
