@@ -20,10 +20,11 @@
 	<th:block layout:fragment="customContents">
 		<div class="card-body">
 		    <h6 class="card-subtitle"></h6>
-		    	<form>
+		    	<form id="insertMeetingroom" th:action="@{/reservation/meetingroomInsert}" method="post">
+		    		<input type="hidden" class="form-control" id="memberNum" name="memberNum" th:value="${session.SID}">
 	        		<div class="form-group">
                     	<label for="exampleInputPassword1">회의실 명</label>
-                   	 	<input type="text" class="form-control" id="exampleInputPassword1">
+                   	 	<input type="text" class="form-control" id="meetName" name="meetName">
                 	</div>
 			        <div class="form-group">
 			            <label for="exampleInputPassword1">사용가능 시작시간</label>
@@ -133,17 +134,17 @@
 			        </div>
 			        <div class="form-group">
                     	<label for="exampleInputPassword1">회의실 위치</label>
-                   	 	<input type="text" class="form-control" id="exampleInputPassword1">
+                   	 	<input type="text" class="form-control" id="meetLocation" name="meetLocation">
                 	</div>
                 	<div class="form-group">
                     	<label for="exampleInputPassword1">회의실 수용인원</label>
-                   	 	<input type="text" class="form-control" id="exampleInputPassword1">
+                   	 	<input type="text" class="form-control" id="meetCapacity" name="meetCapacity">
                 	</div>
                 	<div class="form-group">
                     	<label for="exampleInputPassword1">회의실 상세 정보</label>
-                   	 	<input type="text" class="form-control" id="exampleInputPassword1">
+                   	 	<input type="text" class="form-control" id="meetDetail" name="meetDetail">
                 	</div>
-		        <button type="button" id="submitBtn" class="btn btn-primary">확인</button>
+		        <button type="submit" id="submitBtn" class="btn btn-primary">확인</button>
 		    </form>
 		</div>
 	</th:block>
