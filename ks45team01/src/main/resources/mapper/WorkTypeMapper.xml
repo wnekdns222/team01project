@@ -151,5 +151,14 @@
 	</trim>
 	WHERE work_type_num=#{workTypeNum};
 	</update>
-	
+	<select id="getWorkTypeNum" parameterType="String" resultType="String">
+		SELECT
+			t.work_type_num
+		FROM
+			tb_work_type AS t
+		WHERE
+			t.work_date = #{workDate} 
+			and
+			t.member_num = #{memberNum};
+	</select>
 </mapper>
