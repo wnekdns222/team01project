@@ -67,29 +67,29 @@
 				<div class="col-lg-12">
 					<!--공지사항 넓이 -->
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<h1 class="page-header">공지사항 리스트</h1>
 						</div>
 						<div class="col-lg-8 mt-auto mb-4">
 							<div class="form-row">
 							<form th:action="@{/community/noticeList}">
-								<div class="form-group col-lg-9">
+								<div class="form-group col-lg-10">
 									<select name="searchKey" class="form-control col-lg-3 mr-3" style="width:300px;">
 										<option value="noticeName">제목</option>
 										<option value="memberNum">등록자</option>
-									</select> <input type="text" class="form-control col-lg-4 h-100" style=" height:100px;;"
-										name="searchValue" placeholder="검색">&nbsp;
-									 <button class="btn btn-primary form-control col-lg-2 h-100"
+									</select> <input type="text" class="form-control col-lg-5 h-100"  
+										name="searchValue" placeholder="검색">
+									 <button class="btn btn-primary form-control col-lg-2 h-100 " 
 										type="submit" id="button-addon2">
 										<i class="fa fa-search"></i>
 									</button>
 								</div>
 							</form>
-								<div class="form-group col-lg-2 ml-auto mr-4">
+								<div class="form-group col-lg-2 ml-auto mr-4" >
 									<button type="button"
 										class="btn btn-block btn-round btn-outline-info"
-										onclick="location.href='/community/noticeInsert';">공지사항
-										작성</button>
+										onclick="location.href='/community/noticeInsert';">공지사항 작성
+									</button>
 								</div>
 							</div>
 							<!-- <div class="input-group col-6"></div> -->

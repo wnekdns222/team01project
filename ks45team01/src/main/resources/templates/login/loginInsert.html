@@ -94,22 +94,33 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label class="control-label">부서</label>
-                                                        <input type="text" class="form-control" name="departmentNum" placeholder="부서를 입력해주세요." required/>
+                                                        <select type="text" class="form-control" name="departmentNum" placeholder="부서를 입력해주세요." required>
+	                                                        <option>기획부</option>
+															<option>영업부</option>
+															<option>생산팀</option>
+                                                        </select>
+                                                        
                                                     </div>
                                                 </div>
 
                                                  <div class="col-12">
                                                     <div class="form-group">
                                                         <label class="control-label">직급</label>
-                                                        <input type="text" class="form-control" name="positionNum" placeholder="직급을 입력해주세요." required/>
+                                                        <select type="text" class="form-control" name="positionNum" placeholder="직급을 입력해주세요." required>
+	                                                        <option>부장</option>
+															<option>차장</option>
+															<option>과장</option>
+															<option>계장</option>
+															<option>사원</option>
+														</select>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="col-12 mt-3">
-                                                    <button type="submit" class="btn btn-primary text-uppercase" id="submitBtn">Sign up</button>
+                                                    <button type="submit" class="btn btn-primary text-uppercase" id="submitBtn">회원가입</button>
                                                 </div>
                                                 <div class="col-12  mt-3">
-                                                        <p>Already have an account ?<a href="auth-login.html"> Sign In</a></p>
+                                                        <p>Already have an account ?<a href="auth-login.html">  로그인</a></p>
                                                     </div>
                                             </div>
                                         </form>
