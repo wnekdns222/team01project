@@ -34,12 +34,9 @@ public class ReservationController {
 	@GetMapping("/meetingroomReservationList")
 	public String meetingroomList(Model model) {
 			
-		
-		List<Reservation> reservationList = reservationService.getReservationList();
 		List<Meetingroom> meetingroomList = reservationService.getMeetingroomList();
 		
 		model.addAttribute("title", "회의실 목록");
-		model.addAttribute("reservationList", reservationList);
 		model.addAttribute("meetingroomList", meetingroomList);
 		
 		return "/reservation/meetingroom_reservation_list";
@@ -47,9 +44,9 @@ public class ReservationController {
 	
 	//예약하기 화면
 	@GetMapping("/meetingroomReservationInsert")
-	public String insertReservation(@RequestParam(value="reservationNum",required=false) String reservationNum,Model model) {
+	public String insertMeetingroomReservation(@RequestParam(value="meetName",required=false) String meetName,Model model) {
 		
-		Reservation reservation = reservationService.getReservationById(reservationNum);
+		Reservation reservation = reservationService.getReservationById(meetName);
 		List<Reservation> reservationList = reservationService.getReservationList();
 
 		model.addAttribute("title", "회의실 목록");
@@ -59,34 +56,47 @@ public class ReservationController {
 		return "/reservation/meetingroom_reservation_insert";
 	}
 	
-	// 예약
+	//예약추가
 	@PostMapping("/meetingroomReservationInsert")
-	@ResponseBody
-	public String insertReservation(@RequestBody Reservation reservation) {
+	public String insertMeetingroomReservation(Reservation reservation, Model model) {
 		
-		log.info("reservation : {}", reservation);
+		reservationService.insertMeetingroomReservation(reservation);
 		
-		return "/reservation/meetingroomReservationList";
+		return "redirect:/reservation/meetingroomReservationMine";
+		
 	}
+	
+	// 예약
+	/*
+	 * @PostMapping("/meetingroomReservationInsert")
+	 * 
+	 * @ResponseBody public String insertReservation(@RequestBody Reservation
+	 * reservation) {
+	 * 
+	 * log.info("reservation : {}", reservation);
+	 * 
+	 * return "/reservation/meetingroomReservationList"; }
+	 */
 	
 	//내 예약확인화면
 	@GetMapping("/meetingroomReservationMine")
-	public String getReservationList(Model model) {
+	public String getReservationMineList(@RequestParam(value="applicantMemberNum", required=false) String applicantMemberNum,Model model) {
 		
-		List<Reservation> reservationList = reservationService.getReservationList();
+		List<Reservation> reservationMineList = reservationService.getReservationMineList(applicantMemberNum);
 		
-		model.addAttribute("reservationList", reservationList);
+		model.addAttribute("reservationMineList", reservationMineList);
 		
 		return "/reservation/meetingroom_reservation_mine";
 	}
 	
+ 
 	//예약 수정화면
 	@GetMapping("/meetingroomReservationModify")
-	public String modifyMeetingroomReservation(@RequestParam(value="reservationNum", required=false) String reservationNum,Model model) {
+	public String modifyMeetingroomReservation(@RequestParam(value="meetName", required=false) String meetName,Model model) {
 		
-		log.info("meetingroomReservation: {}", reservationNum);
+		log.info("meetingroomReservation: {}", meetName);
 		
-		Reservation reservation = reservationService.getReservationById(reservationNum);
+		Reservation reservation = reservationService.getReservationById(meetName);
 		
 		model.addAttribute("reservation", reservation);
 

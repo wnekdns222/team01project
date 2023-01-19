@@ -32,8 +32,8 @@
                       </tr>
                   </thead>
                   <tbody>
-                    <tr th:unless="${#lists.isEmpty(reservationList)}"
-					th:each="l : ${reservationList}" th:object="${l.meetingroom}">
+                    <tr th:unless="${#lists.isEmpty(reservationMineList)}"
+					th:each="l : ${reservationMineList}" th:object="${l.meetingroom}">
 					<td th:text="*{meetName}"></td>
 					<td th:text="${l.reservationDate}"></td>
 					<td th:text="${l.reservationStartTime}"></td>
