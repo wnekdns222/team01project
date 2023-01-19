@@ -86,6 +86,65 @@ public class AdminVacationController {
 			return "settings/vacation_variety_list";
 		}
 		/**
+		 * 휴가 대분류 조회
+		 * @param model
+		 * @return
+		 */
+		@GetMapping("settings/vacation_category_list:: vacationCategory")
+		public String getVacationCategory(Model model) {
+			
+			Map<String, Object> variety = vacationService.getVacationVariety();
+			List<VacationCategory> category = (List<VacationCategory>)variety.get("category");
+						model.addAttribute("title", "휴가설정");
+			model.addAttribute("category", category);
+			
+			return "settings/vacation_category_list";
+		}
+		/**
+		 * 휴가 중분류 조회
+		 * @param model
+		 * @return
+		 */
+		@GetMapping("settings/vacation_sort_list:: vacationSort")
+		public String getVacationSort(Model model) {
+			
+			Map<String, Object> variety = vacationService.getVacationVariety();
+			List<VacationSort> sort =(List<VacationSort>)variety.get("sort");
+			model.addAttribute("title", "휴가설정");
+			model.addAttribute("sort", sort);
+			return "settings/vacation_sort_list";
+		}
+		/**
+		 * 휴가 종류 조회
+		 * @param model
+		 * @return
+		 */
+		@GetMapping("settings/vacation_type_list:: vacationType")
+		public String getVacationType(Model model) {
+			
+			Map<String, Object> variety = vacationService.getVacationVariety();
+			List<VacationType> type =(List<VacationType>)variety.get("type");
+			model.addAttribute("title", "휴가설정");
+			model.addAttribute("type", type);
+			
+			return "settings/vacation_type_list";
+		}
+		/**
+		 * 휴가 기준 조회
+		 * @param model
+		 * @return
+		 */
+		@GetMapping("settings/vacation_standard_list:: vacationStandard")
+		public String getVacationStandard(Model model) {
+			
+			Map<String, Object> variety = vacationService.getVacationVariety();
+			List<VacationStandard> standard = (List<VacationStandard>)variety.get("standard");
+			model.addAttribute("title", "휴가설정");
+			model.addAttribute("standard", standard);
+			
+			return "settings/vacation_standard_list";
+		}
+		/**
 		 * 휴가종류 수정 처리
 		 * @param model
 		 * @return
@@ -103,7 +162,7 @@ public class AdminVacationController {
 			return "redirect:/settings/vacationVarietyList";
 		}
 		/**
-		 * 휴가 종류 수정 처리
+		 * 휴가 종류 수정 화면
 		 * @param vacationValue
 		 * @param model
 		 * @return
@@ -217,7 +276,7 @@ public class AdminVacationController {
 		/**
 		 * 기타 휴가 등록 화면
 		 */
-		@GetMapping("settings/vacation_insert_other:: vacationInsertOther")
+		@GetMapping("settings/vacationInsertOther")
 		public String addVacationOthers(Model model) {
 			List<MemberList> memberList = vacationService.getMemberList();
 			log.info("사원정보 조회 :{}",memberList);
@@ -287,30 +346,36 @@ public class AdminVacationController {
 		@GetMapping("settings/vacationStandardInsert")
 		public String addVacationStandard(Model model) {
 			
+			model.addAttribute("title", "휴가기준 입력");
 			return "settings/vacation_standard_insert";
 		}
 		/**
 		 * 휴가 기준 입력 처리
 		 */
 		@PostMapping("settings/vacationStandardInsert")
-		public String addVacationStandard() {
-			
+		public String addVacationStandard(VacationStandard vacationStandard) {
+			log.info("휴가 기준 입력:{}",vacationStandard);
+			vacationService.addVacationStandard(vacationStandard);
 			return "redirect:/settings/vacationVarietyList";
 		}
 		/**
 		 * 휴가 기준 수정 화면
 		 */
 		@GetMapping("settings/vacationStandardModify")
-		public String updateVacationStandard(Model model) {
-			
+		public String updateVacationStandard(Model model,
+											@RequestParam(value="serviceNum", required=false)String serviceNum) {
+			log.info("서비스 번호:{}",serviceNum);
+			model.addAttribute("title", "휴가 기준 수정");
+			VacationStandard vacationStandard = vacationMapper.getVacationStandardByServiceNum(serviceNum);
+			model.addAttribute("vacationStandard", vacationStandard);
 			return "settings/vacation_standard_modify";
 		}
 		/**
 		 * 휴가 기준 수정 처리
 		 */
 		@PostMapping("settings/vacationStandardModify")
-		public String updateVacationStandard() {
-			
+		public String updateVacationStandard(VacationStandard vacationStandard) {
+			vacationService.updateVacationStandard(vacationStandard);
 			return "redirect:/settings/vacationVarietyList";
 		}
 		/**

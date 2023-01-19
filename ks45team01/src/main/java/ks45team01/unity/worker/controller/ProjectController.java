@@ -9,13 +9,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ks45team01.unity.dto.MemberDepartmentList;
 import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.ProjectBoard;
+import ks45team01.unity.dto.ProjectComment;
 import ks45team01.unity.dto.ProjectList;
+import ks45team01.unity.dto.ProjectListPost;
 import ks45team01.unity.dto.ProjectMember;
 import ks45team01.unity.dto.ProjectRequest;
 import ks45team01.unity.dto.ProjectUnit;
@@ -31,7 +35,7 @@ import ks45team01.unity.service.ProjectUnitService;
 @RequestMapping("/project")
 
 public class ProjectController {
-	
+
 	
 	private static final Logger log = LoggerFactory.getLogger(ProjectController.class);
 
@@ -127,10 +131,28 @@ public class ProjectController {
 	}
 	
 	
+	
+	@RequestMapping("/projectMemberDelete")
+	public String getProjectMemberDelete(@RequestParam(value="projectJoinNum") String projectJoinNum
+										,@RequestParam(value="projectNum") String projectNum
+										,RedirectAttributes reAttr
+										) {
+		
+		projectListService.ProjectListOne(projectNum);
+		projectMemberInsertService.projectMemberDelete(projectJoinNum);
+		log.info("프로젝트 멤버 추가 정보:{}",projectJoinNum);
+		reAttr.addAttribute("projectNum", projectNum);
+		
+		
+		return "redirect:/project/projectMemberInsert";
+	}
+	
+	
 	@PostMapping("/projectMemberInsert")
 	public String getProjectMemberInsert(ProjectMember projectMember
 										,String projectNum
-										,RedirectAttributes reAttr) {
+										,RedirectAttributes reAttr
+										,Model model) {
 		
 		projectListService.ProjectListOne(projectNum);
 		projectMemberInsertService.ProjectMemberInsert(projectMember);
@@ -169,6 +191,17 @@ public class ProjectController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value="/idOverlap", method = RequestMethod.POST)
+	public int projectIdCnt(String memberNum
+							,String projectNum) {
+		int result = projectMemberInsertService.projectIdCnt(memberNum, projectNum);
+		return result;
+	}
+	
+	
+	
+	
 	@GetMapping("/projectMemberModify")
 	public String GetProjectMemberModify(Model model) {
 		model.addAttribute("projectMemberModify","프로젝트멤버리스트수정화면");
@@ -205,35 +238,97 @@ public class ProjectController {
 	return "project/project_unit_member_modify";
 	}
 	
+	
+	@RequestMapping("/projectCommentDelete")
+		public String getProjectCommentDelete(@RequestParam(value="projectCommentNum") String projectCommentNum
+																					  ,String projectNum
+																					,RedirectAttributes reAttr) {
+		
+		projectBoardService.projectCommentDelete(projectCommentNum);
+		reAttr.addAttribute("projectNum",projectNum);
+		
+		return "redirect:/project/projectDetail";
+	}
+	
+	
+	@PostMapping("/projectDetail")
+		public String getProjectDetail(ProjectComment ProjectComment
+				 					  ,String projectNum
+									  ,RedirectAttributes reAttr) {
+		projectBoardService.projectCommentInsert(ProjectComment);
+		reAttr.addAttribute("projectNum", projectNum);
+		
+		log.info("프로젝트 댓글{}:",ProjectComment);
+		
+		return "redirect:/project/projectDetail";
+	}
+	
+	
 	@GetMapping("/projectDetail")
-	public String GetProjectDetail(Model model) {
-		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
-		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList();
+	public String GetProjectDetail(Model model
+								  ,String projectNum
+								  ,RedirectAttributes reAttr) {
+		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList(projectNum);
+		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList(projectNum);
 		List<MemberList> memberList = memberListService.memberListSe("","");
 		
+		List<ProjectListPost> projectListPost = projectBoardService.projectListPostList(projectNum);
+		
+		
+		log.info("projectListPost : {}", projectListPost);
+		
 		model.addAttribute("title","프로젝트내부 디테일 화면");
+		model.addAttribute("projectNum",projectNum);
 		model.addAttribute("projectBoardList",projectBoardList);
 		model.addAttribute("projectRequestList",projectRequestList);
 		model.addAttribute("memberList",memberList);
+		model.addAttribute("projectListPost",projectListPost);
+	
+		
+		reAttr.addAttribute("projectNum", projectNum);
 	return "project/project_detail";
 	}
 	
 	@GetMapping("/project_home:: projectHomeTab1")
-	public String GetProjectHome(Model model) {
+	public String GetProjectHome(Model model
+								,String projectNum) {
 		
-		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList();
-		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList();
+		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList(projectNum);
+		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList(projectNum);
+
+		
 		
 		model.addAttribute("title","프로젝트내부 홈 화면");
+		model.addAttribute("projectNum",projectNum);
 		model.addAttribute("projectBoardList",projectBoardList);
 		model.addAttribute("projectRequestList",projectRequestList);
+
+		
+		
+	
 	return "project/project_home";
 	}
 	
 	
+	@PostMapping("/projectBoardInsert")
+	public String getProjectBoardInsert(ProjectBoard projectBoard
+										,String projectNum
+										,RedirectAttributes reAttr) {
+		
+		
+		projectBoardService.projectBoardInsert(projectBoard);
+		
+		System.out.println(projectBoard + "<-- projectBoard GetProjectMemberInsertForm");
+		reAttr.addAttribute("projectNum", projectNum);
+		
+		return "redirect:/project/projectDetail";
+		
+	}
+	
 	@GetMapping("/projectBoardInsert")
-	public String projectBoardInsert(Model model) {
+	public String projectBoardInsert(Model model, @RequestParam(value="projectNum", required = false) String projectNum) {
 		model.addAttribute("projectBoardInsert","프로젝트내부 게시글 생성화면");
+		model.addAttribute("projectNum", projectNum);
 	return "project/project_home/project_board_insert";
 	}
 	

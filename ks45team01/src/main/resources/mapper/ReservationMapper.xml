@@ -13,15 +13,13 @@
 		<result property="memberNum"  column="member_num" />
 		<result property="meetUpdateMember"  column="meet_update_member" />
 		<result property="meetCapacity"  column="meet_capacity" />
-		<result property="meetStatus"  column="meet_status" />
-		<result property="meetRejectReason"  column="meet_reject_reason" />
 		<result property="meetDetail"  column="meet_detail" />
-		<result property="meetManager"  column="meet_manager" />
 	</resultMap>
 	
 	<resultMap type="Reservation" id="reservationResultMap">
 		<id		property="reservationNum"	column="reservation_num" />
 		<result property="meetNum"  column="meet_num" />
+		<result property="reservationDate"  column="reservation_date" />
 		<result property="reservationStartTime"  column="reservation_start_time" />
 		<result property="reservationEndTime"  column="reservation_end_time" />
 		<result property="reservationContents"  column="reservation_contents" />
@@ -58,7 +56,7 @@
 	
 	</select>
 	<select id="getReservationById" parameterType="String" resultMap="reservationResultMap">
-		/* 회의실 조회 */
+		/* 예약 조회 */
 		SELECT 
 			*
 		FROM 
@@ -70,6 +68,24 @@
 		WHERE
 			r.reservation_num = #{reservationNum};
 	</select>
+	<select id="getCommonNewCode" parameterType="String" resultType="String">
+		/* 자동 증가 코드 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT(#{column}, '_1')
+			ELSE
+				CONCAT(#{column},'_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT(#{column}, '_'), -1) AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${table} ;
+	</select>
+	<insert id="insertMeetingroom" parameterType="Meetingroom">
+		/* 예약등록 */
+		INSERT INTO tb_meetingroom
+		(meet_num, meet_name, meet_location, meet_usable_start, meet_usable_end, meet_reg_date, member_num, meet_capacity, meet_detail)
+		VALUES
+		(#{meetNum}, #{meetName}, #{meetLocation}, #{meetUsableStart}, #{meetUsableEnd}, #{meetRegDate}, #{memberNum}, #{meetCapacity}, #{meetDetail})
+	</insert>
 	<select id="getMeetingroomList" resultMap="meetingroomResultMap">
 		/* 회의실 조회 */
 		SELECT 

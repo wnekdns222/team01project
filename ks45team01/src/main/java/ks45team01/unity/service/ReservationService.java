@@ -19,6 +19,12 @@ public class ReservationService {
 		this.reservationMapper = reservationMapper;
 
 	}
+	/* 자동증가 코드 */
+	public String getCommonNewCode(String table, String column) {
+		String newCode = reservationMapper.getCommonNewCode(table, column);
+		
+		return newCode;
+	}
 	
 	public List<Meetingroom> getMeetingroomList(){
 		
@@ -67,6 +73,13 @@ public class ReservationService {
 	public void modifyReservation (Reservation reservation) {
 		
 		reservationMapper.modifyReservation(reservation);
+	}
+	
+	public void insertMeetingroom (Meetingroom meetingroom) {
+		
+		String meetNum =reservationMapper.getCommonNewCode("tb_meetingroom", "meet_num");
+		meetingroom.setMeetNum(meetNum);
+		reservationMapper.insertMeetingroom(meetingroom);
 	}
 	
 }

@@ -3,7 +3,7 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/default}">
 	
-	<th:block layout:fragment="customCrumbbar">
+	<th:block layout:fragment="customCrumbbar"></th:block>
 		<div class="breadcrumbbar">
 			<div class="row align-items-center">
 				<div class="col-md-8 col-lg-10">
@@ -22,6 +22,24 @@
 			</div>
 		</div>
 	<th:block layout:fragment="customContents">
+		<form id="fileBoardCateModify" th:action="@{/fileBoardCate/fileBoardCateModify}" method="post">
+			<input type="hidden" name="fileCategoryCode"/>
+			<label for="fileCategoryName">카테고리명</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileCategoryName" name="fileCategoryName"/>
+			</div>
+				<label for="fileBoardRegistrant">작성자</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileBoardRegistrant" name="fileBoardRegistrant"readonly="readonly"/>
+			</div>
+				<label for="fileCategoryModifier">수정자</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileCategoryModifier" name="fileCategoryModifier"/>
+			</div>
+			<div style="margin-left: 350px; margin-top: 8px; margin-bottom: 8px;">
+			<button type="submit" class="btn btn-outline-success">저장</button>
+			</div>
+		</form>
 		<table class="table table-bordered">
 			<thead>
 				<tr style="text-align: center;">
@@ -42,7 +60,7 @@
 			</thead>
 			<tbody>
 				<tr th:unless="${#lists.isEmpty(fileBoardCateList)}" th:each="f : ${fileBoardCateList}" style="text-align: center;">
-					<th th:text=${f.fileBoardCate.fileCategoryCode} scope="col"></th>
+					<th id="fileCategoryCode2" th:text=${f.fileBoardCate.fileCategoryCode} scope="col"></th>
 					<td th:text=${f.fileBoardCate.fileCategoryName}></td>
 					<td th:text=${f.fileBoardCate.fileCategoryRegistrant}></td>
 					<td>부장</td>
@@ -54,7 +72,7 @@
 					<td th:text=${f.fileBoardCate.fileCategoryModificationDate}></td>
 					<td th:text=${f.fileBoardCate.categoryUseOrNot}></td>
 					<td>
-						<a th:href="@{/fileBoardCate/fileBoardCateModify(fileCategoryCode=${f.fileCategoryCode})}">수정</a>
+						<button th:value="${f.fileCategoryCode}" class="modifyBtn" type="submit">수정</button>
 					</td>
 					<td>
 						<a th:href="@{/fileBoardCate/fileBoardCateDelete(fileCategoryCode=${f.fileCategoryCode})}">삭제</a>

@@ -26,25 +26,44 @@
 		</div>
 	</th:block>
 	<th:block layout:fragment="customContents">
-				<form id="addBoardFile" th:action="@{/fileBoard/addBoardFile}" method="post">
-			<label for="fileBoardTitle">서식명</label>
+				<form id="odInsert" th:action="@{/approval/odInsert}" method="post">
+			<label for="draftTitle">결재명</label>
 			<div style="width: 800px;">
-				<input type="text" class="form-control" id="fileBoardTitle" name="fileBoardTitle"
-					placeholder="서식명을 입력해주세요" />
+				<input type="text" class="form-control" id="draftTitle" name="draftTitle"
+					placeholder="결재명을 입력해주세요" />
 			</div>
-			<label for="fileBoardRegistrant">작성자</label>
+			<label for="registrantNum">작성자</label>
 			<div style="width: 800px;">
-				<input type="text" class="form-control" id="fileBoardRegistrant"
-					name="fileBoardRegistrant" placeholder="작성자를 입력해주세요" /> <label
+				<input type="text" class="form-control" id="registrantNum"
+					name="registrantNum" placeholder="작성자를 입력해주세요" /> <label
 					for="Contents">내용</label>
-				<textarea class="form-control" name="fileBoardContents" id="fileBoardContents"
+				<textarea class="form-control" name="draftContents" id="draftContents"
 					placeholder="내용을 입력해주세요" style="height: 150px; width: 800px;"></textarea>
 			</div>
-			<div style="margin-top: 20px; margin-left: 300px;">
-				<button type="submit" class="btn btn-primary">등록</button>
-				<button type="button" class="btn btn-primary"
-					onclick="location.href='/file/fileList';">취소</button>
+			<div style="margin-top: 8px;">
+				<input type="date" id="draftDeadline" name="draftDeadline"/>
 			</div>
-		</form>
+			<div style="margin-top: 8px;" id="box">
+				<label for="approvalMemberNum">결재자</label>
+				<input type="text"><input type="button" value="추가" onclick="add_textbox()">
+			</div>
+			<div style="margin-top: 20px; margin-left: 300px;">
+				<button type="submit" class="btn btn-outline-success">등록</button>
+				<a class="btn btn-outline-success" href="/approval/draftList">취소</a>
+			</div>
+			</form>
 	</th:block>
+<th:block layout:fragment="customScript">
+    <script>
+        const add_textbox = () => {
+            const box = document.getElementById("box");
+            const newS = document.createElement('span');
+            newS.innerHTML = "<label for='approvalMemberNum'>결재자</label> <input type='text'><input type='button' value='삭제' onclick='remove(this)'> ";
+            box.appendChild(newS);
+        }
+        const remove = (obj) => {
+            document.getElementById('box').removeChild(obj.parentNode);
+        }
+    </script>
+</th:block>
 </html>

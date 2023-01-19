@@ -38,10 +38,13 @@
 			<tbody>
 				<tr th:unless="${#lists.isEmpty(draftList)}" th:each="d : ${draftList}">
 					<td th:text="${d.draftDocNum}"></td>
-					<td><a th:href="@{/approval/draftView}">공문서</a></td>
+					<td><a th:href="@{/approval/draftView(draftDocNum=${d.draftDocNum})}">[[${d.draftTitle}]]</a></td>
 					<td th:text="${d.reportDate}"></td>
 					<td th:text="${d.draftDeadline}"></td>
-					<th th:text="${d.approvalFinalState}" scope="row">진행중</th>
+					<th th:text="${d.approvalFinalState}" scope="row"></th>
+				</tr>
+				<tr th:if="${#lists.isEmpty(draftList)}" th:each="d : ${draftList}">
+					<td colspan="5">등록된 기안문서가 없습니다.</td>
 				</tr>
 			</tbody>
 		</table>

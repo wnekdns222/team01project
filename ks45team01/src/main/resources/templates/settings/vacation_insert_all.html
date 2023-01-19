@@ -28,28 +28,28 @@
 	</th:block>
 	<th:block layout:fragment="customContents">
 		<div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <div class="tab nav-bt">
-                                            <ul class="nav nav-tabs" role="tablist">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">연차 등록</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">기타 연차 등록</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                <div class="tab-content">
-                                    <div class="card-body table-responsive p-0 tab-pane fade active show" id="home" role="tabpanel">
-                                        <div th:include="~{settings/vacation_insert:: vacationInsert}"></div>
-                                    </div>
-                                     <div class="card-body table-responsive p-0 tab-pane fade" id="other" role="tabpanel">
-                                       <div th:include="~{settings/vacation_insert_other:: vacationInsertOhter}"></div>
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end task list contant -->
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="tab nav-bt">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">연차 등록</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">기타 연차 등록</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="card-body table-responsive p-0 tab-pane fade active show" id="home" role="tabpanel">
+                        <div th:include="~{settings/vacation_insert:: vacationInsert}"></div>
+                    </div>
+                     <div class="card-body table-responsive p-0 tab-pane fade" id="other" role="tabpanel">
+                       <div th:include="~{settings/vacation_insert_other:: vacationInsertOhter}"></div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <!-- end task list contant -->
                 
                
          
@@ -57,10 +57,19 @@
 
 	<!-- 사용자 지정 js script -->
 	<th:block layout:fragment="customScript">
-		<script>
-		$("#duallistbox").bootstrapDualListbox({
-		    // see next for specifications
-		});
+		<script type="text/javascript">
+			const today = new Date();
+			const year = today.getFullYear();
+			
+			$('#useVacationYear2').val(year);
+			
+			$("#duallistbox1").bootstrapDualListbox({
+			    // see next for specifications
+			});
+			$("#duallistbox2").bootstrapDualListbox({
+			    // see next for specifications
+			});
+			
 			$('#lengthOfService').change(function() {
 				const length = $('#lengthOfService option:selected').text();
 				let request = $.ajax({
@@ -69,23 +78,21 @@
 										data : {'length' : length},
 										dataType : "json",
 										success : function(memberNameList,standard) {
-										console.log(memberNameList);
-										console.log(memberNameList[0].memberName);
-										$(memberNameList).each(
-											function(idx) {
-												const option = $("<option value="+idx+">"
-														+ memberNameList[idx].memberName
-														+ "</option>");
-												$('#duallistbox').append(option);
-												$('#memberNum').val(memberNameList[idx].memberNum);
-											})
-											$('#duallistbox').bootstrapDualListbox('refresh', true);
-										}
-							})
-				})
-				const today = new Date();
-				const year = today.getFullYear();
-		
-				$('#useVacationYear').val(year);
+													console.log(memberNameList);
+													console.log(memberNameList[0].memberName);
+													
+													$(memberNameList).each( function(idx) {
+															const option = $("<option value="+idx+">"
+																	+ memberNameList[idx].memberName
+																	+ "</option>");
+															$('#duallistbox1').append(option);
+															$('#memberNum').val(memberNameList[idx].memberNum);
+													});
+													
+													$('#duallistbox1').bootstrapDualListbox('refresh', true);
+												}
+								});
+			});
+				
 		</script>
 </html>

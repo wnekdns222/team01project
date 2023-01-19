@@ -24,7 +24,7 @@ public class WorkTypeService {
 	 * 근태유형 조회,페이징
 	 * @return workTypeList
 	 */
-	public Map<String, Object> getAllWorkType(int currentPage){
+	public Map<String, Object> getAllWorkType(int currentPage, String searchKey, String searchValue){
 		
 		//페이지당 보여질 행의 갯수(rowPerPage)
 		int rowPerPage = 10;
@@ -54,12 +54,28 @@ public class WorkTypeService {
                 endPageNum = lastPage;
             }
         }
-				
+		if(searchKey != null) {
+			switch (searchKey) {
+				case "memberName" : {
+					searchKey = "m.member_name";
+					break;
+				}
+				case "workDate" : {
+					searchKey = "t.work_date";
+					break;
+				}
+				case "workName" : {
+					searchKey = "t.work_name";
+					break;
+				}
+			}
+		}
 		//근태 유형 조회시 Limit 인수 파라미터 셋팅
 		Map<String,Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("startRowNum", startRowNum);
 		paramMap.put("rowPerPage", rowPerPage);
-		
+		paramMap.put("searchValue", searchValue);
+		paramMap.put("searchKey", searchKey);
 		//근태유형 조회 data
 		List<WorkType> workType = workTypeMapper.getAllWorkType(paramMap);
 		

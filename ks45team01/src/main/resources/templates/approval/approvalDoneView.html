@@ -7,12 +7,12 @@
 		<div class="breadcrumbbar">
 			<div class="row align-items-center">
 				<div class="col-md-8 col-lg-8">
-					<h4 class="page-title">결재완료 문서번호</h4>
+					<h4 class="page-title">[[${approvalDoneList.draftTitle}]]</h4>
 					<div class="breadcrumb-list">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="/">Home</a></li>
 							<li class="breadcrumb-item"><a href="/approval/approvalDoneList">결재완료함</a></li>
-							<li class="breadcrumb-item active" aria-current="page">결재완료 문서번호</li>
+							<li class="breadcrumb-item active" aria-current="page">[[${approvalDoneList.draftTitle}]]</li>
 						</ol>
 					</div>
 				</div>
@@ -33,7 +33,7 @@
 					<div align="center">기안 번호</div>
 				</td>
 				<td style="font-family:돋음; font-size:12">
-					appdoc_1
+					[[${approvalDoneList.reportDate}]]
 				</td>
 			</tr>
 			<tr>
@@ -41,7 +41,7 @@
 					<div align="center">제목</div>
 				</td>
 				<td style="font-family:돋음; font-size:12">
-					품의서
+					[[${approvalDoneList.draftTitle}]]
 				</td>
 			</tr>
 			<tr>
@@ -49,7 +49,7 @@
 					<div align="center">상신일자</div>
 				</td>
 				<td style="font-family:돋음; font-size:12">
-					2022-11-15
+					[[${approvalDoneList.reportDate}]]
 				</td>
 			</tr>
 			<tr>
@@ -57,7 +57,7 @@
 					<div align="center">기한시점</div>
 				</td>
 				<td style="font-family:돋음; font-size:12">
-					2022-12-01
+					[[${approvalDoneList.draftDeadline}]]
 				</td>
 			</tr>
 			<tr>
@@ -73,7 +73,7 @@
 					<div align="center">내용</div>
 				</td>
 				<td style="font-family:돋음; font-size:12">
-					<textarea rows="4" cols="50" disabled="disabled">품의서 입니다. 확인 부탁드립니다.</textarea>
+					<textarea rows="4" cols="50" disabled="disabled">[[${approvalDoneList.draftContents}]]</textarea>
 				</td>
 			</tr>
 			<tr>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+	
+ <th:block th:fragment="vacationStandard"> 
+	<div style="width: 50%; float: left; margin-top: 40px;">
+		<div class="col-md-12 col-lg-12">
+			<div class="widgetbar"
+				style="margin-bottom: 20px; margin-right: 120px; float: right">
+				<a class="btn btn-outline-success"
+					th:href="@{/settings/vacationStandardInsert}">
+					<i class="feather icon-plus mr-2"> 등록</i>
+				</a>
+			</div>
+		</div>
+		<h3>휴가기준 설정</h3>
+		<div class="col-md-10 col-lg-10">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col" class="hidden">기준코드</th>
+						<th scope="col">근속연수</th>
+						<th scope="col">휴가개수</th>
+						<th scope="col">사용여부</th>
+						<th scope="col">수정</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					<tr th:if="${not #lists.isEmpty(standard)}"
+						th:each="st : ${standard}">
+						<td id="typeCode" class="hidden" th:text="${st.serviceNum}"></td>
+						<td th:text="${st.lengthOfService}"></td>
+						<td th:text="${st.addVacation}"></td>
+						<td>
+							<div class="form-group">
+								<div class="checkbox checbox-switch switch-primary">
+									<label> <input type="checkbox" name="vacationStandardUse" id="vacationStandardUse"
+										th:checked="${st.vacationStandardUse}" /> <span></span>
+									</label>
+								</div>
+							</div>
+						</td>
+						<td>
+							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
+							th:href="@{/settings/vacationStandardModify(serviceNum=${st.serviceNum})}" href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i class="ti ti-pencil"></i></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</th:block>
+</html>

@@ -28,36 +28,62 @@
 </th:block>
 
 <th:block layout:fragment="customContents">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th scope="col">사원번호</th>
-				<th scope="col">근속연수</th>
-				<th scope="col">기본연차휴가일수</th>
-				<th scope="col">포상휴가일수</th>
-				<th scope="col">대체휴가일수</th>
-				<th scope="col">휴가잔여일</th>
-				<th scope="col">휴가잔여시간</th>
-				<th scope="col">사용연도</th>
-			</tr>
-		</thead>
-		<tbody>
-			<!-- <tr th:if="${not #lists.isEmpty(worktypeList)}" th:each="wt : ${worktypeList}">
-                  <td th:text="${wt.workTypeNum}"></td>
-                  <td th:text="${wt.memberNum}"></td>
-                  <td th:text="${wt.workName}"></td>
-                  <td th:text="${wt.workDate}"></td>
-                  <td th:text="${wt.attendanceTime}"></td>
-                  <td th:text="${wt.leaveWorkTime}"></td>
-                  <td th:text="${wt.workTypeUsePeriod}"></td>
-                  <td>
-						<a th:href="@{/settings/workTypeModify(workTypeNum=${wt.workTypeNum})}">수정</a>
-					</td>
-              </tr>
-              <tr th:unless="${not #lists.isEmpty(worktypeList)}">
-              </tr> -->
-		</tbody>
-	</table>
+	<h3>연차 정보</h3>
+		<table class="table table-hover" style="margin-top:30px; margin-bottom:30px;">
+			<thead>
+				<tr>
+					<th scope="col">사원번호</th>
+					<th scope="col">근속연수</th>
+					<th scope="col">기본연차휴가일수</th>
+					<th scope="col">포상휴가일수</th>
+					<th scope="col">대체휴가일수</th>
+					<th scope="col">경조사휴가일수</th>
+					<th scope="col">병가일수</th>
+					<th scope="col">휴가잔여일</th>
+					<th scope="col">휴가잔여시간</th>
+					<th scope="col">사용연도</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${not #lists.isEmpty(vacationInformation)}" th:each="i : ${vacationInformation}">
+	                  <td th:text="${i.memberNum}"></td>
+	                  <td th:text="${i.lengthOfService}"></td>
+	                  <td th:text="${i.addVacation}"></td>
+	                  <td th:text="${i.rewardVacationNumber}"></td>
+	                  <td th:text="${i.replaceVacationDay}"></td>
+	                  <td th:text="${i.personalBuisinessVacationDay}"></td>
+	                  <td th:text="${i.sickVacationDay}"></td>
+	                  <td th:text="${i.remainVacationDay}"></td>
+	                  <td th:text="${i.remainVacationTime}"></td>
+	                  <td th:text="${i.useVacationYear}"></td>
+	              </tr>
+	              <tr th:unless="${not #lists.isEmpty(infoList)}">
+	              </tr>
+			</tbody> 
+		</table>
 
+	<h3>연차 사용 정보</h3>
+		<table class="table table-hover" style="margin-top:30px;">
+			<thead>
+				<tr>
+					<th scope="col">휴가시작일</th>
+					<th scope="col">휴가종료일</th>
+					<th scope="col">총 휴가요청일</th>
+					<th scope="col">총 휴가요청시간</th>
+					<th scope="col">내용 및 사유</th>
+				</tr>
+			</thead>
+			<tbody>
+				 <tr th:if="${not #lists.isEmpty(vacationApproval)}" th:each="a : ${vacationApproval}">
+	                  <td th:text="${a.vacationStartDate}"></td>
+	                  <td th:text="${a.vacationEndDate}"></td>
+	                  <td th:text="${a.totalVacationUseDate}"></td>
+	                  <td th:text="${a.totalVacationUseTime}"></td>
+	                  <td th:text="${a.vacationReason}"></td>
+	              </tr>
+	              <tr th:unless="${not #lists.isEmpty(vacationApproval)}">
+	              </tr> 
+			</tbody>
+		</table>
 </th:block>
 </html>

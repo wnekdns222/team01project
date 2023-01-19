@@ -30,7 +30,7 @@
 			style="margin-bottom: 20px; margin-right: 40px; float: right">
 			<button type="button" class="btn btn-outline-success"
 				onclick="location.href='/settings/workTypeInsert'">
-				<i class="feather icon-plus mr-2"> Insert</i>
+				<i class="feather icon-plus mr-2">Insert</i>
 			</button>
 		</div>
 	</div>
@@ -42,7 +42,7 @@
 		<thead>
 			<tr>
 				<th scope="col">근태유형번호</th>
-				<th scope="col">사원번호</th>
+				<th scope="col">사원이름</th>
 				<th scope="col">근태명</th>
 				<th scope="col">근무일</th>
 				<th scope="col">출근시간</th>
@@ -56,7 +56,7 @@
 			<tr th:if="${not #lists.isEmpty(workTypeList)}"
 				th:each="t : ${workTypeList}">
 				<td th:text="${t.workTypeNum}"></td>
-				<td th:text="${t.memberNum}"></td>
+				<td th:text="${t.memberList.memberName}"></td>
 				<td th:text="${t.workName}"></td>
 				<td th:text="${t.workDate}"></td>
 				<td th:text="${t.attendanceTime}"></td>
@@ -72,8 +72,8 @@
 					</div>
 				</td>
 				
-				<td><a
-					th:href="@{/settings/workTypeModify(workTypeNum=${t.workTypeNum})}">수정</a>
+				<td>
+				<a th:href="@{/settings/workTypeModify(workTypeNum=${t.workTypeNum})}">수정</a>
 				</td>
 			</tr>
 			<tr th:unless="${not #lists.isEmpty(workTypeList)}">
@@ -113,6 +113,14 @@
 			</tr>
 		</tfoot>
 	</table>
-
+	<form th:action="@{/settings/workTypeList}" method="get" style="float:right; margin-bottom: 10px;">
+		<select name="searchKey" style="height: 27px;">
+			<option value="memberName">사원이름</option>
+			<option value="workDate">근무일</option>
+			<option value="workName">근태명</option>
+		</select>
+		<input type="text" name="searchValue" placeholder="검색어를 입력해주세요."/>
+		<button class="btn btn-outline-success" type="submit" style="height: 35px;">검색</button>
+	</form>
 </th:block>
 </html>

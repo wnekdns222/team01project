@@ -27,9 +27,9 @@ public class ProjectRequestService {
 	 * 파일 목록
 	 * @return
 	 */
-	public List<ProjectRequest> projectRequestList(){
+	public List<ProjectRequest> projectRequestList(String projectNum){
 		
-		List<ProjectRequest> ProjectRequestList = projectListMapper.projectRequestList();
+		List<ProjectRequest> ProjectRequestList = projectListMapper.projectRequestList(projectNum);
 		
 		return ProjectRequestList;
 	}

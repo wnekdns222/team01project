@@ -3,6 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team01.unity.mapper.ProjectListMapper">
+
+	<!-- 게시글DTO -->
 	<resultMap type="ProjectBoard" id="ProjectBoardResultMap">
 		<id property="projectBoardNum" column="project_board_num"/>
 		<result property="projectNum" column="project_num"/>
@@ -14,11 +16,201 @@
 		<result property="projectBoardUpdateDate" column="project_board_update_date"/>
 	</resultMap>
 	
+	<!-- 단위 진행 업무DTO -->
+	<resultMap type="projectRequest" id="projectRequestResultMap">
+		<id property="projectRequestNum" column="project_request_num"/>
+		<result property="projectNum" column="project_num"/>
+		<result property="projectTaskTitle" column="project_task_title"/>
+		<result property="projectRequestContent" column="project_request_content"/>
+		<result property="memberNum" column="member_num"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="taskStartDate" column="task_start_date"/>	
+		<result property="taskEndDate" column="task_end_date"/>	
+		<result property="projectTaskFiles" column="project_task_files"/>	
+	</resultMap>
+		
+		<resultMap type="projectComment" id="ProjectCommentResultMap">
+				<id property="projectCommentNum" 				column="project_comment_num"/>
+				<result property="projectDitailNum" 			column="project_ditail_num"/>
+				<result property="projectCommentRegistrant" 	column="project_comment_registrant"/>
+				<result property="projectCommentContent" 		column="project_comment_content"/>
+				<result property="projectCommentRegDate" 		column="project_comment_reg_date"/>
+			</resultMap>
+
+
+	<resultMap type="ProjectListPost" id="projectListPostResultMap">
+		<id property="postIdx" 			column="post_idx"/>
+		<result property="projectNum" 	column="project_num"/>
+		<result property="postType" 	column="post_type"/>
+		<result property="postRegDate" 	column="post_reg_date"/>
+		<association property="projectBoard" javaType="ProjectBoard" foreignColumn="project_board_num">
+			<id property="projectBoardNum" 				column="project_board_num"/>
+			<result property="projectNum" 				column="project_num"/>
+			<result property="memberNum" 				column="member_num"/>
+			<result property="projectBoardTitle" 		column="project_board_title"/>
+			<result property="projectBoardContent" 		column="project_board_content"/>
+			<result property="projectBoardModifier" 	column="project_board_modifier"/>
+			<result property="projectBoardRegDate" 		column="project_board_reg_date"/>	
+			<result property="projectBoardUpdateDate" 	column="project_board_update_date"/>
+			<collection property="projectComment" ofType="ProjectComment">
+				<id property="projectCommentNum" 				column="project_comment_num"/>
+				<result property="projectDitailNum" 			column="project_ditail_num"/>
+				<result property="projectCommentRegistrant" 	column="project_comment_registrant"/>
+				<result property="projectCommentContent" 		column="project_comment_content"/>
+				<result property="projectCommentRegDate" 		column="project_comment_reg_date"/>
+			</collection>
+		</association>
+		<association property="projectRequest" javaType="ProjectRequest" foreignColumn="project_request_num">
+			<id property="projectRequestNum" 			column="project_request_num"/>
+			<result property="projectNum" 				column="project_num"/>
+			<result property="projectTaskTitle" 		column="project_task_title"/>
+			<result property="projectRequestContent" 	column="project_request_content"/>
+			<result property="memberNum" 				column="member_num"/>
+			<result property="regDate" 					column="reg_date"/>
+			<result property="taskStartDate" 			column="task_start_date"/>	
+			<result property="taskEndDate" 				column="task_end_date"/>	
+			<result property="projectTaskFiles" 		column="project_task_files"/>
+			
+			<collection property="projectComment" 		ofType="ProjectComment">
+				<id property="projectCommentNum" 				column="project_comment_num"/>
+				<result property="projectDitailNum" 			column="project_ditail_num"/>
+				<result property="projectCommentRegistrant" 	column="project_comment_registrant"/>
+				<result property="projectCommentContent" 		column="project_comment_content"/>
+				<result property="projectCommentRegDate" 		column="project_comment_reg_date"/>
+			</collection>
+		</association>
+		<!-- 
+		<association property="ProjectComment" javaType="ProjectComment" foreignColumn="project_Comment_num">
+			<id property="projectCommentNum" 			column="project_comment_num"/>
+		<result property="projectNum" 					column="project_num"/>
+		<result property="projectDitailNum" 			column="project_ditail_num"/>
+		<result property="projectCommentRegistrant" 	column="project_comment_registrant"/>
+		<result property="projectCommentContent" 		column="project_comment_content"/>
+		<result property="projectCommnetRegDate" 		column="project_commnet_reg_date"/>
+		</association>	 -->
+			
+	</resultMap>
 	
-	<select id="projectBoardList" resultMap="ProjectBoardResultMap">
+	
+	<!-- 프로젝트 게시글 리스트 -->
+	<select id="projectBoardList" resultMap="ProjectBoardResultMap" parameterType="String"> 
 		SELECT 
 			*
 		FROM 
 			tb_project_board
+		WHERE
+			project_num= #{projectNum}
 	</select>
+	
+	
+	<!-- 자동증가 코드 -->
+	<select id="projectBoardCode" parameterType="String" resultType="String">
+	/* 자동증가코드 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT(#{column}, '_1')
+			ELSE
+				CONCAT(#{column},'_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT(#{column}, '_'), -1) AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${table} ;
+	</select>
+	
+	
+	<!-- 게시글 등록 -->
+	<insert id="projectBoardInsert" parameterType="ProjectBoard">
+	INSERT INTO tb_project_board
+	(project_board_num, project_num, member_num, project_board_title, project_board_content, project_board_reg_date)
+	VALUES (#{projectBoardNum}, #{projectNum},#{memberNum},#{projectBoardTitle},#{projectBoardContent}, NOW())
+	</insert>
+	
+	
+	
+	<select id="projectListPostList" parameterType="String" resultMap="projectListPostResultMap">
+		WITH project_post AS (
+		SELECT
+			 r.project_request_num AS post_idx 
+			,r.project_num AS project_num
+			,'요청' AS post_type
+			,r.reg_date AS post_reg_date
+		FROM 
+			tb_project_request AS r
+		WHERE 
+			r.project_num = 'project_1'
+		UNION 
+		SELECT
+			 b.project_board_num AS post_idx
+			,b.project_num AS project_num
+			,'일반' AS post_type
+			,IFNULL(b.project_board_update_date,b.project_board_reg_date) AS post_reg_date
+		FROM 
+			tb_project_board AS b
+		WHERE 
+			b.project_num = 'project_1'
+	)
+	SELECT
+		*
+	FROM 
+		project_post AS a
+		LEFT JOIN 
+		tb_project_request AS r
+		ON 
+		a.post_idx = r.project_request_num
+		LEFT JOIN 
+		tb_project_board AS b
+		ON 
+		a.post_idx = b.project_board_num
+		LEFT JOIN 
+		tb_project_comment AS c
+		ON 
+		a.post_idx = c.project_ditail_num
+		
+	ORDER BY a.post_reg_date DESC;
+	
+	</select>
+	
+	
+	
+		
+	
+	<!-- 단위업무 리스트 -->
+	<select id="projectRequestList" resultMap="projectRequestResultMap" parameterType="String">
+		SELECT 
+			*
+		FROM 
+			tb_project_request
+		WHERE
+			project_num= #{projectNum}
+	</select>
+	
+
+	
+	<select id="projectCommentCode" parameterType="String" resultType="String">
+	/* 자동증가코드 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT('comment', '_1')
+			ELSE
+				CONCAT('comment','_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT('comment', '_'), -1) AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${table} ;
+	</select>
+	
+	<insert id="projectCommentInsert" parameterType="projectComment">
+	INSERT INTO tb_project_comment
+	(project_comment_num, project_num, project_ditail_num, project_comment_registrant, project_comment_content, project_comment_reg_date)
+	VALUES (#{projectCommentNum}, #{projectNum}, #{projectDitailNum}, 'id001', #{projectCommentContent}, NOW())
+	</insert>
+	
+	
+	<delete id="projectCommentDelete" parameterType="String">
+	DELETE
+	FROM
+		tb_project_comment AS pc
+	WHERE
+		pc.project_comment_num = #{projectCommentNum}
+	
+	
+	</delete>
 </mapper>

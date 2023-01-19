@@ -140,6 +140,24 @@
 		</if>
 	</select>
 	
+	<delete id="projectMemberDelete" parameterType="String">
+	DELETE
+	FROM
+	tb_project_member AS pm
+	WHERE
+	pm.project_join_num = #{projectJoinNum}
 	
+	</delete>
+	
+	<select id="projectIdCnt" resultType="int">
+	SELECT
+	COUNT(#{memberNum})
+	FROM
+	tb_project_member AS pm
+	WHERE
+	pm.project_num = #{projectNum}
+	AND
+	pm.member_num = #{memberNum}
+	</select>
 	
 </mapper>

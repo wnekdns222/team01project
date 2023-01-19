@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ks45team01.unity.dto.MemberList;
+import ks45team01.unity.dto.VacationApproval;
 import ks45team01.unity.dto.VacationCategory;
 import ks45team01.unity.dto.VacationInformation;
 import ks45team01.unity.dto.VacationSort;
@@ -197,6 +198,40 @@ public class VacationService {
 		vacationMapper.updateVacationInfo(vacationInformation);
 		vacationMapper.updateRemainVacation(vacationInfoNum);
 	}
-	
+	/**
+	 * 휴가 기준 등록
+	 */
+	public void addVacationStandard(VacationStandard vacationStandard) {
+		String serviceNum = vacationMapper.getCommonNewCode("tb_vacation_standard", "service_num");
+		vacationStandard.setServiceNum(serviceNum);
+		vacationMapper.addVacationStandard(vacationStandard);
+	}
+	/**
+	 * 특정 휴가 기준 조회
+	 */
+	public VacationStandard getVacationStandardByServiceNum(String serviceNum) {
+		VacationStandard vacationStandard = vacationMapper.getVacationStandardByServiceNum(serviceNum);
+		return vacationStandard;
+	}
+	/**
+	 * 휴가 기준 수정
+	 */
+	public void updateVacationStandard(VacationStandard vacationStandard) {
+		vacationMapper.updateVacationStandard(vacationStandard);
+	}
+	/**
+	 * 특정 사원 연차 조회
+	 */
+	public Map<String,Object> getVacationInfoBymemberNum(String memberNum) {
+			List<VacationInformation> vacationInformation = vacationMapper.getVacationInfoByInfoNum(memberNum);
+			List<VacationApproval> vacationApproval = vacationMapper.getVacationApprovalBymemberNum(memberNum);
+			log.info("서비스-연차사용정보:{}",vacationApproval);
+			log.info("서비스-연차정보:{}",vacationInformation);
+			
+			Map<String, Object> vacationInfo = new HashMap();
+			vacationInfo.put("info", vacationInformation);
+			vacationInfo.put("approval", vacationApproval);
+		return vacationInfo;
+	}
 }	
 

@@ -12,8 +12,6 @@ public class Meetingroom {
 	private String meetUpdateDate;
 	private String meetUpdateMember;
 	private String meetCapacity;
-	private String meetStatus;
-	private String meetRejectReason;
 	private String meetDetail;
 	public String getMeetNum() {
 		return meetNum;
@@ -75,18 +73,6 @@ public class Meetingroom {
 	public void setMeetCapacity(String meetCapacity) {
 		this.meetCapacity = meetCapacity;
 	}
-	public String getMeetStatus() {
-		return meetStatus;
-	}
-	public void setMeetStatus(String meetStatus) {
-		this.meetStatus = meetStatus;
-	}
-	public String getMeetRejectReason() {
-		return meetRejectReason;
-	}
-	public void setMeetRejectReason(String meetRejectReason) {
-		this.meetRejectReason = meetRejectReason;
-	}
 	public String getMeetDetail() {
 		return meetDetail;
 	}
@@ -123,10 +109,6 @@ public class Meetingroom {
 		builder.append(meetUpdateMember);
 		builder.append(", meetCapacity=");
 		builder.append(meetCapacity);
-		builder.append(", meetStatus=");
-		builder.append(meetStatus);
-		builder.append(", meetRejectReason=");
-		builder.append(meetRejectReason);
 		builder.append(", meetDetail=");
 		builder.append(meetDetail);
 		builder.append(", meetManager=");

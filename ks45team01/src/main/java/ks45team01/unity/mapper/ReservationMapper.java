@@ -13,11 +13,13 @@ public interface ReservationMapper {
 
 	public List<Meetingroom> getMeetingroomList();
 	
-	public void modifyMeetingroom(Meetingroom meetingroom);
+	public void insertMeetingroom(Meetingroom meetingroom);
 
-	public Meetingroom getMeetingroomById(String meetNum);
+	public void modifyMeetingroom(Meetingroom meetingroom);
 	
 	public void deleteMeetingroom(Meetingroom meetingroom);
+	
+	public Meetingroom getMeetingroomById(String meetNum);
 	
 	public List<Reservation> getReservationList();
 	
@@ -26,5 +28,7 @@ public interface ReservationMapper {
 	public void insertReservation(Reservation reservation);
 	
 	public void modifyReservation(Reservation reservation);
-
+	
+	public String getCommonNewCode(String table, String column);
+	
 }
