@@ -30,6 +30,10 @@ import ks45team01.unity.service.ProjectMemberInsertService;
 import ks45team01.unity.service.ProjectRequestService;
 import ks45team01.unity.service.ProjectUnitService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 //리퀘스트메핑 /project로 잡음
 @RequestMapping("/project")
@@ -337,10 +341,15 @@ public class ProjectController {
 										String projectBoardTitle,
 										String projectBoardContent,
 										String projectBoardNum,
-										RedirectAttributes reAttr) {
+										String memberNum,
+										RedirectAttributes reAttr
+										) {
 		
-		projectBoardService.projectboardUpdate(projectBoardTitle, projectBoardContent, projectBoardNum);
+		
+		projectBoardService.projectboardUpdate(projectBoardTitle, projectBoardContent, projectBoardNum, memberNum);
 		reAttr.addAttribute("projectNum", projectNum);
+		
+		
 		
 		return "redirect:/project/projectDetail";
 	}
@@ -349,15 +358,18 @@ public class ProjectController {
 	@GetMapping("/projectBoardModify")
 	public String getprojectBoardModify(Model model, 
 									String projectNum, 
-									RedirectAttributes reAttr) {
+									String projectBoartNum,
+									RedirectAttributes reAttr,
+									HttpSession session) {
 		List<ProjectBoard> projectBoardList = projectBoardService.projectBoardList(projectNum);
 		List<ProjectRequest> projectRequestList = projectRequestService.projectRequestList(projectNum);
 		List<MemberList> memberList = memberListService.memberListSe("", "");
 		
 		List<ProjectListPost> projectListPost = projectBoardService.projectListPostList(projectNum);
-
+		ProjectBoard projectBoardOne = projectBoardService.projectBoardOne(projectBoartNum);
+		String SID = (String)session.getAttribute("SID");
 		
-		log.info("projectListPost : {}", projectListPost);
+		projectBoardOne.setMemberNum(SID);
 
 		model.addAttribute("title", "프로젝트내부 디테일 화면");
 		model.addAttribute("projectNum", projectNum);
@@ -365,12 +377,19 @@ public class ProjectController {
 		model.addAttribute("projectRequestList", projectRequestList);
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("projectListPost", projectListPost);
+		model.addAttribute("projectBoardOne",projectBoardOne);
 		
 	
 		reAttr.addAttribute("projectNum", projectNum);
 		model.addAttribute("projectBoardModify", "프로젝트내부 게시글 수정화면");
+		
+		
+		log.info("projectListOne : {}", projectBoardOne);
+		log.info("projectListPost : {}", projectListPost);
+		
 		return "project/project_board_modify";
 	}
+	
 	
 	@GetMapping("/projectTaskInsert")
 	public String projectTaskInsert(Model model) {
