@@ -57,38 +57,6 @@
 
 
 		<h3>전체</h3>
-
-
-
-		<table class="table table-dark">
-			<thead>
-				<tr>
-					<th scope="col">직급관리번호</th>
-					<th scope="col">사원번호</th>
-					<th scope="col">직급코드</th>
-					<th scope="col">직급 등록 일자</th>
-					<th scope="col">직급변경일시</th>
-					<th scope="col">등록자</th>
-					<th scope="col">등록일자</th>
-					<th scope="col">수정자</th>
-					<th scope="col">수정일자</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="plp : ${projectListPost}">
-					<td scope="row"></td>
-					<td th:text="${plp.postIdx}"></td>
-					<td th:text="${plp.postType}"></td>
-					<td th:text="${plp.projectRequest.projectTaskTitle}"></td>
-					<td th:text="${5}"></td>
-					<td th:text="${6}"></td>
-					<td th:text="${7}"></td>
-					<td th:text="${8}"></td>
-					<td th:text="${9}"></td>
-				</tr>
-			</tbody>
-		</table>
-
 		<div class="row" th:each="plp : ${projectListPost}">
 			<form class="col-md-12" th:action="@{/project/projectDetail}" method="post">
 				<div class="col-md-12" th:if="${plp.postType} == '일반'">
@@ -104,8 +72,8 @@
 							<div>
 								<h4 class="card-title">
 									게시글 제목
-									<button type="submit" class="btn btn-primary"
-										onclick="location.href='/project/projectDetail'"
+									<button type="button" class="btn btn-primary"
+										onclick="location.href='/project/projectBoardModify'"
 										style="float: right;">수정</button>
 								</h4>
 							</div>
@@ -233,7 +201,10 @@
 													class="date text-black-50" th:text="${cl.projectCommentRegDate}">날짜</span>
 											</div>
 										</div>
-
+											<div class="float-right">
+											<a href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0"><i class="ti ti-pencil"></i></a>
+                                      		<a th:href="@{/project/projectCommentDelete(projectCommentNum=${cl.projectCommentNum},projectNum=${plp.projectNum})}" class="btn btn-icon btn-outline-danger btn-round"><i class="ti ti-close"></i></a>			
+											</div>
 
 										<div class="mt-2">
 											<p class="comment-text" th:text="${cl.projectCommentContent}">댓글 내용</p>
