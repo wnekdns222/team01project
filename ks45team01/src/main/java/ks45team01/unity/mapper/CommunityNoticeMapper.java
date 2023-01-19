@@ -17,6 +17,9 @@ public interface CommunityNoticeMapper {
 		// 커뮤니티 공지사항 등록
 		void communityNoticeAdd(CommunityNotice communityNotice);
 		
+		// 커뮤니티 공지사항 수정을 위한 공지사항 목록 조회
+		public List<CommunityNotice> noticeList();
+		
 		// 커뮤니티 공지사항 수정 
 		int communityNoticeModify(CommunityNotice communityNotice);
 		

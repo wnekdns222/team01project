@@ -44,17 +44,28 @@
 	        FROM
 	            ${table};
 	</select>
+	
+	<select id="noticeList" resultMap="communityNoticeResultMap">
+		/* 공지사항 수정을 위한 목록 조회*/
+		SELECT
+			*
+		FROM
+			tb_notice;	
+	</select>
+	
 	<insert id="communityNoticeAdd" parameterType="CommunityNotice">
 		INSERT INTO tb_notice
 		(notice_code, notice_name, notice_content, notice_reg_date)
 		VALUES (#{noticeCode}, #{noticeName}, #{noticeContent}, NOW())
 	</insert>
+	
 	<select id="communityNoticeList" resultType="List" resultMap="communityNoticeResultMap">
 		SELECT
 			*
 		FROM
 			tb_notice;	
 	</select>
+	
 	<select id="communityNoticeDetail" parameterType="String" resultMap="communityNoticeResultMap">
 		SELECT 
 			*
@@ -63,6 +74,7 @@
 		WHERE
 			notice_code = #{noticeCode};
 	</select>
+	
 	<select id="getNoticeList" resultMap="communityNoticeResultMap">
 		/* 커뮤니티 공지사항 목록 */
 		SELECT 

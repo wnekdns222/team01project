@@ -282,6 +282,38 @@ public class AdminVacationController {
 			return "redirect:/settings/vacationVarietyList";
 		}
 		/**
+		 * 휴가 기준 입력 화면
+		 */
+		@GetMapping("settings/vacationStandardInsert")
+		public String addVacationStandard(Model model) {
+			
+			return "settings/vacation_standard_insert";
+		}
+		/**
+		 * 휴가 기준 입력 처리
+		 */
+		@PostMapping("settings/vacationStandardInsert")
+		public String addVacationStandard() {
+			
+			return "redirect:/settings/vacationVarietyList";
+		}
+		/**
+		 * 휴가 기준 수정 화면
+		 */
+		@GetMapping("settings/vacationStandardModify")
+		public String updateVacationStandard(Model model) {
+			
+			return "settings/vacation_standard_modify";
+		}
+		/**
+		 * 휴가 기준 수정 처리
+		 */
+		@PostMapping("settings/vacationStandardModify")
+		public String updateVacationStandard() {
+			
+			return "redirect:/settings/vacationVarietyList";
+		}
+		/**
 		 * 전사원 휴가 정보 조회 화면
 		 */
 		@GetMapping("vacation/vacationInfoAllList")

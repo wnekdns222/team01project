@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ks45team01.unity.mapper.ProjectMemberInsertMapper">
+<mapper namespace="ks45team01.unity.mapper.ProjectListMapper">
 	<resultMap type="projectMember" id="projectMemberResultMap">
 		<id property="projectJoinNum" column="project_join_num"/>
 		<result property="projectNum" column="project_num"/>
@@ -67,6 +67,7 @@
 	</resultMap>
 	
 	
+	
 	<select id="getCommonNewCode" parameterType="String" resultType="String">
 		/* 자동증가코드 */
 		SELECT
@@ -85,7 +86,7 @@
 	VALUES (#{projectJoinNum}, #{projectNum}, #{memberNum}, NOW(), #{joinContent});
 	</insert>
 	
-	<select id="projectMemberList" resultMap="projectMemberResultMap">
+	<select id="projectMemberList" resultMap="projectMemberResultMap" parameterType="String" resultType="String">
 	SELECT
 	*
 	FROM
@@ -94,7 +95,10 @@
 	tb_project_member AS pm
 	ON
 	m.member_num = pm.member_num
-
+	WHERE
+	pm.project_num = #{projectNum}
+	ORDER BY 
+	length(project_join_num)
 	</select>
 	
 	<select id="memberDepartmentList" resultMap="memberDepartmentListMap">
@@ -106,7 +110,23 @@
 	use_or_not = 'Y'
 	</select>
 	
-	<select id="memberList" resultMap="MemberListMap">
+	
+	
+	<select id="getMemberListCnt" resultType="int">
+	/*사원 이력테이블 전체 행의 갯수*/
+		SELECT
+	COUNT(1)
+	FROM
+	tb_member AS m
+	INNER JOIN
+	tb_project_member AS pm
+	ON
+	m.member_num = pm.member_num
+	
+	</select>
+	
+	
+	<select id="memberList" resultMap="MemberListMap" parameterType="map">
 	SELECT
 	*
 	FROM
@@ -115,5 +135,11 @@
 	tb_department_list AS dl
 	ON
 	m.member_department_num = dl.department_num
+	<if test="startRowNum !=null and startRowNum> -1">
+		LIMIT #{startRowNum}, #{rowPerPage};
+		</if>
 	</select>
+	
+	
+	
 </mapper>

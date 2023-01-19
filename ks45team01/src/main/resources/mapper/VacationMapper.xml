@@ -341,7 +341,8 @@
 		INNER JOIN
 			tb_member AS m
 			on
-			v.member_num = m.member_num;
+			v.member_num = m.member_num
+		order by length(vacation_info_num);
 	</select>
 	<select id="getMemberList" resultType="List" resultMap="memberListMap">
 	/* 사원 조회 */
@@ -366,6 +367,7 @@
 			m.member_num = #{memberNum};
 	</select> 
 	<update id="updateVacationInfo" parameterType="VacationInformation" >
+		/* 기타 휴가 등록 */
 		UPDATE tb_vacation_information
 		<trim prefix="SET" prefixOverrides=",">
 		<if test="rewardVacationNumber != null and rewardVacationNumber != ''">
