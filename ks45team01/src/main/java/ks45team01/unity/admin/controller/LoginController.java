@@ -55,6 +55,99 @@ public class LoginController {
 		
 		boolean isChecked = (boolean) checkResult.get("result");
 		
+		String redirectURI = "redirect:/main";
+		
+		// 1. 비밀번호가 일치하지 않을 시에는 로그인 폼으로 리다이렉트
+		// /member/removeMember?memberId=id001
+		if(!isChecked) {			
+			redirectURI = "redirect:/Login/loginMain";
+			reAttr.addAttribute("msg", "입력하신 회원의 정보가 일치하지 않습니다.");
+		}else {
+			// 2. 비밀번호 일치 시 세션 저장 
+			MemberList memberList = (MemberList) checkResult.get("memberInfo");
+			session.setAttribute("SID", 		memberNum);
+			session.setAttribute("SPOSITION", memberList.getMemberPositionList().getPositionName());
+			session.setAttribute("SNAME", memberList.getMemberName());
+			session.setAttribute("SDEPARTMENT", memberList.getMemberDepartmentList().getDepartmentName());
+			session.setAttribute("SEMAIL", memberList.getMemberEmail());
+			
+		}
+		return redirectURI;
+	}
+	
+	// 로그인 화면(회원가입 화면)
+	@GetMapping("/loginInsert")
+	public String getLoginInsert(Model model) {
+		model.addAttribute("title", "회원가입화면");
+
+		return "login/loginInsert";
+	}
+
+	// 회원 가입
+	@PostMapping("/loginInsert")
+	public String getLoginInsert(MemberList memberList) {
+
+		loginService.addMember(memberList);
+
+		return "redirect:/Login/loginMain";
+	}
+
+	// 회원가입 아이디 유효성 검사
+	@GetMapping("/checkId")
+	@ResponseBody
+	public boolean checkMemberNum(@RequestParam(value = "memberNum") String memberNum) {
+		boolean isChecked = false;
+
+		isChecked = loginMapper.checkMemberNum(memberNum);
+
+		return isChecked;
+	}
+
+			@GetMapping("/logout")
+			public String logout(HttpSession session) {
+				
+				session.invalidate();
+				
+				return "redirect:/Login/loginMain";
+			}
+			
+			
+			
+
+/*@Controller
+@RequestMapping("/Login")
+public class LoginController {
+
+	private final LoginService loginService;
+	private final LoginMapper loginMapper;
+
+	public LoginController(LoginService loginservice, LoginMapper loginMapper) {
+		this.loginService = loginservice;
+		this.loginMapper = loginMapper;
+	}
+
+	@GetMapping("/loginMain")
+	public String login(Model model, @RequestParam(value = "msg", required = false) String msg) {
+
+		model.addAttribute("title", "로그인");
+		if (msg != null)
+			model.addAttribute("msg", msg);
+
+		return "login/login";
+	}
+
+	@PostMapping("/loginMain")
+	public String login(	@RequestParam(name="memberNum") String memberNum
+							   ,@RequestParam(name="memberPw") String memberPw
+							   ,RedirectAttributes reAttr
+							   ,HttpSession session
+							   ,HttpServletRequest request
+							   ,HttpServletResponse response) {
+		
+		Map<String,Object> checkResult = loginService.checkPwByMemberId(memberNum, memberPw);
+		
+		boolean isChecked = (boolean) checkResult.get("result");
+		
 		String redirectURI = "redirect:/";
 		
 		// 1. 비밀번호가 일치하지 않을 시에는 로그인 폼으로 리다이렉트
@@ -110,6 +203,17 @@ public class LoginController {
 				
 				return "redirect:/Login/loginMain";
 			}
+			*/
+			
+
+
+			
+			
+			
+			
+			
+			
+			
 //			
 //			
 //			
