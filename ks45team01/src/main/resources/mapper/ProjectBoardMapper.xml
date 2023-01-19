@@ -4,6 +4,22 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team01.unity.mapper.ProjectListMapper">
 
+	<!-- 멤버 목록 -->
+	 <resultMap type="MemberList" id="memberResultMap">
+		<id property="memberNum" column="member_num" />
+		<result property="memberPw" 				column="member_pw" />
+		<result property="memberName" 			column="member_name" />
+		<result property="memberGender" 	 column="member_gender" />
+		<result property="memberEmail" 			column="member_email" />
+		<result property="memberBirth" 			column="member_birth" />
+		<result property="memberPhone" 			column="member_phone" />
+		<result property="memberDormant" 		column="member_dormant" />
+		<result property="memberDormantDate" 		column="member_dormant_date" />
+		<result property="departmentNum" 		column="member_department_num" />
+		<result property="positionNum" 		column="member_position_num" />
+		<result property="memberInsertDate" 		column="member_insert_date" />
+	</resultMap> 
+
 	<!-- 게시글DTO -->
 	<resultMap type="ProjectBoard" id="ProjectBoardResultMap">
 		<id property="projectBoardNum" column="project_board_num"/>
@@ -227,7 +243,7 @@
 	SET
 	pb.project_board_title = #{projectBoardTitle}
 	,pb.project_board_content=#{projectBoardContent}
-	,pb.project_board_modifier='id001'
+	,pb.project_board_modifier=#{memberNum}
 	,pb.project_board_update_date = NOW()
 	WHERE
 	pb.project_board_num = #{projectBoardNum}

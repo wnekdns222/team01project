@@ -61,6 +61,7 @@
 			<form class="col-md-12" th:action="@{/project/projectDetail}" method="post">
 				<div class="col-md-12" th:if="${plp.postType} == '일반'">
 					<input type="hidden" id="projectDitailNum" name="projectDitailNum" th:value="${plp.postIdx}" /> 
+					<input type="text" id="projectBoardNum" name="projectBoardNum" th:value="${plp.postIdx}" /> 
 					<input type="hidden" id="projectNum" name="projectNum" th:value="${plp.projectNum}" />
 					<div class="card card-statistics">
 						<div class="card-header">
@@ -72,9 +73,9 @@
 							<div>
 								<h4 class="card-title">
 									게시글 제목
-									<button type="button" class="btn btn-primary"
-										onclick="location.href='/project/projectBoardModify'"
-										style="float: right;">수정</button>
+									<a type="button" class="btn btn-primary"
+									th:href="@{/project/projectBoardModify(projectBoartNum=${plp.postIdx})}"
+										style="float: right;">수정</a>
 								</h4>
 							</div>
 							<div class="card-heading">

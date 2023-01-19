@@ -70,7 +70,7 @@ public interface ProjectListMapper {
 			ProjectBoard projectBoardOne(String projectBoardNum);
 			
 			//프로젝트 게시글 수정
-			int projectboardUpdate(String projectBoardTitle,String projectBoardContent ,String projectBoardNum);
+			int projectboardUpdate(String projectBoardTitle,String projectBoardContent ,String projectBoardNum,String memberNum);
 			
 	//projectList
 	// 프로젝트 업무 조회

@@ -67,8 +67,8 @@ public class ProjectBoardService {
 		return projectBoardOne;
 	}
 	
-	public int projectboardUpdate(String projectBoardTitle,String projectBoardContent ,String projectBoardNum) {
-		int projectboardUpdate = projectListMapper.projectboardUpdate(projectBoardTitle, projectBoardContent, projectBoardNum);
+	public int projectboardUpdate(String projectBoardTitle,String projectBoardContent ,String projectBoardNum, String memberNum) {
+		int projectboardUpdate = projectListMapper.projectboardUpdate(projectBoardTitle, projectBoardContent, projectBoardNum ,memberNum);
 		
 		return projectboardUpdate;
 	}

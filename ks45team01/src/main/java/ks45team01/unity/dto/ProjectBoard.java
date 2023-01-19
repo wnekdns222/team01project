@@ -13,6 +13,8 @@ public class ProjectBoard {
 	private String projectBoardUpdateDate;
 	
 	private List<ProjectComment> projectComment;
+	
+	private MemberList memberList;
 
 	public String getProjectBoardNum() {
 		return projectBoardNum;
@@ -86,6 +88,14 @@ public class ProjectBoard {
 		this.projectComment = projectComment;
 	}
 
+	public MemberList getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(MemberList memberList) {
+		this.memberList = memberList;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -107,6 +117,8 @@ public class ProjectBoard {
 		builder.append(projectBoardUpdateDate);
 		builder.append(", projectComment=");
 		builder.append(projectComment);
+		builder.append(", memberList=");
+		builder.append(memberList);
 		builder.append(", getProjectBoardNum()=");
 		builder.append(getProjectBoardNum());
 		builder.append(", getProjectNum()=");
@@ -125,6 +137,8 @@ public class ProjectBoard {
 		builder.append(getProjectBoardUpdateDate());
 		builder.append(", getProjectComment()=");
 		builder.append(getProjectComment());
+		builder.append(", getMemberList()=");
+		builder.append(getMemberList());
 		builder.append(", getClass()=");
 		builder.append(getClass());
 		builder.append(", hashCode()=");
@@ -134,7 +148,6 @@ public class ProjectBoard {
 		builder.append("]");
 		return builder.toString();
 	}
-
 	
 	
 	
