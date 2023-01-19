@@ -82,6 +82,7 @@ VALUES
 		SELECT 
 		 m.member_num
 		,m.member_pw
+		,dl.department_num
 		,pl.position_name
 		,dl.department_name
 		,m.member_name

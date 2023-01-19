@@ -58,16 +58,18 @@ public class ReservationService {
 		return reservationList;
 	}
 	
-	public Reservation getReservationById(String reservationNum) {
+	public Reservation getReservationById(String meetName) {
 		
-		Reservation reservation = reservationMapper.getReservationById(reservationNum);
+		Reservation reservation = reservationMapper.getReservationById(meetName);
 		
 		return reservation;
 	}
 	
-	public void insertReservation (Reservation reservation) {
+	public void insertMeetingroomReservation (Reservation reservation) {
 		
-		reservationMapper.insertReservation(reservation);
+		String reservationNum =reservationMapper.getCommonNewCode("tb_meet_reservation", "reservation_num");
+		reservation.setReservationNum(reservationNum);
+		reservationMapper.insertMeetingroomReservation(reservation);
 	}
 	
 	public void modifyReservation (Reservation reservation) {
@@ -80,6 +82,13 @@ public class ReservationService {
 		String meetNum =reservationMapper.getCommonNewCode("tb_meetingroom", "meet_num");
 		meetingroom.setMeetNum(meetNum);
 		reservationMapper.insertMeetingroom(meetingroom);
+	}
+	
+	public List<Reservation> getReservationMineList(String applicantMemberNum){
+		
+		List<Reservation> reservationMineList = reservationMapper.getReservationMineList(applicantMemberNum);
+		
+		return reservationMineList;
 	}
 	
 }

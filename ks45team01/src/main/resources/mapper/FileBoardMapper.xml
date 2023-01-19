@@ -56,6 +56,16 @@
 			<result property="useOrNot" 			column="use_or_not"/>
 		</association>
 	</resultMap>
+	
+	<resultMap type="FileBoardCate" id="fileBoardCateResultMap">
+		<id property="fileCategoryCode" 			column="file_category_code"/>
+		<result property="fileCategoryName" 			column="file_category_name"/>
+		<result property="fileCategoryRegistrant" 		column="file_category_registrant"/>
+		<result property="fileCategoryRegDate" 			column="file_category_reg_date"/>
+		<result property="fileCategoryModifier" 		column="file_category_modifier"/>
+		<result property="fileCategoryModificationDate" column="file_category_modification_date"/>
+		<result property="categoryUseOrNot" 			column="category_use_or_not"/>
+	</resultMap>
 	<delete id="fileBoardCateDelete" parameterType="String">
 		/* 파일 카테고리 삭제 */
 		DELETE FROM tb_fileboard_category WHERE file_category_code=#{fileCategoryCode};
@@ -96,17 +106,23 @@
 			tb_fileboard_category;
 	</select>
 	<select id="fileBoardCatePartList" resultType="List" resultMap="fileBoardResultMap">
-		/* 파일 카테고리 코드, 이름 조회 및 중복제거 */
+		/* 파일 카테고리 코드, 이름 조회 */
 		SELECT 
-		DISTINCT
-			 fc.file_category_code
-			,fc.file_category_name
+		*
 		FROM 
 			tb_fileboard_category AS fc
-			LEFT JOIN 
-			tb_file_board AS f
+			INNER JOIN 
+			tb_position_list AS pl
 			ON 
-			fc.file_category_code = f.file_category_code;
+			fc.file_category_registrant = pl.position_member_num
+			INNER JOIN 
+			tb_department_list AS dl
+			ON
+			pl.position_member_num = dl.member_num
+			INNER JOIN 
+			tb_member AS m
+			ON 
+			dl.member_num = m.member_num;
 	</select>
 	<delete id="boardFileDelete" parameterType="String">
 		/* 파일 게시글 삭제 */
@@ -186,9 +202,10 @@
 			d.member_num = m.member_num;
 	</select>
 	
-	<select id="result" parameterType="String" resultMap="fileBoardResultMap">
+	<select id="result" parameterType="String" resultMap="fileBoardCateResultMap">
 		SELECT
-			 fc.file_category_name
+			 fc.file_category_code
+			,fc.file_category_name
 			,fc.file_category_registrant
 		FROM
 			tb_fileboard_category AS fc

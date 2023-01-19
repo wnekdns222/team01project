@@ -63,7 +63,15 @@ public interface ProjectListMapper {
 			//댓글 삭제
 			int projectCommentDelete(String projectCommentNum);
 			
-	
+			
+			//projectBoardModify
+			
+			//프로젝트 1개 조회값
+			ProjectBoard projectBoardOne(String projectBoardNum);
+			
+			//프로젝트 게시글 수정
+			int projectboardUpdate(String projectBoardTitle,String projectBoardContent ,String projectBoardNum);
+			
 	//projectList
 	// 프로젝트 업무 조회
 	List<ProjectRequest> projectRequestList(String projectNum);

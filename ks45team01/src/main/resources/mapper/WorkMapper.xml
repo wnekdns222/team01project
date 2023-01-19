@@ -95,13 +95,22 @@
 			<result property="correctCate" column="correct_date" />
 		</association>
 	</resultMap>
-	<select id="getCommonNewCode" parameterType="String">
+	<select id="getCommonNewCode" parameterType="String" resultType="String">
 	/* 자동증가코드 */
-	
+	SELECT
+		CASE
+		WHEN COUNT(1) = 0 THEN CONCAT(#{column}, '_1')
+		ELSE
+			CONCAT(#{column},'_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT(#{column}, '_'), -1) AS UNSIGNED))+1)
+		END AS newCode
+	FROM
+		${table} ;
 	</select>
 	<insert id="addWork" parameterType="Work">
 	/* 근태등록 */
-	
+	INSERT INTO tb_work
+	(work_num, member_num, work_type_num, department_num, attendance_day, attendance_time, entrance, attendance_status, work_unusual)
+	VALUES (#{workNum}, #{memberNum},#{workTypeNum}, #{departmentNum}, #{attendanceDay}, #{attendanceTime}, '시스템정상입실', #{attendanceStatus}, 'N');
 	</insert>
 	<select id="getAllWorkInfo" resultType="List" resultMap="workResultMap">
 	/* 전사원 근태조회 */
@@ -135,5 +144,68 @@
 	on
 	u.vacation_type_num = t.vacation_type_num;
 	</select>
-	
+	<select id="getAttendanceStatus" parameterType="String" resultType="String">
+	/* 출근상태 등록 */
+	select
+		case
+		when #{attendanceTime} >= DATE_ADD((t.attendance_time_type), INTERVAL 10 MINUTE)
+      	then @attendanceStatus := '지각'
+		ELSE @attendanceStatus := '정상출근'
+		END  AS attendanceStatus
+    from
+		tb_work_type as t
+	join
+	(SELECT @attendanceStatus := 0) as w
+	where
+		t.work_type_num=#{workTypeNum};
+	</select>
+	<select id="getWorkByNum" parameterType="String" resultType="Work" resultMap="workResultMap">
+		/* 특정 사원 출근 기록 */
+		SELECT
+		*
+		FROM
+			tb_work AS w
+		WHERE
+			w.member_num=#{memberNum}
+		AND
+			w.attendance_day=#{attendanceDay};
+	</select>
+	<select id="getLeaveStatus"  parameterType="String" resultType="String">
+	/* 퇴근상태 등록 */
+		select
+			case
+			 when <![CDATA[ #{leaveTime} < DATE_SUB((t.leavework_time_type), INTERVAL 10 MINUTE) ]]>
+	        then @workStatus := '조기퇴근'
+			ELSE @workStatus := '정상퇴근'
+			END  AS result
+	    from
+			tb_work_type as t
+		join
+		(SELECT @workStatus := 0) as w
+		where
+			t.work_type_num=#{workTypeNum};
+	</select>
+	<update id="updateWorkLeaveTime" parameterType="Work">
+	/* 퇴근 등록(수정) */
+		UPDATE tb_work
+		SET
+			leavework_time=#{leaveworkTime},
+			`leave`='시스템정상퇴실',
+			leavework_status=#{leaveworkStatus}
+		WHERE 
+			member_num=#{memberNum}
+			and
+			attendance_day=#{attendanceDay};
+	</update>
+	<update id="updateGoOut" parameterType="Work">
+	/* 외출 등록(수정) */
+		UPDATE tb_work
+		SET
+		goout_workout_start_time=#{gooutWorkoutStartTime},
+		work_unusual='N'
+		WHERE 
+			member_num=#{memberNum}
+			and
+			attendance_day=#{attendanceDay};
+	</update>
 </mapper>

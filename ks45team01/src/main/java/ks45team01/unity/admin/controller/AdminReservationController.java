@@ -92,6 +92,7 @@ public class AdminReservationController {
 		@PostMapping("/meetingroomInsert")
 		public String insertMeetingroom(Meetingroom meetingroom, Model model) {
 			
+			log.info("meetingroom: {}", meetingroom);
 			reservationService.insertMeetingroom(meetingroom);
 			
 			return "redirect:/reservation/meetingroomList";

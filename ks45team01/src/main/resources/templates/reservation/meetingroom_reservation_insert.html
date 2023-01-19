@@ -24,11 +24,16 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<div class="card-body">
 		    <h6 class="card-subtitle"></h6>
-		    <form th:object="${l.meetingroom}" th:each="l : ${reservation}" th:action="@{/reservation/meetingroomReservationInsert}" id="insertReservation" method="post">
-		    	<input type="hidden"  th:value="${l.reservationNum}" name="reservationNum" >
+		    <form th:object="${l.meetingroom}" th:each="l : ${reservation}" th:action="@{/reservation/meetingroomReservationInsert}" id="insertMeetingroomReservation" method="post">
+		    	<input type="hidden"  th:value="${l.reservationNum}" id="reservationNum" name="reservationNum">
+		    	<input type="hidden" class="form-control" id="applicantMemberNum" name="applicantMemberNum" th:value="${session.SID}">
+		    	<input type="hidden" class="form-control" id="meetNum" name="meetNum" th:value="*{meetNum}">
+		    	<input type="hidden" class="form-control" id="meetName" name="meetName" th:value="*{meetName}">
+
+		    	
 	        	<div class="form-group">
                     <label for="exampleInputPassword1">회의실 명</label>
-                   	 <input type="text" class="form-control" id="exampleInputPassword1" name="meetName" th:value="${l.meetingroom.meetName}" readonly="readonly">
+                   	 <input type="text" class="form-control" id="meetName" name="meetName" th:value="${l.meetingroom.meetName}" readonly="readonly">
                 </div>
                 	
                 <div class="form-group">
@@ -142,8 +147,8 @@
 		            </select>
                 </div>
                 <label for="exampleInputPassword1">예약내용</label>
-                	<textarea class="form-control" rows="3" name="reservationContents"></textarea>
-		        <button type="button" id="submitBtn" class="btn btn-primary" style="margin:80px 0px 0px 0px;">확인</button>
+                	<textarea class="form-control" rows="3" name="reservationContents" id="reservationContents" ></textarea>
+		        <button type="submit" id="submitBtn" class="btn btn-primary" style="margin:80px 0px 0px 0px;">확인</button>
 		    </form>
 		</div>
 	</th:block>
@@ -197,13 +202,13 @@
 	   	   	return false;
    		}
    		
-	   	if(isSubmit) {
-	   		const insertReservationObj = {};
+	   	 if(isSubmit) {
+	   		/* const insertReservationObj = {};
 	   		
 	   		const insertReservationInputArray = $('#insertReservation input');
 	   		const insertReservationSelects = $('#insertReservation select');
 	   		const insertReservationTextareas = $('#insertReservation textarea');
-	   		
+	   		s
 	   		for(let insertReservationInput of insertReservationInputArray){
 	   			let objKey = $(insertReservationInput).attr('name');
 	   			let objValue = $(insertReservationInput).val();
@@ -236,9 +241,9 @@
 			 
 			request.fail(function( jqXHR, textStatus ) {
 			  alert( "Request failed: " + textStatus );
-			});
+			});  */
 			
-	   		//$('#insertReservation').submit();
+	   		$('#insertReservation').submit();
 	   	}
    	});
   	

@@ -319,9 +319,10 @@ public class ApprovalController {
 	 * @return
 	 */
 	@GetMapping("/draftList")
-	public String draftList(Model model) {
+	public String draftList(Model model
+						   ,@RequestParam(value = "registrantNum", required = false) String registrantNum) {
 
-		List<Approval> draftList = approvalService.draftList();
+		List<Approval> draftList = approvalService.draftList(registrantNum);
 		model.addAttribute("title", "기안함");
 		model.addAttribute("draftList", draftList);
 		
