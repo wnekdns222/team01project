@@ -28,7 +28,7 @@
 			<label for="fileCategoryRegistrant">작성자</label>
 			<div style="width: 800px;">
 				<input type="text" class="form-control" id="fileCategoryRegistrant"
-					name="fileCategoryRegistrant" placeholder="작성자를 입력해주세요" />
+					name="fileCategoryRegistrant" th:value="${session.SID}" />
 			</div>
 			<div style="margin-top: 20px; margin-left: 300px;">
 				<button type="submit" class="btn btn-outline-success">등록</button>

@@ -11,7 +11,7 @@ import ks45team01.unity.dto.ApprovalLine;
 public interface ApprovalMapper {
 	
 	// 기안 문서 목록 조회
-	List<Approval> draftList();
+	List<Approval> draftList(String registrantNum);
 	
 	// 기안 문서 상세보기
 	Approval draftView(String draftDocNum);

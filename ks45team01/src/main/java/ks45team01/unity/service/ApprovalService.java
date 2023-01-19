@@ -20,10 +20,11 @@ public class ApprovalService {
 	
 	/**
 	 * 기안문서 목록 조회
+	 * @param registrantNum 
 	 * @return approvalMapper.draftList
 	 */
-	public List<Approval> draftList(){
-		return approvalMapper.draftList();
+	public List<Approval> draftList(String registrantNum){
+		return approvalMapper.draftList(registrantNum);
 	}
 	
 	/**
