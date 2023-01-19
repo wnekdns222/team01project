@@ -16,6 +16,24 @@
 		<result property="departmentNum" 		column="member_department_num" />
 		<result property="positionNum" 		column="member_position_num" />
 		<result property="memberInsertDate" 		column="member_insert_date" />
+		<association property="memberPositionList" javaType="MemberPositionList">
+			<id property="positionNum" 				column="position_num"/>
+			<result property="positionName" 		column="position_name"/>
+			<result property="memberNum"			column="member_num"/>
+			<result property="positionRegDate" 		column="position_reg_date"/>
+			<result property="positionUpdateDate" 	column="position_update_date"/>
+			<result property="positionModifier" 	column="position_modifier"/>
+			<result property="useOrNot" 			column="use_or_not"/>
+		</association>
+		<association property ="memberDepartmentList" javaType="MemberDepartmentList">
+			<id property="departmentNum" 			column="department_num"/>
+			<result property="departmentName" 		column="department_name"/>
+			<result property="memberNum" 			column="member_num"/>
+			<result property="departmentRegDate" 	column="department_reg_date"/>
+			<result property="departmentUpdateDate" column="department_update_date"/>
+			<result property="departmentModifier" 	column="department_modifier"/>
+			<result property="useOrNot" 			column="use_or_not"/>
+		</association>
 	</resultMap> 
 	<!-- 회원가입 -->
 	<insert id="addMember" parameterType="MemberList">
@@ -61,17 +79,25 @@ VALUES
 	</resultMap>-->
 	<!-- 로그인 -->
 	<select id="checkPwById" parameterType="String" resultMap="memberResultMap">
-	SELECT 
+		SELECT 
 		 m.member_num
 		,m.member_pw
-		,m.member_position_num
+		,pl.position_name
+		,dl.department_name
 		,m.member_name
-		,m.member_department_num
+		,m.member_email
 	FROM
 		tb_member AS m
+		INNER JOIN 
+		tb_position_list AS pl
+		ON 
+		m.member_num = pl.position_member_num
+		INNER JOIN 
+		tb_department_list AS dl
+		ON 
+		pl.position_member_num = dl.member_num
 	WHERE
-		m.member_num = #{memberNum}
-	;
+		m.member_num = #{memberNum};
 	</select>
 	
 	<!-- <select id="getLoginHistory" parameterType="map" resultMap="loginResultMap">

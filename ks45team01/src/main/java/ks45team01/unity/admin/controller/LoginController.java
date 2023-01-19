@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import ks45team01.unity.dto.MemberList;
+import ks45team01.unity.dto.MemberPositionList;
 import ks45team01.unity.mapper.LoginMapper;
 import ks45team01.unity.service.LoginService;
 
@@ -65,9 +66,10 @@ public class LoginController {
 			// 2. 비밀번호 일치 시 세션 저장 
 			MemberList memberList = (MemberList) checkResult.get("memberInfo");
 			session.setAttribute("SID", 		memberNum);
-			session.setAttribute("SPOSITION", memberList.getPositionNum());
+			session.setAttribute("SPOSITION", memberList.getMemberPositionList().getPositionName());
 			session.setAttribute("SNAME", memberList.getMemberName());
-			session.setAttribute("SDEPARTMENT", memberList.getDepartmentNum());
+			session.setAttribute("SDEPARTMENT", memberList.getMemberDepartmentList().getDepartmentName());
+			session.setAttribute("SEMAIL", memberList.getMemberEmail());
 			
 		}
 		return redirectURI;
