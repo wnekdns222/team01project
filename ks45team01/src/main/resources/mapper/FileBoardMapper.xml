@@ -185,4 +185,14 @@
 			ON
 			d.member_num = m.member_num;
 	</select>
+	
+	<select id="result" parameterType="String" resultMap="fileBoardResultMap">
+		SELECT
+			 fc.file_category_name
+			,fc.file_category_registrant
+		FROM
+			tb_fileboard_category AS fc
+		WHERE
+			file_category_code = #{fileCategoryCode};
+	</select>
 </mapper>

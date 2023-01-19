@@ -1,7 +1,7 @@
 package ks45team01.unity.worker.controller;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,18 +79,38 @@ public class FormController {
 
 		return "/form/formView";
 	}
-
+	/**
+	 * 페이징처리 및 서식 목록 조회
+	 * @param model
+	 * @param currentPage
+	 * @param searchKey
+	 * @param searchValue
+	 * @return
+	 */
 	@GetMapping("/formList")
 	public String formList(Model model
+							,@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage
 							,@RequestParam(value="searchKey", required = false) String searchKey
 			   				,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue) {
 
 		int cnt = formBoardService.formBoardCount();
-		List<FormBoard> formList = formBoardService.formList(searchKey, searchValue);
+		List<FormBoard> formList = formBoardService.fomeList(searchKey, searchValue);
+		Map<String, Object> paramMap = formBoardService.formListPage(currentPage);
+		
+		int lastPage = (int) paramMap.get("lastPage");
+		int startPageNum = (int) paramMap.get("startPageNum");
+		int endPageNum = (int) paramMap.get("endPageNum");
+		if(paramMap.get("formListPage") != null) formList = (List<FormBoard>) paramMap.get("formListPage");
+		// Map에서 List를 꺼내 오지 않아서 위와 같은 조건문으로 꺼내왔습니다.
+
 
 		model.addAttribute("title", "서식목록");
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("formList", formList);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
 
 		return "form/formList";
 	}

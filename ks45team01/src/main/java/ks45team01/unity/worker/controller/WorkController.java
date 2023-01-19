@@ -1,17 +1,16 @@
 package ks45team01.unity.worker.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
+import ks45team01.unity.dto.Work;
 import ks45team01.unity.service.WorkService;
 
 /**
@@ -33,7 +32,8 @@ public class WorkController {
 	
 	//근태 입력처리(출근)
 	@GetMapping("work/workInsert")
-	public String addWork(HttpSession session, RedirectAttributes reAttr) {
+	@ResponseBody
+	public Work addWork(HttpSession session, RedirectAttributes reAttr) {
 		
 		log.info("사용자 정보: {}", session);
 		
@@ -51,7 +51,7 @@ public class WorkController {
 	
 		//reAttr.addAttribute();
 		
-		return "redirect:/";
+		return  null;
 	}
 	//근태 수정처리(퇴근)
 	@GetMapping("work/updateLeaveWork")
@@ -77,10 +77,5 @@ public class WorkController {
 		
 		return "work/work_List";
 	}
-	//연차정보조회
-	@GetMapping("vacation/vacationInfoList")
-	public String getVacationInfoById() {
-		
-		return "vacation/vacation_info_list";
-	}
+	
 }

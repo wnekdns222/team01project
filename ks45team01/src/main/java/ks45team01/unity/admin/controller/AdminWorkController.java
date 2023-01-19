@@ -125,9 +125,11 @@ public class AdminWorkController {
 	 */
 	@GetMapping("settings/workTypeList")
 	public String getAllWorkType(Model model
-								,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+								,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, 
+								@RequestParam(value="searchKey", required=false)String searchKey,
+								@RequestParam(value="searchValue", required=false, defaultValue="")String searchValue) {
 		
-		Map<String, Object> paramMap = workTypeService.getAllWorkType(currentPage);
+		Map<String, Object> paramMap = workTypeService.getAllWorkType(currentPage,searchKey,searchValue);
 		int lastPage = (int)paramMap.get("lastPage");
 		List<WorkType> workTypeList = (List<WorkType>) paramMap.get("workType");
 		int startPageNum = (int) paramMap.get("startPageNum");

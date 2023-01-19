@@ -16,8 +16,7 @@
 						<ol class="breadcrumb p-0 m-b-0">
 							<li class="breadcrumb-item"><a href="/"><i
 									class="ti ti-home"></i></a></li>
-							<li class="breadcrumb-item"><a
-								href="/settings/vacationVarietyList">휴가설정</a></li>
+							<li class="breadcrumb-item"><a href="/settings/vacationVarietyList">휴가설정</a></li>
 							<li class="breadcrumb-item active text-primary" aria-current="page">휴가대분류
 								수정</li>
 						</ol>
@@ -35,16 +34,14 @@
 	<form th:action="@{/settings/vacationCategoryModify}" method="post" th:object="${vacationCategory}">
 	<input type="hidden" th:value="*{vacationCategoryNum}" name="vacationCategoryNum" readonly>
 		<div class="form-group">
-			<label for="vacationCategoryName">휴가명</label> <input type="text"
-				class="form-control" th:value="*{vacationCategoryName}" name="vacationCategoryName" required>
+			<label for="vacationCategoryName">휴가명</label> <input type="text" class="form-control" th:value="*{vacationCategoryName}" name="vacationCategoryName" required>
 		</div>
 		<div class="form-group">
-			<label for="correctMemberNum">수정사원</label> <input type="text"
-				class="form-control" name="correctMemberNum" id="correctMemberNum" required>
+			<label for="correctMemberNum">수정사원</label> <input type="text" class="form-control" name="correctMemberNum" id="correctMemberNum" required>
 		</div>
-		<div class="form-group">
-			<label for="vacationUse">사용유무</label> <input type="text"
-				class="form-control" th:value="*{vacationUse}" name="vacationUse" id="vacationUse" required>
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" name="vacationUse" id="use" required>
+			<label class="form-check-label" for="use"> 사용여부 </label>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>

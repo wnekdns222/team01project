@@ -1,5 +1,7 @@
 package ks45team01.unity.dto;
 
+import java.util.List;
+
 public class ProjectBoard {
 	private String projectBoardNum;
 	private String projectNum;
@@ -9,54 +11,81 @@ public class ProjectBoard {
 	private String projectBoardModifier;
 	private String projectBoardRegDate;
 	private String projectBoardUpdateDate;
+	
+	private List<ProjectComment> projectComment;
+
 	public String getProjectBoardNum() {
 		return projectBoardNum;
 	}
+
 	public void setProjectBoardNum(String projectBoardNum) {
 		this.projectBoardNum = projectBoardNum;
 	}
+
 	public String getProjectNum() {
 		return projectNum;
 	}
+
 	public void setProjectNum(String projectNum) {
 		this.projectNum = projectNum;
 	}
+
 	public String getMemberNum() {
 		return memberNum;
 	}
+
 	public void setMemberNum(String memberNum) {
 		this.memberNum = memberNum;
 	}
+
 	public String getProjectBoardTitle() {
 		return projectBoardTitle;
 	}
+
 	public void setProjectBoardTitle(String projectBoardTitle) {
 		this.projectBoardTitle = projectBoardTitle;
 	}
+
 	public String getProjectBoardContent() {
 		return projectBoardContent;
 	}
+
 	public void setProjectBoardContent(String projectBoardContent) {
 		this.projectBoardContent = projectBoardContent;
 	}
+
 	public String getProjectBoardModifier() {
 		return projectBoardModifier;
 	}
+
 	public void setProjectBoardModifier(String projectBoardModifier) {
 		this.projectBoardModifier = projectBoardModifier;
 	}
+
 	public String getProjectBoardRegDate() {
 		return projectBoardRegDate;
 	}
+
 	public void setProjectBoardRegDate(String projectBoardRegDate) {
 		this.projectBoardRegDate = projectBoardRegDate;
 	}
+
 	public String getProjectBoardUpdateDate() {
 		return projectBoardUpdateDate;
 	}
+
 	public void setProjectBoardUpdateDate(String projectBoardUpdateDate) {
 		this.projectBoardUpdateDate = projectBoardUpdateDate;
 	}
+
+	public List<ProjectComment> getProjectComment() {
+		return projectComment;
+	}
+
+	public void setProjectComment(List<ProjectComment> projectComment) {
+		this.projectComment = projectComment;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -76,6 +105,8 @@ public class ProjectBoard {
 		builder.append(projectBoardRegDate);
 		builder.append(", projectBoardUpdateDate=");
 		builder.append(projectBoardUpdateDate);
+		builder.append(", projectComment=");
+		builder.append(projectComment);
 		builder.append(", getProjectBoardNum()=");
 		builder.append(getProjectBoardNum());
 		builder.append(", getProjectNum()=");
@@ -92,6 +123,8 @@ public class ProjectBoard {
 		builder.append(getProjectBoardRegDate());
 		builder.append(", getProjectBoardUpdateDate()=");
 		builder.append(getProjectBoardUpdateDate());
+		builder.append(", getProjectComment()=");
+		builder.append(getProjectComment());
 		builder.append(", getClass()=");
 		builder.append(getClass());
 		builder.append(", hashCode()=");
@@ -101,6 +134,7 @@ public class ProjectBoard {
 		builder.append("]");
 		return builder.toString();
 	}
+
 	
 	
 	

@@ -4,18 +4,36 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ks45team01.unity.mapper.LoginMapper">
  	<resultMap type="MemberList" id="memberResultMap">
-		<id property="memberNum" column="m_num" />
-		<result property="memberPw" 				column="m_pw" />
-		<result property="memberName" 			column="m_name" />
-		<result property="memberGender" 	 column="m_gender" />
-		<result property="memberEmail" 			column="m_email" />
-		<result property="memberBirth" 			column="m_birth" />
-		<result property="memberPhone" 			column="m_phone" />
-		<result property="memberDormant" 		column="m_dormant" />
-		<result property="memberDormantDate" 		column="m_dormant_date" />
-		<result property="departmentNum" 		column="departmentNum" />
-		<result property="positionNum" 		column="position_num" />
-		<result property="memberInsertDate" 		column="m_insert_date" />
+		<id property="memberNum" column="member_num" />
+		<result property="memberPw" 				column="member_pw" />
+		<result property="memberName" 			column="member_name" />
+		<result property="memberGender" 	 column="member_gender" />
+		<result property="memberEmail" 			column="member_email" />
+		<result property="memberBirth" 			column="member_birth" />
+		<result property="memberPhone" 			column="member_phone" />
+		<result property="memberDormant" 		column="member_dormant" />
+		<result property="memberDormantDate" 		column="member_dormant_date" />
+		<result property="departmentNum" 		column="member_department_num" />
+		<result property="positionNum" 		column="member_position_num" />
+		<result property="memberInsertDate" 		column="member_insert_date" />
+		<association property="memberPositionList" javaType="MemberPositionList">
+			<id property="positionNum" 				column="position_num"/>
+			<result property="positionName" 		column="position_name"/>
+			<result property="memberNum"			column="member_num"/>
+			<result property="positionRegDate" 		column="position_reg_date"/>
+			<result property="positionUpdateDate" 	column="position_update_date"/>
+			<result property="positionModifier" 	column="position_modifier"/>
+			<result property="useOrNot" 			column="use_or_not"/>
+		</association>
+		<association property ="memberDepartmentList" javaType="MemberDepartmentList">
+			<id property="departmentNum" 			column="department_num"/>
+			<result property="departmentName" 		column="department_name"/>
+			<result property="memberNum" 			column="member_num"/>
+			<result property="departmentRegDate" 	column="department_reg_date"/>
+			<result property="departmentUpdateDate" column="department_update_date"/>
+			<result property="departmentModifier" 	column="department_modifier"/>
+			<result property="useOrNot" 			column="use_or_not"/>
+		</association>
 	</resultMap> 
 	<!-- 회원가입 -->
 	<insert id="addMember" parameterType="MemberList">
@@ -59,15 +77,27 @@ VALUES
 			<result property="memberAddr" 			column="m_addr" />
 		</association>
 	</resultMap>-->
-	
-	<select id="checkPwById" resultType="String">
-	SELECT 
-		*
+	<!-- 로그인 -->
+	<select id="checkPwById" parameterType="String" resultMap="memberResultMap">
+		SELECT 
+		 m.member_num
+		,m.member_pw
+		,pl.position_name
+		,dl.department_name
+		,m.member_name
+		,m.member_email
 	FROM
 		tb_member AS m
+		INNER JOIN 
+		tb_position_list AS pl
+		ON 
+		m.member_num = pl.position_member_num
+		INNER JOIN 
+		tb_department_list AS dl
+		ON 
+		pl.position_member_num = dl.member_num
 	WHERE
-		m.member_num = #{memberNum}
-	;
+		m.member_num = #{memberNum};
 	</select>
 	
 	<!-- <select id="getLoginHistory" parameterType="map" resultMap="loginResultMap">

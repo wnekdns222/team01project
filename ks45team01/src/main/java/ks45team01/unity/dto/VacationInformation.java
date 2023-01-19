@@ -20,6 +20,10 @@ public class VacationInformation {
 	private String correctDate;
 	
 	private MemberList memberList;
+	
+	private VacationApproval vacationApproval;
+
+	
 
 	public String getVacationInfoNum() {
 		return vacationInfoNum;
@@ -156,6 +160,13 @@ public class VacationInformation {
 	public void setMemberList(MemberList memberList) {
 		this.memberList = memberList;
 	}
+	public VacationApproval getVacationApproval() {
+		return vacationApproval;
+	}
+
+	public void setVacationApproval(VacationApproval vacationApproval) {
+		this.vacationApproval = vacationApproval;
+	}
 
 	@Override
 	public String toString() {
@@ -194,8 +205,11 @@ public class VacationInformation {
 		builder.append(correctDate);
 		builder.append(", memberList=");
 		builder.append(memberList);
+		builder.append(", vacationApproval=");
+		builder.append(vacationApproval);
 		builder.append("]");
 		return builder.toString();
 	}
+
 	
 }

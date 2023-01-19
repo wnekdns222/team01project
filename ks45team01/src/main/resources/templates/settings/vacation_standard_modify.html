@@ -2,24 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
-
+	
 <th:block layout:fragment="customCrumbbar">
 	<div class="row">
 		<div class="col-md-12 m-b-30">
 			<!-- begin page title -->
 			<div class="d-block d-lg-flex flex-nowrap align-items-center">
 				<div class="page-title mr-4 pr-4 border-right">
-					<h1>휴가대분류 수정</h1>
+					<h1>휴가기준 수정</h1>
 				</div>
 				<div class="breadcrumb-bar align-items-center">
 					<nav>
 						<ol class="breadcrumb p-0 m-b-0">
 							<li class="breadcrumb-item"><a href="/"><i
 									class="ti ti-home"></i></a></li>
-							<li class="breadcrumb-item"><a
-								href="/settings/vacationVarietyList">휴가설정</a></li>
-							<li class="breadcrumb-item active text-primary" aria-current="page">휴가대분류
-								수정</li>
+							<li class="breadcrumb-item"><a href="/settings/vacationVarietyList">휴가기준 설정</a></li>
+							<li class="breadcrumb-item active text-primary"
+								aria-current="page">휴가기준 수정</li>
 						</ol>
 					</nav>
 				</div>
@@ -31,20 +30,29 @@
 
 
 <th:block layout:fragment="customContents">
-<title th:text="title"></title>
-	<form th:action="@{/settings/vacationCategoryModify}" method="post" th:object="${vacationCategory}">
-	<input type="hidden" th:value="*{vacationCategoryNum}" name="vacationCategoryNum" readonly>
-		<div class="form-group">
-			<label for="vacationCategoryName">휴가명</label> <input type="text"
-				class="form-control" th:value="*{vacationCategoryName}" name="vacationCategoryName" required>
+<title th:text="${title}"></title>
+	<form th:action="@{/settings/vacationStandardModify}" method="post" th:object="${vacationStandard}">
+	<div class="form-group">
+		<input type="hidden" class="form-control" name="serviceNum" th:value="*{serviceNum}" />
 		</div>
 		<div class="form-group">
-			<label for="correctMemberNum">수정사원</label> <input type="text"
-				class="form-control" name="correctMemberNum" id="correctMemberNum" required>
+			<label for="lengthOfService">근속연수</label> <input type="text"
+				class="form-control" name="lengthOfService" th:value="*{lengthOfService}" required />
 		</div>
 		<div class="form-group">
-			<label for="vacationUse">사용유무</label> <input type="text"
-				class="form-control" th:value="*{vacationUse}" name="vacationUse" id="vacationUse" required>
+			<label for="addVacation">휴가 개수</label> <input type="text"
+				class="form-control" name="addVacation" th:value="*{addVacation}" required />
+		</div>
+					<div class="form-group">
+				<label for="giveTime">지급시기</label> 
+				<select class="form-control"  name="giveTime" th:selected=*{giveTime} style="width: 300px;" required>
+					<option value="매년 초" th:selected="*{giveTime}==${'매년 초'}">매년 초</option>
+					<option value="입사일" th:selected="*{giveTime}==${'입사일'}">입사일</option>
+				</select>
+			</div>
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" name="vacationStandardUse" id="vacationStandardUse" >
+			<label class="form-check-label" for="vacationStandardUse"> 사용여부 </label>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>

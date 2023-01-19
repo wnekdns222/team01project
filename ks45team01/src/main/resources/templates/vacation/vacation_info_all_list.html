@@ -44,6 +44,7 @@
 				<th scope="col">휴가잔여일</th>
 				<th scope="col">휴가잔여시간</th>
 				<th scope="col">사용연도</th>
+				<th scope="col">상세보기</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -58,6 +59,9 @@
                   <td th:text="${i.remainVacationDay}"></td>
                   <td th:text="${i.remainVacationTime}"></td>
                   <td th:text="${i.useVacationYear}"></td>
+                  <td>
+					<a th:href="@{/vacation/vacationInfoList(memberNum=${i.memberNum})}">선택</a>
+				  </td>
               </tr>
               <tr th:unless="${not #lists.isEmpty(infoList)}">
               </tr>

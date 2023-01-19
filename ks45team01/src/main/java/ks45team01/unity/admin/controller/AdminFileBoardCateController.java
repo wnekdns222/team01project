@@ -1,13 +1,19 @@
 package ks45team01.unity.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team01.unity.dto.FileBoard;
 import ks45team01.unity.dto.FileBoardCate;
@@ -17,6 +23,8 @@ import ks45team01.unity.service.FileBoardService;
 @RequestMapping("/fileBoardCate")
 public class AdminFileBoardCateController {
 	
+	private static final Logger log = LoggerFactory.getLogger(AdminFileBoardCateController.class);
+
 	private final FileBoardService fileBoardService;
 	public AdminFileBoardCateController(FileBoardService fileBoardService) {
 		this.fileBoardService = fileBoardService;
@@ -98,5 +106,14 @@ public class AdminFileBoardCateController {
 		model.addAttribute("fileBoardCateList", fileBoardCateList);
 		
 		return "fileBoardCate/fileBoardCateList";
+	}
+	
+	@GetMapping("/ajaxTest")
+	@ResponseBody
+	public Map<String, Object> ajaxTest(@RequestBody String fileCategoryCode) {
+		
+		Map<String, Object> result = fileBoardService.result(fileCategoryCode);
+		
+		return result;
 	}
 }

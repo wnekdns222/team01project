@@ -1,25 +1,34 @@
 package ks45team01.unity.worker.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team01.unity.dto.Approval;
+import ks45team01.unity.dto.ApprovalLine;
 import ks45team01.unity.service.ApprovalService;
 
 @Controller
 @RequestMapping("/approval")
 public class ApprovalController {
 	
+	
+	private static final Logger log = LoggerFactory.getLogger(ApprovalController.class);
+
 	private final ApprovalService approvalService;
 	public ApprovalController(ApprovalService approvalService) {
 		this.approvalService = approvalService;
 	}
 	
-	@GetMapping("workCorrectInsert")
+	@GetMapping("/workCorrectInsert")
 	public String workCorrectInsert(Model model) {
 		
 		model.addAttribute("title", "근태정정신청");
@@ -33,7 +42,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("vacationInsert")
+	@GetMapping("/vacationInsert")
 	public String vacationInsert(Model model) {
 		
 		model.addAttribute("title", "휴가신청");
@@ -46,7 +55,7 @@ public class ApprovalController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("finalApproverList")
+	@GetMapping("/finalApproverList")
 	public String finalApproverList(Model model) {
 		
 		model.addAttribute("title", "전결/대결 리스트");
@@ -58,45 +67,98 @@ public class ApprovalController {
 	 * @param model
 	 * @return
 	 */
+	@PostMapping("/draftInsert")
+	public String draftInsert(Approval approval
+							 ,String approvalLineNum, String draftDocNum, @RequestParam(name="approvalMemberNum", required = false) String[] approvalMemberNums) {
+		
+		if(approvalMemberNums != null) {
+			List<ApprovalLine> approvalLineList = new ArrayList<ApprovalLine>();
+			ApprovalLine approvalLine = null;
+			for(String approvalMemberNum : approvalMemberNums) {
+				approvalLine = new ApprovalLine();
+				approvalLine.setDraftDocNum(draftDocNum);
+				approvalLine.setApprovalLineNum(approvalLineNum);
+				approvalLine.setApprovalMemberNum(approvalMemberNum);
+				approvalLineList.add(approvalLine);
+			}
+			approvalService.addDraftInsert(approval);
+			approvalService.addApprovalMember(approvalLineList);
+		}
+		
+		return "redirect:/approval/draftList";
+	}
 	
-	@GetMapping("draftInsert")
-	public String draftInsert(Model model) {
+	@GetMapping("/draftInsert")
+	public String draftInsertForm(Model model) {
 		
 		model.addAttribute("title", "기안작성");
 		
 		return "approval/draftInsert";
 	}
 	
-	@GetMapping("odInsert")
-	public String odInsert(Model model) {
+	@PostMapping("/odInsert")
+	public String odInsert(Approval approval) {
+		
+		approvalService.addDraftInsert(approval);
+		return "redirect:/approval/draftList";
+	}
+	@GetMapping("/odInsert")
+	public String odInsertForm(Model model) {
 		
 		model.addAttribute("title", "공문작성");
 		
 		return "approval/odInsert";
 	}
 	
-	@GetMapping("proposalInsert")
-	public String proposalInsert(Model model) {
+	@PostMapping("/proposalInsert")
+	public String proposalInsert(Approval approval) {
+		
+		approvalService.addDraftInsert(approval);
+		return "redirect:/approval/draftList";
+	}
+	
+	
+	@GetMapping("/proposalInsert")
+	public String proposalInsertForm(Model model) {
 		
 		model.addAttribute("title", "기획작성");
 		
 		return "approval/proposalInsert";
 	}
 	
-	@GetMapping("letterApprovalInsert")
-	public String letterApprovalInsert(Model model) {
+	@PostMapping("/letterApprovalInsert")
+	public String letterApprovalInsert(Approval approval) {
+		
+		approvalService.addDraftInsert(approval);
+		return "redirect:/approval/draftList";
+	}
+	
+	@GetMapping("/letterApprovalInsert")
+	public String letterApprovalInsertForm(Model model) {
 		
 		model.addAttribute("title", "품의서작성");
 		
 		return "approval/letterApprovalInsert";
 	}
 	
-	@GetMapping("approvalDoneView")
-	public String approvalDoneView(Model model) {
+	@GetMapping("/approvalDoneView")
+	public String approvalDoneView(@RequestParam(value = "draftDocNum", required = false) String draftDocNum
+								  ,Model model) {
 		
+		Approval approvalDoneList = approvalService.draftView(draftDocNum);
 		model.addAttribute("title", "결재완료상세보기");
+		model.addAttribute("approvalDoneList", approvalDoneList);
 		
 		return "approval/approvalDoneView";
+	}
+	
+	@PostMapping("/approvalView")
+	public String approvalDoneProcess(String approvalProcessNum, String draftDocNum, String processStatus) {
+		
+		approvalService.approvalApprove(draftDocNum, processStatus);
+		approvalService.approvalDoneProcess(approvalProcessNum, draftDocNum);
+		
+		return "redirect:/approval/approvalList";
 	}
 	
 	/**
@@ -105,24 +167,37 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("approvalDoneList")
+	@GetMapping("/approvalDoneList")
 	public String approvalDoneList(Model model) {
 		
+		List<Approval> approvalDoneList = approvalService.approvalDoneList();
 		model.addAttribute("title", "결재완료함");
+		model.addAttribute("approvalDoneList", approvalDoneList);
 		
 		return "approval/approvalDoneList";
 	}
 	
+	@GetMapping("/approvalView")
+	public String approvalView(String draftDocNum
+							  ,Model model) {
+		Approval draftView = approvalService.draftView(draftDocNum);
+		model.addAttribute("title", "결재상세페이지");
+		model.addAttribute("draftView", draftView);
+		
+		return "approval/approvalView";
+	}
 	/**
 	 * 결재함 리스트 
 	 * @param model
 	 * @return
 	 */
 	
-	@GetMapping("approvalList")
+	@GetMapping("/approvalList")
 	public String approvalList(Model model) {
 		
+		List<Approval> approvalList = approvalService.approvalList();
 		model.addAttribute("title", "결재함");
+		model.addAttribute("approvalList", approvalList);
 		
 		return "approval/approvalList";
 	}
@@ -133,12 +208,24 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("rejectList")
+	@GetMapping("/rejectList")
 	public String rejectList(Model model) {
 		
+		List<Approval> rejectList = approvalService.rejectList();
 		model.addAttribute("title", "반려함");
+		model.addAttribute("rejectList", rejectList);
 		
 		return "approval/rejectList";
+	}
+	@GetMapping("/rejectView")
+	public String rejectView(@RequestParam(value = "draftDocNum", required = false) String draftDocNum
+							,Model model) {
+		
+		Approval rejectView = approvalService.rejectView(draftDocNum);
+		model.addAttribute("title", "반려문서");
+		model.addAttribute("rejectView", rejectView);
+		
+		return "approval/rejectView";
 	}
 	
 	/**
@@ -147,7 +234,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("circularList")
+	@GetMapping("/circularList")
 	public String circularList(Model model) {
 		
 		model.addAttribute("title", "회람함");
@@ -155,7 +242,7 @@ public class ApprovalController {
 		return "approval/circularList";
 	}
 	
-	@GetMapping("referrerView")
+	@GetMapping("/referrerView")
 	public String referrerView(Model model) {
 		
 		model.addAttribute("title", "참조문서 상세보기");
@@ -168,7 +255,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("referrerList")
+	@GetMapping("/referrerList")
 	public String referrerList(Model model) {
 		
 		model.addAttribute("title", "참조함");
@@ -180,7 +267,7 @@ public class ApprovalController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("receiverView")
+	@GetMapping("/receiverView")
 	public String receiverView(Model model) {
 		
 		model.addAttribute("title", "수신문서 상세보기");
@@ -194,7 +281,7 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("receiverList")
+	@GetMapping("/receiverList")
 	public String receiverList(Model model) {
 		
 		model.addAttribute("title", "수신함");
@@ -208,12 +295,22 @@ public class ApprovalController {
 	 * @return
 	 */
 	
-	@GetMapping("draftView")
-	public String draftView(Model model) {
+	@GetMapping("/draftView")
+	public String draftView(String draftDocNum
+						   ,Model model) {
 		
+		Approval draftView = approvalService.draftView(draftDocNum);
 		model.addAttribute("title", "기안상세보기");
+		model.addAttribute("draftView", draftView);
 		
 		return "approval/draftView";
+	}
+	@PostMapping("/draftView")
+	public String addRejectReason(String approvalFinalState, String draftDocNum, String approvalProcessNum, String rejectReasonMember, String rejectReason, String rejectDate) {
+		approvalService.addRejectReason(draftDocNum, approvalProcessNum, rejectReasonMember, rejectReason, rejectDate);
+		approvalService.rejectProcess(approvalFinalState, draftDocNum);
+		log.info("반려등록 : {}", approvalProcessNum, rejectReasonMember, rejectReason, rejectDate);
+		return "redirect:/approval/approvalList";
 	}
 	
 	/**
