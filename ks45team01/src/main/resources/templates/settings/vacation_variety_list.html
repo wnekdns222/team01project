@@ -75,15 +75,27 @@
 	<!-- end task list contant -->
 </th:block>
 
-<!-- 사용자 지정 js 파일 -->
-
-<th:block layout:fragment="customJs">
-</th:block>
 
 <!-- 사용자 지정 js script -->
 <th:block layout:fragment="customScript">
-
-	<script>
-
-	</script>
+		<script type="text/javascript">
+			$('button[name=categoryModifyBtn]').click(function(){
+				const vacationCategoryNum = $(this).val();
+				$.ajax({
+					 	url: "/settings/vacationCategoryModify",
+			            type: "GET",
+			            data: {"vacationCategoryNum" : vacationCategoryNum},
+			            contentType: 'application/json; charset=utf-8',
+			            dataType: "json",
+			            success: function(vacationCategory){
+			            			$('#vacationCategoryName').val(vacationCategory.vacationCategoryName);
+			            			$('#categoryUse').val(vacationCategory.vacationUse);
+			            },
+			            error: function(){
+			                alert("error");
+			            }
+				});
+			});
+		</script>
+	</th:block>
 </html>

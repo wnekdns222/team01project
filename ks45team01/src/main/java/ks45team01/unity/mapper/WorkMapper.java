@@ -36,4 +36,7 @@ public interface WorkMapper {
 	
 	//외출 등록(수정)
 	public void updateGoOut(Work work);
+	
+	//외출 복귀 등록(수정)
+	public void updateComeBack(Work work);
 }

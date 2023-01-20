@@ -30,13 +30,13 @@
 						class="nav-icon ti ti-layout-column3-alt"></i> <span
 						class="nav-title">근태</span></a>
 					<ul aria-expanded="false">
-						<li><a href="/work/workList">근태내역조회</a></li>
-						<li><a href="/work/workDepartmentList">부서근태내역조회</a></li>
+						<li><a th:href="@{/work/workList(memberNum=${session.SID})}">근태내역조회</a></li>
+						<li><a th:href="@{/work/workDepartmentList(departmentNum=${session.SDEPARTMENTNUM})}">부서근태내역조회</a></li>
 						<li><a href="/work/workAllList">전사원근태내역조회</a></li>
 						<li><a href="/work/workAuthorityInsert">비정상근태권한입력</a></li>
 						<li><a href="/work/workAuthorityList">비정상근태권한조회</a></li>
-						<li><a href="/vacation/vacationInfoList">연차조회</a></li>
-						<li><a href="/vacation/vacationInfoDepartmentList">부서연차조회</a></li>
+						<li><a th:href="@{/vacation/vacationInfoList(memberNum=${session.SID})}">연차조회</a></li>
+						<li><a th:href="@{/vacation/vacationInfoDepartmentList(departmentNum=${session.SDEPARTMENTNUM})}">부서연차조회</a></li>
 						<li><a href="/vacation/vacationInfoAllList">전사원연차조회</a></li>
 					</ul></li>
 				<!-- 메신저메뉴 -->

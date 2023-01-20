@@ -70,7 +70,7 @@ public class LoginController {
 			session.setAttribute("SNAME", memberList.getMemberName());
 			session.setAttribute("SDEPARTMENT", memberList.getMemberDepartmentList().getDepartmentName());
 			session.setAttribute("SEMAIL", memberList.getMemberEmail());
-			
+			session.setAttribute("SDEPARTMENTNUM", memberList.getMemberDepartmentList().getDepartmentNum());
 		}
 		return redirectURI;
 	}

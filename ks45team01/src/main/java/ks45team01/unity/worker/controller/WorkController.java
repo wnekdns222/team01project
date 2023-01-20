@@ -3,13 +3,13 @@ package ks45team01.unity.worker.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpSession;
 import ks45team01.unity.dto.Work;
 import ks45team01.unity.service.WorkService;
 
@@ -36,7 +36,8 @@ public class WorkController {
 	public Work addWork(@RequestParam(value="SID", required=false) String SID,
 						@RequestParam(value="SDEPARTMENTNUM", required=false) String SDEPARTMENTNUM,
 						@RequestParam(value="attendanceDay", required=false) String attendanceDay,
-						@RequestParam(value="workTime", required=false) String workTime) {
+						@RequestParam(value="workTime", required=false) String workTime,
+						HttpSession session) {
 		
 		Work work = new Work();
 		
@@ -47,6 +48,8 @@ public class WorkController {
 		log.info("근태입력 정보:{}",work);
 		Work workInfo = workService.addWork(work);
 		log.info("근태 입력 후 조회:{}",workInfo);
+		
+		session.setAttribute("attendance", workInfo.getAttendanceTime());
 		return  workInfo;
 	}
 	
@@ -56,38 +59,57 @@ public class WorkController {
 	public Work updateLeaveWork(@RequestParam(value="SID", required=false) String SID,
 								 @RequestParam(value="SDEPARTMENTNUM", required=false) String SDEPARTMENTNUM,
 								 @RequestParam(value="attendanceDay", required=false) String attendanceDay,
-								 @RequestParam(value="leaveTime", required=false)String leaveTime) {	
+								 @RequestParam(value="leaveTime", required=false)String leaveTime,
+								 HttpSession session) {	
 		Work work = new Work();
 		
 		work.setMemberNum(SID);
 		work.setDepartmentNum(SDEPARTMENTNUM);
 		work.setAttendanceDay(attendanceDay);
 		work.setLeaveworkTime(leaveTime);
+		log.info("퇴근 버튼 누른 후 조회:{}",work);
 		Work workInfo = workService.updateLeaveWork(work);
 		log.info("퇴근 입력 후 조회:{}",workInfo);
+		session.setAttribute("leaveTime", workInfo.getLeaveworkTime());
 		return workInfo;
 	}
 	//근태 수정처리(외출시작)
 	@PostMapping("work/updateGoOutStart")
-	public Work updateGoOut(@RequestParam(value="gooutWorkoutStartTime", required=false)String gooutWorkoutStartTime,
-							@RequestParam(value="SID", required=false) String SID,
+	@ResponseBody
+	public Work updateGoOut(@RequestParam(value="SID", required=false) String SID,
 							@RequestParam(value="SDEPARTMENTNUM", required=false) String SDEPARTMENTNUM,
-							@RequestParam(value="attendanceDay", required=false) String attendanceDay) {	
+							@RequestParam(value="attendanceDay", required=false) String attendanceDay,
+							@RequestParam(value="workTime", required=false)String workTime,
+							HttpSession session) {	
 		
 		Work work = new Work();
 		
 		work.setMemberNum(SID);
 		work.setDepartmentNum(SDEPARTMENTNUM);
 		work.setAttendanceDay(attendanceDay);
-		work.setGooutWorkoutStartTime(gooutWorkoutStartTime);
+		work.setGooutWorkoutStartTime(workTime);
 		Work workInfo = workService.updateGoOut(work);
+		session.setAttribute("startTime", workInfo.getGooutWorkoutStartTime());
 		return workInfo;
 	}
 	//근태 수정처리(외출시작)
-	@GetMapping("work/updateComeback")
-	public String updateComeback(@RequestParam(value="gooutWorkoutComebackTime", required=false)String gooutWorkoutComebackTime) {	
-	
-		return "redirect:/";
+	@PostMapping("work/updateComeback")
+	@ResponseBody
+	public Work updateComeback(@RequestParam(value="SID", required=false) String SID,
+			@RequestParam(value="SDEPARTMENTNUM", required=false) String SDEPARTMENTNUM,
+			@RequestParam(value="attendanceDay", required=false) String attendanceDay,
+			@RequestParam(value="workTime", required=false)String workTime,
+			HttpSession session) {	
+
+			Work work = new Work();
+			
+			work.setMemberNum(SID);
+			work.setDepartmentNum(SDEPARTMENTNUM);
+			work.setAttendanceDay(attendanceDay);
+			work.setGooutWorkoutComebackTime(workTime);
+			Work workInfo = workService.updateComeBack(work);
+			session.setAttribute("comebackTime", workInfo.getGooutWorkoutComebackTime());
+			return workInfo;
 	}
 	//근태조회
 	@GetMapping("work/workList")

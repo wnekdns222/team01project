@@ -202,7 +202,18 @@
 		UPDATE tb_work
 		SET
 		goout_workout_start_time=#{gooutWorkoutStartTime},
+		outside_duty='외출',
 		work_unusual='N'
+		WHERE 
+			member_num=#{memberNum}
+			and
+			attendance_day=#{attendanceDay};
+	</update>
+	<update id="updateComeBack" parameterType="Work">
+	/* 외출 복귀 등록(수정) */
+		UPDATE tb_work
+		SET
+		goout_workout_comeback_time=#{gooutWorkoutComebackTime}
 		WHERE 
 			member_num=#{memberNum}
 			and

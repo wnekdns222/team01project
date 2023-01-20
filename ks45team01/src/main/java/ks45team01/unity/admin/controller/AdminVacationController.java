@@ -204,14 +204,13 @@ public class AdminVacationController {
 		 * @return
 		 */
 		@GetMapping("settings/vacationCategoryModify")
-		public String updateVacationCategory(@RequestParam(value="vacationCategoryNum", required=false)String vacationCategoryNum, Model model) {
+		@ResponseBody
+		public VacationCategory updateVacationCategory(@RequestParam(value="vacationCategoryNum", required=false)String vacationCategoryNum, Model model) {
 			log.info("휴가대분류 넘버:{}",vacationCategoryNum);
 			
 			VacationCategory vacationCategory = vacationService.getVacationCategoryByNum(vacationCategoryNum);
 			
-			model.addAttribute("title", "휴가대분류 수정");
-			model.addAttribute("vacationCategory", vacationCategory);
-			return "settings/vacation_category_modify";
+			return vacationCategory;
 		}
 		/**
 		 * 휴가 대분류 수정 처리

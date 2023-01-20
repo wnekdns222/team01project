@@ -67,7 +67,17 @@ public class WorkService {
 	public Work updateGoOut(Work work) {
 		String workDate = work.getAttendanceDay();
 		String memberNum = work.getMemberNum();
-		workMapper.updateWorkLeaveTime(work);
+		workMapper.updateGoOut(work);
+		Work workInfo = workMapper.getWorkByNum(memberNum, workDate);
+		return workInfo;
+	}
+	/**
+	 * 근태 수정(복귀)
+	 */
+	public Work updateComeBack(Work work) {
+		String workDate = work.getAttendanceDay();
+		String memberNum = work.getMemberNum();
+		workMapper.updateComeBack(work);
 		Work workInfo = workMapper.getWorkByNum(memberNum, workDate);
 		return workInfo;
 	}
