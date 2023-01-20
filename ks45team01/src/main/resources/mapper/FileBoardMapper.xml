@@ -122,7 +122,8 @@
 			INNER JOIN 
 			tb_member AS m
 			ON 
-			dl.member_num = m.member_num;
+			dl.member_num = m.member_num
+			ORDER BY LENGTH(fc.file_category_code),fc.file_category_code;
 	</select>
 	<delete id="boardFileDelete" parameterType="String">
 		/* 파일 게시글 삭제 */
