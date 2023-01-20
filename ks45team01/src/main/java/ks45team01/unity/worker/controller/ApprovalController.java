@@ -69,7 +69,8 @@ public class ApprovalController {
 	 */
 	@PostMapping("/draftInsert")
 	public String draftInsert(Approval approval
-							 ,String approvalLineNum, String draftDocNum, @RequestParam(name="approvalMemberNum", required = false) String[] approvalMemberNums) {
+							 ,String approvalLineNum
+							 ,String draftDocNum, @RequestParam(name="approvalMemberNum", required = false) String[] approvalMemberNums) {
 		
 		if(approvalMemberNums != null) {
 			List<ApprovalLine> approvalLineList = new ArrayList<ApprovalLine>();

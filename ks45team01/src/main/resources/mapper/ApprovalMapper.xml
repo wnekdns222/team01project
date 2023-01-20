@@ -39,7 +39,7 @@
 		UPDATE tb_approval_process AS ap INNER JOIN tb_draft_document AS d
 			SET
 				d.approval_final_state='결재완료'
-			WHERE d.draft_doc_num=#{draftDocNum}
+			WHERE d.draft_doc_num=#{draftDocNum};
 	</update>
 	<insert id="approvalApprove" parameterType="String">
 		INSERT INTO tb_approval_process
