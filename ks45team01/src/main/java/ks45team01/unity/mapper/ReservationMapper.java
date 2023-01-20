@@ -23,14 +23,17 @@ public interface ReservationMapper {
 	
 	public List<Reservation> getReservationList();
 	
-	public Reservation getReservationById(String meetName);
+	public Reservation getReservationById(String meetNum);
 	
 	public void insertMeetingroomReservation(Reservation reservation);
 	
-	public void modifyReservation(Reservation reservation);
+	public void modifyReservation(Reservation reservation);  
 	
 	public String getCommonNewCode(String table, String column);
 	
 	public List<Reservation> getReservationMineList(String applicantMemberNum);
 	
+	public List<Reservation> getReservationNameList();
+	
+	public void deleteMeetingroomReservation(Reservation reservation);
 }

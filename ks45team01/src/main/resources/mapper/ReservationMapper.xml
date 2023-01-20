@@ -51,6 +51,14 @@
 		VALUES
 		(#{reservationNum}, #{meetNum}, #{reservationDate}, #{reservationStartTime}, #{reservationEndTime}, #{reservationContents}, now(), #{applicantMemberNum})
 	</insert>
+	<delete id="deleteMeetingroomReservation" parameterType="String">
+		/* 회의실코드로 회의실 삭제*/
+		DELETE
+		FROM
+			tb_meet_reservation
+		WHERE
+			reservation_num = #{reservationNum};
+	</delete>
 	
 	<select id="getReservationMineList" resultMap="reservationResultMap" parameterType="String">
 		/* 내 예약 조회 */
@@ -65,9 +73,23 @@
 		WHERE
 			applicant_member_num = #{applicantMemberNum}
 		ORDER BY r.reservation_insert_date DESC;
-		
 
+	</select>
 	
+	<select id="getReservationNameList" resultMap="reservationResultMap">
+		/* 예약 조회 */
+		SELECT
+			m.meet_num,
+			m.meet_name
+		FROM
+			tb_meetingroom as m
+			INNER JOIN
+			tb_meet_reservation as r
+			ON
+			m.meet_num = r.meet_num
+		GROUP BY
+			m.meet_num,
+			m.meet_name
 	</select>
 	
 	<select id="getReservationList" resultMap="reservationResultMap">
@@ -79,8 +101,7 @@
 			INNER JOIN
 			tb_meet_reservation as r
 			ON
-			m.meet_num = r.meet_num
-	
+			m.meet_num = r.meet_num	
 	</select>
 	
 	<select id="getReservationById" parameterType="String" resultMap="reservationResultMap">
@@ -94,7 +115,7 @@
 			ON
 			m.meet_num = r.meet_num	
 		WHERE
-			m.meet_name = #{meetName};
+			r.reservation_num = #{reservationNum};
 	</select>
 	
 	<select id="getCommonNewCode" parameterType="String" resultType="String">

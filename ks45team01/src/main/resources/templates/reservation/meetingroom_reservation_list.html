@@ -21,27 +21,24 @@
 		<table class="table table-hover">
                   <thead>
                       <tr>
-                          <th scope="col">회의실명</th>
-                          <th scope="col">사용가능시작시간</th>
-                          <th scope="col">사용가능종료시간</th>
-                          <th scope="col">회의실 위치</th>
-                          <th scope="col">회의실 수용인원</th>
-                          <th scope="col">회의실 상세정보</th>
-                          <th scope="col"></th>
+                         <th scope="col">회의실 명</th>
+                         <th scope="col">사용가능시작시간</th>
+                         <th scope="col">사용가능종료시간</th>
+                         <th scope="col">회의실 위치</th>
+                         <th scope="col">회의실 수용인원</th>
+                         <th scope="col">회의실 상세정보</th>
+                         <th scope="col"></th>
                       </tr>
                   </thead>
-                  <tbody>
+                  <tbody >
                     <tr th:unless="${#lists.isEmpty(meetingroomList)}"
 					th:each="l : ${meetingroomList}">
-					<td th:text="${l.meetName}"></td>
-					<td th:text="${l.meetUsableStart}"></td>
-					<td th:text="${l.meetUsableEnd}"></td>
-					<td th:text="${l.meetLocation}"></td>
-					<td th:text="${l.meetCapacity}"></td> 
-					<td th:text="${l.meetDetail}"></td>
-					<td>
-						<a th:href="@{/reservation/meetingroomReservationInsert(meetName=${l.meetName})}" href="javascript:void(0)" class="btn btn-round btn-outline-primary">예약</a>
-					</td>
+						<td th:text="${l.meetName}"></td>
+						<td th:text="${l.meetUsableStart}"></td>
+						<td th:text="${l.meetUsableEnd}"></td>
+						<td th:text="${l.meetLocation}"></td>
+						<td th:text="${l.meetCapacity}"></td> 
+						<td th:text="${l.meetDetail}"></td>
 					</tr>
                   </tbody>
               </table>
