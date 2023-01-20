@@ -58,9 +58,9 @@ public class ReservationService {
 		return reservationList;
 	}
 	
-	public Reservation getReservationById(String meetName) {
+	public Reservation getReservationById(String meetNum) {
 		
-		Reservation reservation = reservationMapper.getReservationById(meetName);
+		Reservation reservation = reservationMapper.getReservationById(meetNum);
 		
 		return reservation;
 	}
@@ -89,6 +89,19 @@ public class ReservationService {
 		List<Reservation> reservationMineList = reservationMapper.getReservationMineList(applicantMemberNum);
 		
 		return reservationMineList;
+	}
+	
+	public List<Reservation> getReservationNameList(){
+		
+		List<Reservation> reservationNameList = reservationMapper.getReservationNameList();
+		
+		return reservationNameList;
+	}
+
+	public void deleteMeetingroomReservation (Reservation reservation) {
+		
+		reservationMapper.deleteMeetingroomReservation(reservation);
+		
 	}
 	
 }

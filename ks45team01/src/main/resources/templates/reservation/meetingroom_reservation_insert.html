@@ -24,16 +24,22 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<div class="card-body">
 		    <h6 class="card-subtitle"></h6>
-		    <form th:object="${l.meetingroom}" th:each="l : ${reservation}" th:action="@{/reservation/meetingroomReservationInsert}" id="insertMeetingroomReservation" method="post">
+		    <form th:action="@{/reservation/meetingroomReservationInsert}" id="insertMeetingroomReservation" method="post">
+		    	 <th:block th:object="${l.meetingroom}" th:each="l : ${reservationList}">
 		    	<input type="hidden"  th:value="${l.reservationNum}" id="reservationNum" name="reservationNum">
 		    	<input type="hidden" class="form-control" id="applicantMemberNum" name="applicantMemberNum" th:value="${session.SID}">
 		    	<input type="hidden" class="form-control" id="meetNum" name="meetNum" th:value="*{meetNum}">
 		    	<input type="hidden" class="form-control" id="meetName" name="meetName" th:value="*{meetName}">
+		    	</th:block>
 
 		    	
 	        	<div class="form-group">
                     <label for="exampleInputPassword1">회의실 명</label>
-                   	 <input type="text" class="form-control" id="meetName" name="meetName" th:value="${l.meetingroom.meetName}" readonly="readonly">
+                   	 <select class="form-control" id="meetName" name="meetName" >
+                   	 	<th:block th:each="l : ${reservationNameList}">
+                   	 		<option th:value="${l.meetingroom.meetNum}">[[${l.meetingroom.meetName}]]</option>
+                   	 	</th:block>
+                   	 </select>
                 </div>
                 	
                 <div class="form-group">
@@ -42,7 +48,7 @@
                 </div>	
                 <div class="form-group">
                		<label for="exampleInputPassword1">시작시간</label>
-		            <select class="form-control" id="reservationStartTime" name="reservationStartTime" th:selected="*{meetUsableStart}">
+		            <select class="form-control" id="reservationStartTime" name="reservationStartTime" th:selected="*{meetUsableStart}" th:object="${reservationList.meetingroom}">
 		            	<option value="00:00" th:selected="*{meetUsableStart}==${'00:00'}" th:disabled="*{meetUsableStart}>${'00:00'}">00:00</option>
 		            	<option value="00:30" th:selected="*{meetUsableStart}==${'00:30'}" th:disabled="*{meetUsableStart}>${'00:30'}">00:30</option>
 		            	<option value="01:00" th:selected="*{meetUsableStart}==${'01:00'}" th:disabled="*{meetUsableStart}>${'01:00'}">01:00</option>
@@ -92,9 +98,11 @@
 		            	<option value="23:00" th:selected="*{meetUsableStart}==${'23:00'}" th:disabled="*{meetUsableStart}>${'23:00'}">23:00</option>
 		            	<option value="23:30" th:selected="*{meetUsableStart}==${'23:30'}" th:disabled="*{meetUsableStart}>${'23:30'}">23:30</option>
 		            </select>
+
 		        </div>
                 <div class="form-group">
                 	<label for="exampleInputPassword1">종료시간</label>
+                	<th:block th:object="${reservationList.meetingroom}">
                  	<select class="form-control" id="reservationEndTime" name=reservationEndTime th:selected="*{meetUsableEnd}">
 		            	<option value="00:00" th:selected="*{meetUsableEnd}==${'00:00'}" th:disabled="*{meetUsableEnd}<${'00:00'}">00:00</option>
 		            	<option value="00:30" th:selected="*{meetUsableEnd}==${'00:30'}" th:disabled="*{meetUsableEnd}<${'00:30'}">00:30</option>
@@ -145,6 +153,7 @@
 		            	<option value="23:00" th:selected="*{meetUsableEnd}==${'23:00'}" th:disabled="*{meetUsableEnd}<${'23:00'}">23:00</option>
 		            	<option value="23:30" th:selected="*{meetUsableEnd}==${'23:30'}" th:disabled="*{meetUsableEnd}<${'23:30'}">23:30</option>
 		            </select>
+		            </th:block>
                 </div>
                 <label for="exampleInputPassword1">예약내용</label>
                 	<textarea class="form-control" rows="3" name="reservationContents" id="reservationContents" ></textarea>

@@ -35,23 +35,25 @@ public class ReservationController {
 	public String meetingroomList(Model model) {
 			
 		List<Meetingroom> meetingroomList = reservationService.getMeetingroomList();
+		List<Reservation> reservationList = reservationService.getReservationList();
 		
 		model.addAttribute("title", "회의실 목록");
 		model.addAttribute("meetingroomList", meetingroomList);
+		model.addAttribute("reservationList", reservationList);
 		
 		return "/reservation/meetingroom_reservation_list";
 	}
 	
 	//예약하기 화면
 	@GetMapping("/meetingroomReservationInsert")
-	public String insertMeetingroomReservation(@RequestParam(value="meetName",required=false) String meetName,Model model) {
+	public String insertMeetingroomReservation(Model model) {
 		
-		Reservation reservation = reservationService.getReservationById(meetName);
 		List<Reservation> reservationList = reservationService.getReservationList();
-
+		List<Reservation> reservationNameList = reservationService.getReservationNameList();
+		
 		model.addAttribute("title", "회의실 목록");
-		model.addAttribute("reservation", reservation);
 		model.addAttribute("reservationList", reservationList);
+		model.addAttribute("reservationNameList", reservationNameList);
 
 		return "/reservation/meetingroom_reservation_insert";
 	}
@@ -92,11 +94,11 @@ public class ReservationController {
  
 	//예약 수정화면
 	@GetMapping("/meetingroomReservationModify")
-	public String modifyMeetingroomReservation(@RequestParam(value="meetName", required=false) String meetName,Model model) {
+	public String modifyMeetingroomReservation(@RequestParam(value="reservationNum", required=false) String reservationNum,Model model) {
 		
-		log.info("meetingroomReservation: {}", meetName);
+		log.info("meetingroomReservation: {}", reservationNum);
 		
-		Reservation reservation = reservationService.getReservationById(meetName);
+		Reservation reservation = reservationService.getReservationById(reservationNum);
 		
 		model.addAttribute("reservation", reservation);
 
