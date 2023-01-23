@@ -1,10 +1,301 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-</body>
+<th:block layout:fragment="customCrumbbar">
+	<div class="row">
+		<div class="col-md-12 m-b-30">
+			<!-- begin page title -->
+			<div class="d-block d-lg-flex flex-nowrap align-items-center">
+				<div class="page-title mr-4 pr-4 border-right">
+					<h1>사원목록</h1>
+				</div>
+				<div class="breadcrumb-bar align-items-center">
+					<nav>
+						<ol class="breadcrumb p-0 m-b-0">
+							<li class="breadcrumb-item"><a href="/"><i
+									class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item active text-primary"
+								aria-current="page">사원목록</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end page title -->
+</th:block>
+<th:block layout:fragment="customContents">
+	<!-- start-clients contant-->
+	<div class="row">
+		<div class="col-12">
+			<div class="card card-statistics clients-contant">
+				<div class="card-header">
+					<div class="d-xxs-flex justify-content-between align-items-center">
+						<div class="card-heading">
+							<h4 class="card-title"></h4>
+						</div>
+					</div>
+				</div>
+				<div class="card-body py-0 table-responsive">
+					<table class="table clients-contant-table mb-0">
+						<thead>
+							<tr>
+								<th scope="col">직원명</th>
+								<th scope="col">부서</th>
+								<th scope="col">직급</th>
+								<th scope="col">채팅</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face1.jpg" class="img-fluid"
+												alt="Clients-01">
+										</div>
+										<p class="font-weight-bold">Adrian Demiandro</p>
+									</div>
+								</td>
+								<td>20/07/2018</td>
+								<td>$230.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face2.jpg" class="img-fluid"
+												alt="Clients-02">
+										</div>
+										<p class="font-weight-bold">Jenny Smithdro</p>
+									</div>
+								</td>
+								<td>25/08/2018</td>
+								<td>$330.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face3.jpg" class="img-fluid"
+												alt="Clients-03">
+										</div>
+										<p class="font-weight-bold">Brian Joedro</p>
+									</div>
+								</td>
+								<td>01/09/2018</td>
+								<td>$500.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face5.jpg" class="img-fluid"
+												alt="Clients-04">
+										</div>
+										<p class="font-weight-bold">Sandradro Garett</p>
+									</div>
+								</td>
+								<td>03/08/2018</td>
+								<td>$130.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face4.jpg" class="img-fluid"
+												alt="Clients-05">
+										</div>
+										<p class="font-weight-bold">Garydro</p>
+									</div>
+								</td>
+								<td>15/08/2018</td>
+								<td>$35.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face6.jpg" class="img-fluid"
+												alt="Clients-06">
+										</div>
+										<p class="font-weight-bold">Andrew dro</p>
+									</div>
+								</td>
+								<td>20/07/2018</td>
+								<td>$230.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face7.jpg" class="img-fluid"
+												alt="Clients-07">
+										</div>
+										<p class="font-weight-bold">Stonedro</p>
+									</div>
+								</td>
+								<td>25/08/2018</td>
+								<td>$330.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face8.jpg" class="img-fluid"
+												alt="Clients-08">
+										</div>
+										<p class="font-weight-bold">Jimmy dron</p>
+									</div>
+								</td>
+								<td>01/09/2018</td>
+								<td>$500.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face9.jpg" class="img-fluid"
+												alt="Clients-09">
+										</div>
+										<p class="font-weight-bold">Richard dro</p>
+									</div>
+								</td>
+								<td>03/08/2018</td>
+								<td>$130.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face10.jpg" class="img-fluid"
+												alt="Clients-01">
+										</div>
+										<p class="font-weight-bold">Garettnice</p>
+									</div>
+								</td>
+								<td>15/08/2018</td>
+								<td>$35.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face11.html" class="img-fluid"
+												alt="Clients-02">
+										</div>
+										<p class="font-weight-bold">Adriannyt</p>
+									</div>
+								</td>
+								<td>20/07/2018</td>
+								<td>$230.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face12.jpg" class="img-fluid"
+												alt="Clients-03">
+										</div>
+										<p class="font-weight-bold">Michaelbrt</p>
+									</div>
+								</td>
+								<td>25/08/2018</td>
+								<td>$330.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face13.jpg" class="img-fluid"
+												alt="Clients-04">
+										</div>
+										<p class="font-weight-bold">Andrewwer</p>
+									</div>
+								</td>
+								<td>01/09/2018</td>
+								<td>$500.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face19.html" class="img-fluid"
+												alt="Clients-05">
+										</div>
+										<p class="font-weight-bold">Braincdt</p>
+									</div>
+								</td>
+								<td>03/08/2018</td>
+								<td>$130.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="bg-img mr-4">
+											<img src="/assets/img/faces/face16.jpg" class="img-fluid"
+												alt="Clients-06">
+										</div>
+										<p class="font-weight-bold">Sandrapot</p>
+									</div>
+								</td>
+								<td>15/08/2018</td>
+								<td>$35.00</td>
+								<td><a href="javascript:void(0)"
+									class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 ">
+									<i class="dripicons dripicons-conversation"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end-clients contant-->
+</th:block>
+
 </html>

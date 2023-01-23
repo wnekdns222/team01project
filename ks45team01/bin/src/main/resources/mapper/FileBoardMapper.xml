@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.FileBoardMapper">
+	<resultMap type="FileBoard" id="fileBoardResultMap">
+		<id property="fileBoardNum" 			column="file_board_num"/>
+		<result property="fileCategoryCode" 	column="file_category_code"/>
+		<result property="fileBoardRegistrant" 	column="file_board_registrant"/>
+		<result property="fileBoardTitle" 		column="file_board_title"/>
+		<result property="fileBoardContents" 	column="file_board_contents"/>
+		<result property="fileRegDate" 			column="file_reg_date"/>
+		<result property="fileModifier" 		column="file_modifier"/>
+		<result property="fileModificationDate" column="file_modification_date"/>
+		<result property="fileUseOrNot" 		column="file_use_or_not"/>
+		<result property="fileGroupCode" 		column="file_group_code"/>
+		<association property="fileBoardCate" javaType="FileBoardCate">
+			<result property="fileCategoryCode" 			column="file_category_code"/>
+			<result property="fileCategoryName" 			column="file_category_name"/>
+			<result property="fileCategoryRegistrant" 		column="file_category_registrant"/>
+			<result property="fileCategoryRegDate" 			column="file_category_reg_date"/>
+			<result property="fileCategoryModifier" 		column="file_category_modifier"/>
+			<result property="fileCategoryModificationDate" column="file_category_modification_date"/>
+			<result property="categoryUseOrNot" 			column="category_use_or_not"/>
+		</association>
+		<association property="memberPositionList" javaType="MemberPositionList">
+			<id property="positionNum" 				column="position_num"/>
+			<result property="positionName" 		column="position_name"/>
+			<result property="memberNum"			column="member_num"/>
+			<result property="positionRegDate" 		column="position_reg_date"/>
+			<result property="positionUpdateDate" 	column="position_update_date"/>
+			<result property="positionModifier" 	column="position_modifier"/>
+			<result property="useOrNot" 			column="use_or_not"/>
+		</association>
+		<association property ="memberList" javaType="MemberList">
+			<id property="memberNum" 				column="member_num"/>
+			<result property="memberPw" 			column="member_pw"/>
+			<result property="memberName" 			column="member_name"/>
+			<result property="memberGender" 		column="member_gender"/>
+			<result property="memberEmail" 			column="member_email"/>
+			<result property="memberBirth" 			column="member_birth"/>
+			<result property="memberPhone" 			column="member_phone"/>	
+			<result property="memberDormant" 		column="member_dormant"/>
+			<result property="memberDormantDate"	column="member_dormant_date"/>	
+			<result property="departmentNum" 		column="department_num"/>	
+			<result property="positionNum" 			column="position_num"/>	
+			<result property="memberInsertDate" 	column="member_insert_date"/>
+		</association>
+		<association property ="memberDepartmentList" javaType="MemberDepartmentList">
+			<id property="departmentNum" 			column="department_num"/>
+			<result property="departmentName" 		column="department_name"/>
+			<result property="memberNum" 			column="member_num"/>
+			<result property="departmentRegDate" 	column="department_reg_date"/>
+			<result property="departmentUpdateDate" column="department_update_date"/>
+			<result property="departmentModifier" 	column="department_modifier"/>
+			<result property="useOrNot" 			column="use_or_not"/>
+		</association>
+	</resultMap>
+	
+	<resultMap type="FileBoardCate" id="fileBoardCateResultMap">
+		<id property="fileCategoryCode" 			column="file_category_code"/>
+		<result property="fileCategoryName" 			column="file_category_name"/>
+		<result property="fileCategoryRegistrant" 		column="file_category_registrant"/>
+		<result property="fileCategoryRegDate" 			column="file_category_reg_date"/>
+		<result property="fileCategoryModifier" 		column="file_category_modifier"/>
+		<result property="fileCategoryModificationDate" column="file_category_modification_date"/>
+		<result property="categoryUseOrNot" 			column="category_use_or_not"/>
+	</resultMap>
+	<delete id="fileBoardCateDelete" parameterType="String">
+		/* 파일 카테고리 삭제 */
+		DELETE FROM tb_fileboard_category WHERE file_category_code=#{fileCategoryCode};
+	</delete>
+	<update id="fileBoardCateModify" parameterType="FileBoardCate">
+		/* 파일카테고리 수정 */
+		UPDATE tb_fileboard_category
+		SET
+			file_category_name=#{fileCategoryName},
+			file_category_modifier=#{fileCategoryModifier},
+			file_category_modification_date=NOW()
+		WHERE file_category_code=#{fileCategoryCode};
+	</update>
+	<select id="fileBoardCateModifyForm" resultType="FileBoardCate" parameterType="String">
+	/* 파일 카테고리 상세보기 */
+		SELECT
+			file_category_code AS fileCategoryCode,
+			file_category_name AS fileCategoryName,
+			file_category_registrant AS fileCategoryRegistrant,
+			file_category_reg_date AS fileCategoryRegDate,
+			file_category_modifier AS fileCategoryModifier,
+			file_category_modification_date AS fileCategoryModificationDate
+		FROM
+			tb_fileboard_category
+		WHERE file_category_code = #{fileCategoryCode};
+	</select>
+	
+	<insert id="addFileBoardCate" parameterType="FileBoardCate">
+		/* 파일 카테고리 등록 */
+		INSERT INTO tb_fileboard_category
+		(file_category_code, file_category_name, file_category_registrant, file_category_reg_date)
+		VALUES (sf_fileBoardCateNum(), #{fileCategoryName}, #{fileCategoryRegistrant}, NOW());
+	</insert>
+	<select id="fileBoardCateList" resultType="List" resultMap="fileBoardResultMap">
+		SELECT 
+			*
+		FROM 
+			tb_fileboard_category;
+	</select>
+	<select id="fileBoardCatePartList" resultType="List" resultMap="fileBoardResultMap">
+		/* 파일 카테고리 코드, 이름 조회 */
+		SELECT 
+		*
+		FROM 
+			tb_fileboard_category AS fc
+			INNER JOIN 
+			tb_position_list AS pl
+			ON 
+			fc.file_category_registrant = pl.position_member_num
+			INNER JOIN 
+			tb_department_list AS dl
+			ON
+			pl.position_member_num = dl.member_num
+			INNER JOIN 
+			tb_member AS m
+			ON 
+			dl.member_num = m.member_num
+			ORDER BY LENGTH(fc.file_category_code),fc.file_category_code;
+	</select>
+	<delete id="boardFileDelete" parameterType="String">
+		/* 파일 게시글 삭제 */
+		DELETE FROM tb_file_board WHERE file_board_num = #{fileBoardNum};
+	</delete>
+	<insert id="addBoardFile" parameterType="FileBoard">
+		/* 파일 게시글 등록 */
+		INSERT INTO tb_file_board
+		(file_board_num, file_category_code, file_board_registrant, file_board_title, file_board_contents, file_reg_date)
+		VALUES (sf_fileBoardNum(), #{fileCategoryCode}, #{fileBoardRegistrant}, #{fileBoardTitle}, #{fileBoardContents}, NOW());
+	</insert>
+	<update id="boardFileUpdate" parameterType="FileBoard">
+		/* 파일게시글 수정 */
+		UPDATE tb_file
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="fileBoardTitle != null and fileBoardTitle != '' ">
+			 	,file_board_title = #{fileBoardTitle} 
+			</if>		
+			<if test="fileBoardContents != null and fileBoardContents != '' ">
+				,file_board_contents = #{fileBoardContents} 
+			</if>
+			<if test="fileModifier != null and fileModifier != '' ">
+				,file_modifier = #{fileModifier} 
+			</if>
+			<if test="fileModificationDate != null and fileModificationDate != '' ">
+				,file_modification_date = NOW()
+			</if>
+		</trim>
+		WHERE 
+			file_board_num = #{fileBoardNum};
+	</update>
+	
+	<select id="boardFileView" resultMap="fileBoardResultMap" parameterType="String">
+	/* 파일게시글 상세보기 */
+		SELECT 
+			*
+		FROM 
+			tb_file_board
+		WHERE file_board_num = #{fileBoardNum};
+	</select>
+	<select id="fileServiceTypeList" parameterType="String" resultMap="fileBoardResultMap">
+		SELECT 
+			*
+		FROM 
+			tb_file_board AS f
+			INNER JOIN 
+			tb_position_list AS p
+			ON 
+			f.file_board_registrant = p.position_member_num
+			INNER JOIN 
+			tb_department_list AS d
+			ON 
+			p.position_member_num = d.member_num
+			INNER JOIN 
+			tb_member AS m
+			ON
+			d.member_num = m.member_num
+		WHERE file_category_code = #{serviceType};
+	</select>
+	<select id="fileBoardList" resultType="List" resultMap="fileBoardResultMap">
+		/* 파일게시글 전체 목록 조회 */
+		SELECT 
+			*
+		FROM 
+			tb_file_board AS f
+			INNER JOIN 
+			tb_position_list AS p
+			ON 
+			f.file_board_registrant = p.position_member_num
+			INNER JOIN 
+			tb_department_list AS d
+			ON 
+			p.position_member_num = d.member_num
+			INNER JOIN 
+			tb_member AS m
+			ON
+			d.member_num = m.member_num;
+	</select>
+	
+	<select id="result" parameterType="String" resultMap="fileBoardCateResultMap">
+		SELECT
+			 fc.file_category_code
+			,fc.file_category_name
+			,fc.file_category_registrant
+		FROM
+			tb_fileboard_category AS fc
+		WHERE
+			file_category_code = #{fileCategoryCode};
+	</select>
+</mapper>

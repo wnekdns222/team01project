@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<th:block layout:fragment="customCrumbbar">
+	<div class="breadcrumbbar">
+		<div class="row align-items-center">
+			<div class="col-md-8 col-lg-8">
+				<h4 class="page-title">Home</h4>
+				<div class="breadcrumb-list">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active" aria-current="page">Home</li>
+					</ol>
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-4">
+				<div class="widgetbar">
+					<button class="btn btn-primary-rgba">
+						<i class="feather icon-plus mr-2"></i>Actions
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</th:block>
+<th:block layout:fragment="customContents">
+	<!-- /project/projectDetail의 bizTab4 -->
+
+	<th:block th:fragment="projectHomeTab1">
+		<div class="tab tab-border nav-center">
+			<ul class="nav nav-tabs" role="tablist">
+
+				<li class="nav-item"><input type="hidden" name="projectNum"
+					id="projectNum" th:value="${projectNum}" />
+					<button class="btn btn-light addBoardBtn">게시글 등록</button></li>
+
+				<li class="nav-item">
+					<button class="btn btn-light"
+						onclick="location.href='/project/projectTaskInsert'">업무요청
+						등록</button>
+				</li>
+
+				<li class="nav-item">
+					<button class="btn btn-light"
+						onclick="location.href='/project/projectCalenderInsert'">캘린더일정
+						등록</button>
+				</li>
+
+				<li class="nav-item">
+					<button class="btn btn-light"
+						onclick="location.href='/project/projectTodo'">할일 등록</button>
+				</li>
+
+			</ul>
+		</div>
+
+
+		<h3>전체</h3>
+		<div class="row" th:each="plp : ${projectListPost}">
+			<form class="col-md-12" th:action="@{/project/projectDetail}" method="post">
+				<div class="col-md-12" th:if="${plp.postType} == '일반'">
+					<input type="hidden" id="projectDitailNum" name="projectDitailNum" th:value="${plp.postIdx}" /> 
+					<input type="text" id="projectBoardNum" name="projectBoardNum" th:value="${plp.postIdx}" /> 
+					<input type="hidden" id="projectNum" name="projectNum" th:value="${plp.projectNum}" />
+					<div class="card card-statistics">
+						<div class="card-header">
+							<div>
+								<!-- 멤버아이디 db값 가져오기  -->
+								<h5>작성자 : [[${plp.projectBoard.memberNum}]] 작성일자 : [[${plp.projectBoard.projectBoardRegDate}]]</h5>
+								<!-- 멤버아이디 db값 가져오기  -->
+							</div>
+							<div>
+								<h4 class="card-title">
+									게시글 제목
+									<a type="button" class="btn btn-primary"
+									th:href="@{/project/projectBoardModify(projectBoartNum=${plp.postIdx})}"
+										style="float: right;">수정</a>
+								</h4>
+							</div>
+							<div class="card-heading">
+								<!-- 프로젝트보드제목 db연결 -->
+								<input class="form-control form-control-lg" type="text"
+									disabled="disabled"
+									th:value="${plp.projectBoard.projectBoardTitle}"
+									style="background-color: white;" />
+							</div>
+						</div>
+						<div class="card-body">
+							<h5>내용</h5>
+							<textarea class="form-control" placeholder="Message"
+								id="Textarea1" rows="10"
+								th:text="${plp.projectBoard.projectBoardContent}" readonly style="background-color: white;"></textarea>
+							<div class="d-flex flex-column comment-section">
+								<th:block th:unless=${#lists.isEmpty(plp.projectBoard.projectComment)} th:each="cl : ${plp.projectBoard.projectComment}">
+									<div class="bg-white p-2">
+										<div class="d-flex flex-row user-info">
+											<img class="rounded-circle"
+												src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+											<div class="d-flex flex-column justify-content-start ml-2">
+												<span class="d-block font-weight-bold name" th:text="${cl.projectCommentRegistrant}"></span> 
+												<span class="date text-black-50" th:text="${cl.projectCommentRegDate}"></span>
+											</div>		
+											<div class="float-right">
+											<a href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0"><i class="ti ti-pencil"></i></a>
+                                      		<a th:href="@{/project/projectCommentDelete(projectCommentNum=${cl.projectCommentNum},projectNum=${plp.projectNum})}" class="btn btn-icon btn-outline-danger btn-round"><i class="ti ti-close"></i></a>			
+											</div>
+										</div>
+										
+										<div class="mt-2">
+											<p class="comment-text" th:text="${cl.projectCommentContent}"></p>
+										</div>
+									</div>
+									
+									
+								</th:block>
+								<div class="bg-light p-2">
+									<div class="d-flex flex-row align-items-start">
+										<img class="rounded-circle"
+											src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+										<textarea class="form-control ml-1 shadow-none textarea" id="projectCommentContent" name="projectCommentContent"></textarea>
+									</div>
+									<div class="mt-2 text-right">
+										<button class="btn btn-primary btn-sm shadow-none"
+											type="submit">댓글등록</button>
+										<button
+											class="btn btn-outline-primary btn-sm ml-1 shadow-none"
+											type="reset">취소</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<form class="col-md-12" th:action="@{/project/projectDetail}" method="post">
+				<div class="col-md-12" th:if="${plp.postType} == '요청'">
+				<input type="hidden" id="projectDitailNum" name="projectDitailNum" th:value="${plp.postIdx}" /> 
+				<input type="hidden" id="projectNum" name="projectNum" th:value="${plp.projectNum}" />
+					<div class="card card-statistics">
+						<div class="card-header">
+							<div class="card-heading">
+
+								<h4 class="card-title">업무진행 제목</h4>
+								<input class="form-control form-control-lg" type="text"
+									th:value="${plp.projectRequest.projectTaskTitle}" readonly
+									style="background-color: white;">
+								<div class="col-12">
+									<h4>진행상황</h4>
+									<div class="row tabs-contant">
+										<div class="col-xxl-6">
+											<div class="tab round">
+												<ul class="nav nav-tabs" role="tablist">
+													<li class="nav-item"><a class="nav-link"
+														id="contact-07-tab" data-toggle="tab" href="#contact-07"
+														role="tab" aria-controls="contact-07"
+														aria-selected="false"> <i class="fa fa-check-square-o"></i>
+															요청
+													</a></li>
+													<li class="nav-item"><a class="nav-link active show"
+														id="home-07-tab" data-toggle="tab" href="#home-07"
+														role="tab" aria-controls="home-07" aria-selected="true">
+															<i class="fa fa-home"></i>진행
+													</a></li>
+													<li class="nav-item"><a class="nav-link"
+														id="profile-07-tab" data-toggle="tab" href="#profile-07"
+														role="tab" aria-controls="profile-07"
+														aria-selected="false"> <i class="fa fa-user"></i> 보류
+													</a></li>
+													<li class="nav-item"><a class="nav-link"
+														id="portfolio-07-tab" data-toggle="tab"
+														href="#portfolio-07" role="tab"
+														aria-controls="portfolio-07" aria-selected="false"> <i
+															class="fa fa-picture-o"></i> 완료
+													</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+									<h5>내용</h5>
+									<textarea class="form-control" placeholder="Message" id="Textarea1" rows="10"
+											  th:text="${plp.projectRequest.projectRequestContent}" readonly style="background-color: white;"></textarea>
+									<button type="submit" class="btn btn-primary" onclick="location.href='/project/projectDetail'">수정</button>
+
+								</div>
+							</div>
+
+							
+
+							<div class="d-flex flex-column comment-section">
+								<th:block
+									th:unless=${#lists.isEmpty(plp.projectRequest.projectComment)}
+									th:each="cl : ${plp.projectRequest.projectComment}">
+									<input type="hidden" id="projectCommentNum" name="projectCommentNum" th:value="${cl.projectCommentNum}" />
+									<div class="bg-white p-2">
+										<div class="d-flex flex-row user-info">
+											<img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+											<div class="d-flex flex-column justify-content-start ml-2">
+												<span class="d-block font-weight-bold name" th:text="${cl.projectCommentRegistrant}">아이디</span> <span
+													class="date text-black-50" th:text="${cl.projectCommentRegDate}">날짜</span>
+											</div>
+										</div>
+											<div class="float-right">
+											<a href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0"><i class="ti ti-pencil"></i></a>
+                                      		<a th:href="@{/project/projectCommentDelete(projectCommentNum=${cl.projectCommentNum},projectNum=${plp.projectNum})}" class="btn btn-icon btn-outline-danger btn-round"><i class="ti ti-close"></i></a>			
+											</div>
+
+										<div class="mt-2">
+											<p class="comment-text" th:text="${cl.projectCommentContent}">댓글 내용</p>
+										</div>
+
+									</div>
+								</th:block>
+
+
+								<div class="bg-light p-2">
+									<div class="d-flex flex-row align-items-start">
+										<img class="rounded-circle"
+											src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+										<textarea class="form-control ml-1 shadow-none textarea"
+											id="projectCommentContent" name="projectCommentContent"></textarea>
+									</div>
+									<div class="mt-2 text-right">
+										<button class="btn btn-primary btn-sm shadow-none"
+											type="submit">댓글등록</button>
+										<button
+											class="btn btn-outline-primary btn-sm ml-1 shadow-none"
+											type="reset">취소</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+
+
+
+
+
+
+
+
+	</th:block>
+</th:block>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">파일번호</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item"><a href="/fileBoard/fileList">파일목록</a></li>
+							<li class="breadcrumb-item active" aria-current="page">파일번호</li>
+						</ol>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<div class="widgetbar">
+						<button class="btn btn-primary-rgba">
+							<i class="feather icon-plus mr-2"></i>Actions
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<table class="table table-hover">
+			<tr>
+				<td style="font-family: 돋음; font-size: 12" height="16">
+					<div align="center">파일번호</div>
+				</td>
+				<td style="font-family: 돋음; font-size: 12">
+					[[${boardFileView.fileBoardNum}]]</td>
+			</tr>
+			<tr>
+				<td style="font-family: 돋음; font-size: 12" height="16">
+					<div align="center">파일명</div>
+				</td>
+				<td style="font-family: 돋음; font-size: 12">
+					[[${boardFileView.fileBoardTitle}]]</td>
+			</tr>
+			<tr>
+				<td style="font-family: 돋음; font-size: 12" height="16">
+					<div align="center">내용</div>
+				</td>
+				<td style="font-family: 돋음; font-size: 12"><textarea
+						class="form-control" disabled="disabled" style="background-color: white;">[[${boardFileView.fileBoardContents}]]</textarea>
+				</td>
+			</tr>
+		</table>
+		<div style="text-align: center;">
+			<a class="btn btn-outline-success"
+				th:href="@{/fileBoard/fileBoardUpdate(fileBoardNum=${boardFileView.fileBoardNum})}">수정</a>
+			<a type="button" class="btn btn-outline-success"
+				th:href="@{/fileBoard/fileList}">목록</a>
+			<a type="button" class="btn btn-outline-success"
+				th:href="@{/fileBoard/fileBoardDelete(fileBoardNum=${boardFileView.fileBoardNum})}">삭제</a>
+		</div>
+	</th:block>
+</html>

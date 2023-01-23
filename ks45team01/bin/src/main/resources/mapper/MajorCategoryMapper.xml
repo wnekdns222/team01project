@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.MajorCategoryMapper">
+	<resultMap type="MajorCateGory" id="majorCateResultMap">
+		<id property="majorCategoryNum" column="major_category_num"/>
+		<result property="categotyType" column="categoty_type"/>
+		<result property="categotyRegistrant" column="categoty_registrant"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="categoryModifier" column="category_modifier"/>
+		<result property="correctDate" column="correct_date"/>
+		<result property="categoryUseOrNot" column="category_use_or_not"/>
+	</resultMap>
+	
+	<select id="majorCategoryList" resultType="List" resultMap="majorCateResultMap">
+		/* 대분류 카테고리 조회 */		
+		SELECT 
+			*
+		FROM 
+			tb_major_category;
+	</select>
+</mapper>

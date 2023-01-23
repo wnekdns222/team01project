@@ -1,10 +1,148 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>boardList</title>
 </head>
 <body>
+	<th:block layout:fragment="customCrumbbar">
+		<!-- begin row -->
+		<div class="row">
+			<div class="col-md-12 m-b-30">
+				<!-- begin page title -->
+				<div class="d-block d-lg-flex flex-nowrap align-items-center">
+					<div class="page-title mr-4 pr-4 border-right">
+						<h1>게시판 등록</h1>
+					</div>
+					<div class="breadcrumb-bar align-items-center">
+						<nav>
+							<ol class="breadcrumb p-0 m-b-0">
+								<li class="breadcrumb-item"><a href="index.html"><i
+										class="ti ti-home"></i></a></li>
+								<li class="breadcrumb-item">게시판 리스트</li>
 
+							</ol>
+						</nav>
+					</div>
+					<div
+						class="ml-auto d-flex align-items-center secondary-menu text-center">
+						<a href="/todolist/todoList" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Todo list"> <i
+							class="fe fe-edit btn btn-icon text-primary"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Projects"> <i
+							class="fa fa-lightbulb-o btn btn-icon text-success"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Task"> <i
+							class="fa fa-check btn btn-icon text-warning"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Calendar"> <i
+							class="fa fa-calendar-o btn btn-icon text-cyan"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Analytics"> <i
+							class="fa fa-bar-chart-o btn btn-icon text-danger"></i>
+						</a>
+					</div>
+				</div>
+				<!-- end page title -->
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<div class="page-wrapper">
+			<div class="container-fluid">
+				<div class="col-lg-12">
+					<!--게시판 넓이 -->
+					<div class="row">
+						<div class="col-lg-4">
+							<h1 class="page-header">게시판 리스트</h1>
+						</div>
+						<div class="col-lg-8 mt-auto mb-4">
+							<div class="form-row">
+								<div class="form-group col-lg-9">
+									<select name="searchKey" class="form-control col-lg-3 mr-3">
+										<option value="boardName">제목</option>
+										<option value="boardName">등록자</option>
+									</select> <input type="text" class="form-control col-lg-4 h-100 "
+										name="searchValue" placeholder="검색">
+									<button class="btn btn-primary form-control col-lg-2 h-100"
+										type="button" id="button-addon2">
+										<i class="fa fa-search"></i>
+									</button>
+								</div>
+
+								<div class="form-group col-lg-2 ml-auto mr-4">
+									<button type="button"
+										class="btn btn-block btn-round btn-outline-info"
+										onclick="location.href='/community/boardInsert';">게시판
+										작성</button>
+								</div>
+							</div>
+							<!-- <div class="input-group col-6"></div> -->
+						</div>
+						<div class="col-12 col-lg-12">
+							<div class="card card-statistics">
+								<div class="card-header"></div>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="card card-statistics">
+											<div class="card-body">
+												<div class="datatable-wrapper table-responsive">
+													<table id="datatable"
+														class="display compact table table-striped table-bordered">
+														<thead>
+															<tr>
+																<th>No.</th>
+																<th>제목</th>
+																<th>첨부파일</th>
+																<th>등록 날짜</th>
+																<th>수정 날짜</th>
+																<th>조회수</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr th:unless="${#lists.isEmpty(communityBoardList)}"
+																th:each="cb : ${communityBoardList}">
+																<td th:text="${cb.boardCode}"></td>
+																<td><a
+																	th:href="@{/community/boardDetail(boardCode=${cb.boardCode})}">[[${cb.boardName}]]</a>
+																</td>
+																<td th:text="${cb.boardFile}"></td>
+																<td th:text="${cb.boardRegDate}"></td>
+																<td th:text="${cb.boardUpdateDate}"></td>
+																<td th:text="${cb.boardViewCount}"></td>
+															</tr>
+															<tr th:if="${#lists.isEmpty(communityBoardList)}">
+																<td colspan="6"></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- end row -->
+						</div>
+						<!-- end container-fluid -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
 </body>
 </html>

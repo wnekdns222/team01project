@@ -35,7 +35,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<tr th:unless="${#lists.isEmpty(approvalDoneList)}" th:each="a : ${approvalDoneList}">
+					<td th:text="${a.draftDocNum}"></td>
+					<td>
+						<a th:href="@{/approval/approvalDoneView(draftDocNum=${a.draftDocNum})}">[[${a.draftTitle}]]</a>
+					</td>
+					<td th:text="${a.approvalFinalState}"></td>
+					<td th:text="${a.approvalProcess.approvalDoneDate}"></td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(approvalDoneList)}">
 					<td colspan="4">완료된 결재가 없습니다.</td>
 				</tr>
 			</tbody>

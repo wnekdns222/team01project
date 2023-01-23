@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Mentor - Bootstrap 4 Admin Dashboard Template</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Admin template that can be used to build dashboards for CRM, CMS, etc." />
+    <meta name="author" content="Potenza Global Solutions" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- app favicon -->
+    <link rel="shortcut icon" href="/assets/img/favicon.ico">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <!-- plugin stylesheets -->
+    <link rel="stylesheet" type="text/css"  href="/assets/css/vendors.css" />
+    <!-- app style -->
+    <link rel="stylesheet" type="text/css"  href="/assets/css/style.css" />
+</head>
+
+<body class="bg-white">
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin pre-loader -->
+            <div class="loader">
+                <div class="h-100 d-flex justify-content-center">
+                    <div class="align-self-center">
+                        <img src="/assets/img/loader/loader.svg" alt="loader">
+                    </div>
+                </div>
+            </div>
+            <!-- end pre-loader -->
+
+            
+            <div class="app-contant">
+                <div class="bg-white" >
+                    <div class="container-fluid p-0">
+                        <div class="row no-gutters">
+                            <div class="col-sm-6 col-lg-5 col-xxl-3  align-self-center order-2 order-sm-1">
+                                <div class="d-flex align-items-center h-100-vh">
+                                    <div class="register p-5">
+                                        <h1 class="mb-2">We are Unity</h1>
+                                        <p>Welcome, Please create your account.</p>
+                                        <form th:action="@{/Login/loginInsert}" method="post" id="addMemberForm" class="mt-2 mt-sm-5">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-8">
+                                                    <div class="form-group">
+                                                        <label class="control-label">사원 번호</label>
+                                                        <input type="text" class="form-control" name="memberNum" id="memberNum"  placeholder="아이디를 입력해주세요." required />
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-4 d-flex justify-content-end mt-4 mb-4" >
+                                                   <button type="button" class="btn btn-round btn-outline-primary" id="checkBtn">중복 체크</button>
+                                                </div>
+                                                <div class="col-12 ">
+                                                    <div class="form-group">
+                                                        <label class="control-label">사원 비밀번호</label>
+                                                        <input type="password" class="form-control" name="memberPw" placeholder="비밀번호를 입력해주세요." required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">사원 이름</label>
+                                                        <input type="text" class="form-control" name="memberName" placeholder="이름을 입력해주세요." required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">성별</label>
+                                                        <input type="text" class="form-control" name="memberGender" placeholder="성별을 입력해주세요." required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">이메일</label>
+                                                        <input type="email" class="form-control" name="memberEmail" placeholder="이메일을 입력해주세요." required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">생년월일</label>
+                                                        <input type="text" class="form-control" name="memberBirth" placeholder="생년월일을 입력해주세요." required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">폰 번호</label>
+                                                        <input type="text" class="form-control" name="memberPhone" placeholder="번호을 입력해주세요." required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">부서</label>
+                                                        <select type="text" class="form-control" name="departmentNum" placeholder="부서를 입력해주세요." required>
+	                                                        <option>기획부</option>
+															<option>영업부</option>
+															<option>생산팀</option>
+                                                        </select>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                 <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">직급</label>
+                                                        <select type="text" class="form-control" name="positionNum" placeholder="직급을 입력해주세요." required>
+	                                                        <option>부장</option>
+															<option>차장</option>
+															<option>과장</option>
+															<option>대리</option>
+															<option>계장</option>
+															<option>사원</option>
+														</select>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-12 mt-3">
+                                                    <button type="submit" class="btn btn-primary text-uppercase" id="submitBtn">회원가입</button>
+                                                </div>
+                                                <div class="col-12  mt-3">
+                                                        <p>Already have an account ?<a href="auth-login.html">  로그인</a></p>
+                                                    </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                              </div>
+                           <div class="col-sm-6 col-xxl-9 col-lg-7 bg-gradient o-hidden order-1 order-sm-2">
+                                <div class="row align-items-center h-100">
+                                    <div class="col-7 mx-auto ">
+                                        <img class="img-fluid" src="/assets/img/bg/login.svg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end app-wrap -->
+    </div>
+    <!-- end app -->
+	<script src="/assets/js/vendors.js"></script>
+
+    <!-- custom app -->
+    <script src="/assets/js/app.js"></script>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+	<script type="text/javascript">
+			$('#checkBtn').click(function(){
+				
+				let memberNum = $('#memberNum').val();
+				
+				let request = $.ajax({
+					  url: "/Login/checkId",
+					  method: "GET",
+					  data: { 'memberNum' : memberNum }, //input tag의 id=memberId 홑따옴표로 문자열인걸 알려줌
+					  dataType: "json" //요청을 하고 응답을 했을때 타입
+					});
+				
+					 //성공
+					request.done(function( isChecked ) {
+					  console.log(isChecked,'데이터타입 확인');
+					  
+					  if(isChecked){
+						  	alert('중복된 아이디가 존재합니다.');
+						  	$('#memberNum').val('');
+							$('#addMemberForm input').not('#memberNum').prop('disabled', true);
+						  	$('#addMemberForm select').prop('disabled', true);
+						  	$('#addMemberForm button').not('#checkBtn').prop('disabled', true);
+						  	$('#memberNum').focus();
+							return false;
+					  }else{
+							$('#addMemberForm input').not('#memberNum').prop('disabled', false);
+						  	$('#addMemberForm select').prop('disabled', false);
+						  	$('#addMemberForm button').not('#checkBtn').prop('disabled', false);
+					  }
+					});
+					 //실패
+					request.fail(function( jqXHR, textStatus ) {
+					  console.log( "Request failed: " + textStatus );
+					  
+					
+					});
+			});
+			$(document).on('input', '#memberNum', function() {
+			  	$('#addMemberForm input').not('#memberNum').prop('disabled', true);
+			  	$('#addMemberForm select').prop('disabled', true);
+			  	$('#addMemberForm button').not('#checkBtn').prop('disabled', true);
+			 });
+		
+	
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">Home</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item active" aria-current="page">Home</li>
+						</ol>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<div class="widgetbar">
+						<button class="btn btn-primary-rgba">
+							<i class="feather icon-plus mr-2"></i>Actions
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button type="button" class="btn btn-outline-primary"
+					onclick="location.href='/member/MemberDepartmentInsert'">사원 직급수정</button>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<div class="table-responsive" style="width: 100%; overflow: auto">
+		<table class="table table-dark">
+			<thead>
+				<tr>
+					<th scope="col">직급관리번호</th>
+					<th scope="col">사원번호</th>
+					<th scope="col">직급코드</th>
+					<th scope="col">직급 등록 일자</th>
+					<th scope="col">직급변경일시</th>
+					<th scope="col">등록자</th>
+					<th scope="col">등록일자</th>
+					<th scope="col">수정자</th>
+					<th scope="col">수정일자</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="dm : ${departmentManage}">
+					<td th:text="${dm.memberNum}"></td>
+					<td th:text="${dm.departmentNum}"></td>
+					<td th:text="${dm.departmentRegDate}"></td>
+					<td th:text="${dm.departmentUpdateRegDate}"></td>
+					<td th:text="${dm.departmentManageRegistrant}"></td>
+					<td th:text="${dm.regDate}"></td>
+					<td th:text="${dm.departmentManageModifier}"></td>
+					<td th:text="${dm.departmentUpdateDate}">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	</th:block>
+	
+</html>

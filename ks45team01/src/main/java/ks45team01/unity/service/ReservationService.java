@@ -98,9 +98,9 @@ public class ReservationService {
 		return reservationNameList;
 	}
 
-	public void deleteMeetingroomReservation (Reservation reservation) {
+	public void deleteReservation (Reservation reservation) {
 		
-		reservationMapper.deleteMeetingroomReservation(reservation);
+		reservationMapper.deleteReservation(reservation);
 		
 	}
 	

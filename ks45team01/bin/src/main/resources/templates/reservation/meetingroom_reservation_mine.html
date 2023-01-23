@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">회의실 예약</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">예약</a></li>
+							<li class="breadcrumb-item active" aria-current="page">회의실 예약</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	<th:block layout:fragment="customContents">
+		<table class="table table-hover">
+                  <thead>
+                      <tr>
+                          <th scope="col">회의실명</th>
+                          <th scope="col">예약날짜</th>
+                          <th scope="col">예약시작시간</th>
+                          <th scope="col">예약종료시간</th>
+                          <th scope="col">예약내용</th>
+                          <th scope="col">예약등록시간</th>                          
+                          <th scope="col">예약수정</th>
+                          <th scope="col">예약취소</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:unless="${#lists.isEmpty(reservationMineList)}"
+					th:each="l : ${reservationMineList}" th:object="${l.meetingroom}">
+					<td th:text="*{meetName}"></td>
+					<td th:text="${l.reservationDate}"></td>
+					<td th:text="${l.reservationStartTime}"></td>
+					<td th:text="${l.reservationEndTime}"></td>
+					<td th:text="${l.reservationContents}"></td>
+					<td th:text="${l.reservationInsertDate}"></td>
+					<td>
+						<a th:href="@{/reservation/meetingroomReservationModify(reservationNum=${l.reservationNum})}"  href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i class="ti ti-pencil"></i></a>
+					</td>
+					<td>					
+						<a th:href="@{/reservation/meetingroomReservationDelete(reservationNum=${l.reservationNum})}" href="javascript:void(0)" class="btn btn-icon btn-outline-danger btn-round"><i class="ti ti-close"></i></a>
+					</td>
+					</tr>
+                  </tbody>
+              </table>
+	</th:block>
+</html>

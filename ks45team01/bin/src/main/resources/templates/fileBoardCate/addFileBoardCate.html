@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">카테고리등록</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item"><a href="/fileBoardCate/fileBoardCateList">카테고리목록</a></li>
+							<li class="breadcrumb-item active" aria-current="page">카테고리등록</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<form id="addFileBoardCate" th:action="@{/fileBoardCate/addFileBoardCate}" method="post">
+			<label for="fileCategoryName">카테고리명</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileCategoryName" name="fileCategoryName"
+					placeholder="카테고리를 입력해주세요" />
+			</div>
+			<label for="fileCategoryRegistrant">작성자</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileCategoryRegistrant"
+					name="fileCategoryRegistrant" th:value="${session.SID}" />
+			</div>
+			<div style="margin-top: 20px; margin-left: 300px;">
+				<button type="submit" class="btn btn-outline-success">등록</button>
+				<a type="button" class="btn btn-outline-success"
+					href="/fileBoardCate/fileBoardCateList">취소</a>
+			</div>
+		</form>
+	</th:block>
+</html>

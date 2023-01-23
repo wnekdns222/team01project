@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.MemberListMapper">
+	<resultMap type="MemberDepartmentList" id="MemberDepartmentListResultMap">
+		<id property="departmentNum" column="department_num"/>
+		<result property="departmentName" column="department_name"/>
+		<result property="memberNum" column="member_num"/>
+		<result property="departmentRegDate" column="department_reg_date"/>
+		<result property="departmentUpdateDate" column="department_update_date"/>
+		<result property="departmentModifier" column="department_modifier"/>
+		<result property="useOrNot" column="use_or_not"/>
+		
+	</resultMap>
+	
+	<select id="memberDepartmentList" resultMap="MemberDepartmentListResultMap">
+		SELECT 
+			*
+		FROM 
+			tb_department_list;
+	</select>
+</mapper>
