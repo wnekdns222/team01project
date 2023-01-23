@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">기안작성</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">기안작성</li>
+						</ol>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<div class="widgetbar">
+						<button class="btn btn-primary-rgba">
+							<i class="feather icon-plus mr-2"></i>Actions
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="customContents">
+				<form id="odInsert" th:action="@{/approval/odInsert}" method="post">
+			<label for="draftTitle">결재명</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="draftTitle" name="draftTitle"
+					placeholder="결재명을 입력해주세요" />
+			</div>
+			<label for="registrantNum">작성자</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="registrantNum"
+					name="registrantNum" th:value="${session.SID}" /> <label
+					for="Contents">내용</label>
+				<textarea class="form-control" name="draftContents" id="draftContents"
+					placeholder="내용을 입력해주세요" style="height: 150px; width: 800px;"></textarea>
+			</div>
+			<div style="margin-top: 8px;">
+				<input type="date" id="draftDeadline" name="draftDeadline"/>
+			</div>
+			<div style="margin-top: 8px;" id="box">
+				<label for="approvalMemberNum">결재자</label>
+				<input type="text"><input type="button" value="추가" onclick="add_textbox()">
+			</div>
+			<div style="margin-top: 20px; margin-left: 300px;">
+				<button type="submit" class="btn btn-outline-success">등록</button>
+				<a class="btn btn-outline-success" href="/approval/draftList">취소</a>
+			</div>
+			</form>
+	</th:block>
+<th:block layout:fragment="customScript">
+    <script>
+        const add_textbox = () => {
+            const box = document.getElementById("box");
+            const newS = document.createElement('span');
+            newS.innerHTML = "<label for='approvalMemberNum'>결재자</label> <input type='text'><input type='button' value='삭제' onclick='remove(this)'> ";
+            box.appendChild(newS);
+        }
+        const remove = (obj) => {
+            document.getElementById('box').removeChild(obj.parentNode);
+        }
+    </script>
+</th:block>
+</html>

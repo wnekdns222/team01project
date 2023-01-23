@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customCrumbbar">
+	<div class="breadcrumbbar">
+		<div class="row align-items-center">
+			<div class="col-md-8 col-lg-8">
+				<h4 class="page-title">Home</h4>
+				<div class="breadcrumb-list">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active" aria-current="page">Home</li>
+					</ol>
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-4">
+				<div class="widgetbar">
+					<button class="btn btn-primary-rgba">
+						<i class="feather icon-plus mr-2"></i>Actions
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+</th:block>
+<th:block layout:fragment="customContents">
+	<div class="col-lg-12">
+		<div class="card m-b-30">
+			<div>
+				<h5 class="card-title">사원수정</h5>
+			</div>
+
+			<div class="card-body">
+
+				아이디 <input type="text" class="form-control" th:name="${memberListOne.memberNum}" th:id="${memberListOne.memberNum}" th:value="${memberListOne.memberNum}" readonly>
+				이메일 <input type="email" class="form-control" th:name="${memberListOne.memberEmail}" th:id="${memberListOne.memberEmail}" th:value="${memberListOne.memberEmail}" placeholder="name@example.com">
+				이름 <input type="text" class="form-control" th:name="${memberListOne.memberName}" th:id="${memberListOne.memberName}" th:value="${memberListOne.memberName}" placeholder="Text Input"> 
+				성별 <select class="form-control" id="GenderSelect">
+					<option value="남" th:selected="${memberListOne.memberGender == '남'}">남</option>
+					<option value="여" th:selected="${memberListOne.memberGender == '여'}">여</option>
+				</select>
+				 전화번호 <input type="text" class="form-control" name="inputText" id="inputText" placeholder="Text Input" th:value="${memberListOne.memberPhone}"> 
+					부서명 <select class="form-control" id="formControlSelect">
+					<option th:each="mmdl : ${memberModifyDepartmentList}" th:value="${mmdl.departmentNum}" th:text="${mmdl.departmentName}" th:selected="${memberListOne.memberDepartmentList.departmentName == mmdl.departmentName}"></option>
+					
+				</select>
+				직급명<select class="form-control" id="formControlSelect">
+					<option th:each="mmpl : ${memberModifyPositionList}" th:value="${mmpl.positionNum}" th:utext="${mmpl.positionName}" th:selected="${memberListOne.memberPositionList.positionName == mmpl.positionName}"></option>
+				</select>
+				<div class="m-t-20">
+				<div class="l-h-40">
+				<button type="button" class="btn btn-outline-primary">수정</button>
+				<button type="button" class="btn btn-outline-primary">취소</button>
+				
+				<h5 th:text="${memberListOne.memberPositionList.positionName}"></h5>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</th:block>
+
+</html>

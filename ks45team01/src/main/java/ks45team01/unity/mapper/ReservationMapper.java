@@ -35,5 +35,5 @@ public interface ReservationMapper {
 	
 	public List<Reservation> getReservationNameList();
 	
-	public void deleteMeetingroomReservation(Reservation reservation);
+	public void deleteReservation(Reservation reservation);
 }

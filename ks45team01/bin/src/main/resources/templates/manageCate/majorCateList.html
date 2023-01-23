@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaml.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-10">
+					<h4 class="page-title">카테고리목록</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">카테고리목록</li>
+						</ol>
+					</div>
+				</div>
+		<div style="text-align: right;">
+			<button class="btn btn-outline-success" th:href="@{/fileBoardCate/addFileBoardCate}">카테고리등록
+			</button>
+		</div>
+			</div>
+		</div>
+	<th:block layout:fragment="customContents">
+		<table class="table table-bordered">
+			<thead>
+				<tr style="text-align: center;">
+					<th>카테고리번호</th>
+					<th>카테고리명</th>
+					<th>등록자</th>
+					<th>직급</th>
+					<th>부서</th>
+					<th>등록일</th>
+					<th>수정자</th>
+					<th>직급</th>
+					<th>부서</th>
+					<th>수정일자</th>
+					<th>사용 여부</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:unless="${#lists.isEmpty(majorCateList)}" th:each="ml : ${majorCateList}" style="text-align: center;">
+					<th th:text=${ml.majorCategoryNum} scope="col"></th>
+					<td th:text=${ml.categotyType}></td>
+					<td th:text=${ml.categotyRegistrant}></td>
+					<td>부장</td>
+					<td>인사과</td>
+					<td th:text=${ml.regDate}></td>
+					<td th:text=${ml.categoryModifier}></td>
+					<td>부장</td>
+					<td>인사과</td>
+					<td th:text=${ml.correctDate}></td>
+					<td th:text=${ml.categoryUseOrNot}></td>
+					<td>
+						<a th:href="@{#}">수정</a>
+					</td>
+					<td>
+						<a th:href="@{#}">삭제</a>
+					</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(majorCateList)}" th:each="ml : ${majorCateList}">
+					<td colspan="13">등록된 파일카테고리가 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+	</th:block>
+</html>

@@ -1,32 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/default}">
-	
-	<th:block layout:fragment="customCrumbbar">
-		<div class="breadcrumbbar">
-			<div class="row align-items-center">
-				<div class="col-md-8 col-lg-8">
-					<h4 class="page-title">Home</h4>
-					<div class="breadcrumb-list">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item active" aria-current="page">Home</li>
-						</ol>
-					</div>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customCrumbbar">
+	<div class="breadcrumbbar">
+		<div class="row align-items-center">
+			<div class="col-md-8 col-lg-8">
+				<h4 class="page-title">Home</h4>
+				<div class="breadcrumb-list">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active" aria-current="page">Home</li>
+					</ol>
 				</div>
-				<div class="col-md-4 col-lg-4">
-					<div class="widgetbar">
-						<button class="btn btn-primary-rgba">
-							<i class="feather icon-plus mr-2"></i>Actions
-						</button>
+			</div>
+			<div class="col-md-4 col-lg-4">
+				<div class="widgetbar">
+					<button class="btn btn-primary-rgba">
+						<i class="feather icon-plus mr-2"></i>Actions
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+</th:block>
+<th:block layout:fragment="customContents">
+	<form>
+		<div class="form-group">
+			<label for="workNum">제목</label> <input type="text"
+				class="form-control" id="workNum" required>
+		</div>
+		<div class="form-group">
+			<label for="writeChangeReason">단위업무</label>
+			<button type="button" class="btn btn-outline-dark" style="float: right;">단위업무추가</button>
+			 <input type="text"
+				class="form-control" id="projectNum" required>
+		</div>
+		<div class="form-group">
+			<label for="writeChangeReason">단위업무확인 </label>
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-statistics clients-contant">
+						<div class="card-header">
+							<div
+								class="d-xxs-flex justify-content-between align-items-center">
+								<div class="card-heading">
+									<h4 class="card-title">Clients</h4>
+								</div>
+							</div>
+						</div>
+						<div class="card-body py-0 table-responsive">
+							<table class="table clients-contant-table mb-0">
+								<thead>
+									<tr>
+										<th scope="col">등록자</th>
+										<th scope="col">등록일자</th>
+										<th scope="col">수정일자</th>
+										<th scope="col">단위업무내용</th>
+										<th scope="col">Edit & Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="pu : ${projectUnit}">
+										<td>
+											<div class="d-flex align-items-center">
+												<div class="bg-img mr-4">
+													<img src="/assets/img/avtar/01.jpg" class="img-fluid"
+														alt="Clients-01">
+												</div>
+												<p class="font-weight-bold" th:text="${pu.memberInsertNum}"></p>
+											</div>
+										</td>
+										<td th:text="${pu.projectUnitRegDate}"></td>
+										<td th:text="${pu.projectUnitUpdateDate}"></td>
+										<td th:text="${pu.unitContents}">1.커피고르기</td>
+										<td><a href="/project/projectModify"
+											class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i
+												class="ti ti-pencil"></i></a> <a href="javascript:void(0)"
+											class="btn btn-icon btn-outline-danger btn-round"><i
+												class="ti ti-close"></i></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<br><br>
-	</th:block>
-	<th:block layout:fragment="customContents">
-		<h1>프로젝트 인서트 등록 화면</h1>
-	</th:block>
-	
+		<button type="button" class="btn btn-primary">Submit</button>
+	</form>
+</th:block>
+
 </html>

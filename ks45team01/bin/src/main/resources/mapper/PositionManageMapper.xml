@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.MemberListMapper">
+	<resultMap type="positionManage" id="positionManageResultMap">
+		<id property="positionListNum" column="position_list_num"/>
+		<result property="memberNum" column="member_num"/>
+		<result property="positionNum" column="position_num"/>
+		<result property="positionRegDate" column="position_reg_date"/>
+		<result property="positionUpdateRegDate" column="position_update_reg_date"/>
+		<result property="positionListManageRegistrant" column="position_list_manage_registrant"/>
+		<result property="regDate" column="reg_date"/>	
+		<result property="positionListManageModifier" column="position_list_manage_modifier"/>
+		<result property="positionUpdateDate" column="position_update_date"/>	
+	</resultMap>
+	
+	
+	<select id="positionManageSe" resultMap="positionManageResultMap">
+		SELECT 
+			*
+		FROM 
+			tb_position_manage
+	</select>
+</mapper>

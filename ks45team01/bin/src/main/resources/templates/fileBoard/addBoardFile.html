@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">파일등록</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item"><a href="/fileBoard/fileList">파일목록</a></li>
+							<li class="breadcrumb-item active" aria-current="page">파일등록</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<form id="addBoardFile" th:action="@{/fileBoard/addBoardFile}"
+			enctype="multipart/form-data" method="post">
+			<table>
+				<tr>
+					<td><label for="fileBoardTitle">파일명</label>
+						<div style="width: 300px;">
+							<input type="text" class="form-control" id="fileBoardTitle"
+								name="fileBoardTitle" placeholder="파일명을 입력해주세요" />
+						</div></td>
+					<td><label for="fileCategoryCode">카테고리</label>
+						<div style="width: 200px;">
+							<select class="form-control" id="fileCategoryCode"
+								name="fileCategoryCode">
+								<th:block th:if="${not #lists.isEmpty(fileBoardCatePartList)}"
+									th:each="f : ${fileBoardCatePartList}">
+									<option th:value="${f.FileBoardCate.fileCategoryCode}">[[${f.FileBoardCate.fileCategoryName}]]</option>
+								</th:block>
+								<th:block th:unless="${not #lists.isEmpty(fileBoardCatePartList)}">
+									<option>등록된 카테고리가 없습니다</option>
+								</th:block>
+							</select>
+						</div></td>
+				</tr>
+			</table>
+			<label for="fileBoardRegistrant">작성자</label>
+			<div style="width: 800px;">
+				<input type="text" class="form-control" id="fileBoardRegistrant"
+					name="fileBoardRegistrant" th:value="${session.SID}" readonly="readonly"/> <label
+					for="Contents">내용</label>
+				<textarea class="form-control" name="fileBoardContents"
+					id="fileBoardContents" placeholder="내용을 입력해주세요"
+					style="height: 150px; width: 800px;"></textarea>
+			</div>
+			<input type="file" name="uploadfile" multiple="multiple"/>
+			<div style="margin-top: 20px; margin-left: 300px;">
+				<button type="submit" class="btn btn-outline-success">등록</button>
+				<a class="btn btn-outline-success" href="/fileBoard/fileList">취소</a>
+			</div>
+		</form>
+	</th:block>
+</html>

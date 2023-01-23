@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team01.unity.dto.Meetingroom;
 import ks45team01.unity.dto.Reservation;
+import ks45team01.unity.dto.Work;
 import ks45team01.unity.service.ReservationService;
 
 @Controller
@@ -44,18 +45,19 @@ public class ReservationController {
 		return "/reservation/meetingroom_reservation_list";
 	}
 	
-	//예약하기 화면
+	//예약추가
 	@GetMapping("/meetingroomReservationInsert")
-	public String insertMeetingroomReservation(Model model) {
+	public String insertMeetingroomReservation(@RequestParam(value="meetNum", required=false) String meetNum,Model model) {
 		
+		log.info("meetingroom: {}", meetNum);
+		
+		Meetingroom meetingroom = reservationService.getMeetingroomById(meetNum);
 		List<Reservation> reservationList = reservationService.getReservationList();
-		List<Reservation> reservationNameList = reservationService.getReservationNameList();
-		
-		model.addAttribute("title", "회의실 목록");
-		model.addAttribute("reservationList", reservationList);
-		model.addAttribute("reservationNameList", reservationNameList);
 
-		return "/reservation/meetingroom_reservation_insert";
+		model.addAttribute("meetingroom", meetingroom);
+		model.addAttribute("reservationList", reservationList);
+
+		return "reservation/meetingroom_reservation_insert";
 	}
 	
 	//예약추가
@@ -63,6 +65,7 @@ public class ReservationController {
 	public String insertMeetingroomReservation(Reservation reservation, Model model) {
 		
 		reservationService.insertMeetingroomReservation(reservation);
+
 		
 		return "redirect:/reservation/meetingroomReservationMine";
 		
@@ -103,6 +106,26 @@ public class ReservationController {
 		model.addAttribute("reservation", reservation);
 
 		return "reservation/meetingroom_reservation_modify";
+	}
+	
+	//예약 수정화면
+	@PostMapping("/meetingroomReservationModify")
+	public String modifyMeetingroomReservation(Reservation reservation) {
+						
+		reservationService.modifyReservation(reservation);
+
+		return "redirect:/reservation/meetingroomReservationMine";
+		
+	}
+	
+	//회의실 삭제
+	@GetMapping("meetingroomReservationDelete")
+	public String deleteReservation(Reservation reservation) {
+		
+		reservationService.deleteReservation(reservation);
+		
+		return "redirect:/reservation/meetingroomReservationList";
+		
 	}
 	
 	

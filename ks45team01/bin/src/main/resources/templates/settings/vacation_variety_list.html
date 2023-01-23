@@ -1,10 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="${title}"></title>
+<style>
+.hidden {
+	display: none;
+}
+</style>
 </head>
-<body>
+<th:block layout:fragment="customCrumbbar">
+	<div class="row">
+		<div class="col-md-12 m-b-30">
+			<!-- begin page title -->
+			<div class="d-block d-lg-flex flex-nowrap align-items-center">
+				<div class="page-title mr-4 pr-4 border-right">
+					<h1>휴가설정</h1>
+				</div>
+				<div class="breadcrumb-bar align-items-center">
+					<nav>
+						<ol class="breadcrumb p-0 m-b-0">
+							<li class="breadcrumb-item"><a href="/"><i class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item active text-primary" aria-current="page">휴가설정</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end page title -->
+</th:block>
 
-</body>
+<th:block layout:fragment="customContents">
+	<div class="row">
+		<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<div class="tab nav-bt">
+				<ul class="nav nav-tabs" role="tablist">
+				
+					<li class="nav-item">
+					<a class="nav-link active show" id="category-tab" data-toggle="tab" href="#category" role="tab"
+						aria-controls="home" aria-selected="true">휴가 대분류</a></li>
+						
+					<li class="nav-item">
+					<a class="nav-link" id="sort-tab" data-toggle="tab" href="#sort" role="tab" aria-controls="sort"
+						aria-selected="false">휴가 중분류</a></li>
+						
+					<li class="nav-item">
+					<a class="nav-link" id="type-tab" data-toggle="tab" href="#type" role="tab"
+					aria-controls="type" aria-selected="false">휴가종류</a></li>
+					
+					<li class="nav-item">
+					<a class="nav-link" id="standard-tab" data-toggle="tab" href="#standard" role="tab"
+					aria-controls="standard" aria-selected="false">휴가기준</a></li>
+					
+				</ul>
+			</div>
+			<div class="tab-content">
+				<div class="card-body table-responsive p-0 tab-pane fade active show" id="category" role="tabpanel">
+					<div th:include="~{settings/vacation_category_list :: vacationCategory}"></div>
+				</div>
+				<div class="card-body table-responsive p-0 tab-pane fade" id="sort" role="tabpanel">
+					<div th:include="~{settings/vacation_sort_list :: vacationSort}"></div>
+				</div>
+				<div class="card-body table-responsive p-0 tab-pane fade" id="type" role="tabpanel">
+					<div th:include="~{settings/vacation_type_list :: vacationType}"></div>
+				</div>
+				<div class="card-body table-responsive p-0 tab-pane fade" id="standard" role="tabpanel">
+					<div th:include="~{settings/vacation_standard_list :: vacationStandard}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end task list contant -->
+</th:block>
+
+
+<!-- 사용자 지정 js script -->
+<th:block layout:fragment="customScript">
+		<script type="text/javascript">
+			$('button[name=categoryModifyBtn]').click(function(){
+				const vacationCategoryNum = $(this).val();
+				$.ajax({
+					 	url: "/settings/vacationCategoryModify",
+			            type: "GET",
+			            data: {"vacationCategoryNum" : vacationCategoryNum},
+			            contentType: 'application/json; charset=utf-8',
+			            dataType: "json",
+			            success: function(vacationCategory){
+			            			$('#vacationCategoryName').val(vacationCategory.vacationCategoryName);
+			            			$('#categoryUse').val(vacationCategory.vacationUse);
+			            },
+			            error: function(){
+			                alert("error");
+			            }
+				});
+			});
+		</script>
+	</th:block>
 </html>

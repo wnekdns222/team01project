@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<title th:text=${title}></title>
 </head>
-<body>
+<th:block layout:fragment="customCrumbbar">
+	<div class="row">
+		<div class="col-md-12 m-b-30">
+			<!-- begin page title -->
+			<div class="d-block d-lg-flex flex-nowrap align-items-center">
+				<div class="page-title mr-4 pr-4 border-right">
+					<h1>전사원연차조회</h1>
+				</div>
+				<div class="breadcrumb-bar align-items-center">
+					<nav>
+						<ol class="breadcrumb p-0 m-b-0">
+							<li class="breadcrumb-item"><a href="/"><i
+									class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item active text-primary"
+								aria-current="page">전사원연차조회</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end page title -->
+</th:block>
 
-</body>
+
+<th:block layout:fragment="customContents">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">사원번호</th>
+				<th scope="col">근속연수</th>
+				<th scope="col">기본연차휴가일수</th>
+				<th scope="col">포상휴가일수</th>
+				<th scope="col">대체휴가일수</th>
+				<th scope="col">경조사휴가일수</th>
+				<th scope="col">병가일수</th>
+				<th scope="col">휴가잔여일</th>
+				<th scope="col">휴가잔여시간</th>
+				<th scope="col">사용연도</th>
+				<th scope="col">상세보기</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${not #lists.isEmpty(infoList)}" th:each="i : ${infoList}">
+                  <td th:text="${i.memberList.memberName}"></td>
+                  <td th:text="${i.lengthOfService}"></td>
+                  <td th:text="${i.addVacation}"></td>
+                  <td th:text="${i.rewardVacationNumber}"></td>
+                  <td th:text="${i.replaceVacationDay}"></td>
+                  <td th:text="${i.personalBuisinessVacationDay}"></td>
+                  <td th:text="${i.sickVacationDay}"></td>
+                  <td th:text="${i.remainVacationDay}"></td>
+                  <td th:text="${i.remainVacationTime}"></td>
+                  <td th:text="${i.useVacationYear}"></td>
+                  <td>
+					<a th:href="@{/vacation/vacationInfoList(memberNum=${i.memberNum})}">선택</a>
+				  </td>
+              </tr>
+              <tr th:unless="${not #lists.isEmpty(infoList)}">
+              </tr>
+		</tbody>
+	</table>
+
+</th:block>
 </html>

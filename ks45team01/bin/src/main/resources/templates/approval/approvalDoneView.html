@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	  
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">[[${approvalDoneList.draftTitle}]]</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item"><a href="/approval/approvalDoneList">결재완료함</a></li>
+							<li class="breadcrumb-item active" aria-current="page">[[${approvalDoneList.draftTitle}]]</li>
+						</ol>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<div class="widgetbar">
+						<button class="btn btn-primary-rgba">
+							<i class="feather icon-plus mr-2"></i>Actions
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<table class="table table-hover">
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">기안 번호</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					[[${approvalDoneList.reportDate}]]
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">제목</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					[[${approvalDoneList.draftTitle}]]
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">상신일자</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					[[${approvalDoneList.reportDate}]]
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">기한시점</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					[[${approvalDoneList.draftDeadline}]]
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">결재자</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					홍xx 인사과 부장, 김xx 총무과 부장
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">내용</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					<textarea rows="4" cols="50" disabled="disabled">[[${approvalDoneList.draftContents}]]</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">파일첨부</div>
+				</td>
+				<td>
+					<input type="file" disabled="disabled"/>
+				</td>
+			</tr>
+		</table>
+		<div style="text-align: center;">
+			<a th:href="@{/approval/approvalDoneList}">[목록]</a>
+		</div>
+	</th:block>
+</html>
