@@ -220,7 +220,7 @@
    		console.log(second);
    		
    		if(first >= second){
-   	   		alert("시작시간보다 이른시간을 선택해주세요");
+   	   		alert("시작시간보다 늦은시간을 선택해주세요");
    	   	}
    		
    		if(second > secondUsable){
@@ -246,6 +246,30 @@
 	   	   	
 	   	   	return false;
    		}
+   		
+   		if(second > secondUsable){
+   	   		alert("시간을 다시 선택하세요");
+   	   		
+   	   		isSubmit = false;
+   	   	
+   	   		return false;
+   	   	}
+   		
+   		if(first < firstUsable){
+   			alert("시간을 다시 선택하세요");
+   			
+   			isSubmit = false;
+   	   	   	
+   	   		return false;
+   	   	}
+   		
+   		if('#reservationDate == null'){
+   			alert("예약날짜를 선택해주세요");
+   			
+   			isSubmit = false;
+   	   	   	
+   	   		return false;
+   	   	}
    		
 	   	 if(isSubmit) {
 	   		/* const insertReservationObj = {};
