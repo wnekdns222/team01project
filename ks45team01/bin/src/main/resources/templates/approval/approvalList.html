@@ -35,8 +35,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td colspan="4">진행중인 결재가 없습니다.</td>
+				<tr th:unless="${#lists.isEmpty(approvalList)}" th:each="a : ${approvalList}">
+					<td th:text="${a.draftDocNum}"></td>
+					<td><a th:href="@{/approval/approvalView(draftDocNum=${a.draftDocNum})}">[[${a.draftTitle}]]</a></td>
+					<td th:text="${a.reportDate}"></td>
+					<td th:text="${a.draftDeadline}"></td>
 				</tr>
 			</tbody>
 		</table>

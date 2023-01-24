@@ -16,6 +16,11 @@ public class WorkType {
 	private String use;
 	private String workTypeUsePeriod;
 	
+	private MemberList memberList;
+	
+	public void setMemberList(MemberList memberList) {
+		this.memberList = memberList;
+	}
 	public String getWorkTypeNum() {
 		return workTypeNum;
 	}
@@ -88,6 +93,10 @@ public class WorkType {
 	public void setWorkTypeUsePeriod(String workTypeUsePeriod) {
 		this.workTypeUsePeriod = workTypeUsePeriod;
 	}
+	public MemberList getMemberList() {
+		return memberList;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -115,9 +124,10 @@ public class WorkType {
 		builder.append(use);
 		builder.append(", workTypeUsePeriod=");
 		builder.append(workTypeUsePeriod);
+		builder.append(", memberList=");
+		builder.append(memberList);
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	
 }

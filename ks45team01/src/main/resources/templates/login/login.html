@@ -41,20 +41,20 @@
                             <div class="col-sm-6 col-lg-5 col-xxl-3  align-self-center order-2 order-sm-1">
                                 <div class="d-flex align-items-center h-100-vh">
                                     <div class="login p-50">
-                                        <h1 class="mb-2">We Are Mentor</h1>
+                                        <h1 class="mb-2">We Are Unity</h1>
                                         <p>Welcome back, please login to your account.</p>
-                                        <form action="auth-login.html" class="mt-3 mt-sm-5">
+                                        <form th:action="@{/Login/loginMain}" class="mt-3 mt-sm-5" method="post">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">User Name*</label>
-                                                        <input type="text" class="form-control" placeholder="Username" />
+                                                        <label class="control-label">User ID</label>
+                                                        <input type="text" class="form-control" name="memberNum" placeholder="UserID" />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label class="control-label">Password*</label>
-                                                        <input type="password" class="form-control" placeholder="Password" />
+                                                        <label class="control-label">Password</label>
+                                                        <input type="password" class="form-control" name="memberPw" placeholder="Password" />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -69,10 +69,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12 mt-3">
-                                                    <a href="index.html" class="btn btn-primary text-uppercase">Sign In</a>
+                                                    <button type="submit" class="btn btn-primary text-uppercase">로그인</button>
                                                 </div>
                                                 <div class="col-12  mt-3">
-                                                    <p>Don't have an account ?<a href="/Login/loginInsert"> Sign Up</a></p>
+                                                    <p>Don't have an account ?<a href="/Login/loginInsert"> 회원가입</a></p>
                                                 </div>
                                             </div>
                                         </form>
@@ -100,9 +100,12 @@
 
     <!-- plugins -->
     <script src="/assets/js/vendors.js"></script>
+   
 
     <!-- custom app -->
-    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/app.js"></script>  
+ 
 </body>
+
 
 </html>

@@ -36,12 +36,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>appdoc_2</td>
-					<td><a th:href="@{/approval/draftView}">공문서</a></td>
-					<td>2022-11-15</td>
-					<td>2022-12-02</td>
-					<th scope="row">진행중</th>
+				<tr th:unless="${#lists.isEmpty(draftList)}" th:each="d : ${draftList}">
+					<td th:text="${d.draftDocNum}"></td>
+					<td><a th:href="@{/approval/draftView(draftDocNum=${d.draftDocNum})}">[[${d.draftTitle}]]</a></td>
+					<td th:text="${d.reportDate}"></td>
+					<td th:text="${d.draftDeadline}"></td>
+					<th th:text="${d.approvalFinalState}" scope="row"></th>
+				</tr>
+				<tr th:if="${#lists.isEmpty(draftList)}" th:each="d : ${draftList}">
+					<td colspan="5">등록된 기안문서가 없습니다.</td>
 				</tr>
 			</tbody>
 		</table>

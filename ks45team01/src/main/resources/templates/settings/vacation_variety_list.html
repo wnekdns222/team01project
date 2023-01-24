@@ -2,7 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
-
+<head>
+<title th:text="${title}"></title>
+<style>
+.hidden {
+	display: none;
+}
+</style>
+</head>
 <th:block layout:fragment="customCrumbbar">
 	<div class="row">
 		<div class="col-md-12 m-b-30">
@@ -14,8 +21,7 @@
 				<div class="breadcrumb-bar align-items-center">
 					<nav>
 						<ol class="breadcrumb p-0 m-b-0">
-							<li class="breadcrumb-item"><a href="/"><i
-									class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item"><a href="/"><i class="ti ti-home"></i></a></li>
 							<li class="breadcrumb-item active text-primary" aria-current="page">휴가설정</li>
 						</ol>
 					</nav>
@@ -27,151 +33,69 @@
 </th:block>
 
 <th:block layout:fragment="customContents">
-<title th:text="${title}"></title>
-<div style="text-align:center;">
-	<div style="width: 50%; float: left;">
-		<div class="col-md-12 col-lg-12">
-			<div class="widgetbar"
-				style="margin-bottom: 20px; margin-right: 40px; float: right">
-				<button type="button" class="btn btn-outline-success"
-					onclick="location.href='/settings/vacationVarietyInsert'">
-					<i class="feather icon-plus mr-2"> Insert</i>
-				</button>
+	<div class="row">
+		<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<div class="tab nav-bt">
+				<ul class="nav nav-tabs" role="tablist">
+				
+					<li class="nav-item">
+					<a class="nav-link active show" id="category-tab" data-toggle="tab" href="#category" role="tab"
+						aria-controls="home" aria-selected="true">휴가 대분류</a></li>
+						
+					<li class="nav-item">
+					<a class="nav-link" id="sort-tab" data-toggle="tab" href="#sort" role="tab" aria-controls="sort"
+						aria-selected="false">휴가 중분류</a></li>
+						
+					<li class="nav-item">
+					<a class="nav-link" id="type-tab" data-toggle="tab" href="#type" role="tab"
+					aria-controls="type" aria-selected="false">휴가종류</a></li>
+					
+					<li class="nav-item">
+					<a class="nav-link" id="standard-tab" data-toggle="tab" href="#standard" role="tab"
+					aria-controls="standard" aria-selected="false">휴가기준</a></li>
+					
+				</ul>
+			</div>
+			<div class="tab-content">
+				<div class="card-body table-responsive p-0 tab-pane fade active show" id="category" role="tabpanel">
+					<div th:include="~{settings/vacation_category_list :: vacationCategory}"></div>
+				</div>
+				<div class="card-body table-responsive p-0 tab-pane fade" id="sort" role="tabpanel">
+					<div th:include="~{settings/vacation_sort_list :: vacationSort}"></div>
+				</div>
+				<div class="card-body table-responsive p-0 tab-pane fade" id="type" role="tabpanel">
+					<div th:include="~{settings/vacation_type_list :: vacationType}"></div>
+				</div>
+				<div class="card-body table-responsive p-0 tab-pane fade" id="standard" role="tabpanel">
+					<div th:include="~{settings/vacation_standard_list :: vacationStandard}"></div>
+				</div>
 			</div>
 		</div>
-		<h3>휴가대분류 설정</h3>
-		
-		<div class="col-md-10 col-lg-10">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col">휴가명</th>
-						<th scope="col">사용유무</th>
-						<th scope="col">수정</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:if="${not #lists.isEmpty(category)}"
-						th:each="c : ${category}">
-						<td th:text="${c.vacationCategoryName}"></td>
-						<td th:text="${c.vacationUse}"></td>
-						<td>
-							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
-							th:href="@{/settings/vacationVarietyModify}">수정</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
 	</div>
-	<div style="width: 50%; float: right;">
-		<div class="col-md-12 col-lg-12">
-			<div class="widgetbar"
-				style="margin-bottom: 20px; margin-right: 40px; float: right">
-				<button type="button" class="btn btn-outline-success"
-					onclick="location.href='/settings/vacationVarietyInsert'">
-					<i class="feather icon-plus mr-2"> Insert</i>
-				</button>
-			</div>
-		</div>
-		<h3>휴가중분류 설정</h3>
-		<div class="col-md-10 col-lg-10">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col">휴가명</th>
-						<th scope="col">사용유무</th>
-						<th scope="col">수정</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:if="${not #lists.isEmpty(sort)}"
-						th:each="s : ${sort}">
-						<td th:text="${s.vacationSortName}"></td>
-						<td th:text="${s.vacationUse}"></td>
-						<td>
-							<!-- (workTypeNum=${wt.workTypeNum}) -->
-							 <a th:href="@{/settings/vacationVarietyModify}">수정</a>
-						</td>
-					</tr>
-					<tr th:unless="${not #lists.isEmpty(category)}">
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div style="width: 50%; float: left; margin-top: 40px;">
-		<div class="col-md-12 col-lg-12">
-			<div class="widgetbar"
-				style="margin-bottom: 20px; margin-right: 40px; float: right">
-				<button type="button" class="btn btn-outline-success"
-					onclick="location.href='/settings/vacationVarietyInsert'">
-					<i class="feather icon-plus mr-2"> Insert</i>
-				</button>
-			</div>
-		</div>
-		<h3>휴가종류 설정</h3>
-		<div class="col-md-10 col-lg-10">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col">휴가명</th>
-						<th scope="col">사용유무</th>
-						<th scope="col">수정</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<tr th:if="${not #lists.isEmpty(type)}"
-						th:each="t : ${type}">
-						<td th:text="${t.vacationName}"></td>
-						<td th:text="${t.vacationUse}"></td>
-						<td>
-							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
-							th:href="@{/settings/vacationVarietyModify}">수정</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div style="width: 50%; float: right; margin-top: 40px;">
-		<div class="col-md-12 col-lg-12">
-			<div class="widgetbar"
-				style="margin-bottom: 20px; margin-right: 40px; float: right">
-				<button type="button" class="btn btn-outline-success"
-					onclick="location.href='/settings/vacationVarietyInsert'">
-					<i class="feather icon-plus mr-2"> Insert</i>
-				</button>
-			</div>
-		</div>
-		<h3>휴가기준 설정</h3>
-		<div class="col-md-10 col-lg-10">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col">근속연수</th>
-						<th scope="col">휴가개수</th>
-						<th scope="col">사용여부</th>
-						<th scope="col">수정</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<tr th:if="${not #lists.isEmpty(standard)}"
-						th:each="st : ${standard}">
-						<td th:text="${st.lengthOfService}"></td>
-						<td th:text="${st.addVacation}"></td>
-						<td th:text="${st.vacationStandardUse}"></td>
-						<td>
-							<!-- (workTypeNum=${wt.workTypeNum}) --> <a
-							th:href="@{/settings/vacationVarietyModify}">수정</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
+	<!-- end task list contant -->
 </th:block>
+
+
+<!-- 사용자 지정 js script -->
+<th:block layout:fragment="customScript">
+		<script type="text/javascript">
+			$('button[name=categoryModifyBtn]').click(function(){
+				const vacationCategoryNum = $(this).val();
+				$.ajax({
+					 	url: "/settings/vacationCategoryModify",
+			            type: "GET",
+			            data: {"vacationCategoryNum" : vacationCategoryNum},
+			            contentType: 'application/json; charset=utf-8',
+			            dataType: "json",
+			            success: function(vacationCategory){
+			            			$('#vacationCategoryName').val(vacationCategory.vacationCategoryName);
+			            			$('#categoryUse').val(vacationCategory.vacationUse);
+			            },
+			            error: function(){
+			                alert("error");
+			            }
+				});
+			});
+		</script>
+	</th:block>
 </html>

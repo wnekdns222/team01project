@@ -10,7 +10,7 @@ public class VacationType {
 	private String memberNum;
 	private String regDate;
 	private String correctMemberNum;
-	private String correctCate;
+	private String correctDate;
 	
 	public String getVacationTypeNum() {
 		return vacationTypeNum;
@@ -60,11 +60,11 @@ public class VacationType {
 	public void setCorrectMemberNum(String correctMemberNum) {
 		this.correctMemberNum = correctMemberNum;
 	}
-	public String getCorrectCate() {
-		return correctCate;
+	public String getCorrectDate() {
+		return correctDate;
 	}
-	public void setCorrectCate(String correctCate) {
-		this.correctCate = correctCate;
+	public void setCorrectDate(String correctDate) {
+		this.correctDate = correctDate;
 	}
 	@Override
 	public String toString() {
@@ -85,8 +85,8 @@ public class VacationType {
 		builder.append(regDate);
 		builder.append(", correctMemberNum=");
 		builder.append(correctMemberNum);
-		builder.append(", correctCate=");
-		builder.append(correctCate);
+		builder.append(", correctDate=");
+		builder.append(correctDate);
 		builder.append("]");
 		return builder.toString();
 	}

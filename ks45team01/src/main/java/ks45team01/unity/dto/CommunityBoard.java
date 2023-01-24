@@ -2,103 +2,103 @@ package ks45team01.unity.dto;
 
 public class CommunityBoard {
 	
-	private String BoardCode;
-	private String CommunityCode;
-	private String BoardName;
-	private String MemberNum;
-	private String BoardContent;
-	private String BoardFile;
-	private String BoardFilePath;
-	private String BoardRegDate;
-	private String BoardUpdateDate;
-	private String BoardViewCount;
+	private String boardCode;
+	private String communityCode;
+	private String boardName;
+	private String memberNum;
+	private String boardContent;
+	private String boardFile;
+	private String boardFilePath;
+	private String boardRegDate;
+	private String boardUpdateDate;
+	private String boardViewCount;
+	
 	public String getBoardCode() {
-		return BoardCode;
+		return boardCode;
 	}
-	public void setBoardCode(String BoardCode) {
-		BoardCode = BoardCode;
+	public void setBoardCode(String boardCode) {
+		this.boardCode = boardCode;
 	}
 	public String getCommunityCode() {
-		return CommunityCode;
+		return communityCode;
 	}
 	public void setCommunityCode(String communityCode) {
-		CommunityCode = communityCode;
+		this.communityCode = communityCode;
 	}
 	public String getBoardName() {
-		return BoardName;
+		return boardName;
 	}
-	public void setBoardName(String BoardName) {
-		BoardName = BoardName;
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
 	}
 	public String getMemberNum() {
-		return MemberNum;
+		return memberNum;
 	}
 	public void setMemberNum(String memberNum) {
-		MemberNum = memberNum;
+		this.memberNum = memberNum;
 	}
 	public String getBoardContent() {
-		return BoardContent;
+		return boardContent;
 	}
-	public void setBoardContent(String BoardContent) {
-		BoardContent = BoardContent;
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
 	}
 	public String getBoardFile() {
-		return BoardFile;
+		return boardFile;
 	}
-	public void setBoardFile(String BoardFile) {
-		BoardFile = BoardFile;
+	public void setBoardFile(String boardFile) {
+		this.boardFile = boardFile;
 	}
 	public String getBoardFilePath() {
-		return BoardFilePath;
+		return boardFilePath;
 	}
-	public void setBoardFilePath(String BoardFilePath) {
-		BoardFilePath = BoardFilePath;
+	public void setBoardFilePath(String boardFilePath) {
+		this.boardFilePath = boardFilePath;
 	}
 	public String getBoardRegDate() {
-		return BoardRegDate;
+		return boardRegDate;
 	}
-	public void setBoardRegDate(String BoardRegDate) {
-		BoardRegDate = BoardRegDate;
+	public void setBoardRegDate(String boardRegDate) {
+		this.boardRegDate = boardRegDate;
 	}
 	public String getBoardUpdateDate() {
-		return BoardUpdateDate;
+		return boardUpdateDate;
 	}
-	public void setBoardUpdateDate(String BoardUpdateDate) {
-		BoardUpdateDate = BoardUpdateDate;
+	public void setBoardUpdateDate(String boardUpdateDate) {
+		this.boardUpdateDate = boardUpdateDate;
 	}
 	public String getBoardViewCount() {
-		return BoardViewCount;
+		return boardViewCount;
 	}
-	public void setBoardViewCount(String BoardViewCount) {
-		BoardViewCount = BoardViewCount;
+	public void setBoardViewCount(String boardViewCount) {
+		this.boardViewCount = boardViewCount;
 	}
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CommunityBoard [BoardCode=");
-		builder.append(BoardCode);
-		builder.append(", CommunityCode=");
-		builder.append(CommunityCode);
-		builder.append(", BoardName=");
-		builder.append(BoardName);
-		builder.append(", MemberNum=");
-		builder.append(MemberNum);
-		builder.append(", BoardContent=");
-		builder.append(BoardContent);
-		builder.append(", BoardFile=");
-		builder.append(BoardFile);
-		builder.append(", BoardFilePath=");
-		builder.append(BoardFilePath);
-		builder.append(", BoardRegDate=");
-		builder.append(BoardRegDate);
-		builder.append(", BoardUpdateDate=");
-		builder.append(BoardUpdateDate);
-		builder.append(", BoardViewCount=");
-		builder.append(BoardViewCount);
+		builder.append("CommunityBoard [boardCode=");
+		builder.append(boardCode);
+		builder.append(", communityCode=");
+		builder.append(communityCode);
+		builder.append(", boardName=");
+		builder.append(boardName);
+		builder.append(", memberNum=");
+		builder.append(memberNum);
+		builder.append(", boardContent=");
+		builder.append(boardContent);
+		builder.append(", boardFile=");
+		builder.append(boardFile);
+		builder.append(", boardFilePath=");
+		builder.append(boardFilePath);
+		builder.append(", boardRegDate=");
+		builder.append(boardRegDate);
+		builder.append(", boardUpdateDate=");
+		builder.append(boardUpdateDate);
+		builder.append(", boardViewCount=");
+		builder.append(boardViewCount);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 	
 }

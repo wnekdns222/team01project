@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.MemberListMapper">
+	<resultMap type="MemberList" id="MemberModifyResultMap">
+		<id property="memberNum" column="member_num"/>
+		<result property="memberPw" column="member_pw"/>
+		<result property="memberName" column="member_name"/>
+		<result property="memberGender" column="member_gender"/>
+		<result property="memberEmail" column="member_email"/>
+		<result property="memberBirth" column="member_birth"/>
+		<result property="memberPhone" column="member_phone"/>	
+		<result property="memberDormant" column="member_dormant"/>
+		<result property="memberDormantDate" column="member_dormant_date"/>	
+		<result property="departmentNum" column="department_num"/>	
+		<result property="positionNum" column="position_num"/>	
+		<result property="memberInsertDate" column="member_insert_date"/>	
+	
+	
+	<association property ="memberPositionList" javaType="MemberPositionList">
+		<id property="positionNum" 				column="position_num"/>
+		<result property="positionName" 		column="position_name"/>
+		<result property="memberNum" 			column="member_num"/>
+		<result property="positionRegDate" 		column="position_reg_date"/>
+		<result property="positionUpdateDate" 	column="position_update_date"/>
+		<result property="positionModifier" 	column="position_modifier"/>
+		<result property="useOrNot" 			column="use_or_not"/>
+	</association>
+	
+	<association property ="memberDepartmentList" javaType="memberDepartmentList">
+		<id property="departmentNum" 				column="department_num"/>
+		<result property="departmentName" 		column="department_name"/>
+		<result property="memberNum" 			column="member_num"/>
+		<result property="departmentRegDate" 		column="department_reg_date"/>
+		<result property="departmentUpdateDate" 	column="department_update_date"/>
+		<result property="departmentModifier" 	column="department_modifier"/>
+		<result property="useOrNot" 			column="use_or_not"/>
+	</association>
+	
+	</resultMap>
+	<resultMap type ="MemberPositionList" id="MemberPositionListMap">
+		<id property="positionNum" 				column="position_num"/>
+		<result property="positionName" 		column="position_name"/>
+		<result property="memberNum" 			column="member_num"/>
+		<result property="positionRegDate" 		column="position_reg_date"/>
+		<result property="positionUpdateDate" 	column="position_update_date"/>
+		<result property="positionModifier" 	column="position_modifier"/>
+		<result property="useOrNot" 			column="use_or_not"/>
+	</resultMap>
+	
+	<resultMap type ="memberDepartmentList" id="memberDepartmentListMap">
+		<id property="departmentNum" 				column="department_num"/>
+		<result property="departmentName" 		column="department_name"/>
+		<result property="memberNum" 			column="member_num"/>
+		<result property="departmentRegDate" 		column="department_reg_date"/>
+		<result property="departmentUpdateDate" 	column="department_update_date"/>
+		<result property="departmentModifier" 	column="department_modifier"/>
+		<result property="useOrNot" 			column="use_or_not"/>
+	</resultMap>
+	
+	
+	
+	<select id="memberModifyList" resultMap="MemberModifyResultMap">
+	/*멤버 직급 및 부서 조인 */
+	SELECT
+		*
+	FROM
+		tb_member AS m
+			INNER JOIN 
+		tb_position_list AS pl
+			ON
+		m.member_position_num = pl.position_num
+		INNER JOIN 
+		tb_department_list AS dl
+		ON
+		m.member_department_num = dl.department_num
+	</select>
+	
+	<select id="memberModifyDepartmentList" resultMap="memberDepartmentListMap">
+	/*부서 목록 */
+	SELECT
+		*
+	FROM
+		tb_department_list
+	
+	</select>
+	
+	<select id="MemberModifyPositionList" resultMap="MemberPositionListMap">
+	/*부서 목록 */
+	SELECT
+		*
+	FROM
+		tb_position_list
+	
+	</select>
+
+</mapper>

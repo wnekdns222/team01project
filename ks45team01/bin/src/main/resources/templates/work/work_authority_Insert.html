@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-</body>
+<th:block layout:fragment="customCrumbbar">
+	<div class="row">
+		<div class="col-md-12 m-b-30">
+			<!-- begin page title -->
+			<div class="d-block d-lg-flex flex-nowrap align-items-center">
+				<div class="page-title mr-4 pr-4 border-right">
+					<h1>비정상근태등록</h1>
+				</div>
+				<div class="breadcrumb-bar align-items-center">
+					<nav>
+						<ol class="breadcrumb p-0 m-b-0">
+							<li class="breadcrumb-item"><a href="/"><i
+									class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item active text-primary"
+								aria-current="page">비정상근태등록</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end page title -->
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<form>
+		<div class="form-group">
+			<label for="workNum">근태번호</label> <input type="text"
+				class="form-control" id="workNum" required>
+		</div>
+		<div class="form-group">
+			<label for="memberNum">사원번호</label> <input type="text"
+				class="form-control" id="memberNum" required>
+		</div>
+		<div class="form-group">
+			<label for="writeAttendanceDay">근무일</label> <input type="date"
+				class="form-control" id="writeAttendanceDay" required>
+		</div>
+		<div class="form-group">
+			<label for="writeAttendanceTime">출근시간</label> <input type="time"
+				class="form-control" name="writeAttendanceTime"
+				id="writeAttendanceTime" required>
+		</div>
+		<div class="form-group">
+			<label for="writeLeaveWorkTime">퇴근시간</label> <input type="time"
+				class="form-control" name="writeLeaveWorkTime"
+				id="writeLeaveWorkTime" required>
+		</div>
+		<div class="form-group">
+			<label for="writeChangeReason">입력사유</label>
+			<textarea class="form-control" name="writeChangeReason"
+				id="writeChangeReason" rows="3" placeholder="Textarea text">
+	                     </textarea>
+		</div>
+		<div class="form-group">
+			<label for="vacationCategoryNum">대분류</label> <select
+				class="form-control" name="vacationCategoryNum"
+				id="vacationCategoryNum" required>
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="vacationSortNum">중분류</label> <select class="form-control"
+				name="vacationSortNum" id="vacationSortNum" required>
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="vacationTypeNum">휴가종류</label> <select
+				class="form-control" name="vacationTypeNum" id="vacationTypeNum"
+				required>
+				<option value=""></option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</th:block>
 </html>

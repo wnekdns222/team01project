@@ -26,7 +26,44 @@
 		<br><br>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<h1>프로젝트내부 게시글 수정 화면</h1>
+				<div class="row" th:each="pbo : ${projectBoardOne}">
+			<form class="col-md-12" th:action="@{/project/projectBoardModify}" method="post">
+				<div class="col-md-12">
+					<input type="hidden" id="projectBoardNum" name="projectBoardNum" th:value="${pbo.projectBoardNum}" /> 
+					<input type="text" id="memberNum" name="memberNum" th:value="${pbo.memberNum}" />
+					<div class="card card-statistics">
+						<div class="card-header">
+							<div>
+								<!-- 멤버아이디 db값 가져오기  -->
+								<h5>작성자 : [[${pbo.memberNum}]]</h5>
+								<!-- 멤버아이디 db값 가져오기  -->
+							</div>
+							<div>
+								<h4 class="card-title">
+									게시글 제목
+									<button type="submit" class="btn btn-primary" style="float: right;">
+										수정완료
+									</button>
+								</h4>
+							</div>
+							<div class="card-heading">
+								<!-- 프로젝트보드제목 db연결 -->
+								<input class="form-control form-control-lg" type="text" id="projectBoardTitle" name="projectBoardTitle"
+									th:value="${pbo.projectBoardTitle}"
+									style="background-color: white;" />
+							</div>
+						</div>
+						<div class="card-body">
+							<h5>내용</h5>
+							<textarea class="form-control" placeholder="Message"
+								id="projectBoardContent" name="projectBoardContent" rows="10"
+								th:text="${pbo.projectBoardContent}" style="background-color: white;"></textarea>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
 	</th:block>
 	
 </html>

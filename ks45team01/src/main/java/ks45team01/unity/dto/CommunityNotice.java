@@ -2,103 +2,105 @@ package ks45team01.unity.dto;
 
 public class CommunityNotice {
 	
-	private String NoticeCode;
-	private String CommunityCode;
-	private String NoticeName;
-	private String MemberNum;
-	private String NoticeContent;
-	private String NoticeFile;
-	private String NoticeFilePath;
-	private String NoticeRegDate;
-	private String NoticeUpdateDate;
-	private String NoticeViewCount;
+	private String noticeCode;
+	private String communityCode;
+	private String noticeName;
+	private String memberNum;
+	private String noticeContent;
+	private String noticeFile;
+	private String noticeFilePath;
+	private String noticeRegDate;
+	private String noticeUpdateDate;
+	private String noticeViewCount;
+	
 	public String getNoticeCode() {
-		return NoticeCode;
+		return noticeCode;
 	}
 	public void setNoticeCode(String noticeCode) {
-		NoticeCode = noticeCode;
+		this.noticeCode = noticeCode;
 	}
 	public String getCommunityCode() {
-		return CommunityCode;
+		return communityCode;
 	}
 	public void setCommunityCode(String communityCode) {
-		CommunityCode = communityCode;
+		this.communityCode = communityCode;
 	}
 	public String getNoticeName() {
-		return NoticeName;
+		return noticeName;
 	}
 	public void setNoticeName(String noticeName) {
-		NoticeName = noticeName;
+		this.noticeName = noticeName;
 	}
 	public String getMemberNum() {
-		return MemberNum;
+		return memberNum;
 	}
 	public void setMemberNum(String memberNum) {
-		MemberNum = memberNum;
+		this.memberNum = memberNum;
 	}
 	public String getNoticeContent() {
-		return NoticeContent;
+		return noticeContent;
 	}
 	public void setNoticeContent(String noticeContent) {
-		NoticeContent = noticeContent;
+		this.noticeContent = noticeContent;
 	}
 	public String getNoticeFile() {
-		return NoticeFile;
+		return noticeFile;
 	}
 	public void setNoticeFile(String noticeFile) {
-		NoticeFile = noticeFile;
+		this.noticeFile = noticeFile;
 	}
 	public String getNoticeFilePath() {
-		return NoticeFilePath;
+		return noticeFilePath;
 	}
 	public void setNoticeFilePath(String noticeFilePath) {
-		NoticeFilePath = noticeFilePath;
+		this.noticeFilePath = noticeFilePath;
 	}
 	public String getNoticeRegDate() {
-		return NoticeRegDate;
+		return noticeRegDate;
 	}
 	public void setNoticeRegDate(String noticeRegDate) {
-		NoticeRegDate = noticeRegDate;
+		this.noticeRegDate = noticeRegDate;
 	}
 	public String getNoticeUpdateDate() {
-		return NoticeUpdateDate;
+		return noticeUpdateDate;
 	}
 	public void setNoticeUpdateDate(String noticeUpdateDate) {
-		NoticeUpdateDate = noticeUpdateDate;
+		this.noticeUpdateDate = noticeUpdateDate;
 	}
 	public String getNoticeViewCount() {
-		return NoticeViewCount;
+		return noticeViewCount;
 	}
 	public void setNoticeViewCount(String noticeViewCount) {
-		NoticeViewCount = noticeViewCount;
+		this.noticeViewCount = noticeViewCount;
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CommunityNotice [NoticeCode=");
-		builder.append(NoticeCode);
-		builder.append(", CommunityCode=");
-		builder.append(CommunityCode);
-		builder.append(", NoticeName=");
-		builder.append(NoticeName);
-		builder.append(", MemberNum=");
-		builder.append(MemberNum);
-		builder.append(", NoticeContent=");
-		builder.append(NoticeContent);
-		builder.append(", NoticeFile=");
-		builder.append(NoticeFile);
-		builder.append(", NoticeFilePath=");
-		builder.append(NoticeFilePath);
-		builder.append(", NoticeRegDate=");
-		builder.append(NoticeRegDate);
-		builder.append(", NoticeUpdateDate=");
-		builder.append(NoticeUpdateDate);
-		builder.append(", NoticeViewCount=");
-		builder.append(NoticeViewCount);
+		builder.append("CommunityNotice [noticeCode=");
+		builder.append(noticeCode);
+		builder.append(", communityCode=");
+		builder.append(communityCode);
+		builder.append(", noticeName=");
+		builder.append(noticeName);
+		builder.append(", memberNum=");
+		builder.append(memberNum);
+		builder.append(", noticeContent=");
+		builder.append(noticeContent);
+		builder.append(", noticeFile=");
+		builder.append(noticeFile);
+		builder.append(", noticeFilePath=");
+		builder.append(noticeFilePath);
+		builder.append(", noticeRegDate=");
+		builder.append(noticeRegDate);
+		builder.append(", noticeUpdateDate=");
+		builder.append(noticeUpdateDate);
+		builder.append(", noticeViewCount=");
+		builder.append(noticeViewCount);
 		builder.append("]");
 		return builder.toString();
 	}
 	
-	
 }
+	
+	

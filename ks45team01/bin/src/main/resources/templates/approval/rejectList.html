@@ -36,7 +36,16 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<tr th:unless="${#lists.isEmpty(rejectList)}" th:each="r : ${rejectList}">
+					<td th:text="${r.draftDocNum}"></td>
+					<td>
+						<a th:href="@{/approval/rejectView(draftDocNum=${r.draftDocNum})}">[[${r.draftTitle}]]</a>
+					</td>
+					<td th:text="${r.reportDate}"></td>
+					<td th:text="${r.draftDeadline}"></td>
+					<td th:text="${r.approvalProcess.rejectDate}"></td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(rejectList)}">
 					<td colspan="5">반려된 결재/문서가 없습니다.</td>
 				</tr>
 			</tbody>

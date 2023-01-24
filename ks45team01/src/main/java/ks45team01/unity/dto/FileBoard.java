@@ -12,67 +12,127 @@ public class FileBoard {
 	private String fileModificationDate;
 	private String fileUseOrNot;
 	private String fileGroupCode;
+	
+	private FileBoardCate fileBoardCate;
+
+	private MemberPositionList memberPositionList;
+
+	private MemberList memberList;
+
+	private MemberDepartmentList memberDepartmentList;
+
 	public String getFileBoardNum() {
 		return fileBoardNum;
 	}
+
 	public void setFileBoardNum(String fileBoardNum) {
 		this.fileBoardNum = fileBoardNum;
 	}
+
 	public String getFileCategoryCode() {
 		return fileCategoryCode;
 	}
+
 	public void setFileCategoryCode(String fileCategoryCode) {
 		this.fileCategoryCode = fileCategoryCode;
 	}
+
 	public String getFileBoardRegistrant() {
 		return fileBoardRegistrant;
 	}
+
 	public void setFileBoardRegistrant(String fileBoardRegistrant) {
 		this.fileBoardRegistrant = fileBoardRegistrant;
 	}
+
 	public String getFileBoardTitle() {
 		return fileBoardTitle;
 	}
+
 	public void setFileBoardTitle(String fileBoardTitle) {
 		this.fileBoardTitle = fileBoardTitle;
 	}
+
 	public String getFileBoardContents() {
 		return fileBoardContents;
 	}
+
 	public void setFileBoardContents(String fileBoardContents) {
 		this.fileBoardContents = fileBoardContents;
 	}
+
 	public String getFileRegDate() {
 		return fileRegDate;
 	}
+
 	public void setFileRegDate(String fileRegDate) {
 		this.fileRegDate = fileRegDate;
 	}
+
 	public String getFileModifier() {
 		return fileModifier;
 	}
+
 	public void setFileModifier(String fileModifier) {
 		this.fileModifier = fileModifier;
 	}
+
 	public String getFileModificationDate() {
 		return fileModificationDate;
 	}
+
 	public void setFileModificationDate(String fileModificationDate) {
 		this.fileModificationDate = fileModificationDate;
 	}
+
 	public String getFileUseOrNot() {
 		return fileUseOrNot;
 	}
+
 	public void setFileUseOrNot(String fileUseOrNot) {
 		this.fileUseOrNot = fileUseOrNot;
 	}
+
 	public String getFileGroupCode() {
 		return fileGroupCode;
 	}
+
 	public void setFileGroupCode(String fileGroupCode) {
 		this.fileGroupCode = fileGroupCode;
 	}
-	
+
+	public FileBoardCate getFileBoardCate() {
+		return fileBoardCate;
+	}
+
+	public void setFileBoardCate(FileBoardCate fileBoardCate) {
+		this.fileBoardCate = fileBoardCate;
+	}
+
+	public MemberPositionList getMemberPositionList() {
+		return memberPositionList;
+	}
+
+	public void setMemberPositionList(MemberPositionList memberPositionList) {
+		this.memberPositionList = memberPositionList;
+	}
+
+	public MemberList getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(MemberList memberList) {
+		this.memberList = memberList;
+	}
+
+	public MemberDepartmentList getMemberDepartmentList() {
+		return memberDepartmentList;
+	}
+
+	public void setMemberDepartmentList(MemberDepartmentList memberDepartmentList) {
+		this.memberDepartmentList = memberDepartmentList;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -96,8 +156,17 @@ public class FileBoard {
 		builder.append(fileUseOrNot);
 		builder.append(", fileGroupCode=");
 		builder.append(fileGroupCode);
+		builder.append(", fileBoardCate=");
+		builder.append(fileBoardCate);
+		builder.append(", memberPositionList=");
+		builder.append(memberPositionList);
+		builder.append(", memberList=");
+		builder.append(memberList);
+		builder.append(", memberDepartmentList=");
+		builder.append(memberDepartmentList);
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 }

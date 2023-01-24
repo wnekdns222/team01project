@@ -17,35 +17,34 @@
 				</div>
 			</div>
 		</div>
-	  <a href="/reservation/meetingroomReservationInsert" id="exportExcel" class="btn btn-primary" style="float:right; margin-bottom:8px;">예약하기</a>
 	<th:block layout:fragment="customContents">
 		<table class="table table-hover">
                   <thead>
                       <tr>
-                          <th scope="col">회의실명</th>
-                          <th scope="col">사용가능시작시간</th>
-                          <th scope="col">사용가능종료시간</th>
-                          <th scope="col">회의실 위치</th>
-                          <th scope="col">회의실 수용인원</th>
-                          <th scope="col">회의실 상세정보</th>
+                         <th scope="col">회의실 명</th>
+                         <th scope="col">사용가능시작시간</th>
+                         <th scope="col">사용가능종료시간</th>
+                         <th scope="col">회의실 위치</th>
+                         <th scope="col">회의실 수용인원</th>
+                         <th scope="col">회의실 상세정보</th>
+                         <th scope="col"></th>
                       </tr>
                   </thead>
-                  <tbody>
-                    <tr th:unless="${#lists.isEmpty(meetingroomList)}"
-					th:each="l : ${meetingroomList}">	
-					<td>
-                       <div class="form-check mb-0 py-2">
-                           <input class="form-check-input" type="radio" name="meetingroom[${l.index}]"
-                               id="success" value="success" th:text="${l.meetName}"> 
-                               <label class="form-check-label" for="success"></label>
-                       </div>
-                    </td>
-					<td th:text="${l.meetUsableStart}"></td>
-					<td th:text="${l.meetUsableEnd}"></td>
-					<td th:text="${l.meetLocation}"></td>
-					<td th:text="${l.meetCapacity}"></td> 
-					<td th:text="${l.meetDetail}"></td>
+                  <tbody >
+						<th:block th:unless="${#lists.isEmpty(reservationList)}"
+					th:each="l : ${reservationList}" th:if="${lStat.index} < 1"> 
+                    <tr th:each="m : ${meetingroomList}">
+						<td th:text="${m.meetName}"></td>
+						<td th:text="${m.meetUsableStart}"></td>
+						<td th:text="${m.meetUsableEnd}"></td>
+						<td th:text="${m.meetLocation}"></td>
+						<td th:text="${m.meetCapacity}"></td> 
+						<td th:text="${m.meetDetail}"></td>
+						<td>
+							<a th:href="@{/reservation/meetingroomReservationInsert(meetNum=${m.meetNum})}"  href="javascript:void(0)" class="btn btn-round btn-outline-primary">예약</a>
+						<td>
 					</tr>
+						</th:block>
                   </tbody>
               </table>
 	</th:block>

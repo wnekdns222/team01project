@@ -26,5 +26,6 @@ public interface WorkTypeMapper {
 	//근무유형 수정
 	public void updateWorkType(WorkType workType);
 	
-	
+	//근무유형 근무일,사원번호로 조회
+	public String getWorkTypeNum(String workDate, String memberNum);
 }

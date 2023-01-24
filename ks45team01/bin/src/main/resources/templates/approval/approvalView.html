@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	  
+	<th:block layout:fragment="customCrumbbar">
+		<div class="breadcrumbbar">
+			<div class="row align-items-center">
+				<div class="col-md-8 col-lg-8">
+					<h4 class="page-title">문서번호</h4>
+					<div class="breadcrumb-list">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item"><a href="/approval/draftList">기안함</a></li>
+							<li class="breadcrumb-item active" aria-current="page">문서번호</li>
+						</ol>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<div class="widgetbar">
+						<button class="btn btn-primary-rgba">
+							<i class="feather icon-plus mr-2"></i>Actions
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<form id="addRejectReason" th:action="@{/approval/draftView}" method="post">
+		<table class="table table-hover">
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<input type="hidden" id="draftDocNum" name="draftDocNum" th:value="${draftView.draftDocNum}"/>
+					<div align="center">기안 번호</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					[[${draftView.draftDocNum}]]
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">제목</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					[[${draftView.draftTitle}]]
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">상신일자</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					[[${draftView.reportDate}]]
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">기한시점</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					[[${draftView.draftDeadline}]]
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">내용</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					<textarea rows="4" cols="50" disabled="disabled">[[${draftView.draftContents}]]</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">파일첨부</div>
+				</td>
+				<td>
+					<input type="file" disabled="disabled"/>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="center">반려사유</div>
+				</td>
+				<td style="font-family:돋음; font-size:12">
+					<textarea rows="4" cols="50" id="rejectReason" name="rejectReason"></textarea>
+				</td>
+				<td style="font-family:돋음; font-size:12" height="16">
+					<div align="left">반려자
+						<input type="text" id="rejectReasonMember" name="rejectReasonMember"/>
+						<button type="submit" class="btn btn-outline-success">반려</button>
+					</div>
+				</td>
+			</tr>
+		</table>
+		</form>
+		<form id="approvalView" th:action="@{/approval/approvalView}" method="post">
+			<input type="hidden" id="approvalProcessNum" name="approvalProcessNum" th:value="${draftView.approvalProcess.approvalProcessNum}">
+			<input type="hidden" id="draftDocNum" name="draftDocNum" th:value="${draftView.draftDocNum}">
+			<div style="text-align: center;">
+				<button type="submit" class="btn btn-outline-success">승인</button>
+				<a th:href="@{/approval/draftList}" class="btn btn-outline-success">목록</a>
+			</div>
+		</form>
+	</th:block>
+</html>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ks45team01.unity.mapper.LoginMapper">
+ 	<resultMap type="MemberList" id="memberResultMap">
+		<id property="memberNum" column="member_num" />
+		<result property="memberPw" 				column="member_pw" />
+		<result property="memberName" 			column="member_name" />
+		<result property="memberGender" 	 column="member_gender" />
+		<result property="memberEmail" 			column="member_email" />
+		<result property="memberBirth" 			column="member_birth" />
+		<result property="memberPhone" 			column="member_phone" />
+		<result property="memberDormant" 		column="member_dormant" />
+		<result property="memberDormantDate" 		column="member_dormant_date" />
+		<result property="departmentNum" 		column="member_department_num" />
+		<result property="positionNum" 		column="member_position_num" />
+		<result property="memberInsertDate" 		column="member_insert_date" />
+		<association property="memberPositionList" javaType="MemberPositionList">
+			<id property="positionNum" 				column="position_num"/>
+			<result property="positionName" 		column="position_name"/>
+			<result property="memberNum"			column="member_num"/>
+			<result property="positionRegDate" 		column="position_reg_date"/>
+			<result property="positionUpdateDate" 	column="position_update_date"/>
+			<result property="positionModifier" 	column="position_modifier"/>
+			<result property="useOrNot" 			column="use_or_not"/>
+		</association>
+		<association property ="memberDepartmentList" javaType="MemberDepartmentList">
+			<id property="departmentNum" 			column="department_num"/>
+			<result property="departmentName" 		column="department_name"/>
+			<result property="memberNum" 			column="member_num"/>
+			<result property="departmentRegDate" 	column="department_reg_date"/>
+			<result property="departmentUpdateDate" column="department_update_date"/>
+			<result property="departmentModifier" 	column="department_modifier"/>
+			<result property="useOrNot" 			column="use_or_not"/>
+		</association>
+	</resultMap> 
+	<!-- 회원가입 -->
+	<insert id="addMember" parameterType="MemberList">
+	INSERT INTO 
+	tb_member
+		(member_num, 
+		member_pw, 
+		member_name, 
+		member_gender, 
+		member_email, 
+		member_birth, 
+		member_phone,  
+		member_department_num, 
+		member_position_num, 
+		member_insert_date)
+VALUES 
+		(#{memberNum}, #{memberPw}, #{memberName}, #{memberGender}, #{memberEmail}, #{memberBirth}, #{memberPhone}, #{departmentNum}, #{positionNum}, NOW());
+	</insert>
+	<!-- 회원가입 유효성 검사 -->
+	<select id="checkMemberNum" parameterType="String" resultType="boolean">
+	SELECT 
+		if(COUNT(*) = 1, 1, 0)
+	FROM
+		tb_member AS m
+	WHERE
+		m.member_num=#{memberNum};
+	
+	</select>
+	<!-- <resultMap type="LoginHistory" id="loginResultMap">
+		<id 		property="loginNum" 		column="login_num"/>
+		<result 	property="loginId"   			column="login_num"/>
+		<result 	property="loginDate"   		column="login_Date"/>
+		<result 	property="logoutDate"   	column="logout_Date"/>
+		<association property="member" javaType="Member">
+			<id property="memberNum" column="m_num" />
+			<result property="memberPw" 				column="m_pw" />
+			<result property="memberLevel" 			column="m_level" />
+			<result property="memberLevelName" 	 column="level_name" />
+			<result property="memberName" 			column="m_name" />
+			<result property="memberEmail" 			column="m_email" />
+			<result property="memberAddr" 			column="m_addr" />
+		</association>
+	</resultMap>-->
+	<!-- 로그인 -->
+	<select id="checkPwById" parameterType="String" resultMap="memberResultMap">
+		SELECT 
+		 m.member_num
+		,m.member_pw
+		,dl.department_num
+		,pl.position_name
+		,dl.department_name
+		,m.member_name
+		,m.member_email
+	FROM
+		tb_member AS m
+		INNER JOIN 
+		tb_position_list AS pl
+		ON 
+		m.member_num = pl.position_member_num
+		INNER JOIN 
+		tb_department_list AS dl
+		ON 
+		pl.position_member_num = dl.member_num
+	WHERE
+		m.member_num = #{memberNum};
+	</select>
+	
+	<!-- <select id="getLoginHistory" parameterType="map" resultMap="loginResultMap">
+		/* 로그인 이력 조회 */
+		SELECT
+		   l.login_date
+		  ,l.logout_date
+		  ,m.m_num
+		  ,m.m_name
+		  ,m.m_email
+		  ,ml.level_name
+		FROM
+			tb_login AS l
+			INNER join
+			tb_member as m
+			on
+			l.login_num = m.m_num
+			INNER join
+			tb_member_level AS ml
+			on
+			ml.level_num = m.m_level
+		ORDER BY l.login_date DESC
+		<if test="startRowNum != null and startRowNum > -1">
+			LIMIT #{startRowNum}, #{rowPerPage};
+		</if>
+	</select>
+	
+	<select id="getLoginHistoryCnt" resultType = "int">
+		 /* 로그인 이력테이블의 전체 행의 갯수 */
+		SELECT
+			COUNT(1)
+		FROM
+			tb_login;	
+	</select> -->
+	</mapper>
+	

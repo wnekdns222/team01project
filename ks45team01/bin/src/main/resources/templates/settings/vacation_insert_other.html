@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+ <th:block th:fragment="vacationInsertOhter"> 
+	<form th:action="@{/settings/vacationInsertOther}" method="post"
+		style="margin-top: 20px; margin-bottom: 20px; width: 90%; margin-left: 20px;">
+		<div class="form-group">
+			<label for="rewardVacationNumber">포상휴가</label> <select
+				class="form-control" id="rewardVacationNumber"
+				name="rewardVacationNumber" style="width: 300px;" >
+				<option></option>
+				<th:block th:each="num : ${#numbers.sequence(1, 10)}">
+					<option th:text="|${num}|"></option>
+				</th:block>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="replaceVacationDay">대체휴가</label> <select
+				class="form-control" id="replaceVacationDay"
+				name="replaceVacationDay" style="width: 300px;" >
+				<option></option>
+				<th:block th:each="num : ${#numbers.sequence(1, 10)}">
+					<option th:text="|${num}|"></option>
+				</th:block>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="personalBuisinessVacationDay">경조사휴가</label> <select
+				class="form-control" id="personalBuisinessVacationDay"
+				name="personalBuisinessVacationDay" style="width: 300px;" >
+				<option></option>
+				<th:block th:each="num : ${#numbers.sequence(1, 10)}">
+					<option th:text="|${num}|"></option>
+				</th:block>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="sickVacationDay">병가</label> <select class="form-control"
+				id="sickVacationDay" name="sickVacationDay" style="width: 300px;">
+				<option></option>
+				<th:block th:each="num : ${#numbers.sequence(1, 10)}">
+					<option th:text="|${num}|"></option>
+				</th:block>
+			</select>
+		</div>
+		<div class="duallistbox">
+			<div class="box2 col-md-6"></div>
+		</div>
+		<label for="memberName">사원이름</label> 
+		<select multiple="multiple"
+			size="10" id="duallistbox2" name="memberNum" style="display: none;">
+			<option></option>
+				<th:block th:each="l : ${memberList}">
+					<option th:value="${l.memberNum}">[[${l.memberName}]]</option>
+				</th:block>
+		</select>
+		<div class="form-group">
+			<input type="hidden" id="useVacationYear2" name="useVacationYear" >
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</th:block>
+</html>

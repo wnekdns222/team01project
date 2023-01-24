@@ -95,11 +95,19 @@
                
          
 	</th:block>
-	
-         <th:block layout:fragment="customScript">         
-	        <script>
-	     
-	        </script>
-         </th:block>
+	<th:block layout:fragment="customScript">
+
+	<script>
+		const $addBoardBtn = document.querySelector('.addBoardBtn');
+		$addBoardBtn.addEventListener('click', function(){	
+			const $projectNumEle = document.querySelector('#projectNum');
+			let projectNum = $projectNumEle.value;
+			location.href = '/project/projectBoardInsert?projectNum=' + projectNum;
+		});
+		function home_clickFunc() {
+			document.getElementById().href="/project/projectBoardInsert(projectNum=${projectNum})"
+		}
+	</script>
+</th:block>
 	
 </html>

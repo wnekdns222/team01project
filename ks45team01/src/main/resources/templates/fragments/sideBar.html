@@ -30,13 +30,13 @@
 						class="nav-icon ti ti-layout-column3-alt"></i> <span
 						class="nav-title">근태</span></a>
 					<ul aria-expanded="false">
-						<li><a href="/work/workList">근태내역조회</a></li>
-						<li><a href="/work/workDepartmentList">부서근태내역조회</a></li>
+						<li><a th:href="@{/work/workList(memberNum=${session.SID})}">근태내역조회</a></li>
+						<li><a th:href="@{/work/workDepartmentList(departmentNum=${session.SDEPARTMENTNUM})}">부서근태내역조회</a></li>
 						<li><a href="/work/workAllList">전사원근태내역조회</a></li>
 						<li><a href="/work/workAuthorityInsert">비정상근태권한입력</a></li>
 						<li><a href="/work/workAuthorityList">비정상근태권한조회</a></li>
-						<li><a href="/vacation/vacationInfoList">연차조회</a></li>
-						<li><a href="/vacation/vacationInfoDepartmentList">부서연차조회</a></li>
+						<li><a th:href="@{/vacation/vacationInfoList(memberNum=${session.SID})}">연차조회</a></li>
+						<li><a th:href="@{/vacation/vacationInfoDepartmentList(departmentNum=${session.SDEPARTMENTNUM})}">부서연차조회</a></li>
 						<li><a href="/vacation/vacationInfoAllList">전사원연차조회</a></li>
 					</ul></li>
 				<!-- 메신저메뉴 -->
@@ -76,18 +76,24 @@
 				<li class="active"><a class="has-arrow"
 					href="javascript:void(0)" aria-expanded="false"> <i
 						class="nav-icon ti ti-rocket"></i> <span class="nav-title">전자결재</span>
-						<span class="nav-label label label-danger">3</span>
 				</a>
 					<ul aria-expanded="false">
 						<li><a href='/form/formList'>서식</a></li>
-						<li><a href="/approval/draftInsert">기안</a></li>
-						<li><a href="/approval/draftList">기안함</a></li>
-						<li><a href="/approval/receiverList">수신함</a></li>
-						<li><a href="/approval/referrerList">참조함</a></li>
-						<li><a href="/approval/circularList">회람함</a></li>
-						<li><a href="/approval/rejectList">반려함</a></li>
-						<li><a href="/approval/approvalList">결재함</a></li>
-						<li><a href="/approval/approvalDoneList">결재완료함</a></li>
+						<li class="scoop-hasmenu"><a class="has-arrow"
+							href="javascript: void(0);">기안</a>
+							<ul aria-expanded="false">
+								<li><a href="/approval/odInsert">공문서</a></li>
+								<li><a href="/approval/draftInsert">기안서</a></li>
+								<li><a href="/approval/proposalInsert">기획서</a></li>
+								<li><a href="/approval/letterApprovalInsert">품의서</a></li>
+							</ul></li>
+						<li><a th:href="@{/approval/draftList(registrantNum=${session.SID})}">기안함</a></li>
+						<li><a th:href="@{/approval/receiverList(registrantNum=${session.SID})}">수신함</a></li>
+						<li><a th:href="@{/approval/referrerList(registrantNum=${session.SID})}">참조함</a></li>
+						<li><a th:href="@{/approval/circularList(registrantNum=${session.SID})}">회람함</a></li>
+						<li><a th:href="@{/approval/rejectList(registrantNum=${session.SID})}">반려함</a></li>
+						<li><a th:href="@{/approval/approvalList(registrantNum=${session.SID})}">결재함</a></li>
+						<li><a th:href="@{/approval/approvalDoneList(registrantNum=${session.SID})}">결재완료함</a></li>
 						<li><a href="/approval/vacationInsert">휴가신청</a></li>
 						<li><a href="/approval/workCorrectInsert">근태정정</a></li>
 						<li><a href="/approval/finalApproverList">전결/대결</a></li>
@@ -99,6 +105,7 @@
 						<li class="scoop-hasmenu"><a class="has-arrow"
 							href="javascript: void(0);">파일목록</a>
 							<ul aria-expanded="false">
+								<li><a href="/fileBoard/fileList">통합파일</a></li>
 								<li><a href="/fileBoard/hrList">인사부</a></li>
 								<li><a href="/fileBoard/marketingList">마케팅부</a></li>
 								<li><a href="/fileBoard/managementSupportList">경영지원부</a></li>
@@ -111,7 +118,7 @@
 						class="nav-title">예약</span></a>
 					<ul aria-expanded="false">
 						<li><a href="/reservation/meetingroomReservationList">회의실 예약</a></li>
-						<li><a href="/reservation/meetingroomList">회의실 관리</a></li>
+						<li><a th:href="@{/reservation/meetingroomReservationMine(applicantMemberNum=${session.SID})}">내 예약관리</a></li>
 					</ul></li>
 				<li><a class="has-arrow" href="javascript:void(0)"
 					aria-expanded="false"> <i
@@ -134,12 +141,13 @@
 						class="nav-title">사원관리</span>
 				</a>
 					<ul aria-expanded="false">
-						<li><a href="/member/MemberAdmin">전체사원관리</a></li>
+						<li><a href="/AdminMember/AdminMemberList">전체사원관리</a></li>
 
 						<li><a href="/member/MemberDepartmentList">부서목록관리</a></li>
 						<li><a href="/member/MemberDepartMentManige">부서목록사원관리</a></li>
 						<li><a href="/member/MemberPositionList">직급목록관리</a></li>
 						<li><a href="/member/MemberPositionManige">직급목록사원관리</a></li>
+						<li><a href="/member/MemberLevelList">사원권한 관리</a></li>
 
 					</ul></li>
 				<li><a class="has-arrow" href="javascript:void(0)"
@@ -159,8 +167,23 @@
 						class="nav-title">근태관리</span></a>
 					<ul aria-expanded="false">
 						<li><a href="/settings/workTypeList">사원 근무유형</a></li>
-						<li><a href="/settings/vacationInsert">사원 휴가부여</a></li>
+						<li><a href="/settings/vacationInsertAll">사원 휴가부여</a></li>
 						<li><a href="/settings/vacationVarietyList">휴가설정</a></li>
+					</ul></li>
+					<!-- 관리자 회의실설정 -->
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i
+						class="nav-icon ti ti-timer"></i><span
+						class="nav-title">예약관리</span></a>
+					<ul aria-expanded="false">
+						<li><a href="/reservation/meetingroomList">회의실 관리</a></li>
+					</ul></li>
+				<li><a class="has-arrow" href="javascript:void(0)"
+					aria-expanded="false"><i
+						class="nav-icon ti ti-layout-column3-alt"></i><span
+						class="nav-title">카테고리</span></a>
+					<ul aria-expanded="false">
+						<li><a href="/fileBoardCate/fileBoardCateList">파일카테고리</a></li>
 					</ul></li>
 				<li><a class="has-arrow" href="javascript:void(0)"
 					aria-expanded="false"><i class="nav-icon ti ti-layout"></i> <span

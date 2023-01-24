@@ -15,13 +15,6 @@
 						</ol>
 					</div>
 				</div>
-				<div class="col-md-4 col-lg-4">
-					<div class="widgetbar">
-						<button class="btn btn-primary-rgba">
-							<i class="feather icon-plus mr-2"></i>Actions
-						</button>
-					</div>
-				</div>
 			</div>
 		</div>
 	</th:block>
@@ -33,7 +26,7 @@
 			</div>
 			<label for="formRegiStrant">작성자</label>
 			<div style="width: 800px;">
-			<input type="text" class="form-control" id="formRegiStrant" name="formRegiStrant" placeholder="작성자를 입력해주세요" />
+			<input type="text" class="form-control" id="formRegiStrant" name="formRegiStrant" th:value="${session.SID}" />
 			</div>
 			<label for="formContents">내용</label>
 			<textarea class="form-control" name="formContents" id="formContents" placeholder="내용을 입력해주세요" style="height: 250px; width: 800px;"></textarea>

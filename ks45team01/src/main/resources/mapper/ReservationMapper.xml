@@ -13,19 +13,167 @@
 		<result property="memberNum"  column="member_num" />
 		<result property="meetUpdateMember"  column="meet_update_member" />
 		<result property="meetCapacity"  column="meet_capacity" />
-		<result property="meetStatus"  column="meet_status" />
-		<result property="meetRejectReason"  column="meet_reject_reason" />
 		<result property="meetDetail"  column="meet_detail" />
-		<result property="meetManager"  column="meet_manager" />
 	</resultMap>
-
+	
+	<resultMap type="Reservation" id="reservationResultMap">
+		<id		property="reservationNum"	column="reservation_num" />
+		<result property="meetNum"  column="meet_num" />
+		<result property="reservationDate"  column="reservation_date" />
+		<result property="reservationStartTime"  column="reservation_start_time" />
+		<result property="reservationEndTime"  column="reservation_end_time" />
+		<result property="reservationContents"  column="reservation_contents" />
+		<result property="reservationInsertDate"  column="reservation_insert_date" />
+		<result property="applicantMemberNum"  column="applicant_member_num" />
+		<result property="reservationUpdateDate"  column="reservation_update_date" />
+		<result property="reservationUpdateMember"  column="reservation_update_member" />
+		<association property="meetingroom" javaType="Meetingroom">
+			<id property="meetNum" column="meet_num" />
+			<result property="meetName" column="meet_name"/>
+			<result property="meetLocation"  column="meet_location" />
+			<result property="meetUsableStart"  column="meet_usable_start" />
+			<result property="meetUsableEnd"  column="meet_usable_End" />
+			<result property="meetRegDate"  column="meet_reg_date" />
+			<result property="memberNum"  column="member_num" />
+			<result property="meetUpdateMember"  column="meet_update_member" />
+			<result property="meetCapacity"  column="meet_capacity" />
+			<result property="meetStatus"  column="meet_status" />
+			<result property="meetRejectReason"  column="meet_reject_reason" />
+			<result property="meetDetail"  column="meet_detail" />
+			<result property="meetManager"  column="meet_manager" />
+		</association>		
+	</resultMap>
+	<delete id="deleteReservation" parameterType="String">
+		/* 회의실코드로 회의실 삭제*/
+		DELETE
+		FROM
+			tb_meet_reservation
+		WHERE
+			reservation_num = #{reservationNum};
+	</delete>
+	
+	<update id="modifyReservation" parameterType="Reservation">
+		/* 특정 회의실 수정 */
+		UPDATE tb_meet_reservation
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="reservationDate != null and reservationDate != '' ">
+				,reservation_date = #{reservationDate}
+			</if> 
+			<if test="reservationStartTime != null and reservationStartTime != '' ">
+				,reservation_start_time = #{reservationStartTime}
+			</if> 
+			<if test="reservationEndTime != null and reservationEndTime != '' ">
+				,reservation_end_time = #{reservationEndTime}
+			</if> 
+			<if test="reservationContents != null and reservationContents != '' ">
+				,reservation_contents = #{reservationContents}
+			</if> 
+		</trim>
+		 WHERE
+		 	reservation_num = #{reservationNum};
+	</update>
+	
+	<insert id="insertMeetingroomReservation" parameterType="Reservation">
+		/* 회의실 등록 */
+		INSERT INTO tb_meet_reservation
+		(reservation_num, meet_num, reservation_date, reservation_start_time, reservation_end_time, reservation_contents, reservation_insert_date, applicant_member_num)
+		VALUES
+		(#{reservationNum}, #{meetNum}, #{reservationDate}, #{reservationStartTime}, #{reservationEndTime}, #{reservationContents}, now(), #{applicantMemberNum})
+	</insert>
+	<delete id="deleteMeetingroomReservation" parameterType="String">
+		/* 예약코드로 예약 삭제*/
+		DELETE
+		FROM
+			tb_meet_reservation
+		WHERE
+			reservation_num = #{reservationNum};
+	</delete>
+	
+	<select id="getReservationMineList" resultMap="reservationResultMap" parameterType="String">
+		/* 내 예약 조회 */
+		SELECT 
+			*
+		FROM
+			tb_meetingroom as m
+			INNER JOIN
+			tb_meet_reservation as r
+			ON
+			m.meet_num = r.meet_num
+		WHERE
+			applicant_member_num = #{applicantMemberNum}
+		ORDER BY r.reservation_insert_date DESC;
+	</select>
+	
+	<select id="getReservationNameList" resultMap="reservationResultMap">
+		/* 예약 조회 */
+		SELECT
+			m.meet_num,
+			m.meet_name
+		FROM
+			tb_meetingroom as m
+			INNER JOIN
+			tb_meet_reservation as r
+			ON
+			m.meet_num = r.meet_num
+		GROUP BY
+			m.meet_num,
+			m.meet_name
+	</select>
+	
+	<select id="getReservationList" resultMap="reservationResultMap">
+		/* 예약 조회 */
+		SELECT 
+			*
+		FROM
+			tb_meetingroom as m
+			INNER JOIN
+			tb_meet_reservation as r
+			ON
+			m.meet_num = r.meet_num	
+	</select>
+	
+	<select id="getReservationById" parameterType="String" resultMap="reservationResultMap">
+		/* 아이디 가져오기 */
+		SELECT 
+			*
+		FROM 
+			tb_meetingroom as m
+			INNER JOIN
+			tb_meet_reservation as r
+			ON
+			m.meet_num = r.meet_num	
+		WHERE
+			r.reservation_num = #{reservationNum};
+	</select>
+	
+	<select id="getCommonNewCode" parameterType="String" resultType="String">
+		/* 자동 증가 코드 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT(#{column}, '_1')
+			ELSE
+				CONCAT(#{column},'_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT(#{column}, '_'), -1) AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${table} ;
+	</select>
+	
+	<insert id="insertMeetingroom" parameterType="Meetingroom">
+		/* 회의실 등록 */
+		INSERT INTO tb_meetingroom
+		(meet_num, meet_name, meet_location, meet_usable_start, meet_usable_end, meet_reg_date, member_num, meet_capacity, meet_detail)
+		VALUES
+		(#{meetNum}, #{meetName}, #{meetLocation}, #{meetUsableStart}, #{meetUsableEnd}, now(), #{memberNum}, #{meetCapacity}, #{meetDetail})
+	</insert>
+	
 	<select id="getMeetingroomList" resultMap="meetingroomResultMap">
 		/* 회의실 조회 */
 		SELECT 
 			*
 		FROM 
-			tb_meetingroom;
+			tb_meetingroom; 
 	</select>
+	
 	<select id="getMeetingroomById" parameterType="String" resultMap="meetingroomResultMap">
 		/* 회의실 조회 */
 		SELECT 
@@ -35,6 +183,7 @@
 		WHERE
 			meet_num = #{meetNum};
 	</select>
+	
 	<update id="modifyMeetingroom" parameterType="Meetingroom">
 		/* 특정 회의실 수정 */
 		UPDATE tb_meetingroom

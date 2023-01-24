@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<head>
+<link rel="stylesheet" href="/assets/css/todostyle.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&family=Yeon+Sung&display=swap"
+	rel="stylesheet">
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>todoList</title>
+</head>
+<body>
+	<th:block layout:fragment="customCrumbbar">
+		<!-- begin row -->
+		<div class="row">
+			<div class="col-md-12 m-b-30">
+				<!-- begin page title -->
+				<div class="d-block d-lg-flex flex-nowrap align-items-center">
+					<div class="page-title mr-4 pr-4 border-right">
+						<h1>TodoList</h1>
+					</div>
+					<div class="breadcrumb-bar align-items-center">
+						<nav>
+							<ol class="breadcrumb p-0 m-b-0">
+								<li class="breadcrumb-item"><a href="index.html"><i
+										class="ti ti-home"></i></a></li>
+								<li class="breadcrumb-item">todoList</li>
+
+							</ol>
+						</nav>
+					</div>
+					<div
+						class="ml-auto d-flex align-items-center secondary-menu text-center">
+						<a href="/todolist/todoList" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Todo list"> <i
+							class="fe fe-edit btn btn-icon text-primary"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Projects"> <i
+							class="fa fa-lightbulb-o btn btn-icon text-success"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Task"> <i
+							class="fa fa-check btn btn-icon text-warning"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Calendar"> <i
+							class="fa fa-calendar-o btn btn-icon text-cyan"></i>
+						</a> <a href="javascript:void(0);" class="tooltip-wrapper"
+							data-toggle="tooltip" data-placement="top" title=""
+							data-original-title="Analytics"> <i
+							class="fa fa-bar-chart-o btn btn-icon text-danger"></i>
+						</a>
+					</div>
+				</div>
+				<!-- end page title -->
+			</div>
+		</div>
+	</th:block>
+	<!-- 투두리스트  -->
+	<th:block layout:fragment="customContents">
+		<div class="container" id="todoListContent" style="margin-bottom: 50px;">
+			<div class="heading">
+				<img class="heading__img"
+					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/756881/laptop.svg">
+				<h1 class="heading__title">To-Do List</h1>
+			</div>
+			<form class="form"> <!-- id = addtodolist -->
+				<div>
+					<label class="form__label" for="todo">~ 오늘의 할 일은 ~</label> 
+					<input
+						class="form__input" type="text" id="todo" name="to-do" size="30"
+						required>
+					<button class="button"> <!-- id= submitbtn -->
+						<span>추가</span>
+					</button>
+				</div>
+			</form>
+			<div>
+				<ul class="toDoList">
+				</ul>
+			</div>
+			</div>
+		<!-- partial -->
+		<script src="/assets/js/todojs.js"></script>
+	</th:block>
+</body>
+</html>

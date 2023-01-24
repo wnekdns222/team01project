@@ -7,6 +7,8 @@ public class VacationSort {
 	private String memberNum;
 	private String regDate;
 	private String vacationUse;
+	private String correctMemberNum;
+	private String correctDate;
 	public String getVacationSortNum() {
 		return vacationSortNum;
 	}
@@ -37,6 +39,18 @@ public class VacationSort {
 	public void setVacationUse(String vacationUse) {
 		this.vacationUse = vacationUse;
 	}
+	public String getCorrectMemberNum() {
+		return correctMemberNum;
+	}
+	public void setCorrectMemberNum(String correctMemberNum) {
+		this.correctMemberNum = correctMemberNum;
+	}
+	public String getCorrectDate() {
+		return correctDate;
+	}
+	public void setCorrectDate(String correctDate) {
+		this.correctDate = correctDate;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -50,8 +64,14 @@ public class VacationSort {
 		builder.append(regDate);
 		builder.append(", vacationUse=");
 		builder.append(vacationUse);
+		builder.append(", correctMemberNum=");
+		builder.append(correctMemberNum);
+		builder.append(", correctDate=");
+		builder.append(correctDate);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 	
 }

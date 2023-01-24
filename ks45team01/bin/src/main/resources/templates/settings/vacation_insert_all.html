@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default}">
+	<th:block layout:fragment="customCrumbbar">
+	<div class="row">
+		<div class="col-md-12 m-b-30">
+			<!-- begin page title -->
+			<div class="d-block d-lg-flex flex-nowrap align-items-center">
+				<div class="page-title mr-4 pr-4 border-right">
+					<h1>휴가부여</h1>
+				</div>
+				<div class="breadcrumb-bar align-items-center">
+					<nav>
+						<ol class="breadcrumb p-0 m-b-0">
+							<li class="breadcrumb-item"><a href="/"><i
+									class="ti ti-home"></i></a></li>
+							<li class="breadcrumb-item">휴가기준 설정</li>
+							<li class="breadcrumb-item active text-primary"
+								aria-current="page">휴가부여</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end page title -->
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="tab nav-bt">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">연차 등록</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">기타 연차 등록</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="card-body table-responsive p-0 tab-pane fade active show" id="home" role="tabpanel">
+                        <div th:include="~{settings/vacation_insert:: vacationInsert}"></div>
+                    </div>
+                     <div class="card-body table-responsive p-0 tab-pane fade" id="other" role="tabpanel">
+                       <div th:include="~{settings/vacation_insert_other:: vacationInsertOhter}"></div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <!-- end task list contant -->
+                
+               
+         
+	</th:block>
+
+	<!-- 사용자 지정 js script -->
+	<th:block layout:fragment="customScript">
+		<script type="text/javascript">
+			const today = new Date();
+			const year = today.getFullYear();
+			
+			$('#useVacationYear2').val(year);
+			
+			$("#duallistbox1").bootstrapDualListbox({
+			    // see next for specifications
+			});
+			$("#duallistbox2").bootstrapDualListbox({
+			    // see next for specifications
+			});
+			
+			$('#lengthOfService').change(function() {
+				const length = $('#lengthOfService option:selected').text();
+				let request = $.ajax({
+										url : "/settings/checkMember",
+										method : "GET",
+										data : {'length' : length},
+										dataType : "json",
+										success : function(memberNameList,standard) {
+													console.log(memberNameList);
+													console.log(memberNameList[0].memberName);
+													
+													$(memberNameList).each( function(idx) {
+															const option = $("<option value="+idx+">"
+																	+ memberNameList[idx].memberName
+																	+ "</option>");
+															$('#duallistbox1').append(option);
+															$('#memberNum').val(memberNameList[idx].memberNum);
+													});
+													
+													$('#duallistbox1').bootstrapDualListbox('refresh', true);
+												}
+								});
+			});
+				
+		</script>
+</html>

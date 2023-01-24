@@ -13,6 +13,9 @@ public class MemberList {
 	private String departmentNum;
 	private String positionNum;
 	private String memberInsertDate;
+	
+	private MemberPositionList MemberPositionList;
+	private MemberDepartmentList MemberDepartmentList;
 	public String getMemberNum() {
 		return memberNum;
 	}
@@ -85,6 +88,18 @@ public class MemberList {
 	public void setMemberInsertDate(String memberInsertDate) {
 		this.memberInsertDate = memberInsertDate;
 	}
+	public MemberPositionList getMemberPositionList() {
+		return MemberPositionList;
+	}
+	public void setMemberPositionList(MemberPositionList memberPositionList) {
+		MemberPositionList = memberPositionList;
+	}
+	public MemberDepartmentList getMemberDepartmentList() {
+		return MemberDepartmentList;
+	}
+	public void setMemberDepartmentList(MemberDepartmentList memberDepartmentList) {
+		MemberDepartmentList = memberDepartmentList;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -112,9 +127,48 @@ public class MemberList {
 		builder.append(positionNum);
 		builder.append(", memberInsertDate=");
 		builder.append(memberInsertDate);
+		builder.append(", MemberPositionList=");
+		builder.append(MemberPositionList);
+		builder.append(", MemberDepartmentList=");
+		builder.append(MemberDepartmentList);
+		builder.append(", getMemberNum()=");
+		builder.append(getMemberNum());
+		builder.append(", getMemberPw()=");
+		builder.append(getMemberPw());
+		builder.append(", getMemberName()=");
+		builder.append(getMemberName());
+		builder.append(", getMemberGender()=");
+		builder.append(getMemberGender());
+		builder.append(", getMemberEmail()=");
+		builder.append(getMemberEmail());
+		builder.append(", getMemberBirth()=");
+		builder.append(getMemberBirth());
+		builder.append(", getMemberPhone()=");
+		builder.append(getMemberPhone());
+		builder.append(", getMemberDormant()=");
+		builder.append(getMemberDormant());
+		builder.append(", getMemberDormantDate()=");
+		builder.append(getMemberDormantDate());
+		builder.append(", getDepartmentNum()=");
+		builder.append(getDepartmentNum());
+		builder.append(", getPositionNum()=");
+		builder.append(getPositionNum());
+		builder.append(", getMemberInsertDate()=");
+		builder.append(getMemberInsertDate());
+		builder.append(", getMemberPositionList()=");
+		builder.append(getMemberPositionList());
+		builder.append(", getMemberDepartmentList()=");
+		builder.append(getMemberDepartmentList());
+		builder.append(", getClass()=");
+		builder.append(getClass());
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append(", toString()=");
+		builder.append(super.toString());
 		builder.append("]");
 		return builder.toString();
 	}
+
 	
 	
 }
