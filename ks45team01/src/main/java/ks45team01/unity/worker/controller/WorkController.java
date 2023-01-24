@@ -1,8 +1,11 @@
 package ks45team01.unity.worker.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -111,11 +114,27 @@ public class WorkController {
 			session.setAttribute("comebackTime", workInfo.getGooutWorkoutComebackTime());
 			return workInfo;
 	}
+	
 	//근태조회
 	@GetMapping("work/workList")
-	public String getWorkInfoById() {
+	public String getWorkInfoById(Model model,
+							      @RequestParam(value="memberNum", required=false)String memberNum) {
+		List<Work> workList = workService.getWorkInfoById(memberNum);
 		
+		model.addAttribute("title", "근태조회");
+		model.addAttribute("workList", workList);
 		return "work/work_List";
+	}
+	
+	//부서 사원 근태 조회
+	@GetMapping("work/workDepartmentList")
+	public String getDepartWorkInfo(@RequestParam(value="departmentNum", required=false)String departmentNum
+									,Model model) {
+	
+		List<Work> workList = workService.getWorkInfoByDepart(departmentNum);
+		model.addAttribute("title", "부서 근태 조회");
+		model.addAttribute("workList", workList);
+		return "work/work_department_list";
 	}
 	
 }

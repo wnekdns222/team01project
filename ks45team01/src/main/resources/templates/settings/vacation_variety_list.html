@@ -89,7 +89,82 @@
 			            dataType: "json",
 			            success: function(vacationCategory){
 			            			$('#vacationCategoryName').val(vacationCategory.vacationCategoryName);
-			            			$('#categoryUse').val(vacationCategory.vacationUse);
+			            			$('#vacationCategoryNum').val(vacationCategory.vacationCategoryNum);
+			            			if(vacationCategory.vacationUse=="on"){
+			            				$('input[name="vacationUse"]').attr('checked', true);
+			            			}else if(vacationCategory.vacationUse=="off"){
+			            				$('input[name="vacationUse"]').attr('checked', false);
+			            			}
+			            },
+			            error: function(){
+			                alert("error");
+			            }
+				});
+			});
+			$('button[name=sortModifyBtn]').click(function(){
+				const vacationSortNum = $(this).val();
+				$.ajax({
+					 	url: "/settings/vacationSortModify",
+			            type: "GET",
+			            data: {"vacationSortNum" : vacationSortNum},
+			            contentType: 'application/json; charset=utf-8',
+			            dataType: "json",
+			            success: function(vacationSort){
+			            			$('#vacationSortNum').val(vacationSort.vacationSortNum);
+			            			$('#vacationSortName').val(vacationSort.vacationSortName);
+			            			if(vacationSort.vacationUse=="on"){
+			            				$('input[name="vacationUse"]').attr("checked","Y");
+			            			}else if(vacationSort.vacationUse=="off"){
+			            				$('input[name="vacationUse"]').attr();
+			            			}
+			            },
+			            error: function(){
+			                alert("error");
+			            }
+				});
+			});
+			$('button[name=typeModifyBtn]').click(function(){
+				const vacationTypeNum = $(this).val();
+				$.ajax({
+					 	url: "/settings/vacationTypeModify",
+			            type: "GET",
+			            data: {"vacationTypeNum" : vacationTypeNum},
+			            contentType: 'application/json; charset=utf-8',
+			            dataType: "json",
+			            success: function(vacationType){
+			            			$('#vacationTypeNum').val(vacationType.vacationTypeNum);
+			            			$('#vacationName').val(vacationType.vacationName);
+			            			$('#vacationType').val(vacationType.vacationType);
+			            			$('#subtractUnit').val(vacationType.subtractUnit);
+			            			if(vacationType.vacationUse=="on"){
+			            				$('input[name="vacationUse"]').attr('checked', true);
+			            			}else if(vacationType.vacationUse=="off"){
+			            				$('input[name="vacationUse"]').attr('checked', false);
+			            			}
+			            },
+			            error: function(){
+			                alert("error");
+			            }
+				});
+			});
+			$('button[name=standardModifyBtn]').click(function(){
+				const serviceNum = $(this).val();
+				$.ajax({
+					 	url: "/settings/vacationStandardModify",
+			            type: "GET",
+			            data: {"serviceNum" : serviceNum},
+			            contentType: 'application/json; charset=utf-8',
+			            dataType: "json",
+			            success: function(vacationStandard){
+			            			$('#serviceNum').val(vacationStandard.serviceNum);
+			            			$('#lengthOfService').val(vacationStandard.lengthOfService);
+			            			$('#addVacation').val(vacationStandard.addVacation);
+			            			$('#vacationCategoryNum').val(vacationStandard.vacationCategoryNum);
+			            			if(vacationStandard.vacationStandardUse=="on"){
+			            				$('#vacationStandardUse').checked;
+			            			}else if(vacationStandard.vacationStandardUse=="off"){
+			            				$('#vacationStandardUse').checked;
+			            			}
 			            },
 			            error: function(){
 			                alert("error");

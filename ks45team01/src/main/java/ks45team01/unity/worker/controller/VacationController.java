@@ -45,4 +45,17 @@ public class VacationController {
 			
 			return "vacation/vacation_info_list";
 		}
+		/**
+		 * 부서 연차정보조회
+		 * @return
+		 */
+		@GetMapping("vacation/vacationInfoDepartmentList")
+		public String getDepartVacationInfo(@RequestParam(value="departmentNum", required=false)String departmentNum,
+											Model model) {
+			List<VacationApproval> vacationApproval = vacationService.getVacationApprovalByDepart(departmentNum);
+			
+			model.addAttribute("title","부서연차조회");
+			model.addAttribute("vacationApproval", vacationApproval);
+			return "vacation/vacation_info_department_list";
+		}
 }

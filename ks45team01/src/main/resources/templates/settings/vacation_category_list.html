@@ -52,7 +52,7 @@
 			<div style="width: 50%; float: right;  margin-top: 40px;">
 				<div class="col-md-10 col-lg-10" style="margin-bottom:auto; margin-top:20px;">
 					<form th:action="@{/settings/vacationCategoryModify}" method="post" >
-					<input type="hidden" name="vacationCategoryNum" readonly>
+					<input type="hidden" name="vacationCategoryNum" id="vacationCategoryNum" readonly>
 						<div class="form-group">
 							<label for="vacationCategoryName">휴가명</label> <input type="text" class="form-control" name="vacationCategoryName" id="vacationCategoryName" >
 						</div>
@@ -60,7 +60,8 @@
 							<label for="correctMemberNum">수정사원</label> <input type="text" class="form-control" name="correctMemberNum" th:value="${session.SID}" id="correctMemberNum" >
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="vacationUse" id="use">
+							<input class="form-check-input" type="checkbox" name="vacationUse" value="on" id="use">
+							<input class="form-check-input" type="hidden" name="_vacationUse" value="off" >
 							<label class="form-check-label" for="use"> 사용여부 </label>
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>

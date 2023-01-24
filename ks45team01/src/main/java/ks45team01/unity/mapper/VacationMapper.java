@@ -107,4 +107,8 @@ public interface VacationMapper {
 	
 	//특정 휴가 사용 조회
 	public List<VacationApproval> getVacationApprovalBymemberNum(String memberNum);
+	
+	//특정 부서 휴가 사용 조회
+	public List<VacationApproval> getVacationApprovalByDepart(String departmentNum);
+	
 }

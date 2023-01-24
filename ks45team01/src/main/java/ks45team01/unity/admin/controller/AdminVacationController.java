@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team01.unity.dto.MemberList;
-import ks45team01.unity.dto.ProjectBoard;
-import ks45team01.unity.dto.ProjectRequest;
 import ks45team01.unity.dto.VacationCategory;
 import ks45team01.unity.dto.VacationInformation;
 import ks45team01.unity.dto.VacationSort;
@@ -168,15 +166,14 @@ public class AdminVacationController {
 		 * @return
 		 */
 		@GetMapping("settings/vacationTypeModify")
-		public String updateVacationType(@RequestParam(value="vacationTypeNum", required=false)String vacationTypeNum, Model model) {
+		@ResponseBody
+		public VacationType updateVacationType(@RequestParam(value="vacationTypeNum", required=false)String vacationTypeNum, Model model) {
 			
 			VacationType vacationType = vacationService.getVacationTypeByNum(vacationTypeNum);
-			model.addAttribute("title", "휴가종류 수정");
-			model.addAttribute("vacationType", vacationType);
 			
 			log.info("특정휴가종류 조회:{}",vacationType);
 			
-			return "settings/vacation_type_modify";
+			return vacationType;
 		}
 
 		/**
@@ -318,15 +315,14 @@ public class AdminVacationController {
 		 * 
 		 */
 		@GetMapping("settings/vacationSortModify")
-		public String updateVacationSort(@RequestParam(value="vacationSortNum", required=false)String vacationSortNum, Model model) {
+		@ResponseBody
+		public VacationSort updateVacationSort(@RequestParam(value="vacationSortNum", required=false)String vacationSortNum, Model model) {
 			
 				log.info("휴가 중분류 번호:{}",vacationSortNum);
 				
-				VacationSort vacactionSort = vacationService.getVacationSortByNum(vacationSortNum);
+				VacationSort vacationSort = vacationService.getVacationSortByNum(vacationSortNum);
 				
-				model.addAttribute("title", "휴가 중분류 수정");
-				model.addAttribute("vacactionSort", vacactionSort);
-			return "settings/vacation_sort_modify";
+			return vacationSort;
 		}
 		
 		/**
@@ -361,13 +357,12 @@ public class AdminVacationController {
 		 * 휴가 기준 수정 화면
 		 */
 		@GetMapping("settings/vacationStandardModify")
-		public String updateVacationStandard(Model model,
+		@ResponseBody
+		public VacationStandard updateVacationStandard(Model model,
 											@RequestParam(value="serviceNum", required=false)String serviceNum) {
 			log.info("서비스 번호:{}",serviceNum);
-			model.addAttribute("title", "휴가 기준 수정");
 			VacationStandard vacationStandard = vacationMapper.getVacationStandardByServiceNum(serviceNum);
-			model.addAttribute("vacationStandard", vacationStandard);
-			return "settings/vacation_standard_modify";
+			return vacationStandard;
 		}
 		/**
 		 * 휴가 기준 수정 처리
