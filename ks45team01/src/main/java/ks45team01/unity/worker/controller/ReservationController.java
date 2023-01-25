@@ -42,7 +42,7 @@ public class ReservationController {
 		model.addAttribute("meetingroomList", meetingroomList);
 		model.addAttribute("reservationList", reservationList);
 		
-		return "/reservation/meetingroom_reservation_list";
+		return "reservation/meetingroom_reservation_list";
 	}
 	
 	//예약추가
@@ -91,7 +91,7 @@ public class ReservationController {
 		
 		model.addAttribute("reservationMineList", reservationMineList);
 		
-		return "/reservation/meetingroom_reservation_mine";
+		return "reservation/meetingroom_reservation_mine";
 	}
 	
  
@@ -127,6 +127,20 @@ public class ReservationController {
 		return "redirect:/reservation/meetingroomReservationList";
 		
 	}
+	
+	//모든 예약목록 확인
+	@GetMapping("/meetingroomReservationAllList")
+	public String getReservationMineList(Model model) {
+		
+		List<Reservation> reservationList = reservationService.getReservationList();
+		List<Meetingroom> meetingroomList = reservationService.getMeetingroomList();
+		
+ 		model.addAttribute("reservationList", reservationList);
+ 		model.addAttribute("meetingroomList", meetingroomList);
+		
+		return "reservation/meetingroom_reservation_all_list";
+	}
+	
 	
 	
 }

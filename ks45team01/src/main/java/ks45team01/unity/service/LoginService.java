@@ -21,6 +21,34 @@ public class LoginService {
 	public LoginService(LoginMapper loginMapper) {
 		this.loginMapper = loginMapper;
 	}
+	/**
+	 * 회원정보(비밀번호) 확인
+	 * @param memberId, memberPw
+	 * @return
+	 */
+	public Map<String, Object> checkPwByMemberId(String memberNum, String memberPw) {
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		boolean result = false;
+		
+		MemberList memberList = loginMapper.checkPwById(memberNum);
+		if(memberList != null) {
+			String checkPw = memberList.getMemberPw();
+			if(memberPw.equals(checkPw)) {
+				result = true;
+			}
+		}
+		
+		resultMap.put("result", result);
+		resultMap.put("memberInfo", memberList);
+		
+		return resultMap;
+	}
+	//회원 가입
+	public void addMember(MemberList memberList) {
+		loginMapper.addMember(memberList);
+	}
 //	public Map<String, Object> getLoginHistory(int currentPage){
 //		// 보여질 행의 갯수
 //		int rowPerPage = 10;
@@ -69,32 +97,4 @@ public class LoginService {
 //		return paramMap;
 //	}
 //	
-	/**
-	 * 회원정보(비밀번호) 확인
-	 * @param memberId, memberPw
-	 * @return
-	 */
-	public Map<String, Object> checkPwByMemberId(String memberNum, String memberPw) {
-		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		
-		boolean result = false;
-		
-		MemberList memberList = loginMapper.checkPwById(memberNum);
-		if(memberList != null) {
-			String checkPw = memberList.getMemberPw();
-			if(memberPw.equals(checkPw)) {
-				result = true;
-			}
-		}
-		
-		resultMap.put("result", result);
-		resultMap.put("memberInfo", memberList);
-		
-		return resultMap;
-	}
-	//회원 가입
-	public void addMember(MemberList memberList) {
-		loginMapper.addMember(memberList);
-	}
 }
