@@ -52,7 +52,7 @@
 	</div>
 	<div style="width: 50%; float: right;  margin-top: 40px;">
 		<div class="col-md-10 col-lg-10" style="margin-bottom:auto; margin-top:20px;">
-			<form th:action="@{/settings/vacationTypeModify}" method="post">
+			<form th:action="@{/settings/vacationTypeModify}" method="post" >
 				<input type="hidden" class="form-control"  name="vacationTypeNum" id="vacationTypeNum">
 				<div class="form-group">
 					<label for="vacationName">휴가명</label> 
@@ -70,10 +70,15 @@
 					<label for="correctMemberNum">등록 사원번호</label> 
 					<input type="text" class="form-control" name="correctMemberNum" th:value="${session.SID}" >
 				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id="use" name="vacationUse" >
-					<label class="form-check-label" for="use"> 사용여부 </label>
-				</div>
+					<label class="d-block mb-2" >사용여부</label>
+						<div class="form-check mb-0 py-2">
+	                        <input class="form-check-input" type="radio" name="vacationUse" id="toast-bottom-left" value="on">
+	                        <label class="form-check-label" for="toast-bottom-left">사용</label>
+	                    </div>
+	                    <div class="form-check mb-0 py-2">
+	                        <input class="form-check-input" type="radio" name="vacationUse" id="toast-top-left" value="off">
+	                        <label class="form-check-label" for="toast-top-left">사용안함</label>
+	                    </div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</div>

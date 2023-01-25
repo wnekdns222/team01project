@@ -91,9 +91,9 @@
 			            			$('#vacationCategoryName').val(vacationCategory.vacationCategoryName);
 			            			$('#vacationCategoryNum').val(vacationCategory.vacationCategoryNum);
 			            			if(vacationCategory.vacationUse=="on"){
-			            				$('input[name="vacationUse"]').attr('checked', true);
+			            				$('#success').attr('checked', true);
 			            			}else if(vacationCategory.vacationUse=="off"){
-			            				$('input[name="vacationUse"]').attr('checked', false);
+			            				$('#info').attr('checked', true);
 			            			}
 			            },
 			            error: function(){
@@ -113,9 +113,9 @@
 			            			$('#vacationSortNum').val(vacationSort.vacationSortNum);
 			            			$('#vacationSortName').val(vacationSort.vacationSortName);
 			            			if(vacationSort.vacationUse=="on"){
-			            				$('input[name="vacationUse"]').attr("checked","Y");
+			            				$('#warning').attr('checked', true);
 			            			}else if(vacationSort.vacationUse=="off"){
-			            				$('input[name="vacationUse"]').attr();
+			            				$('#error').attr('checked', true);
 			            			}
 			            },
 			            error: function(){
@@ -137,9 +137,9 @@
 			            			$('#vacationType').val(vacationType.vacationType);
 			            			$('#subtractUnit').val(vacationType.subtractUnit);
 			            			if(vacationType.vacationUse=="on"){
-			            				$('input[name="vacationUse"]').attr('checked', true);
+			            				$('#toast-bottom-left').attr('checked', true);
 			            			}else if(vacationType.vacationUse=="off"){
-			            				$('input[name="vacationUse"]').attr('checked', false);
+			            				$('#toast-top-left').attr('checked', true);
 			            			}
 			            },
 			            error: function(){
@@ -161,9 +161,9 @@
 			            			$('#addVacation').val(vacationStandard.addVacation);
 			            			$('#vacationCategoryNum').val(vacationStandard.vacationCategoryNum);
 			            			if(vacationStandard.vacationStandardUse=="on"){
-			            				$('#vacationStandardUse').checked;
+			            				$('#toast-top-right').attr('checked', true);
 			            			}else if(vacationStandard.vacationStandardUse=="off"){
-			            				$('#vacationStandardUse').checked;
+			            				$('#toast-bottom-right').attr('checked', true);
 			            			}
 			            },
 			            error: function(){

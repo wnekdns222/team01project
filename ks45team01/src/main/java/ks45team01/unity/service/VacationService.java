@@ -51,34 +51,7 @@ public class VacationService {
 		variety.put("standard", standard);
 		return variety;
 	}
-	/**
-	 * 휴가 대분류 비동기 수정
-	 */
-	public void updateVacationCategoryA(String vacationCategoryNum, String vacationUse) {
-		
-		vacationMapper.updateVacationCategoryA();
-	}
-	/**
-	 * 휴가 중분류 비동기 수정
-	 */
-	public void updateVacationSortA(String vacationSortNum, String vacationUse) {
-		
-		vacationMapper.updateVacationSortA();
-	}
-	/**
-	 * 휴가 종류 비동기 수정
-	 */
-	public void updateVacationTypeA(String vacationTypeNum, String vacationUse) {
-		
-		vacationMapper.updateVacationTypeA();
-	}
-	/**
-	 * 휴가 기준 비동기 수정
-	 */
-	public void updateVacationStandardA(String vacationStandardNum, String vacationStandardUse) {
-		
-		vacationMapper.updateVacationStandardA();
-	}
+	
 	/**
 	 * 휴가 종류 등록
 	 * 

@@ -123,7 +123,7 @@ public class WorkController {
 		
 		model.addAttribute("title", "근태조회");
 		model.addAttribute("workList", workList);
-		return "work/work_List";
+		return "work/work_list";
 	}
 	
 	//부서 사원 근태 조회

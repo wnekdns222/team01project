@@ -30,18 +30,6 @@ public interface VacationMapper {
 	//휴가기준 목록
 	public List<VacationStandard> getVacationStandard();
 	
-	//휴가대분류 비동기 수정
-	public void updateVacationCategoryA();
-	
-	//휴가 중분류 비동기 수정
-	public void updateVacationSortA();
-		
-	//휴가 종류 비동기 수정
-	public void updateVacationTypeA();
-	
-	//휴가 기준 비동기 수정
-	public void updateVacationStandardA();
-	
 	//휴가 종류 등록
 	public void addVacationType(VacationType vacationType);
 	

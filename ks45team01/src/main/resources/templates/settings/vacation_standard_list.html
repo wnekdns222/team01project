@@ -75,10 +75,15 @@
 						<option value="입사일">입사일</option>
 					</select>
 				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" name="vacationStandardUse" id="vacationStandardUse" >
-					<label class="form-check-label" for="vacationStandardUse"> 사용여부 </label>
-				</div>
+				<label class="d-block mb-2" style="margin-top:20px; margin-bottom:20px;">사용여부</label>
+					<div class="form-check mb-0 py-2">
+                        <input class="form-check-input" type="radio" name="vacationStandardUse" id="toast-top-right" value="on">
+                        <label class="form-check-label" for="toast-top-right">사용</label>
+                    </div>
+                    <div class="form-check mb-0 py-2">
+                        <input class="form-check-input" type="radio" name="vacationStandardUse" id="toast-bottom-right" value="off">
+                        <label class="form-check-label" for="toast-bottom-right">사용안함</label>
+                    </div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</div>

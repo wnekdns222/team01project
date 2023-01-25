@@ -238,38 +238,6 @@
 		tb_vacation_standard
 		order by length(service_num);
 	</select>
-	<update id="updateVacationCategoryA" parameterType="String">
-		/* 휴가대분류 비동기 수정 */
-		UPDATE tb_vacation_category
-		SET
-		vacation_use=#{vacationUse}
-		WHERE 
-		vacation_category_num=#{vacationCategoryNum};
-	</update>
-	<update id="updateVacationStandardA" parameterType="String">
-		/* 휴가 기준 비동기 수정 */
-		UPDATE tb_vacation_standard
-		SET
-		vacation_standard_use=#{vacationStandardUse}
-		WHERE 
-		vacation_standard_num=#{vacationStandardNum};
-	</update>
-	<update id="updateVacationSortA" parameterType="String">
-		/* 휴가 중분류 비동기 수정 */
-		UPDATE tb_vacation_sort
-		SET
-		vacation_use=#{vacationUse}
-		WHERE 
-		vacation_sort_num=#{vacationSortNum};
-	</update>
-	<update id="updateVacationTypeA" parameterType="String">
-		/* 휴가 종류 비동기 수정 */
-		UPDATE tb_vacation_type
-		SET
-		vacation_use=#{vacationUse}
-		WHERE 
-		vacation_type_num=#{vacationTypeNum};
-	</update>
 	<insert id="addVacationType" parameterType="VacationType">
 		/* 휴가 종류 등록 */
 		INSERT INTO tb_vacation_type
