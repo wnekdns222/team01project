@@ -133,8 +133,10 @@ public class ReservationController {
 	public String getReservationMineList(Model model) {
 		
 		List<Reservation> reservationList = reservationService.getReservationList();
+		List<Meetingroom> meetingroomList = reservationService.getMeetingroomList();
 		
-		model.addAttribute("reservationList", reservationList);
+ 		model.addAttribute("reservationList", reservationList);
+ 		model.addAttribute("meetingroomList", meetingroomList);
 		
 		return "reservation/meetingroom_reservation_all_list";
 	}

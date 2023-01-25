@@ -18,7 +18,9 @@
 			</div>
 		</div>
 	<th:block layout:fragment="customContents">
-		<table class="table table-hover">
+		<th:block th:each="ml : ${meetingroomList}">
+			<h4 th:text="${ml.meetName}"></h4>
+				<table class="table table-hover">
                   <thead>
                       <tr>
                           <th scope="col">회의실명</th>
@@ -30,7 +32,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                    <tr th:unless="${#lists.isEmpty(reservationList)}"
+                    <tr th:if="${l.meetingroom.meetName == ml.meetName}"
 					th:each="l : ${reservationList}" th:object="${l.meetingroom}">
 					<td th:text="*{meetName}"></td>
 					<td th:text="${l.reservationDate}"></td>
@@ -41,5 +43,6 @@
 					</tr>
                   </tbody>
               </table>
+		</th:block>
 	</th:block>
 </html>
