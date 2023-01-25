@@ -84,7 +84,7 @@ public class AdminReservationController {
 			
 			model.addAttribute("meetingroomList", meetingroomList);
 			
-			return "/reservation/meetingroom_insert";
+			return "reservation/meetingroom_insert";
 			
 		}
 		
