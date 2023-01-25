@@ -39,4 +39,10 @@ public interface WorkMapper {
 	
 	//외출 복귀 등록(수정)
 	public void updateComeBack(Work work);
+	
+	//특정사원 근태 조회
+	public List<Work> getWorkInfoById(String memberNum);
+	
+	//특정부서 사원 근태 조회
+	public List<Work> getWorkInfoByDepart(String departmentNum);
 }

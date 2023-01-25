@@ -100,4 +100,22 @@ public class WorkService {
 		List<WorkUnusual> unusualList = workMapper.getAuthorityWorkInfo(); 
 		return unusualList;
 	}
+	/**
+	 * 특정 사원 근태 조회
+	 */
+	public List<Work> getWorkInfoById(String memberNum){
+		
+		List<Work> workList = workMapper.getWorkInfoById(memberNum);
+		
+		return workList;
+	}
+	/**
+	 * 특정부서 사원 근태 조회
+	 */
+	public List<Work> getWorkInfoByDepart(String departmentNum){
+		
+		List<Work> workList = workMapper.getWorkInfoByDepart(departmentNum);
+		
+		return workList;
+	}
 }

@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ks45team01.unity.dto.MemberList;
-import ks45team01.unity.dto.ProjectBoard;
-import ks45team01.unity.dto.ProjectRequest;
 import ks45team01.unity.dto.VacationCategory;
 import ks45team01.unity.dto.VacationInformation;
 import ks45team01.unity.dto.VacationSort;
@@ -161,23 +159,6 @@ public class AdminVacationController {
 			
 			return "redirect:/settings/vacationVarietyList";
 		}
-		/**
-		 * 휴가 종류 수정 화면
-		 * @param vacationValue
-		 * @param model
-		 * @return
-		 */
-		@GetMapping("settings/vacationTypeModify")
-		public String updateVacationType(@RequestParam(value="vacationTypeNum", required=false)String vacationTypeNum, Model model) {
-			
-			VacationType vacationType = vacationService.getVacationTypeByNum(vacationTypeNum);
-			model.addAttribute("title", "휴가종류 수정");
-			model.addAttribute("vacationType", vacationType);
-			
-			log.info("특정휴가종류 조회:{}",vacationType);
-			
-			return "settings/vacation_type_modify";
-		}
 
 		/**
 		 * 휴가 대분류 입력 화면
@@ -198,19 +179,6 @@ public class AdminVacationController {
 			
 			vacationService.addVacationCategory(vacationCategory);
 			return "redirect:/settings/vacationVarietyList";
-		}
-		/**
-		 * 휴가 대분류 수정 화면
-		 * @return
-		 */
-		@GetMapping("settings/vacationCategoryModify")
-		@ResponseBody
-		public VacationCategory updateVacationCategory(@RequestParam(value="vacationCategoryNum", required=false)String vacationCategoryNum, Model model) {
-			log.info("휴가대분류 넘버:{}",vacationCategoryNum);
-			
-			VacationCategory vacationCategory = vacationService.getVacationCategoryByNum(vacationCategoryNum);
-			
-			return vacationCategory;
 		}
 		/**
 		 * 휴가 대분류 수정 처리
@@ -313,21 +281,6 @@ public class AdminVacationController {
 			
 			return "redirect:/settings/vacationVarietyList";
 		}
-		/**
-		 * 휴가 중분류 수정 화면
-		 * 
-		 */
-		@GetMapping("settings/vacationSortModify")
-		public String updateVacationSort(@RequestParam(value="vacationSortNum", required=false)String vacationSortNum, Model model) {
-			
-				log.info("휴가 중분류 번호:{}",vacationSortNum);
-				
-				VacationSort vacactionSort = vacationService.getVacationSortByNum(vacationSortNum);
-				
-				model.addAttribute("title", "휴가 중분류 수정");
-				model.addAttribute("vacactionSort", vacactionSort);
-			return "settings/vacation_sort_modify";
-		}
 		
 		/**
 		 * 휴가 중분류 수정 처리
@@ -356,18 +309,6 @@ public class AdminVacationController {
 			log.info("휴가 기준 입력:{}",vacationStandard);
 			vacationService.addVacationStandard(vacationStandard);
 			return "redirect:/settings/vacationVarietyList";
-		}
-		/**
-		 * 휴가 기준 수정 화면
-		 */
-		@GetMapping("settings/vacationStandardModify")
-		public String updateVacationStandard(Model model,
-											@RequestParam(value="serviceNum", required=false)String serviceNum) {
-			log.info("서비스 번호:{}",serviceNum);
-			model.addAttribute("title", "휴가 기준 수정");
-			VacationStandard vacationStandard = vacationMapper.getVacationStandardByServiceNum(serviceNum);
-			model.addAttribute("vacationStandard", vacationStandard);
-			return "settings/vacation_standard_modify";
 		}
 		/**
 		 * 휴가 기준 수정 처리

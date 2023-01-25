@@ -16,6 +16,15 @@ public class VacationApproval {
 	private String emergencyContact;
 	private String replaceMember;
 	private String approvalDeadline;
+	
+	private MemberList memberList;
+	
+	public MemberList getMemberList() {
+		return memberList;
+	}
+	public void setMemberList(MemberList memberList) {
+		this.memberList = memberList;
+	}
 	public String getVacationApprovalNum() {
 		return vacationApprovalNum;
 	}
@@ -131,9 +140,12 @@ public class VacationApproval {
 		builder.append(replaceMember);
 		builder.append(", approvalDeadline=");
 		builder.append(approvalDeadline);
+		builder.append(", memberList=");
+		builder.append(memberList);
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 	
 }

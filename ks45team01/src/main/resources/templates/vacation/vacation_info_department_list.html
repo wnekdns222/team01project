@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
-
+<head>
+	<title th:text="${title}"></title>
+</head>
 <th:block layout:fragment="customCrumbbar">
 	<div class="row">
 		<div class="col-md-12 m-b-30">
@@ -28,36 +30,31 @@
 </th:block>
 
 <th:block layout:fragment="customContents">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th scope="col">사원번호</th>
-				<th scope="col">근속연수</th>
-				<th scope="col">기본연차휴가일수</th>
-				<th scope="col">포상휴가일수</th>
-				<th scope="col">대체휴가일수</th>
-				<th scope="col">휴가잔여일</th>
-				<th scope="col">휴가잔여시간</th>
-				<th scope="col">사용연도</th>
-			</tr>
-		</thead>
-		<tbody>
-			<!-- <tr th:if="${not #lists.isEmpty(worktypeList)}" th:each="wt : ${worktypeList}">
-                  <td th:text="${wt.workTypeNum}"></td>
-                  <td th:text="${wt.memberNum}"></td>
-                  <td th:text="${wt.workName}"></td>
-                  <td th:text="${wt.workDate}"></td>
-                  <td th:text="${wt.attendanceTime}"></td>
-                  <td th:text="${wt.leaveWorkTime}"></td>
-                  <td th:text="${wt.workTypeUsePeriod}"></td>
-                  <td>
-						<a th:href="@{/settings/workTypeModify(workTypeNum=${wt.workTypeNum})}">수정</a>
-					</td>
-              </tr>
-              <tr th:unless="${not #lists.isEmpty(worktypeList)}">
-              </tr> -->
-		</tbody>
-	</table>
-
+	<table class="table table-hover" style="margin-top:30px;">
+			<thead>
+				<tr>
+					<th scope="col">사원이름</th>
+					<th scope="col">휴가시작일</th>
+					<th scope="col">휴가종료일</th>
+					<th scope="col">총 휴가요청일</th>
+					<th scope="col">총 휴가요청시간</th>
+					<th scope="col">내용 및 사유</th>
+					<th scope="col">상세정보</th>
+				</tr>
+			</thead>
+			<tbody>
+				 <tr th:if="${not #lists.isEmpty(vacationApproval)}" th:each="a : ${vacationApproval}">
+				 	  <td th:text="${a.memberList.memberName}"></td>
+	                  <td th:text="${a.vacationStartDate}"></td>
+	                  <td th:text="${a.vacationEndDate}"></td>
+	                  <td th:text="${a.totalVacationUseDate}"></td>
+	                  <td th:text="${a.totalVacationUseTime}"></td>
+	                  <td th:text="${a.vacationReason}"></td>
+	                  <td><button class="btn btn-primary" th:href="@{/vacation/vacationInfoList(memberNum=${a.memberNum})}">확인</button></td>
+	              </tr>
+	              <tr th:unless="${not #lists.isEmpty(vacationApproval)}">
+	              </tr> 
+			</tbody>
+		</table>
 </th:block>
 </html>

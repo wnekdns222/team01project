@@ -2,6 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
+	
+<head>
+	<title th:text="${title}"></title>
+</head>
 
 <th:block layout:fragment="customCrumbbar">
 	<div class="row">
@@ -40,24 +44,29 @@
 				<th scope="col">외출,외근복귀시간</th>
 				<th scope="col">출근상태</th>
 				<th scope="col">퇴근상태</th>
+				<th scope="col">외근유무</th>
 				<th scope="col">비정상근태 등록 유무</th>
+				<th scope="col">확인</th>
 			</tr>
 		</thead>
 		<tbody>
-			<!-- <tr th:if="${not #lists.isEmpty(worktypeList)}" th:each="wt : ${worktypeList}">
-                  <td th:text="${wt.workTypeNum}"></td>
-                  <td th:text="${wt.memberNum}"></td>
-                  <td th:text="${wt.workName}"></td>
-                  <td th:text="${wt.workDate}"></td>
-                  <td th:text="${wt.attendanceTime}"></td>
-                  <td th:text="${wt.leaveWorkTime}"></td>
-                  <td th:text="${wt.workTypeUsePeriod}"></td>
-                  <td>
-						<a th:href="@{/settings/workTypeModify(workTypeNum=${wt.workTypeNum})}">수정</a>
-					</td>
+			<tr th:if="${not #lists.isEmpty(workList)}" th:each="w : ${workList}">
+                  <td th:text="${w.memberNum}"></td>
+                  <td th:text="${w.workType.workName}"></td>
+                  <td th:text="${w.attendanceDay}"></td>
+                  <td th:text="${w.attendanceTime}"></td>
+                  <td th:text="${w.leaveworkTime}"></td>
+                  <td th:text="${w.gooutWorkoutStartTime}"></td>
+                  <td th:text="${w.gooutWorkoutComebackTime}"></td>
+                  <td th:text="${w.attendanceStatus}"></td>
+                  <td th:text="${w.leaveworkStatus}"></td>
+                  <td th:text="${w.outsideDuty}"></td>
+                  <td th:text="${w.workUnusual}"></td>
+                  <td th:if="${w.workUnusual=='Y'}"><button  class="btn btn-primary" th:href="@{/work/workAuthorityList(workTypeNum=${w.workTypeNum})}">확인</button></td>
+                  <td th:unless="${w.workUnusual=='Y'}"><button  class="btn btn-primary" th:disabled="disabled">확인</button></td>
               </tr>
-              <tr th:unless="${not #lists.isEmpty(worktypeList)}">
-              </tr> -->
+              <tr th:unless="${not #lists.isEmpty(workList)}">
+              </tr> 
 		</tbody>
 	</table>
 
