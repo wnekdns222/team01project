@@ -42,7 +42,7 @@ public class ReservationController {
 		model.addAttribute("meetingroomList", meetingroomList);
 		model.addAttribute("reservationList", reservationList);
 		
-		return "/reservation/meetingroom_reservation_list";
+		return "reservation/meetingroom_reservation_list";
 	}
 	
 	//예약추가
@@ -91,7 +91,7 @@ public class ReservationController {
 		
 		model.addAttribute("reservationMineList", reservationMineList);
 		
-		return "/reservation/meetingroom_reservation_mine";
+		return "reservation/meetingroom_reservation_mine";
 	}
 	
  
