@@ -128,5 +128,19 @@ public class ReservationController {
 		
 	}
 	
+	//모든 예약목록 확인
+	@GetMapping("/meetingroomReservationAllList")
+	public String getReservationMineList(Model model) {
+		
+		List<Reservation> reservationList = reservationService.getReservationList();
+		List<Meetingroom> meetingroomList = reservationService.getMeetingroomList();
+		
+ 		model.addAttribute("reservationList", reservationList);
+ 		model.addAttribute("meetingroomList", meetingroomList);
+		
+		return "reservation/meetingroom_reservation_all_list";
+	}
+	
+	
 	
 }
