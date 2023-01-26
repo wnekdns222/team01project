@@ -32,7 +32,15 @@ public class AdminFileBoardCateController {
 		
 		fileBoardService.fileBoardCateDelete(fileCategoryCode);
 		
-		return "redirect:/fileBoardCate/fileBoardCateList";
+		return "redirect:/fileBoardCate/fileBoardCateDeleteCheck";
+	}
+	
+	@GetMapping("/fileBoardCateDeleteCheck")
+	public String fileBoardCateDeleteCheck(Model model) {
+		
+		model.addAttribute("title", "삭제확인");
+		
+		return "fileBoardCate/fileBoardCateDeleteCheck";
 	}
 	
 	/**
@@ -41,8 +49,7 @@ public class AdminFileBoardCateController {
 	 * @return
 	 */
 	@PostMapping("/fileBoardCateModify")
-	public String fileBoardCateModify(FileBoardCate fileBoardCate
-									 ,Model model) {
+	public String fileBoardCateModify(FileBoardCate fileBoardCate) {
 		
 		fileBoardService.fileBoardCateModify(fileBoardCate);
 		
@@ -106,14 +113,13 @@ public class AdminFileBoardCateController {
 		return "fileBoardCate/fileBoardCateList";
 	}
 	
-	@GetMapping("/ajaxTest")
+	@GetMapping("/ajaxModify")
 	@ResponseBody
-	public List<FileBoardCate> ajaxTest(@RequestParam(value = "fileCategoryCode", required = false) String fileCategoryCode) {
+	public List<FileBoardCate> ajaxModify(@RequestParam(value = "fileCategoryCode", required = false) String fileCategoryCode) {
 		
-		log.info("파일카테로그 : {}", fileCategoryCode);
-		List<FileBoardCate> result = fileBoardService.result(fileCategoryCode);
-		log.info("result로그 : {}", result);
+		List<FileBoardCate> ajaxModify = fileBoardService.result(fileCategoryCode);
 		
-		return result;
+		return ajaxModify;
 	}
+		
 }
