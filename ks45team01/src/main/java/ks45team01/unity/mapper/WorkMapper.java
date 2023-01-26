@@ -45,4 +45,10 @@ public interface WorkMapper {
 	
 	//특정부서 사원 근태 조회
 	public List<Work> getWorkInfoByDepart(String departmentNum);
+	
+	//비정상 근태 등록
+	public void addWorkUnusual(WorkUnusual workUnusual);
+	
+	//특정 workNum 조회
+	public String getWorkNum(String memberNum, String attendanceDay);
 }

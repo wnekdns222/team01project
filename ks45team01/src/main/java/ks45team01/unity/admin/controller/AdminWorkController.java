@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ks45team01.unity.dto.MemberList;
+import ks45team01.unity.dto.VacationCategory;
+import ks45team01.unity.dto.VacationSort;
+import ks45team01.unity.dto.VacationStandard;
+import ks45team01.unity.dto.VacationType;
 import ks45team01.unity.dto.Work;
 import ks45team01.unity.dto.WorkType;
 import ks45team01.unity.dto.WorkUnusual;
@@ -33,10 +38,12 @@ public class AdminWorkController {
 
 	private final WorkTypeService workTypeService;
 	private final WorkService workService;
+	private final VacationService vacationService;
 	
-	public AdminWorkController(WorkTypeService workTypeService, WorkService workService) {
+	public AdminWorkController(WorkTypeService workTypeService, WorkService workService, VacationService vacationService) {
 		this.workTypeService = workTypeService;
 		this.workService = workService;
+		this.vacationService = vacationService;
 	}
 	/**
 	 * 전사원 근태내역 조회
@@ -51,11 +58,33 @@ public class AdminWorkController {
 		
 		return "work/work_all_list";
 	}
-	//비정상 근태 직권등록
+	/**비정상 근태 직권등록
+	 * 
+	 * @return
+	 */
 	@GetMapping("work/workAuthorityInsert")
-	public String addAuthorityWorkInfo() {
+	public String addAuthorityWorkInfo(Model model) {
+		Map<String, Object> variety = vacationService.getVacationVariety();
+		List<VacationCategory> category = (List<VacationCategory>)variety.get("category");
+		List<VacationSort> sort =(List<VacationSort>)variety.get("sort");
+		List<VacationType> type =(List<VacationType>)variety.get("type");
+		model.addAttribute("category", category);
+		model.addAttribute("sort", sort);
+		model.addAttribute("type", type);
 		
+		List<MemberList> memberList = vacationService.getMemberList();
+		model.addAttribute("memberList", memberList); 
+
 		return "work/work_authority_Insert";
+	}
+	/**비정상 근태 직권등록
+	 * 
+	 * @return
+	 */
+	@PostMapping("work/workAuthorityInsert")
+	public String addAuthorityWorkInfo(WorkUnusual workUnusual) {
+		workService.addWorkUnusual(workUnusual);
+		return "redirect:/work/work_authority_list";
 	}
 	/**
 	 * 비정상 근태 조회

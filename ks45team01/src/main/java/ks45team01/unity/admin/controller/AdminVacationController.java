@@ -143,6 +143,22 @@ public class AdminVacationController {
 			return "settings/vacation_standard_list";
 		}
 		/**
+		 * 휴가 종류 수정 화면
+		 * @param vacationValue
+		 * @param model
+		 * @return
+		 */
+		@GetMapping("settings/vacationTypeModify")
+		@ResponseBody
+		public VacationType updateVacationType(@RequestParam(value="vacationTypeNum", required=false)String vacationTypeNum, Model model) {
+			
+			VacationType vacationType = vacationService.getVacationTypeByNum(vacationTypeNum);
+			
+			log.info("특정휴가종류 조회:{}",vacationType);
+			
+			return vacationType;
+		}
+		/**
 		 * 휴가종류 수정 처리
 		 * @param model
 		 * @return
@@ -181,6 +197,19 @@ public class AdminVacationController {
 			return "redirect:/settings/vacationVarietyList";
 		}
 		/**
+		 * 휴가 대분류 수정 화면
+		 * @return
+		 */
+		@GetMapping("settings/vacationCategoryModify")
+		@ResponseBody
+		public VacationCategory updateVacationCategory(@RequestParam(value="vacationCategoryNum", required=false)String vacationCategoryNum, Model model) {
+			log.info("휴가대분류 넘버:{}",vacationCategoryNum);
+			
+			VacationCategory vacationCategory = vacationService.getVacationCategoryByNum(vacationCategoryNum);
+			
+			return vacationCategory;
+		}
+		/**
 		 * 휴가 대분류 수정 처리
 		 * @return
 		 */
@@ -197,8 +226,8 @@ public class AdminVacationController {
 		  @GetMapping("settings/vacationInsertAll") 
 		  public String GetVacationInserAll(Model model) { 
 			  List<VacationStandard> standard = vacationMapper.getVacationStandard(); model.addAttribute("title","휴가부여");
-			  model.addAttribute("standard", standard); List<MemberList> memberList =
-					  vacationService.getMemberList(); log.info("사원정보 조회 :{}",memberList);
+			  model.addAttribute("standard", standard); 
+			  List<MemberList> memberList = vacationService.getMemberList(); log.info("사원정보 조회 :{}",memberList);
 					  model.addAttribute("memberList", memberList); 
 					  return "settings/vacation_insert_all"; 
 		  }
@@ -281,7 +310,20 @@ public class AdminVacationController {
 			
 			return "redirect:/settings/vacationVarietyList";
 		}
-		
+		/**
+		 * 휴가 중분류 수정 화면
+		 * 
+		 */
+		@GetMapping("settings/vacationSortModify")
+		@ResponseBody
+		public VacationSort updateVacationSort(@RequestParam(value="vacationSortNum", required=false)String vacationSortNum, Model model) {
+			
+				log.info("휴가 중분류 번호:{}",vacationSortNum);
+				
+				VacationSort vacationSort = vacationService.getVacationSortByNum(vacationSortNum);
+				
+			return vacationSort;
+		}
 		/**
 		 * 휴가 중분류 수정 처리
 		 */
@@ -309,6 +351,17 @@ public class AdminVacationController {
 			log.info("휴가 기준 입력:{}",vacationStandard);
 			vacationService.addVacationStandard(vacationStandard);
 			return "redirect:/settings/vacationVarietyList";
+		}
+		/**
+		 * 휴가 기준 수정 화면
+		 */
+		@GetMapping("settings/vacationStandardModify")
+		@ResponseBody
+		public VacationStandard updateVacationStandard(Model model,
+											@RequestParam(value="serviceNum", required=false)String serviceNum) {
+			log.info("서비스 번호:{}",serviceNum);
+			VacationStandard vacationStandard = vacationMapper.getVacationStandardByServiceNum(serviceNum);
+			return vacationStandard;
 		}
 		/**
 		 * 휴가 기준 수정 처리

@@ -62,7 +62,7 @@
                   <td th:text="${w.leaveworkStatus}"></td>
                   <td th:text="${w.outsideDuty}"></td>
                   <td th:text="${w.workUnusual}"></td>
-                  <td th:if="${w.workUnusual=='Y'}"><button  class="btn btn-primary" th:href="@{/work/workAuthorityList(workTypeNum=${w.workTypeNum})}">확인</button></td>
+                  <td th:if="${w.workUnusual=='Y'}"><button class="btn btn-primary" th:href="@{/work/workAuthorityList(workTypeNum=${w.workTypeNum})}">확인</button></td>
                   <td th:unless="${w.workUnusual=='Y'}"><button  class="btn btn-primary" th:disabled="disabled">확인</button></td>
               </tr>
               <tr th:unless="${not #lists.isEmpty(workList)}">
