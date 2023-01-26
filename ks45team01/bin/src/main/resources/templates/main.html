@@ -14,15 +14,12 @@
 					</div>
 					<div class="col-3">
 						<div class="dropdown">
-							<button class="btn btn-link p-0 font-18 float-right"
-								type="button" id="widgetRevenue" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">
+							<button class="btn btn-link p-0 font-18 float-right" type="button" id="widgetRevenue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="feather icon-more-horizontal-"></i>
 							</button>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="widgetRevenue">
-								<a class="dropdown-item font-13" href="#">Refresh</a> <a
-									class="dropdown-item font-13" href="#">Export</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="widgetRevenue">
+								<a class="dropdown-item font-13" href="#">Refresh</a> 
+								<a class="dropdown-item font-13" href="#">Export</a>
 							</div>
 						</div>
 					</div>
@@ -31,30 +28,25 @@
 			<div class="user-slider">
 				<div class="user-slider-item">
 					<div class="card-body text-center">
-						<span class="action-icon badge badge-primary-inverse"
-							style="margin-bottom: 20px;">JD</span>
+						<span class="action-icon badge badge-primary-inverse" style="margin-bottom: 20px;">JD</span>
 						<h6 th:text="${session.SNAME}"></h6>
 						<h5 th:text="${session.SDEPARTMENT}"></h5>
 						<p th:text="${session.SEMAIL}"></p>
 						<div class="button-list mt-4">
-							<button type="button" class="btn btn-outline-primary"
-								name="attendanceTime">출근</button>
-							<button type="button" class="btn btn-outline-danger"
-								name="leaveworkTime">퇴근</button>
+							<button type="button" class="btn btn-outline-primary" name="attendanceTime">출근</button>
+							<button type="button" class="btn btn-outline-danger" name="leaveworkTime" >퇴근</button>
 						</div>
 						<div class="button-list mt-1">
-							<button type="button" class="btn btn-outline-success"
-								name="gooutWorkoutStartTime">외출</button>
-							<button type="button" class="btn btn-outline-success"
-								name="gooutWorkoutComebackTime">복귀</button>
+							<button type="button" class="btn btn-outline-success" name="gooutWorkoutStartTime" >외출</button>
+							<button type="button" class="btn btn-outline-success" name="gooutWorkoutComebackTime" >복귀</button>
 							<div class="card-footer text-center">
 								<div class="row">
 									<div class="col-6 border-right">
-										<div id="attendanceTime"  th:unless="${session.attendance == null}" th:text="${session.attendance}" ></div>
+										<div id="attendanceTime"></div>
 										<p class="my-2">출근시간</p>
 									</div>
 									<div class="col-6">
-										<div id="leaveworkTime" th:unless="${session.leaveTime == null}" th:text="${session.leaveTime}"></div>
+										<div id="leaveworkTime"></div>
 										<p class="my-2">퇴근시간</p>
 									</div>
 								</div>
@@ -62,11 +54,11 @@
 							<div class="card-footer text-center">
 								<div class="row">
 									<div class="col-6 border-right">
-										<div id="gooutWorkoutStartTime" th:unless="${session.startTime == null}" th:text="${session.startTime}"></div>
+										<div id="gooutWorkoutStartTime"></div>
 										<p class="my-2">외출시작시간</p>
 									</div>
 									<div class="col-6">
-										<div id="gooutWorkoutComebackTime" th:unless="${session.comebackTime == null}" th:text="${session.comebackTime}"></div>
+										<div id="gooutWorkoutComebackTime"></div>
 										<p class="my-2">외출복귀시간</p>
 									</div>
 								</div>
@@ -152,7 +144,9 @@
 									dataType : "json",
 									success : function(workInfo) {
 										console.log(workInfo);
-										$attendanceEle.text=`${workInfo.attendanceTime}`;
+										let attendanceTime = workInfo.attendanceTime;
+										$attendanceEle.innerHTML=`${attendanceTime}`;
+										$attendanceBtn.disabled="true";
 									}
 								});
 						
@@ -169,7 +163,9 @@
 									dataType : "json",
 									success : function(workInfo) {
 										console.log(workInfo);
-										$leaveWorkEle.text=`${workInfo.leaveworkTime}`;	
+										let leaveTime = workInfo.leaveworkTime;
+										$leaveWorkEle.innerHTML=`${leaveTime}`;	
+										$leaveWorkBtn.disabled="true";
 										
 									}
 								});
@@ -187,7 +183,9 @@
 									dataType : "json",
 									success : function(workInfo) {
 										console.log(workInfo);
-										$goOutEle.text=`${workInfo.gooutWorkoutStartTime}`;
+										let startTime = workInfo.gooutWorkoutStartTime;
+										$goOutEle.innerHTML=`${startTime}`;	
+										$goOutBtn.disabled="true";
 									}
 								});
 						
@@ -204,18 +202,35 @@
 									dataType : "json",
 									success : function(workInfo) {
 										console.log(workInfo);
-										$comeBackEle.text=`${workInfo.gooutWorkoutComebackTime}`;	
+										let comebackTime = workInfo.gooutWorkoutComebackTime;
+										$comeBackEle.innerHTML=`${comebackTime}`;
+										$comebackBtn.disabled="true";
 									}
 								});
 						
 		});
 		
-			
-		
-		
-		
-		
-		
+		const attendance = "[[${session.attendance}]]";
+		const leave = "[[${session.leaveTime}]]";
+		const start = "[[${session.startTime}]]";
+		const comeback = "[[${session.comebackTime}]]";
+		console.log(attendance);
+		if(attendance != ''){
+			$attendanceEle.innerHTML=`${attendance}`;
+			$attendanceBtn.disabled="true";
+		}
+		if(leave != ''){
+			$leaveWorkEle.innerHTML=`${leave}`;	
+			$leaveWorkBtn.disabled="true";
+		}
+		if(start !=''){
+			$goOutEle.innerHTML=`${start}`;	
+			$goOutBtn.disabled="true";
+		}
+		if(comeback != ''){
+			$comeBackEle.innerHTML=`${comeback}`;
+			$comebackBtn.disabled="true";
+		}
 			
 	</script>
 </th:block>

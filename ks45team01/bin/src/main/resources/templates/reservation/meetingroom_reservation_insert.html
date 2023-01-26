@@ -21,140 +21,147 @@
 			</div>
 		</div>
 	<th:block layout:fragment="customContents">
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<div class="card-body">
 		    <h6 class="card-subtitle"></h6>
-		    <form th:action="@{/reservation/meetingroomReservationInsert}" id="insertMeetingroomReservation" method="post">
-		    	 <th:block th:object="${l.meetingroom}" th:each="l : ${reservationList}">
-		    	<input type="hidden"  th:value="${l.reservationNum}" id="reservationNum" name="reservationNum">
+		    <form th:action="@{/reservation/meetingroomReservationInsert}" id="insertMeetingroomReservation" method="post" th:object="${meetingroom}">
 		    	<input type="hidden" class="form-control" id="applicantMemberNum" name="applicantMemberNum" th:value="${session.SID}">
 		    	<input type="hidden" class="form-control" id="meetNum" name="meetNum" th:value="*{meetNum}">
-		    	<input type="hidden" class="form-control" id="meetName" name="meetName" th:value="*{meetName}">
-		    	</th:block>
-
-		    	
+ 	
 	        	<div class="form-group">
                     <label for="exampleInputPassword1">회의실 명</label>
-                   	 <select class="form-control" id="meetName" name="meetName" >
-                   	 	<th:block th:each="l : ${reservationNameList}">
-                   	 		<option th:value="${l.meetingroom.meetNum}">[[${l.meetingroom.meetName}]]</option>
-                   	 	</th:block>
-                   	 </select>
+					<input type="text" class="form-control" id="exampleInputPassword1" th:value="*{meetName}" readonly="readonly">
                 </div>
                 	
                 <div class="form-group">
 			        <label for="exampleInputPassword1">예약날짜</label>
-                 	<input class="form-control"type="date" name="reservationDate" id="reservationDate" >
-                </div>	
-                <div class="form-group">
-               		<label for="exampleInputPassword1">시작시간</label>
-		            <select class="form-control" id="reservationStartTime" name="reservationStartTime" th:selected="*{meetUsableStart}" th:object="${reservationList.meetingroom}">
-		            	<option value="00:00" th:selected="*{meetUsableStart}==${'00:00'}" th:disabled="*{meetUsableStart}>${'00:00'}">00:00</option>
-		            	<option value="00:30" th:selected="*{meetUsableStart}==${'00:30'}" th:disabled="*{meetUsableStart}>${'00:30'}">00:30</option>
-		            	<option value="01:00" th:selected="*{meetUsableStart}==${'01:00'}" th:disabled="*{meetUsableStart}>${'01:00'}">01:00</option>
-		            	<option value="01:30" th:selected="*{meetUsableStart}==${'01:30'}" th:disabled="*{meetUsableStart}>${'01:30'}">01:30</option>
-		            	<option value="02:00" th:selected="*{meetUsableStart}==${'02:00'}" th:disabled="*{meetUsableStart}>${'02:00'}">02:00</option>
-		            	<option value="02:30" th:selected="*{meetUsableStart}==${'02:30'}" th:disabled="*{meetUsableStart}>${'02:30'}">02:30</option>
-		            	<option value="03:00" th:selected="*{meetUsableStart}==${'03:00'}" th:disabled="*{meetUsableStart}>${'03:00'}">03:00</option>
-		            	<option value="03:30" th:selected="*{meetUsableStart}==${'03:30'}" th:disabled="*{meetUsableStart}>${'03:30'}">03:30</option>
-		            	<option value="04:00" th:selected="*{meetUsableStart}==${'04:00'}" th:disabled="*{meetUsableStart}>${'04:00'}">04:00</option>
-		            	<option value="04:30" th:selected="*{meetUsableStart}==${'04:30'}" th:disabled="*{meetUsableStart}>${'04:30'}">04:30</option>
-		            	<option value="05:00" th:selected="*{meetUsableStart}==${'05:00'}" th:disabled="*{meetUsableStart}>${'05:00'}">05:00</option>
-		            	<option value="05:30" th:selected="*{meetUsableStart}==${'05:30'}" th:disabled="*{meetUsableStart}>${'05:30'}">05:30</option>
-		            	<option value="06:00" th:selected="*{meetUsableStart}==${'06:00'}" th:disabled="*{meetUsableStart}>${'06:00'}">06:00</option>
-		            	<option value="06:30" th:selected="*{meetUsableStart}==${'06:30'}" th:disabled="*{meetUsableStart}>${'06:30'}">06:30</option>
-		            	<option value="07:00" th:selected="*{meetUsableStart}==${'07:00'}" th:disabled="*{meetUsableStart}>${'07:00'}">07:00</option>
-		            	<option value="07:30" th:selected="*{meetUsableStart}==${'07:30'}" th:disabled="*{meetUsableStart}>${'07:30'}">07:30</option>
-		            	<option value="08:00" th:selected="*{meetUsableStart}==${'08:00'}" th:disabled="*{meetUsableStart}>${'08:00'}">08:00</option>
-		            	<option value="08:30" th:selected="*{meetUsableStart}==${'08:30'}" th:disabled="*{meetUsableStart}>${'08:30'}">08:30</option>
-		            	<option value="09:00" th:selected="*{meetUsableStart}==${'09:00'}" th:disabled="*{meetUsableStart}>${'09:00'}">09:00</option>
-		            	<option value="09:30" th:selected="*{meetUsableStart}==${'09:30'}" th:disabled="*{meetUsableStart}>${'09:30'}">09:30</option>
-		            	<option value="10:00" th:selected="*{meetUsableStart}==${'10:00'}" th:disabled="*{meetUsableStart}>${'10:00'}">10:00</option>
-		            	<option value="10:30" th:selected="*{meetUsableStart}==${'10:30'}" th:disabled="*{meetUsableStart}>${'10:30'}">10:30</option>
-		            	<option value="11:00" th:selected="*{meetUsableStart}==${'11:00'}" th:disabled="*{meetUsableStart}>${'11:00'}">11:00</option>
-		            	<option value="11:30" th:selected="*{meetUsableStart}==${'11:30'}" th:disabled="*{meetUsableStart}>${'11:30'}">11:30</option>
-		            	<option value="12:00" th:selected="*{meetUsableStart}==${'12:00'}" th:disabled="*{meetUsableStart}>${'12:00'}">12:00</option>
-		            	<option value="12:30" th:selected="*{meetUsableStart}==${'12:30'}" th:disabled="*{meetUsableStart}>${'12:30'}">12:30</option>
-		            	<option value="13:00" th:selected="*{meetUsableStart}==${'13:00'}" th:disabled="*{meetUsableStart}>${'13:00'}">13:00</option>
-		            	<option value="13:30" th:selected="*{meetUsableStart}==${'13:30'}" th:disabled="*{meetUsableStart}>${'13:30'}">13:30</option>
-		            	<option value="14:00" th:selected="*{meetUsableStart}==${'14:00'}" th:disabled="*{meetUsableStart}>${'14:00'}">14:00</option>
-		            	<option value="14:30" th:selected="*{meetUsableStart}==${'14:30'}" th:disabled="*{meetUsableStart}>${'14:30'}">14:30</option>
-		            	<option value="15:00" th:selected="*{meetUsableStart}==${'15:00'}" th:disabled="*{meetUsableStart}>${'15:00'}">15:00</option>
-		            	<option value="15:30" th:selected="*{meetUsableStart}==${'15:30'}" th:disabled="*{meetUsableStart}>${'15:30'}">15:30</option>
-		            	<option value="16:00" th:selected="*{meetUsableStart}==${'16:00'}" th:disabled="*{meetUsableStart}>${'16:00'}">16:00</option>
-		            	<option value="16:30" th:selected="*{meetUsableStart}==${'16:30'}" th:disabled="*{meetUsableStart}>${'16:30'}">16:30</option>
-		            	<option value="17:00" th:selected="*{meetUsableStart}==${'17:00'}" th:disabled="*{meetUsableStart}>${'17:00'}">17:00</option>
-		            	<option value="17:30" th:selected="*{meetUsableStart}==${'17:30'}" th:disabled="*{meetUsableStart}>${'17:30'}">17:30</option>
-		            	<option value="18:00" th:selected="*{meetUsableStart}==${'18:00'}" th:disabled="*{meetUsableStart}>${'18:00'}">18:00</option>
-		            	<option value="18:30" th:selected="*{meetUsableStart}==${'18:30'}" th:disabled="*{meetUsableStart}>${'18:30'}">18:30</option>
-		            	<option value="19:00" th:selected="*{meetUsableStart}==${'19:00'}" th:disabled="*{meetUsableStart}>${'19:00'}">19:00</option>
-		            	<option value="19:30" th:selected="*{meetUsableStart}==${'19:30'}" th:disabled="*{meetUsableStart}>${'19:30'}">19:30</option>
-		            	<option value="20:00" th:selected="*{meetUsableStart}==${'20:00'}" th:disabled="*{meetUsableStart}>${'20:00'}">20:00</option>
-		            	<option value="20:30" th:selected="*{meetUsableStart}==${'20:30'}" th:disabled="*{meetUsableStart}>${'20:30'}">20:30</option>
-		            	<option value="21:00" th:selected="*{meetUsableStart}==${'21:00'}" th:disabled="*{meetUsableStart}>${'21:00'}">21:00</option>
-		            	<option value="21:30" th:selected="*{meetUsableStart}==${'21:30'}" th:disabled="*{meetUsableStart}>${'21:30'}">21:30</option>
-		            	<option value="22:00" th:selected="*{meetUsableStart}==${'22:00'}" th:disabled="*{meetUsableStart}>${'22:00'}">22:00</option>
-		            	<option value="22:30" th:selected="*{meetUsableStart}==${'22:30'}" th:disabled="*{meetUsableStart}>${'22:30'}">22:30</option>
-		            	<option value="23:00" th:selected="*{meetUsableStart}==${'23:00'}" th:disabled="*{meetUsableStart}>${'23:00'}">23:00</option>
-		            	<option value="23:30" th:selected="*{meetUsableStart}==${'23:30'}" th:disabled="*{meetUsableStart}>${'23:30'}">23:30</option>
-		            </select>
-
-		        </div>
-                <div class="form-group">
-                	<label for="exampleInputPassword1">종료시간</label>
-                	<th:block th:object="${reservationList.meetingroom}">
-                 	<select class="form-control" id="reservationEndTime" name=reservationEndTime th:selected="*{meetUsableEnd}">
-		            	<option value="00:00" th:selected="*{meetUsableEnd}==${'00:00'}" th:disabled="*{meetUsableEnd}<${'00:00'}">00:00</option>
-		            	<option value="00:30" th:selected="*{meetUsableEnd}==${'00:30'}" th:disabled="*{meetUsableEnd}<${'00:30'}">00:30</option>
-		            	<option value="01:00" th:selected="*{meetUsableEnd}==${'01:00'}" th:disabled="*{meetUsableEnd}<${'01:00'}">01:00</option>
-		            	<option value="01:30" th:selected="*{meetUsableEnd}==${'01:30'}" th:disabled="*{meetUsableEnd}<${'01:30'}">01:30</option>
-		            	<option value="02:00" th:selected="*{meetUsableEnd}==${'02:00'}" th:disabled="*{meetUsableEnd}<${'02:00'}">02:00</option>
-		            	<option value="02:30" th:selected="*{meetUsableEnd}==${'02:30'}" th:disabled="*{meetUsableEnd}<${'02:30'}">02:30</option>
-		            	<option value="03:00" th:selected="*{meetUsableEnd}==${'03:00'}" th:disabled="*{meetUsableEnd}<${'03:00'}">03:00</option>
-		            	<option value="03:30" th:selected="*{meetUsableEnd}==${'03:30'}" th:disabled="*{meetUsableEnd}<${'03:30'}">03:30</option>
-		            	<option value="04:00" th:selected="*{meetUsableEnd}==${'04:00'}" th:disabled="*{meetUsableEnd}<${'04:00'}">04:00</option>
-		            	<option value="04:30" th:selected="*{meetUsableEnd}==${'04:30'}" th:disabled="*{meetUsableEnd}<${'04:30'}">04:30</option>
-		            	<option value="05:00" th:selected="*{meetUsableEnd}==${'05:00'}" th:disabled="*{meetUsableEnd}<${'05:00'}">05:00</option>
-		            	<option value="05:30" th:selected="*{meetUsableEnd}==${'05:30'}" th:disabled="*{meetUsableEnd}<${'05:30'}">05:30</option>
-		            	<option value="06:00" th:selected="*{meetUsableEnd}==${'06:00'}" th:disabled="*{meetUsableEnd}<${'06:00'}">06:00</option>
-		            	<option value="06:30" th:selected="*{meetUsableEnd}==${'06:30'}" th:disabled="*{meetUsableEnd}<${'06:30'}">06:30</option>
-		            	<option value="07:00" th:selected="*{meetUsableEnd}==${'07:00'}" th:disabled="*{meetUsableEnd}<${'07:00'}">07:00</option>
-		            	<option value="07:30" th:selected="*{meetUsableEnd}==${'07:30'}" th:disabled="*{meetUsableEnd}<${'07:30'}">07:30</option>
-		            	<option value="08:00" th:selected="*{meetUsableEnd}==${'08:00'}" th:disabled="*{meetUsableEnd}<${'08:00'}">08:00</option>
-		            	<option value="08:30" th:selected="*{meetUsableEnd}==${'08:30'}" th:disabled="*{meetUsableEnd}<${'08:30'}">08:30</option>
-		            	<option value="09:00" th:selected="*{meetUsableEnd}==${'09:00'}" th:disabled="*{meetUsableEnd}<${'09:00'}">09:00</option>
-		            	<option value="09:30" th:selected="*{meetUsableEnd}==${'09:30'}" th:disabled="*{meetUsableEnd}<${'09:30'}">09:30</option>
-		            	<option value="10:00" th:selected="*{meetUsableEnd}==${'10:00'}" th:disabled="*{meetUsableEnd}<${'10:00'}">10:00</option>
-		            	<option value="10:30" th:selected="*{meetUsableEnd}==${'10:30'}" th:disabled="*{meetUsableEnd}<${'10:30'}">10:30</option>
-		            	<option value="11:00" th:selected="*{meetUsableEnd}==${'11:00'}" th:disabled="*{meetUsableEnd}<${'11:00'}">11:00</option>
-		            	<option value="11:30" th:selected="*{meetUsableEnd}==${'11:30'}" th:disabled="*{meetUsableEnd}<${'11:30'}">11:30</option>
-		            	<option value="12:00" th:selected="*{meetUsableEnd}==${'12:00'}" th:disabled="*{meetUsableEnd}<${'12:00'}">12:00</option>
-		            	<option value="12:30" th:selected="*{meetUsableEnd}==${'12:30'}" th:disabled="*{meetUsableEnd}<${'12:30'}">12:30</option>
-		            	<option value="13:00" th:selected="*{meetUsableEnd}==${'13:00'}" th:disabled="*{meetUsableEnd}<${'13:00'}">13:00</option>
-		            	<option value="13:30" th:selected="*{meetUsableEnd}==${'13:30'}" th:disabled="*{meetUsableEnd}<${'13:30'}">13:30</option>
-		            	<option value="14:00" th:selected="*{meetUsableEnd}==${'14:00'}" th:disabled="*{meetUsableEnd}<${'14:00'}">14:00</option>
-		            	<option value="14:30" th:selected="*{meetUsableEnd}==${'14:30'}" th:disabled="*{meetUsableEnd}<${'14:30'}">14:30</option>
-		            	<option value="15:00" th:selected="*{meetUsableEnd}==${'15:00'}" th:disabled="*{meetUsableEnd}<${'15:00'}">15:00</option>
-		            	<option value="15:30" th:selected="*{meetUsableEnd}==${'15:30'}" th:disabled="*{meetUsableEnd}<${'15:30'}">15:30</option>
-		            	<option value="16:00" th:selected="*{meetUsableEnd}==${'16:00'}" th:disabled="*{meetUsableEnd}<${'16:00'}">16:00</option>
-		            	<option value="16:30" th:selected="*{meetUsableEnd}==${'16:30'}" th:disabled="*{meetUsableEnd}<${'16:30'}">16:30</option>
-		            	<option value="17:00" th:selected="*{meetUsableEnd}==${'17:00'}" th:disabled="*{meetUsableEnd}<${'17:00'}">17:00</option>
-		            	<option value="17:30" th:selected="*{meetUsableEnd}==${'17:30'}" th:disabled="*{meetUsableEnd}<${'17:30'}">17:30</option>
-		            	<option value="18:00" th:selected="*{meetUsableEnd}==${'18:00'}" th:disabled="*{meetUsableEnd}<${'18:00'}">18:00</option>
-		            	<option value="18:30" th:selected="*{meetUsableEnd}==${'18:30'}" th:disabled="*{meetUsableEnd}<${'18:30'}">18:30</option>
-		            	<option value="19:00" th:selected="*{meetUsableEnd}==${'19:00'}" th:disabled="*{meetUsableEnd}<${'19:00'}">19:00</option>
-		            	<option value="19:30" th:selected="*{meetUsableEnd}==${'19:30'}" th:disabled="*{meetUsableEnd}<${'19:30'}">19:30</option>
-		            	<option value="20:00" th:selected="*{meetUsableEnd}==${'20:00'}" th:disabled="*{meetUsableEnd}<${'20:00'}">20:00</option>
-		            	<option value="20:30" th:selected="*{meetUsableEnd}==${'20:30'}" th:disabled="*{meetUsableEnd}<${'20:30'}">20:30</option>
-		            	<option value="21:00" th:selected="*{meetUsableEnd}==${'21:00'}" th:disabled="*{meetUsableEnd}<${'21:00'}">21:00</option>
-		            	<option value="21:30" th:selected="*{meetUsableEnd}==${'21:30'}" th:disabled="*{meetUsableEnd}<${'21:30'}">21:30</option>
-		            	<option value="22:00" th:selected="*{meetUsableEnd}==${'22:00'}" th:disabled="*{meetUsableEnd}<${'22:00'}">22:00</option>
-		            	<option value="22:30" th:selected="*{meetUsableEnd}==${'22:30'}" th:disabled="*{meetUsableEnd}<${'22:30'}">22:30</option>
-		            	<option value="23:00" th:selected="*{meetUsableEnd}==${'23:00'}" th:disabled="*{meetUsableEnd}<${'23:00'}">23:00</option>
-		            	<option value="23:30" th:selected="*{meetUsableEnd}==${'23:30'}" th:disabled="*{meetUsableEnd}<${'23:30'}">23:30</option>
-		            </select>
-		            </th:block>
+                 	<input class="form-control" type="date" name="reservationDate" id="reservationDate">
                 </div>
+                        <div class="form-group">
+                                <h4 class="card-title">시작시간</h4>
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">예약가능한 시작시간</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" readonly="" class="form-control-plaintext" id="meetUsableStart" name="meetUsableStart" th:value="*{meetUsableStart}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword" class="col-sm-2 col-form-label">예약시간</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="reservationStartTime" name="reservationStartTime">
+							            	<option value="00:00">00:00</option>
+							            	<option value="00:30">00:30</option>
+							            	<option value="01:00">01:00</option>
+							            	<option value="01:30">01:30</option>
+							            	<option value="02:00">02:00</option>
+							            	<option value="02:30">02:30</option>
+							            	<option value="03:00">03:00</option>
+							            	<option value="03:30">03:30</option>
+							            	<option value="04:00">04:00</option>
+							            	<option value="04:30">04:30</option>
+							            	<option value="05:00">05:00</option>
+							            	<option value="05:30">05:30</option>
+							            	<option value="06:00">06:00</option>
+							            	<option value="06:30">06:30</option>
+							            	<option value="07:00">07:00</option>
+							            	<option value="07:30">07:30</option>
+							            	<option value="08:00">08:00</option>
+							            	<option value="08:30">08:30</option>
+							            	<option value="09:00">09:00</option>
+							            	<option value="09:30">09:30</option>
+							            	<option value="10:00">10:00</option>
+							            	<option value="10:30">10:30</option>
+							            	<option value="11:00">11:00</option>
+							            	<option value="11:30">11:30</option>
+							            	<option value="12:00">12:00</option>
+							            	<option value="12:30">12:30</option>
+							            	<option value="13:00">13:00</option>
+							            	<option value="13:30">14:00</option>
+							            	<option value="14:30">14:30</option>
+							            	<option value="15:00">15:00</option>
+							            	<option value="15:30">15:30</option>
+							            	<option value="16:00">16:00</option>
+							            	<option value="16:30">16:30</option>
+							            	<option value="17:00">17:00</option>
+							            	<option value="17:30">17:30</option>
+							            	<option value="18:00">18:00</option>
+							            	<option value="18:30">18:30</option>
+							            	<option value="19:00">19:00</option>
+							            	<option value="19:30">19:30</option>
+							            	<option value="20:00">20:00</option>
+							            	<option value="20:30">20:30</option>
+							            	<option value="21:00">21:00</option>
+							            	<option value="21:30">21:30</option>
+							            	<option value="22:00">22:00</option>
+							            	<option value="22:30">22:30</option>
+							            	<option value="23:00">23:00</option>
+							            	<option value="23:30">23:30</option>
+				          				</select>
+                                    </div>
+                                </div>
+                        </div>
+               				<div class="form-group">
+                                <h4 class="card-title">종료시간</h4>
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">예약가능한 종료시간</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" readonly="" class="form-control-plaintext" id="meetUsableEnd" name="meetUsableEnd" th:value="*{meetUsableEnd}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label for="inputPassword" class="col-sm-2 col-form-label">예약시간</label>
+                                    <div class="col-sm-10">
+                                      <select class="form-control" id="reservationEndTime" name="reservationEndTime">
+						            	<option value="00:00">00:00</option>
+						            	<option value="00:30">00:30</option>
+						            	<option value="01:00">01:00</option>
+						            	<option value="01:30">01:30</option>
+						            	<option value="02:00">02:00</option>
+						            	<option value="02:30">02:30</option>
+						            	<option value="03:00">03:00</option>
+						            	<option value="03:30">03:30</option>
+						            	<option value="04:00">04:00</option>
+						            	<option value="04:30">04:30</option>
+						            	<option value="05:00">05:00</option>
+						            	<option value="05:30">05:30</option>
+						            	<option value="06:00">06:00</option>
+						            	<option value="06:30">06:30</option>
+						            	<option value="07:00">07:00</option>
+						            	<option value="07:30">07:30</option>
+						            	<option value="08:00">08:00</option>
+						            	<option value="08:30">08:30</option>
+						            	<option value="09:00">09:00</option>
+						            	<option value="09:30">09:30</option>
+						            	<option value="10:00">10:00</option>
+						            	<option value="10:30">10:30</option>
+						            	<option value="11:00">11:00</option>
+						            	<option value="11:30">11:30</option>
+						            	<option value="12:00">12:00</option>
+						            	<option value="12:30">12:30</option>
+						            	<option value="13:00">13:00</option>
+						            	<option value="13:30">14:00</option>
+						            	<option value="14:30">14:30</option>
+						            	<option value="15:00">15:00</option>
+						            	<option value="15:30">15:30</option>
+						            	<option value="16:00">16:00</option>
+						            	<option value="16:30">16:30</option>
+						            	<option value="17:00">17:00</option>
+						            	<option value="17:30">17:30</option>
+						            	<option value="18:00">18:00</option>
+						            	<option value="18:30">18:30</option>
+						            	<option value="19:00">19:00</option>
+						            	<option value="19:30">19:30</option>
+						            	<option value="20:00">20:00</option>
+						            	<option value="20:30">20:30</option>
+						            	<option value="21:00">21:00</option>
+						            	<option value="21:30">21:30</option>
+						            	<option value="22:00">22:00</option>
+						            	<option value="22:30">22:30</option>
+						            	<option value="23:00">23:00</option>
+						            	<option value="23:30">23:30</option>
+				          			</select>
+                                </div>
+                            </div>
+                        </div>
                 <label for="exampleInputPassword1">예약내용</label>
                 	<textarea class="form-control" rows="3" name="reservationContents" id="reservationContents" ></textarea>
 		        <button type="submit" id="submitBtn" class="btn btn-primary" style="margin:80px 0px 0px 0px;">확인</button>
@@ -179,11 +186,30 @@
     //시작시간을 숫자로 변환
    	var first;
    	var second;
+   	var firstUsable;
+   	var secondUsable;
+   	
+   	$("#meetUsableStart").ready(function(){
+   		var startusable = $("#meetUsableStart").val();
+   		firstUsable = startusable.substr(0,2) + startusable.substr(3,2);
+   		console.log(firstUsable);
    		
+   	});
+   	
+   	$("#meetUsableEnd").ready(function(){
+   		var endusable = $("#meetUsableEnd").val();
+   		secondUsable = endusable.substr(0,2) + endusable.substr(3,2);
+   		console.log(secondUsable);
+   		
+   	});
+   	
    	$("#reservationStartTime").change(function(){
    		var startselected = $("#reservationStartTime option:selected").val();
    		first = startselected.substr(0,2) + startselected.substr(3,2);
    		console.log(first);
+   		if(first < firstUsable){
+   			alert("사용불가능한 시간입니다");
+   	   	}
    		
    	});
     
@@ -194,10 +220,20 @@
    		console.log(second);
    		
    		if(first >= second){
-   	   		alert("시간을 다시 선택하세요");
+   	   		alert("시작시간보다 늦은시간을 선택해주세요");
+   	   	}
+   		
+   		if(second > secondUsable){
+   	   		alert("사용불가능한 시간입니다");
    	   	}
    	   		
    	});
+   
+   		
+   	
+   	
+   	
+   	
    	
   	//조건에 안맞을 시 버튼 클릭하면 alert창 뜨게 하기
    	$('#submitBtn').click(function(){
@@ -210,6 +246,30 @@
 	   	   	
 	   	   	return false;
    		}
+   		
+   		if(second > secondUsable){
+   	   		alert("시간을 다시 선택하세요");
+   	   		
+   	   		isSubmit = false;
+   	   	
+   	   		return false;
+   	   	}
+   		
+   		if(first < firstUsable){
+   			alert("시간을 다시 선택하세요");
+   			
+   			isSubmit = false;
+   	   	   	
+   	   		return false;
+   	   	}
+   		
+   		if('#reservationDate == null'){
+   			alert("예약날짜를 선택해주세요");
+   			
+   			isSubmit = false;
+   	   	   	
+   	   		return false;
+   	   	}
    		
 	   	 if(isSubmit) {
 	   		/* const insertReservationObj = {};
