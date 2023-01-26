@@ -91,6 +91,10 @@ public class ApprovalService {
 		approval.setDraftDocNum(draftDocNum);
 		approvalMapper.addDraftInsert(approval);
 	}
+	/**
+	 * 결재자 추가
+	 * @param approvalLineList
+	 */
 	public void addApprovalMember(List<ApprovalLine> approvalLineList) {
 		approvalMapper.addApprovalMember(approvalLineList);
 	}

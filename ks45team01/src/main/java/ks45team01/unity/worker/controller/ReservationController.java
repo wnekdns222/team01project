@@ -2,6 +2,7 @@ package ks45team01.unity.worker.controller;
 
 import java.util.List;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ks45team01.unity.dto.Meetingroom;
 import ks45team01.unity.dto.Reservation;
@@ -62,27 +64,17 @@ public class ReservationController {
 	
 	//예약추가
 	@PostMapping("/meetingroomReservationInsert")
-	public String insertMeetingroomReservation(Reservation reservation, Model model) {
+	public String insertMeetingroomReservation(Reservation reservation, Model model,RedirectAttributes reAttr) {
 		
 		reservationService.insertMeetingroomReservation(reservation);
+		reAttr.addAttribute("applicantMemberNum", reservation.getApplicantMemberNum());
 
 		
 		return "redirect:/reservation/meetingroomReservationMine";
 		
 	}
 	
-	// 예약
-	/*
-	 * @PostMapping("/meetingroomReservationInsert")
-	 * 
-	 * @ResponseBody public String insertReservation(@RequestBody Reservation
-	 * reservation) {
-	 * 
-	 * log.info("reservation : {}", reservation);
-	 * 
-	 * return "/reservation/meetingroomReservationList"; }
-	 */
-	
+
 	//내 예약확인화면
 	@GetMapping("/meetingroomReservationMine")
 	public String getReservationMineList(@RequestParam(value="applicantMemberNum", required=false) String applicantMemberNum,Model model) {
@@ -97,7 +89,7 @@ public class ReservationController {
  
 	//예약 수정화면
 	@GetMapping("/meetingroomReservationModify")
-	public String modifyMeetingroomReservation(@RequestParam(value="reservationNum", required=false) String reservationNum,Model model) {
+	public String modifyReservation(@RequestParam(value="reservationNum", required=false) String reservationNum,Model model) {
 		
 		log.info("meetingroomReservation: {}", reservationNum);
 		
@@ -110,9 +102,10 @@ public class ReservationController {
 	
 	//예약 수정화면
 	@PostMapping("/meetingroomReservationModify")
-	public String modifyMeetingroomReservation(Reservation reservation) {
+	public String modifyReservation(Reservation reservation, RedirectAttributes reAttr) {
 						
 		reservationService.modifyReservation(reservation);
+		reAttr.addAttribute("applicantMemberNum", reservation.getApplicantMemberNum());
 
 		return "redirect:/reservation/meetingroomReservationMine";
 		

@@ -263,7 +263,9 @@
    	   		return false;
    	   	}
    		
-   		if('#reservationDate == null'){
+   		const checkValue = $('#reservationDate').val();
+   		
+   		if(checkValue == 'undefined' || checkValue == null || checkValue == ''){
    			alert("예약날짜를 선택해주세요");
    			
    			isSubmit = false;
@@ -272,46 +274,7 @@
    	   	}
    		
 	   	 if(isSubmit) {
-	   		/* const insertReservationObj = {};
-	   		
-	   		const insertReservationInputArray = $('#insertReservation input');
-	   		const insertReservationSelects = $('#insertReservation select');
-	   		const insertReservationTextareas = $('#insertReservation textarea');
-	   		s
-	   		for(let insertReservationInput of insertReservationInputArray){
-	   			let objKey = $(insertReservationInput).attr('name');
-	   			let objValue = $(insertReservationInput).val();
-	   			insertReservationObj[objKey] = objValue;
-	   		}
-	   		for(let insertReservationSelect of insertReservationSelects){
-	   			let objKey = $(insertReservationSelect).attr('name');
-	   			let objValue = $(insertReservationSelect).val();
-	   			insertReservationObj[objKey] = objValue;
-	   		}
-	   		for(let insertReservationTextarea of insertReservationTextareas){
-	   			let objKey = $(insertReservationTextarea).attr('name');
-	   			let objValue = $(insertReservationTextarea).val();
-	   			insertReservationObj[objKey] = objValue;
-	   		}
-	   		
-	   		console.log(insertReservationObj)
-	   		
-	   		const request = $.ajax({
-			  url: '/reservation/meetingroomReservationInsert',
-			  method: 'POST',
-			  data: JSON.stringify(insertReservationObj),
-			  contentType: 'application/json; charset=utf-8',
-			  dataType: 'text'
-			});
-			 
-			request.done(function( res ) {
-			  location.href = res;
-			});
-			 
-			request.fail(function( jqXHR, textStatus ) {
-			  alert( "Request failed: " + textStatus );
-			});  */
-			
+	   		 
 	   		$('#insertReservation').submit();
 	   	}
    	});

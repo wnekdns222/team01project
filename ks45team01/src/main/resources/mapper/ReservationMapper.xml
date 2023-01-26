@@ -67,7 +67,13 @@
 			</if> 
 			<if test="reservationContents != null and reservationContents != '' ">
 				,reservation_contents = #{reservationContents}
-			</if> 
+			</if>
+			<if test="reservationUpdateMember != null and reservationUpdateMember != '' ">
+				,reservation_update_member = #{reservationUpdateMember}
+			</if>
+			<if test="reservationUpdateDate != null and reservationUpdateDate != '' ">
+				,reservation_update_date = now()
+			</if>		 
 		</trim>
 		 WHERE
 		 	reservation_num = #{reservationNum};
