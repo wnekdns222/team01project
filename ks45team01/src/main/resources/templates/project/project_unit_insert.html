@@ -27,6 +27,42 @@
 	</th:block>
 	<th:block layout:fragment="customContents">
 		<h1>프로젝트 단위업무 등록 화면</h1>
+		
+		<div class="card-body py-0 table-responsive">
+							<table class="table clients-contant-table mb-0">
+								<thead>
+									<tr>
+										<th scope="col">등록자</th>
+										<th scope="col">등록일자</th>
+										<th scope="col">수정일자</th>
+										<th scope="col">단위업무내용</th>
+										<th scope="col">Edit & Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="pu : ${projectUnit}">
+										<td>
+											<div class="d-flex align-items-center">
+												<div class="bg-img mr-4">
+													<img src="/assets/img/avtar/01.jpg" class="img-fluid"
+														alt="Clients-01">
+												</div>
+												<p class="font-weight-bold" th:text="${pu.memberInsertNum}"></p>
+											</div>
+										</td>
+										<td th:text="${pu.projectUnitRegDate}"></td>
+										<td th:text="${pu.projectUnitUpdateDate}"></td>
+										<td th:text="${pu.unitContents}">1.커피고르기</td>
+										<td><a href="/project/projectModify"
+											class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i
+												class="ti ti-pencil"></i></a> <a href="javascript:void(0)"
+											class="btn btn-icon btn-outline-danger btn-round"><i
+												class="ti ti-close"></i></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+		
 	</th:block>
 	
 </html>
