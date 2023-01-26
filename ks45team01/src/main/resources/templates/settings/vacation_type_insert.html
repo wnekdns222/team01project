@@ -46,7 +46,7 @@
 		</div>
 		<div class="form-group">
 			<label for="memberNum">등록 사원번호</label> 
-			<input type="text" class="form-control" name="memberNum" id="memberNum" required>
+			<input type="text" class="form-control" name="memberNum" id="memberNum"  th:value ="${session.SID}" required>
 		</div>
 		<div class="form-group">
 			<div class="checkbox checbox-switch switch-primary">

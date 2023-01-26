@@ -276,4 +276,44 @@
 		w.department_num=#{departmentNum}
 		ORDER BY w.attendance_day;
 	</select>
+	<insert id="addWorkUnusual" parameterType="WorkUnusual">
+	/* 비정상 근태 등록 */
+	INSERT INTO tb_work_unusual
+	(work_unusual_num, 
+	work_num, 
+	member_num, 
+	write_attendance_day, 
+	wirte_attendance_time, 
+	write_leavework_time, 
+	write_change_reason, 
+	vacation_category_num, 
+	vacation_sort_num, 
+	vacation_type_num, 
+	reg_member_num, 
+	reg_date)
+	VALUES 
+	(#{workUnusualNum}, 
+	#{workNum}, 
+	#{memberNum}, 
+	#{writeAttendanceDay}, 
+	#{wirteAttendanceTime}, 
+	#{writeLeaveworkTime}, 
+	#{writeChangeReason}, 
+	#{vacationCategoryNum}, 
+	#{vacationSortNum}, 
+	#{vacationTypeNum}, 
+	#{regMemberNum}, 
+	NOW());
+	</insert>
+	<select id="getWorkNum" parameterType="String" resultType="String">
+	/* workNum 조회 */
+	select
+	w.work_num
+	from
+	tb_work AS w
+	where
+	w.member_num = #{memberNum}
+	and
+	w.attendance_day = #{attendanceDay};
+	</select>
 </mapper>

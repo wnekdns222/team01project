@@ -3,6 +3,7 @@ package ks45team01.unity.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ks45team01.unity.dto.Work;
 import ks45team01.unity.dto.WorkUnusual;
@@ -10,6 +11,7 @@ import ks45team01.unity.mapper.WorkMapper;
 import ks45team01.unity.mapper.WorkTypeMapper;
 
 @Service
+@Transactional
 public class WorkService {
 
 	private final WorkMapper workMapper;
@@ -91,7 +93,19 @@ public class WorkService {
 		List<Work> workInfoList = workMapper.getAllWorkInfo();
 		return workInfoList;
 	}
-	
+	/**
+	 * 비정상 근태 등록 
+	 */
+	public void addWorkUnusual(WorkUnusual workUnusual){
+		String memberNum = workUnusual.getMemberNum();
+		String attendanceDay = workUnusual.getWriteAttendanceDay();
+		String workUnusualNum = workMapper.getCommonNewCode("tb_work_unusual", "work_unusual_num");
+		String workNum = workMapper.getWorkNum(memberNum, attendanceDay);
+		workUnusual.setWorkNum(workNum);
+		workUnusual.setWorkUnusualNum(workUnusualNum);
+		workMapper.addWorkUnusual(workUnusual); 
+		
+	}
 	/**
 	 * 비정상 근태 등록 조회
 	 */

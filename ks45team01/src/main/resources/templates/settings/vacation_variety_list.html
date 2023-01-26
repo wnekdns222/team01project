@@ -96,8 +96,8 @@
 			            				$('#info').attr('checked', true);
 			            			}
 			            },
-			            error: function(){
-			                alert("error");
+			            error: function(request, status, error){
+			                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			            }
 				});
 			});
@@ -118,8 +118,8 @@
 			            				$('#error').attr('checked', true);
 			            			}
 			            },
-			            error: function(){
-			                alert("error");
+			            error: function(request, status, error){
+			                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			            }
 				});
 			});
@@ -142,8 +142,8 @@
 			            				$('#toast-top-left').attr('checked', true);
 			            			}
 			            },
-			            error: function(){
-			                alert("error");
+			            error: function(request, status, error){
+			                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			            }
 				});
 			});
@@ -166,8 +166,8 @@
 			            				$('#toast-bottom-right').attr('checked', true);
 			            			}
 			            },
-			            error: function(){
-			                alert("error");
+			            error: function(request, status, error){
+			                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			            }
 				});
 			});

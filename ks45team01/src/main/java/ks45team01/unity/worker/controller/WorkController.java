@@ -33,7 +33,15 @@ public class WorkController {
 		this.workService = workService;
 	}
 	
-	//근태 입력처리(출근)
+	/**근태 입력처리(출근)
+	 * 
+	 * @param SID
+	 * @param SDEPARTMENTNUM
+	 * @param attendanceDay
+	 * @param workTime
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("work/workInsert")
 	@ResponseBody
 	public Work addWork(@RequestParam(value="SID", required=false) String SID,
@@ -56,7 +64,15 @@ public class WorkController {
 		return  workInfo;
 	}
 	
-	//근태 수정처리(퇴근)
+	/**근태 수정처리(퇴근)
+	 * 
+	 * @param SID
+	 * @param SDEPARTMENTNUM
+	 * @param attendanceDay
+	 * @param leaveTime
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("work/workUpdate")
 	@ResponseBody
 	public Work updateLeaveWork(@RequestParam(value="SID", required=false) String SID,
@@ -76,7 +92,15 @@ public class WorkController {
 		session.setAttribute("leaveTime", workInfo.getLeaveworkTime());
 		return workInfo;
 	}
-	//근태 수정처리(외출시작)
+	/**근태 수정처리(외출시작)
+	 * 
+	 * @param SID
+	 * @param SDEPARTMENTNUM
+	 * @param attendanceDay
+	 * @param workTime
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("work/updateGoOutStart")
 	@ResponseBody
 	public Work updateGoOut(@RequestParam(value="SID", required=false) String SID,
@@ -95,7 +119,15 @@ public class WorkController {
 		session.setAttribute("startTime", workInfo.getGooutWorkoutStartTime());
 		return workInfo;
 	}
-	//근태 수정처리(외출시작)
+	/**근태 수정처리(외출시작)
+	 * 
+	 * @param SID
+	 * @param SDEPARTMENTNUM
+	 * @param attendanceDay
+	 * @param workTime
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("work/updateComeback")
 	@ResponseBody
 	public Work updateComeback(@RequestParam(value="SID", required=false) String SID,
