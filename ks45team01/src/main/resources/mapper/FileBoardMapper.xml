@@ -55,10 +55,21 @@
 			<result property="departmentModifier" 	column="department_modifier"/>
 			<result property="useOrNot" 			column="use_or_not"/>
 		</association>
+		<association property="fileDto" javaType="FileDto">
+			<id property="fileIdx" 				column="file_idx"/>
+			<result property="fileNewName" 		column="file_new_name"/>
+			<result property="fileOriginalName" column="file_original_name"/>
+			<result property="filePath" 		column="file_path"/>
+			<result property="fileSize" 		column="file_size"/>
+		</association>
+		<association property="fileControl" javaType="FileControl">
+			<id property="fileControlCode" 		column="file_control_code"/>
+			<result property="fileGroupCode" 	column="file_group_code"/>
+			<result property="fileIdx" 			column="file_idx"/>
+		</association>
 	</resultMap>
-	
 	<resultMap type="FileBoardCate" id="fileBoardCateResultMap">
-		<id property="fileCategoryCode" 			column="file_category_code"/>
+		<id property="fileCategoryCode" 				column="file_category_code"/>
 		<result property="fileCategoryName" 			column="file_category_name"/>
 		<result property="fileCategoryRegistrant" 		column="file_category_registrant"/>
 		<result property="fileCategoryRegDate" 			column="file_category_reg_date"/>
@@ -132,8 +143,8 @@
 	<insert id="addBoardFile" parameterType="FileBoard">
 		/* 파일 게시글 등록 */
 		INSERT INTO tb_file_board
-		(file_board_num, file_category_code, file_board_registrant, file_board_title, file_board_contents, file_reg_date)
-		VALUES (sf_fileBoardNum(), #{fileCategoryCode}, #{fileBoardRegistrant}, #{fileBoardTitle}, #{fileBoardContents}, NOW());
+		(file_board_num, file_category_code, file_board_registrant, file_board_title, file_board_contents, file_reg_date, file_group_code)
+		VALUES (sf_fileBoardNum(), #{fileCategoryCode}, #{fileBoardRegistrant}, #{fileBoardTitle}, #{fileBoardContents}, NOW(), sf_fileGroupCode());
 	</insert>
 	<update id="boardFileUpdate" parameterType="FileBoard">
 		/* 파일게시글 수정 */
@@ -161,8 +172,16 @@
 		SELECT 
 			*
 		FROM 
-			tb_file_board
-		WHERE file_board_num = #{fileBoardNum};
+			tb_file_board AS fb
+			INNER JOIN 
+			tb_file_control AS fc
+			ON 
+			fb.file_group_code = fc.file_group_code
+			INNER JOIN 
+			tb_file AS f
+			ON 
+			fc.file_idx = f.file_idx
+		WHERE fb.file_board_num = #{fileBoardNum};
 	</select>
 	<select id="fileServiceTypeList" parameterType="String" resultMap="fileBoardResultMap">
 		SELECT 
