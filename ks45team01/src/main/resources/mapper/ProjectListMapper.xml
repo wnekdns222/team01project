@@ -95,7 +95,7 @@
 			CASE
 			WHEN COUNT(1) = 0 THEN CONCAT('project', '_1')
 			ELSE
-				CONCAT('comment','_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT('project', '_'), -1) AS UNSIGNED))+1)
+				CONCAT('project','_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT('project', '_'), -1) AS UNSIGNED))+1)
 			END AS newCode
 		FROM
 			${table} ;

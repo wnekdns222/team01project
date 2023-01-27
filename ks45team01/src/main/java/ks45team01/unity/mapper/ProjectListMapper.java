@@ -120,13 +120,21 @@ public interface ProjectListMapper {
 		
 		//projectUnit
 		// 회원 멤버전체 조회
-		List<ProjectUnit> projectUnitList(); 
+		List<ProjectUnit> projectUnitList(String projectNum); 
 		
 		//projectUnitMember 왜 오류가 안나지?? 아직 안쓰인 코드인가?
 		// 회원 멤버전체 조회
-		List<ProjectUnitMember> projectUnitMemberList(); 
+		List<ProjectUnitMember> projectUnitMemberList();
+
+		//자동증가 코드
+		String projectUnitCode (String table,String column);
 		
+		void ProjectUnitInsert (ProjectUnit projectUnit);
 		
 
+		
+	
+		
+		
 }
 

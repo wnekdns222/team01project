@@ -26,7 +26,26 @@
 		<br><br>
 	</th:block>
 	<th:block layout:fragment="customContents">
-		<h1>프로젝트 단위업무 등록 화면</h1>
+	
+	<form th:action="@{/project/projectUnitInsert}" method="post">
+		<div class="form-group">
+			<label for="workNum">단위업무 내용</label> 
+			<input type="text" class="form-control" id="unitContents" name="unitContents" required>
+		</div>
+		<div class="form-group">
+			<label for="writeChangeReason">생성자 아이디</label>
+			 <input type="hidden"
+				class="form-control" id="memberInsertNum" name="memberInsertNum" th:value ="${session.SID}" required >
+			
+		
+			<input type="hidden"
+				class="form-control" id="projectNum" name="projectNum" th:value ="${projectNum}" required>
+		
+		</div>
+		
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+	
 		
 		<div class="card-body py-0 table-responsive">
 							<table class="table clients-contant-table mb-0">
@@ -52,7 +71,7 @@
 										</td>
 										<td th:text="${pu.projectUnitRegDate}"></td>
 										<td th:text="${pu.projectUnitUpdateDate}"></td>
-										<td th:text="${pu.unitContents}">1.커피고르기</td>
+										<td th:text="${pu.unitContents}"></td>
 										<td><a href="/project/projectModify"
 											class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i
 												class="ti ti-pencil"></i></a> <a href="javascript:void(0)"

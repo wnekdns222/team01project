@@ -88,13 +88,7 @@ public class ProjectController {
 //프로젝트 등록 컨트롤러
 	@GetMapping("/projectInsert")
 	public String getProjectInsert(Model model
-									,ProjectList projectList
-								  ,HttpSession session
-								  ,HttpServletRequest request) {
-		String SID = (String)session.getAttribute("SID");
-		
-		
-		log.info("SID:",SID);
+								  ,ProjectList projectList) {
 		
 		model.addAttribute("projectInsert","프로젝트등록화면");
 		return "project/project_insert";
@@ -201,14 +195,33 @@ public class ProjectController {
 	return "project/project_unit";
 	}
 	
-	@GetMapping("/projectUnitInsert")
-	public String GetProjectUnitInsert(Model model) {
+	
+	@PostMapping("/projectUnitInsert")
+	public String setProjectUnitInsert(ProjectUnit projectUnit
+										,String projectNum
+										,RedirectAttributes reAttr) {
 		
-List<ProjectUnit> projectUnit = projectService.projectUnitList();
+		projectService.ProjectUnitInsert(projectUnit);
+		
+		log.info("projectUnit{}:",projectUnit);
+		reAttr.addAttribute("projectNum", projectNum);
+		
+		return "redirect:/project/projectUnitInsert";
+	}
+	
+	
+	@GetMapping("/projectUnitInsert")
+	public String GetProjectUnitInsert(Model model
+									  ,String projectNum) {
+		
+		List<ProjectUnit> projectUnit = projectService.projectUnitList(projectNum);
+		
 		
 		
 		model.addAttribute("projectUnitInsert","프로젝트단위업무등록화면");
 		model.addAttribute("projectUnit",projectUnit);
+		model.addAttribute("projectNum" ,projectNum);
+		
 	return "project/project_unit_insert";
 	}
 	

@@ -205,12 +205,20 @@ public class ProjectService {
 
 			
 //projectUnitService
-			public List<ProjectUnit> projectUnitList(){
+			public List<ProjectUnit> projectUnitList(String projectNum){
 				
-				List<ProjectUnit> projectUnit = projectListMapper.projectUnitList();
+				List<ProjectUnit> projectUnit = projectListMapper.projectUnitList(projectNum);
 				
 				return projectUnit;
 			}
 			
+			
+			public void ProjectUnitInsert(ProjectUnit ProjectUnit) {
+				String projectUnitCode = projectListMapper.projectUnitCode("tb_project_unit", "project_unit_num");
+			
+				ProjectUnit.setProjectUnitNum(projectUnitCode);
+				projectListMapper.ProjectUnitInsert(ProjectUnit);
+				
+			}
 
 }
