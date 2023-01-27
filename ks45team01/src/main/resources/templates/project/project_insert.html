@@ -27,69 +27,19 @@
 	<br>
 </th:block>
 <th:block layout:fragment="customContents">
-	<form>
+	<form th:action="@{/project/projectInsert}" method="post">
 		<div class="form-group">
-			<label for="workNum">제목</label> <input type="text"
-				class="form-control" id="workNum" required>
+			<label for="workNum">제목</label> 
+			<input type="text" class="form-control" id="projectContent" name="projectContent" required>
 		</div>
 		<div class="form-group">
-			<label for="writeChangeReason">단위업무</label>
-			<button type="button" class="btn btn-outline-dark" style="float: right;">단위업무추가</button>
-			 <input type="text"
-				class="form-control" id="projectNum" required>
+			<label for="writeChangeReason">생성자 아이디</label>
+			 <input type="hidden"
+				class="form-control" id="memberNum" name="memberNum" th:value ="${session.SID}" required>
+				
 		</div>
-		<div class="form-group">
-			<label for="writeChangeReason">단위업무확인 </label>
-			<div class="row">
-				<div class="col-12">
-					<div class="card card-statistics clients-contant">
-						<div class="card-header">
-							<div
-								class="d-xxs-flex justify-content-between align-items-center">
-								<div class="card-heading">
-									<h4 class="card-title">Clients</h4>
-								</div>
-							</div>
-						</div>
-						<div class="card-body py-0 table-responsive">
-							<table class="table clients-contant-table mb-0">
-								<thead>
-									<tr>
-										<th scope="col">등록자</th>
-										<th scope="col">등록일자</th>
-										<th scope="col">수정일자</th>
-										<th scope="col">단위업무내용</th>
-										<th scope="col">Edit & Delete</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="pu : ${projectUnit}">
-										<td>
-											<div class="d-flex align-items-center">
-												<div class="bg-img mr-4">
-													<img src="/assets/img/avtar/01.jpg" class="img-fluid"
-														alt="Clients-01">
-												</div>
-												<p class="font-weight-bold" th:text="${pu.memberInsertNum}"></p>
-											</div>
-										</td>
-										<td th:text="${pu.projectUnitRegDate}"></td>
-										<td th:text="${pu.projectUnitUpdateDate}"></td>
-										<td th:text="${pu.unitContents}">1.커피고르기</td>
-										<td><a href="/project/projectModify"
-											class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i
-												class="ti ti-pencil"></i></a> <a href="javascript:void(0)"
-											class="btn btn-icon btn-outline-danger btn-round"><i
-												class="ti ti-close"></i></a></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<button type="button" class="btn btn-primary">Submit</button>
+		
+		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </th:block>
 

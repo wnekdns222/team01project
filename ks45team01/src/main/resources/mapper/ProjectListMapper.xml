@@ -80,5 +80,25 @@
 	</where>
 	</update>
 
+	<insert id="ProjectInsert" parameterType="projectList">
+	INSERT INTO 
+		tb_project
+		(project_num, member_num, project_content, project_reg_date, project_done, project_progress, project_join)
+	VALUES 
+		(#{projectNum}, #{memberNum}, #{projectContent}, NOW(), 'N', '0', '1')
+	</insert>
 
+
+	<select id="projectCode" parameterType="String" resultType="String">
+	/* 자동증가코드 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT('project', '_1')
+			ELSE
+				CONCAT('project','_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT('project', '_'), -1) AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${table} ;
+	</select>
+	
 </mapper>
