@@ -32,8 +32,7 @@
 				<td style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">파일번호</div>
 				</td>
-				<td style="font-family: 돋음; font-size: 12">
-					[[${boardFileView.fileBoardNum}]]</td>
+				<td style="font-family: 돋음; font-size: 12" th:text="${boardFileView.fileBoardNum}"></td>
 			</tr>
 			<tr>
 				<td style="font-family: 돋음; font-size: 12" height="16">
@@ -55,7 +54,9 @@
 					<div align="center">파일첨부</div>
 				</td>
 				<td>
-					<input type="file" name="uploadfile" multiple="multiple" readonly/>
+					<div>
+						<a th:href="@{/fileBoard/fileBoardList}" th:text="${boardFileView.fileDto.fileOriginalName}"></a>
+					</div>
 				</td>
 			</tr>
 		</table>

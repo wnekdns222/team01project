@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import ks45team01.unity.admin.controller.LoginController;
 import ks45team01.unity.dto.Approval;
 import ks45team01.unity.dto.ApprovalLine;
 import ks45team01.unity.service.ApprovalService;
@@ -24,6 +29,7 @@ public class ApprovalController {
 	private static final Logger log = LoggerFactory.getLogger(ApprovalController.class);
 
 	private final ApprovalService approvalService;
+	
 	public ApprovalController(ApprovalService approvalService) {
 		this.approvalService = approvalService;
 	}
@@ -69,6 +75,7 @@ public class ApprovalController {
 	 */
 	@PostMapping("/draftInsert")
 	public String draftInsert(Approval approval
+							 ,RedirectAttributes reAttr
 							 ,String approvalLineNum
 							 ,String draftDocNum, @RequestParam(name="approvalMemberNum", required = false) String[] approvalMemberNums) {
 		
@@ -84,8 +91,9 @@ public class ApprovalController {
 			}
 			approvalService.addDraftInsert(approval);
 			approvalService.addApprovalMember(approvalLineList);
+			
 		}
-		
+		reAttr.addAttribute("registrantNum", approval.getRegistrantNum());
 		return "redirect:/approval/draftList";
 	}
 	

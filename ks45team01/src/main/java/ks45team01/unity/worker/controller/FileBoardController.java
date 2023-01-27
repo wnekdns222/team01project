@@ -79,7 +79,7 @@ public class FileBoardController {
 	 */
 	
 	@GetMapping("/fileBoardView")
-	public String fileView(String fileBoardNum
+	public String fileView(@RequestParam(value = "fileBoardNum", required = false) String fileBoardNum
 						  ,Model model) {
 		
 		FileBoard boardFileView = fileBoardService.boardFileView(fileBoardNum);

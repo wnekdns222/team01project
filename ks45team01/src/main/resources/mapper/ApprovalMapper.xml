@@ -148,6 +148,7 @@
 			*
 		FROM 
 			tb_draft_document AS d
-		WHERE d.registrant_num = #{registrantNum};
+		WHERE d.registrant_num = #{registrantNum}
+		ORDER BY LENGTH(d.draft_doc_num),d.draft_doc_num;
 	</select>
 </mapper>
