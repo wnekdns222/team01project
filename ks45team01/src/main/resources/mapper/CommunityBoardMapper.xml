@@ -34,6 +34,8 @@
 		WHERE 
 			board_code = #{boardCode};
 	</update>
+	
+	
 	<select id="getCommonNewCode" parameterType="String" resultType="String">
 			SELECT
 	            CASE
