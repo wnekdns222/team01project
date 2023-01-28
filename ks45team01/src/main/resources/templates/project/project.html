@@ -69,6 +69,7 @@
 				<div class="row">
 					<div class="col-sm-3" th:each="pl : ${projectList}">
 						<div class="card h-100">
+						 <a href="javascript:void(0);" class="btn btn-icon btn-xs btn-primary" style="float: right;"><i class="zmdi zmdi-close"></i></a>
 							<div class="card-body">
 								<h4 class="card-title" th:text="${pl.projectContent}"></h4>
 								
