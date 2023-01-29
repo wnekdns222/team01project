@@ -46,6 +46,7 @@
 				<th scope="col">퇴근상태</th>
 				<th scope="col">외근유무</th>
 				<th scope="col">비정상근태 등록 유무</th>
+				<th scope="col">비정상근태 조회</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -61,6 +62,8 @@
                   <td th:text="${w.leaveworkStatus}"></td>
                   <td th:text="${w.outsideDuty}"></td>
                   <td th:text="${w.workUnusual}"></td>
+                  <td th:if="${w.workUnusual=='Y'}"><a class="btn btn-inverse-info" th:href="@{/work/workAuthorityList(workNum=${w.workNum})}">확인</a></td>
+                  <td th:unless="${w.workUnusual=='Y'}"><a  class="btn btn-inverse-info" th:disabled="disabled">확인</a></td>
               </tr>
               <tr th:unless="${not #lists.isEmpty(workList)}">
               </tr> 

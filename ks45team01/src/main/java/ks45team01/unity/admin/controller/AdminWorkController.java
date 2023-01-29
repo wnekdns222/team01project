@@ -91,15 +91,16 @@ public class AdminWorkController {
 	 * @return "work/work_authority_list"
 	 */
 	@GetMapping("work/workAuthorityList")
-	public String getAuthorityWorkInfo(Model model,@RequestParam(value="workTypeNum", required=false)String workTypeNum) {
+	public String getAuthorityWorkInfo(Model model,@RequestParam(value="workNum", required=false)String workNum) {
 		
-		if(workTypeNum == null) {
+		if(workNum == null) {
 			List<WorkUnusual> unusualList = workService.getAuthorityWorkInfo();
 			model.addAttribute("unusualList", unusualList);
+			model.addAttribute("unusual", null);
 		}
-		else if(workTypeNum != null) {
-			WorkType workType = workTypeService.getWorkTypeById(workTypeNum);
-			model.addAttribute("workType", workType);
+		else if(workNum != null) {
+			WorkUnusual unusual = workService.getUnusualWorkByNum(workNum);
+			model.addAttribute("unusual", unusual);
 		}
 		
 		return "work/work_authority_list";

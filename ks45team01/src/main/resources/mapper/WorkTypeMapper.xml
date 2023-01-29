@@ -98,25 +98,6 @@
 		#{use}, 
 		#{workTypeUsePeriod});
 	</insert>
-	<select id="getWorkTypeById" parameterType="String" resultMap="workTypeResultMap">
-		SELECT 
-		  work_type_num,
-		  member_num, 
-		  work_name,
-		  work_date,
-		  attendance_time_type, 
-		  leavework_time_type, 
-		  reg_member_num, 
-		  reg_date, 
-		  correct_member_num, 
-		  correct_date, 
-		  `use`, 
-		  work_type_use_period
-  
-		FROM tb_work_type AS t
-
-		WHERE work_type_num=#{workTypeNum};
-	</select>
 	<update id="updateWorkType" parameterType="WorkType">
 	/* 근무유형 수정 */
 	UPDATE tb_work_type
@@ -160,5 +141,13 @@
 			t.work_date = #{workDate} 
 			and
 			t.member_num = #{memberNum};
+	</select>
+	<select id="getWorkTypeById" parameterType="String" resultMap="workTypeResultMap">
+			select
+				*
+			from
+			tb_work_type AS t
+			where
+			t.work_type_num=#{workTypeNum};
 	</select>
 </mapper>
