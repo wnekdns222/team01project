@@ -51,4 +51,16 @@ public interface WorkMapper {
 	
 	//특정 workNum 조회
 	public String getWorkNum(String memberNum, String attendanceDay);
+	
+	//특정 workUnusual 조회
+	public WorkUnusual getUnusualWorkByNum(String workNum);
+	
+	//퇴근시간 저장값 조회
+	public int getLeaveWorkTime(String workDate, String memberNum);
+	
+	//외출시간 저장값 조회
+	public int getGoOut(String memberNum, String workDate);
+	
+	//복귀시간 저장값 조회
+	public int getComeback(String memberNum, String workDate);
 }

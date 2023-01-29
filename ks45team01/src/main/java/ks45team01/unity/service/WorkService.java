@@ -56,10 +56,13 @@ public class WorkService {
 		String memberNum = work.getMemberNum();
 		String leaveTime = work.getLeaveworkTime();
 		String workTypeNum = workTypeMapper.getWorkTypeNum(workDate,memberNum);
-		work.setWorkTypeNum(workTypeNum);
-		String leaveStatus = workMapper.getLeaveStatus(workTypeNum, leaveTime);
-		work.setLeaveworkStatus(leaveStatus);
-		workMapper.updateWorkLeaveTime(work);
+		int result = workMapper.getLeaveWorkTime(workDate, memberNum);
+		if(result == 0) {
+			work.setWorkTypeNum(workTypeNum);
+			String leaveStatus = workMapper.getLeaveStatus(workTypeNum, leaveTime);
+			work.setLeaveworkStatus(leaveStatus);
+			workMapper.updateWorkLeaveTime(work);
+		}
 		Work workInfo = workMapper.getWorkByNum(memberNum, workDate);
 		return workInfo;
 	}
@@ -69,7 +72,10 @@ public class WorkService {
 	public Work updateGoOut(Work work) {
 		String workDate = work.getAttendanceDay();
 		String memberNum = work.getMemberNum();
-		workMapper.updateGoOut(work);
+		int result = workMapper.getGoOut(memberNum, workDate);
+		if(result == 0) {
+			workMapper.updateGoOut(work);
+		}
 		Work workInfo = workMapper.getWorkByNum(memberNum, workDate);
 		return workInfo;
 	}
@@ -79,7 +85,10 @@ public class WorkService {
 	public Work updateComeBack(Work work) {
 		String workDate = work.getAttendanceDay();
 		String memberNum = work.getMemberNum();
-		workMapper.updateComeBack(work);
+		int result = workMapper.getComeback(memberNum, workDate);
+		if(result == 0) {
+			workMapper.updateComeBack(work);
+		}
 		Work workInfo = workMapper.getWorkByNum(memberNum, workDate);
 		return workInfo;
 	}
@@ -131,5 +140,15 @@ public class WorkService {
 		List<Work> workList = workMapper.getWorkInfoByDepart(departmentNum);
 		
 		return workList;
+	}
+	/**
+	 * 특정 비정상 근태 등록 조회
+	 * return 
+	 */
+	public WorkUnusual getUnusualWorkByNum(String workNum) {
+		
+		WorkUnusual unusual = workMapper.getUnusualWorkByNum(workNum);
+		
+		return unusual;
 	}
 }

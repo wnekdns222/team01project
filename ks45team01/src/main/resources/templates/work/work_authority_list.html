@@ -4,74 +4,78 @@
 	layout:decorate="~{layout/default}">
 
 
-<th:block layout:fragment="customCrumbbar">
-	<div class="row">
-		<div class="col-md-12 m-b-30">
-			<!-- begin page title -->
-			<div class="d-block d-lg-flex flex-nowrap align-items-center">
-				<div class="page-title mr-4 pr-4 border-right">
-					<h1>비정상근무내역조회</h1>
-				</div>
-				<div class="breadcrumb-bar align-items-center">
-					<nav>
-						<ol class="breadcrumb p-0 m-b-0">
-							<li class="breadcrumb-item"><a href="/"><i
-									class="ti ti-home"></i></a></li>
-							<li class="breadcrumb-item active text-primary"
-								aria-current="page">비정상근무내역조회</li>
-						</ol>
-					</nav>
+	<th:block layout:fragment="customCrumbbar">
+		<div class="row">
+			<div class="col-md-12 m-b-30">
+				<!-- begin page title -->
+				<div class="d-block d-lg-flex flex-nowrap align-items-center">
+					<div class="page-title mr-4 pr-4 border-right">
+						<h1>비정상근무내역조회</h1>
+					</div>
+					<div class="breadcrumb-bar align-items-center">
+						<nav>
+							<ol class="breadcrumb p-0 m-b-0">
+								<li class="breadcrumb-item"><a href="/"><i
+										class="ti ti-home"></i></a></li>
+								<li class="breadcrumb-item active text-primary"
+									aria-current="page">비정상근무내역조회</li>
+							</ol>
+						</nav>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- end page title -->
-</th:block>
+		<!-- end page title -->
+	</th:block>
 
-<head>
-	<title th:text="${title}"></title>
-</head>
+	<head>
+		<title th:text="${title}"></title>
+	</head>
 
-<th:block layout:fragment="customContents">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th scope="col">근태번호</th>
-				<th scope="col">사원번호</th>
-				<th scope="col">근무일</th>
-				<th scope="col">출근시간</th>
-				<th scope="col">퇴근시간</th>
-				<th scope="col">대분류</th>
-				<th scope="col">중분류</th>
-				<th scope="col">소분류</th>
-				<th scope="col">입력사유</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:if="${not #lists.isEmpty(unusualList)}" th:each="u : ${unusualList}">
-                  <td th:text="${u.workNum}"></td>
-                  <td th:text="${u.memberNum}"></td>
-                  <td th:text="${u.writeAttendanceDay}"></td>
-                  <td th:text="${u.writeAttendanceTime}"></td>
-                  <td th:text="${u.writeLeaveworkTime}"></td>
-                  <td th:text="${u.vacationCategory.vacationCategoryName}"></td>
-                  <td th:text="${u.vacationSort.vacationSortName}"></td>
-                  <td th:text="${u.vacationType.vacationName}"></td>
-                  <td th:text="${u.writeChangeReason}"></td>
-              </tr>
-              <tr th:unless="${not #lists.isEmpty(unusualList)}" th:object="${workType}">
-              	<td th:text="*{workNum}"></td>
-                  <td th:text="*{memberNum}"></td>
-                  <td th:text="*{writeAttendanceDay}"></td>
-                  <td th:text="*{writeAttendanceTime}"></td>
-                  <td th:text="*{writeLeaveworkTime}"></td>
-                  <td th:text="*{vacationCategory.vacationCategoryName}"></td>
-                  <td th:text="*{vacationSort.vacationSortName}"></td>
-                  <td th:text="*{vacationType.vacationName}"></td>
-                  <td th:text="*{writeChangeReason}"></td>
-              </tr>
-		</tbody>
-	</table>
-
-</th:block>
+	<th:block layout:fragment="customContents">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">근태번호</th>
+					<th scope="col">사원번호</th>
+					<th scope="col">근무일</th>
+					<th scope="col">출근시간</th>
+					<th scope="col">퇴근시간</th>
+					<th scope="col">대분류</th>
+					<th scope="col">중분류</th>
+					<th scope="col">소분류</th>
+					<th scope="col">입력사유</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${not #lists.isEmpty(unusualList)}" th:each="u : ${unusualList}">
+	                  <td th:text="${u.workNum}"></td>
+	                  <td th:text="${u.memberNum}"></td>
+	                  <td th:text="${u.writeAttendanceDay}"></td>
+	                  <td th:text="${u.writeAttendanceTime}"></td>
+	                  <td th:text="${u.writeLeaveworkTime}"></td>
+	                  <td th:text="${u.vacationCategory.vacationCategoryName}"></td>
+	                  <td th:text="${u.vacationSort.vacationSortName}"></td>
+	                  <td th:text="${u.vacationType.vacationName}"></td>
+	                  <td th:text="${u.writeChangeReason}"></td>
+	              </tr>
+	              <tr th:unless="${not #lists.isEmpty(unusualList)}">
+	              </tr>
+	              <tr th:if="${unusual != null }" th:object="${unusual}">
+	              	  <td th:text="*{workNum}"></td>
+	                  <td th:text="*{memberNum}"></td>
+	                  <td th:text="*{writeAttendanceDay}"></td>
+	                  <td th:text="*{writeAttendanceTime}"></td>
+	                  <td th:text="*{writeLeaveworkTime}"></td>
+	                  <td th:text="*{vacationCategory.vacationCategoryName}"></td>
+	                  <td th:text="*{vacationSort.vacationSortName}"></td>
+	                  <td th:text="*{vacationType.vacationName}"></td>
+	                  <td th:text="*{writeChangeReason}"></td>
+	              </tr>
+	              <tr th:unless="${unusual != null}">
+	              </tr>
+			</tbody>
+		</table>
+	
+	</th:block>
 </html>

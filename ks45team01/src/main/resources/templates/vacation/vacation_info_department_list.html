@@ -50,7 +50,7 @@
 	                  <td th:text="${a.totalVacationUseDate}"></td>
 	                  <td th:text="${a.totalVacationUseTime}"></td>
 	                  <td th:text="${a.vacationReason}"></td>
-	                  <td><button class="btn btn-primary" th:href="@{/vacation/vacationInfoList(memberNum=${a.memberNum})}">확인</button></td>
+	                  <td><a class="btn btn-inverse-info" th:href="@{/vacation/vacationInfoList(memberNum=${a.memberNum})}">확인</a></td>
 	              </tr>
 	              <tr th:unless="${not #lists.isEmpty(vacationApproval)}">
 	              </tr> 
