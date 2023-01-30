@@ -113,7 +113,7 @@ public class WorkService {
 		workUnusual.setWorkNum(workNum);
 		workUnusual.setWorkUnusualNum(workUnusualNum);
 		workMapper.addWorkUnusual(workUnusual); 
-		
+		workMapper.updateWorkUnusual(workNum);
 	}
 	/**
 	 * 비정상 근태 등록 조회

@@ -63,4 +63,7 @@ public interface WorkMapper {
 	
 	//복귀시간 저장값 조회
 	public int getComeback(String memberNum, String workDate);
+	
+	//근태정정 신청서 입력시 수정
+	public void updateWorkUnusual(String workNum);
 }

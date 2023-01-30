@@ -7,15 +7,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ks45team01.unity.dto.Approval;
 import ks45team01.unity.dto.ApprovalLine;
+import ks45team01.unity.dto.VacationApproval;
+import ks45team01.unity.dto.WorkCorrectApproval;
 import ks45team01.unity.mapper.ApprovalMapper;
+import ks45team01.unity.mapper.WorkMapper;
 
 @Service
 @Transactional
 public class ApprovalService {
 	
 	private final ApprovalMapper approvalMapper;
-	public ApprovalService(ApprovalMapper approvalMapper) {
+	private final WorkMapper workMapper;
+	public ApprovalService(ApprovalMapper approvalMapper, WorkMapper workMapper) {
 		this.approvalMapper = approvalMapper;
+		this.workMapper = workMapper;
 	}
 	
 	/**
@@ -97,5 +102,26 @@ public class ApprovalService {
 	 */
 	public void addApprovalMember(List<ApprovalLine> approvalLineList) {
 		approvalMapper.addApprovalMember(approvalLineList);
+	}
+	/**
+	 * 연차사용신청서
+	 * @param vacationApproval
+	 */
+	public void addVacationApproval(VacationApproval vacationApproval) {
+		String vacationApprovalNum = approvalMapper.getCommonNewCode("tb_vacation_approval", "vacation_approval_num");
+		vacationApproval.setVacationApprovalNum(vacationApprovalNum);
+		approvalMapper.addVacationApproval(vacationApproval);
+	}
+	/**
+	 * 근태정정신청서
+	 * @param vacationApproval
+	 */
+	public void addWorkCorrectApproval(WorkCorrectApproval workCorrectApproval, String attendanceDay) {
+		String workCorrectNum = approvalMapper.getCommonNewCode("tb_work_correct_approval", "work_correct_num");
+		workCorrectApproval.setWorkCorrectNum(workCorrectNum);
+		String memberNum = workCorrectApproval.getMemberNum();
+		String workNum = workMapper.getWorkNum(memberNum, attendanceDay);
+		workCorrectApproval.setWorkNum(workNum);
+		approvalMapper.addWorkCorrectApproval(workCorrectApproval);
 	}
 }
