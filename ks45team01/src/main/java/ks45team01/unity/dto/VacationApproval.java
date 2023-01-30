@@ -18,97 +18,128 @@ public class VacationApproval {
 	private String approvalDeadline;
 	
 	private MemberList memberList;
-	
-	public MemberList getMemberList() {
-		return memberList;
-	}
-	public void setMemberList(MemberList memberList) {
-		this.memberList = memberList;
-	}
+
 	public String getVacationApprovalNum() {
 		return vacationApprovalNum;
 	}
+
 	public void setVacationApprovalNum(String vacationApprovalNum) {
 		this.vacationApprovalNum = vacationApprovalNum;
 	}
+
 	public String getDraftDocNum() {
 		return draftDocNum;
 	}
+
 	public void setDraftDocNum(String draftDocNum) {
 		this.draftDocNum = draftDocNum;
 	}
+
+
 	public String getVacationTypeNum() {
 		return vacationTypeNum;
 	}
+
 	public void setVacationTypeNum(String vacationTypeNum) {
 		this.vacationTypeNum = vacationTypeNum;
 	}
+
 	public String getVacationTitle() {
 		return vacationTitle;
 	}
+
 	public void setVacationTitle(String vacationTitle) {
 		this.vacationTitle = vacationTitle;
 	}
+
 	public String getMemberNum() {
 		return memberNum;
 	}
+
 	public void setMemberNum(String memberNum) {
 		this.memberNum = memberNum;
 	}
+
 	public String getDraftSend() {
 		return draftSend;
 	}
+
 	public void setDraftSend(String draftSend) {
 		this.draftSend = draftSend;
 	}
+
 	public String getVacationStartDate() {
 		return vacationStartDate;
 	}
+
 	public void setVacationStartDate(String vacationStartDate) {
 		this.vacationStartDate = vacationStartDate;
 	}
+
 	public String getVacationEndDate() {
 		return vacationEndDate;
 	}
+
 	public void setVacationEndDate(String vacationEndDate) {
 		this.vacationEndDate = vacationEndDate;
 	}
+
 	public String getTotalVacationUseDate() {
 		return totalVacationUseDate;
 	}
+
 	public void setTotalVacationUseDate(String totalVacationUseDate) {
 		this.totalVacationUseDate = totalVacationUseDate;
 	}
+
 	public String getTotalVacationUseTime() {
 		return totalVacationUseTime;
 	}
+
 	public void setTotalVacationUseTime(String totalVacationUseTime) {
 		this.totalVacationUseTime = totalVacationUseTime;
 	}
+
 	public String getVacationReason() {
 		return vacationReason;
 	}
+
 	public void setVacationReason(String vacationReason) {
 		this.vacationReason = vacationReason;
 	}
+
 	public String getEmergencyContact() {
 		return emergencyContact;
 	}
+
 	public void setEmergencyContact(String emergencyContact) {
 		this.emergencyContact = emergencyContact;
 	}
+
 	public String getReplaceMember() {
 		return replaceMember;
 	}
+
 	public void setReplaceMember(String replaceMember) {
 		this.replaceMember = replaceMember;
 	}
+
 	public String getApprovalDeadline() {
 		return approvalDeadline;
 	}
+
 	public void setApprovalDeadline(String approvalDeadline) {
 		this.approvalDeadline = approvalDeadline;
 	}
+
+	public MemberList getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(MemberList memberList) {
+		this.memberList = memberList;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -145,6 +176,8 @@ public class VacationApproval {
 		builder.append("]");
 		return builder.toString();
 	}
+
+	
 	
 	
 	

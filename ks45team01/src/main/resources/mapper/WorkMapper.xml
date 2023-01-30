@@ -370,4 +370,12 @@
 			and
 			w.attendance_day=#{workDate};
 	</select> 
+	<update id="updateWorkUnusual" parameterType="String">
+		/* 근태 정정 입력시 근태 수정 */
+		UPDATE tb_work
+		SET
+			work_unusual='Y'
+		WHERE 
+		work_num=#{workNum};
+	</update>
 </mapper>

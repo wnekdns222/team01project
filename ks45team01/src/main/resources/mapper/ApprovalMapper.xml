@@ -34,6 +34,22 @@
 			<result property="approvalSequence" 	column="approval_sequence"/>
 		</association>
 	</resultMap>
+	<resultMap type="VacationApproval" id="vacationApprovalResultMap">
+		<id property="vacationApprovalNum" 				column="vacation_approval_num"/>
+		<result property="draftDocNum" 			column="draft_doc_num"/>
+		<result property="vacationTypeNum" 			column="vacation_type_num"/>
+		<result property="vacationTitle" 		column="vacation_title"/>
+		<result property="memberNum" 		column="member_num"/>
+		<result property="draftSend" 	column="draft_send"/>
+		<result property="vacationStartDate" 		column="vacation_start_date"/>
+		<result property="vacationEndDate" 		column="vacation_end_date"/>
+		<result property="totalVacationUseDate" 	column="total_vacation_use_date"/>
+		<result property="totalVacationUseTime" 		column="total_vacation_use_time"/>
+		<result property="vacationReason" 	column="vacation_reason"/>
+		<result property="emergencyContact" 		column="emergency_contact"/>
+		<result property="replaceMember" 		column="replace_member"/>
+		<result property="approvalDeadline" 	column="approval_deadline"/>
+	</resultMap>
 	<update id="approvalDoneProcess" parameterType="String">
 		/* 결재 완료 처리 */
 		UPDATE tb_approval_process AS ap INNER JOIN tb_draft_document AS d
@@ -151,4 +167,16 @@
 		WHERE d.registrant_num = #{registrantNum}
 		ORDER BY LENGTH(d.draft_doc_num),d.draft_doc_num;
 	</select>
+	<insert id="addVacationApproval" parameterType="VacationApproval">
+		/* 연차신청서 등록 */
+		INSERT INTO tb_vacation_approval
+		(vacation_approval_num, draft_doc_num, vacation_type_num, vacation_title, member_num, draft_send, vacation_start_date, vacation_end_date, total_vacation_use_date, total_vacation_use_time, vacation_reason, emergency_contact, replace_member, approval_deadline)
+		VALUES (#{vacationApprovalNum}, #{draftDocNum}, #{vacationTypeNum}, #{vacationTitle},#{memberNum}, #{draftSend}, #{vacationStartDate}, #{vacationEndDate}, #{totalVacationUseDate}, #{totalVacationUseTime}, #{vacationReason},#{emergencyContact}, #{replaceMember}, #{approvalDeadline});
+	</insert>
+	<insert id="addWorkCorrectApproval" parameterType="WorkCorrectApproval">
+		/* 근태등록 신청서 등록 */
+		INSERT INTO tb_work_correct_approval
+		(work_correct_num, work_num, work_category_num, draft_doc_num, work_correct_title, member_num, draft_send, correct_attendance_time, correct_leavework_time, correct_reason, approval_deadline)
+		VALUES (#{workCorrectNum}, #{workNum}, #{workCategoryNum}, #{draftDocNum}, #{workCorrectTitle}, #{memberNum}, #{draftSend}, #{correctAttendanceTime}, #{correctLeaveworkTime}, #{correctReason}, #{approvalDeadline});
+	</insert>
 </mapper>
