@@ -66,18 +66,18 @@ public class FileBoardService {
 	 * @param fileBoard
 	 */
 	
-	public void addBoardFile(MultipartFile[] uploadfile, String fileRealPath
-							,FileBoard fileBoard) {
+	public void addBoardFile(MultipartFile[] uploadfile, FileBoard fileBoard) {
 		
-		List<FileDto> fileList= fileUtil.parseFileInfo(uploadfile, fileRealPath);
+		List<FileDto> fileList= fileUtil.parseFileInfo(uploadfile);
 		
 		System.out.println(fileList);
 		
 		if(fileList != null) fileMapper.addFile(fileList);
 		
-		fileUtil.parseFileInfo(uploadfile, fileRealPath);
 		fileMapper.addFile(fileList);
 		fileBoardMapper.addBoardFile(fileBoard);
+		System.out.println("insert >>> "+fileBoard);
+		// file_control insert
 	}
 	
 	/**
@@ -88,7 +88,7 @@ public class FileBoardService {
 	public FileBoard boardFileView(String fileBoardNum) {
 		
 		FileBoard boardFileView = fileBoardMapper.boardFileView(fileBoardNum);
-		
+		System.out.println(">>>>>>"+boardFileView);
 		return boardFileView;
 	}
 	
@@ -166,7 +166,7 @@ public class FileBoardService {
 	 * @return fileMapper.getFileList
 	 */
 	public List<FileDto> getFileList(){
-		return fileMapper.getFileList();
+		return fileBoardMapper.getFileList();
 	}
 	
 	/**
@@ -175,7 +175,7 @@ public class FileBoardService {
 	 * @return fileMapper.getFileInfoByIdx(fileIdx)
 	 */
 	public FileDto getFileInfoByIdx(String fileIdx) {
-		return fileMapper.getFileInfoByIdx(fileIdx);
+		return fileBoardMapper.getFileInfoByIdx(fileIdx);
 	}
 	
 	public List<FileBoardCate> result(String fileCategoryCode){

@@ -9,7 +9,6 @@
 		<result property="fileOriginalName" column="file_original_name"/>
 		<result property="filePath" 		column="file_path"/>
 		<result property="fileSize" 		column="file_size"/>
-		<result property="fileGroupCode" 	column="file_group_code"/>
 	</resultMap>
 	
 	<insert id="addFile" parameterType="list">

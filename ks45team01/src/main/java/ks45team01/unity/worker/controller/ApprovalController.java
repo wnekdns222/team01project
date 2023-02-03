@@ -51,8 +51,11 @@ public class ApprovalController {
 	}
 	
 	@PostMapping("/workCorrectInsert")
-	public String workCorrectInsert(WorkCorrectApproval workCorrectApproval,
-									@RequestParam(value="attendanceDay", required=false)String attendanceDay) {
+	public String workCorrectInsert(WorkCorrectApproval workCorrectApproval
+								   ,@RequestParam(value="attendanceDay", required=false)String attendanceDay
+								   ,RedirectAttributes reAttr) {
+		
+		reAttr.addAttribute("registrantNum", workCorrectApproval.getMemberNum());
 		approvalService.addWorkCorrectApproval(workCorrectApproval, attendanceDay);
 		return "redirect:/approval/draftList";
 	}
