@@ -1,9 +1,24 @@
 package ks45team01.unity.worker.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +26,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import ks45team01.unity.dto.FileBoard;
+import ks45team01.unity.dto.FileDto;
 import ks45team01.unity.service.FileBoardService;
 
 @Controller
@@ -72,23 +90,6 @@ public class FileBoardController {
 		return "fileBoard/fileBoardUpdate";
 	}
 	
-	/**
-	 * 파일 상세보기
-	 * @param model
-	 * @return
-	 */
-	
-	@GetMapping("/fileBoardView")
-	public String fileView(@RequestParam(value = "fileBoardNum", required = false) String fileBoardNum
-						  ,Model model) {
-		
-		FileBoard boardFileView = fileBoardService.boardFileView(fileBoardNum);
-		
-		model.addAttribute("title", "파일상세보기");
-		model.addAttribute("boardFileView", boardFileView);
-		
-		return "fileBoard/fileBoardView";
-	}
 	
 	/**
 	 * 파일 등록
@@ -100,6 +101,7 @@ public class FileBoardController {
 	public String addBoardFile(@RequestParam MultipartFile[] uploadfile, Model model, HttpServletRequest request
 							  ,FileBoard fileBoard) {
 		String serverName = request.getServerName();
+		/*
 		String fileRealPath = "";
 		if("localhost".equals(serverName)) {				
 			fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
@@ -108,8 +110,8 @@ public class FileBoardController {
 			// 실제 배포 파일 패스
 			fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
 		}
-				
-		fileBoardService.addBoardFile(uploadfile, fileRealPath, fileBoard);
+		*/	
+		fileBoardService.addBoardFile(uploadfile, fileBoard);
 		
 		return "redirect:/fileBoard/fileList";
 	}
@@ -181,5 +183,64 @@ public class FileBoardController {
 		model.addAttribute("fileBoardList", fileBoardList);
 		
 		return "fileBoard/fileList";
+	}
+	
+	
+	@RequestMapping("/files/download")
+	@ResponseBody
+	public ResponseEntity<Object> archiveDownload(@RequestParam(value="fileIdx", required = false) String fileIdx
+												   ,HttpServletRequest request
+												   ,HttpServletResponse response) throws URISyntaxException{
+		
+		String serverName = request.getServerName();
+		
+		
+		if(fileIdx != null) {
+			FileDto fileDto = fileBoardService.getFileInfoByIdx(fileIdx);
+			File file = new File("/home/springboot/teamproject/resources/"+ fileDto.getFilePath());
+		
+			Path path = Paths.get(file.getAbsolutePath());
+	        Resource resource;
+			try {
+				resource = new UrlResource(path.toUri());
+				String contentType = null;
+				contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+				if(contentType == null) {
+					contentType = "application/octet-stream";
+				}
+				return ResponseEntity.ok()
+						.contentType(MediaType.parseMediaType(contentType))
+						.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + URLEncoder.encode(fileDto.getFileOriginalName(),"UTF-8") + "\";")
+						.body(resource);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		URI redirectUri = new URI("/");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setLocation(redirectUri);
+		
+        return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
+	}
+	/**
+	 * 파일 상세보기
+	 * @param model
+	 * @return
+	 */
+	
+	@GetMapping("/fileBoardView")
+	public String fileView(@RequestParam(value = "fileBoardNum", required = false) String fileBoardNum
+			,Model model) {
+		System.out.println("132");
+		FileBoard boardFileView = fileBoardService.boardFileView(fileBoardNum);
+		
+		model.addAttribute("fileList", fileBoardService.getFileList());
+		model.addAttribute("title", "파일상세보기");
+		model.addAttribute("boardFileView", boardFileView);
+		
+		return "fileBoard/fileBoardView";
 	}
 }

@@ -54,8 +54,8 @@
 					<div align="center">파일첨부</div>
 				</td>
 				<td>
-					<div>
-						<a th:href="@{/fileBoard/fileBoardList}" th:text="${boardFileView.fileDto.fileOriginalName}"></a>
+					<div th:each="f : ${fileList}">
+						<a th:href="@{/fileBoard/files/download(fileIdx=${f.fileIdx})}" th:text="${boardFileView.fileDto.fileOriginalName}"></a>
 					</div>
 				</td>
 			</tr>

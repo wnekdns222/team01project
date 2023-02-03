@@ -20,7 +20,9 @@ import ks45team01.unity.dto.FileDto;
 @Component
 public class FileUtil {
 	
-	public List<FileDto> parseFileInfo(MultipartFile[] uploadfile, String fileRealPath){
+	private static final String FILE_PATH = "/home/springboot/teamproject/resources/";
+	
+	public List<FileDto> parseFileInfo(MultipartFile[] uploadfile){
 		
 		// 파일이 존재하지 않은 경우 
 		if(ObjectUtils.isEmpty(uploadfile)){
@@ -62,7 +64,7 @@ public class FileUtil {
 					}
 					
 					// Paths 클래스를 통한 파일의 경로 ( 주소의 / 경로와 실제 os의 경로 \ 와 차이)
-					path = Paths.get(fileRealPath + directory + current.format(format)).toString();
+					path = Paths.get(FILE_PATH + directory + current.format(format)).toString();
 			    	
 					// 파일 경로 셋팅
 			    	File file = new File(path);

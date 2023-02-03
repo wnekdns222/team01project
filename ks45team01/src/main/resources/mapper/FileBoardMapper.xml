@@ -77,6 +77,49 @@
 		<result property="fileCategoryModificationDate" column="file_category_modification_date"/>
 		<result property="categoryUseOrNot" 			column="category_use_or_not"/>
 	</resultMap>
+		<resultMap type="FileDto" id="fileResultMap">
+		<result property="fileIdx" 			column="file_idx"/>
+		<result property="fileNewName" 		column="file_new_name"/>
+		<result property="fileOriginalName" column="file_original_name"/>
+		<result property="filePath" 		column="file_path"/>
+		<result property="fileSize" 		column="file_size"/>
+	</resultMap>
+	
+	<insert id="addFile" parameterType="list">
+		INSERT IGNORE INTO tb_file
+		(
+			 file_idx
+			,file_new_name
+			,file_original_name
+			,file_path
+			,file_size
+		)VALUES
+		<foreach collection="list" item="data" separator=",">
+		( 
+			 #{data.fileIdx}
+			,#{data.fileNewName}
+			,#{data.fileOriginalName}
+			,#{data.filePath}
+			,#{data.fileSize}
+		)
+		</foreach>
+	</insert>
+	
+	<select id="getFileList" resultMap="fileResultMap">
+		SELECT
+			*
+		FROM
+			tb_file;
+	</select>
+
+	<select id="getFileInfoByIdx" parameterType="string" resultMap="fileResultMap">
+		SELECT
+			*
+		FROM
+			tb_file
+		WHERE
+			file_idx = #{fileIdx};
+	</select>
 	<delete id="fileBoardCateDelete" parameterType="String">
 		/* 파일 카테고리 삭제 */
 		DELETE FROM tb_fileboard_category WHERE file_category_code=#{fileCategoryCode};
@@ -141,10 +184,13 @@
 		DELETE FROM tb_file_board WHERE file_board_num = #{fileBoardNum};
 	</delete>
 	<insert id="addBoardFile" parameterType="FileBoard">
+		<selectKey keyProperty="fileGroupCode" keyColumn="fileGroupCode" resultType="string" order="BEFORE">
+			SELECT sf_fileGroupCode() as fileGroupCode;
+		</selectKey>
 		/* 파일 게시글 등록 */
 		INSERT INTO tb_file_board
 		(file_board_num, file_category_code, file_board_registrant, file_board_title, file_board_contents, file_reg_date, file_group_code)
-		VALUES (sf_fileBoardNum(), #{fileCategoryCode}, #{fileBoardRegistrant}, #{fileBoardTitle}, #{fileBoardContents}, NOW(), sf_fileGroupCode());
+		VALUES (sf_fileBoardNum(), #{fileCategoryCode}, #{fileBoardRegistrant}, #{fileBoardTitle}, #{fileBoardContents}, NOW(), #{fileGroupCode});
 	</insert>
 	<update id="boardFileUpdate" parameterType="FileBoard">
 		/* 파일게시글 수정 */
