@@ -101,7 +101,5 @@
 			${table} ;
 	</select>
 	
-	<delete id="projectCommentDelete" parameterType="String">
-	
-	</delete>
+
 </mapper>
