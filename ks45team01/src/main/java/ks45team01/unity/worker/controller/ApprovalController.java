@@ -1,5 +1,6 @@
 package ks45team01.unity.worker.controller;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ks45team01.unity.dto.Approval;
 import ks45team01.unity.dto.ApprovalLine;
+import ks45team01.unity.dto.MemberList;
+import ks45team01.unity.dto.VacationApproval;
+import ks45team01.unity.dto.VacationType;
+import ks45team01.unity.dto.WorkCorrectApproval;
+import ks45team01.unity.mapper.VacationMapper;
 import ks45team01.unity.service.ApprovalService;
 
 @Controller
@@ -24,10 +31,17 @@ public class ApprovalController {
 	private static final Logger log = LoggerFactory.getLogger(ApprovalController.class);
 
 	private final ApprovalService approvalService;
-	public ApprovalController(ApprovalService approvalService) {
-		this.approvalService = approvalService;
-	}
+	private final VacationMapper vacationMapper;
 	
+	public ApprovalController(ApprovalService approvalService,VacationMapper vacationMapper) {
+		this.approvalService = approvalService;
+		this.vacationMapper = vacationMapper;
+	}
+	/**
+	 * 근태정정신청
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/workCorrectInsert")
 	public String workCorrectInsert(Model model) {
 		
@@ -36,6 +50,15 @@ public class ApprovalController {
 		return "approval/workCorrectInsert";
 	}
 	
+	@PostMapping("/workCorrectInsert")
+	public String workCorrectInsert(WorkCorrectApproval workCorrectApproval
+								   ,@RequestParam(value="attendanceDay", required=false)String attendanceDay
+								   ,RedirectAttributes reAttr) {
+		
+		reAttr.addAttribute("registrantNum", workCorrectApproval.getMemberNum());
+		approvalService.addWorkCorrectApproval(workCorrectApproval, attendanceDay);
+		return "redirect:/approval/draftList";
+	}
 	/**
 	 * 휴가 신청
 	 * @param model
@@ -44,12 +67,18 @@ public class ApprovalController {
 	
 	@GetMapping("/vacationInsert")
 	public String vacationInsert(Model model) {
-		
+		List<MemberList> memberList = vacationMapper.getMemberList();
+		List<VacationType> vacationTypeList = vacationMapper.getVacationType();
 		model.addAttribute("title", "휴가신청");
-		
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("vacationTypeList", vacationTypeList);
 		return "approval/vacationInsert";
 	}
-	
+	@PostMapping("/vacationInsert")
+	public String vacationInsert(VacationApproval vacationApproval) {
+		approvalService.addVacationApproval(vacationApproval);
+		return "redirect:/approval/draftList";
+	}
 	/**
 	 * 전결/대결 리스트
 	 * @param model
@@ -69,6 +98,7 @@ public class ApprovalController {
 	 */
 	@PostMapping("/draftInsert")
 	public String draftInsert(Approval approval
+							 ,RedirectAttributes reAttr
 							 ,String approvalLineNum
 							 ,String draftDocNum, @RequestParam(name="approvalMemberNum", required = false) String[] approvalMemberNums) {
 		
@@ -84,8 +114,9 @@ public class ApprovalController {
 			}
 			approvalService.addDraftInsert(approval);
 			approvalService.addApprovalMember(approvalLineList);
+			
 		}
-		
+		reAttr.addAttribute("registrantNum", approval.getRegistrantNum());
 		return "redirect:/approval/draftList";
 	}
 	

@@ -48,9 +48,10 @@
 			<label for="memberNum">등록 사원번호</label> 
 			<input type="text" class="form-control" name="memberNum" id="memberNum" required>
 		</div>
-		<div class="form-check">
-			<input class="form-check-input" type="checkbox" name="vacationUse" id="use" required>
-			<label class="form-check-label" for="use"> 사용여부 </label>
+		<div class="form-group">
+			<div class="checkbox checbox-switch switch-primary">
+				<label>사용여부 <input type="checkbox" name="vacationUse" /> <span></span>	</label>
+			</div>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>

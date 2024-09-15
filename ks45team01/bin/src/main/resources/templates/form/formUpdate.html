@@ -31,16 +31,20 @@
 			<input type="hidden" name="formNum" th:value="${formUpdate.formNum}" />
 			<label for="formName">서식명</label>
 			<div style="width: 800px;">
-			<input type="text" class="form-control" id="formName" name="formName" th:value="${formUpdate.formName}" />
+				<input type="text" class="form-control" id="formName" name="formName" th:value="${formUpdate.formName}" />
 			</div>
 			<label for="formModifier">수정자</label>
-			<div style="width: 800px;">
+				<div style="width: 800px;">
 			<input type="text" class="form-control" id="formModifier" name="formModifier" th:placeholder="${formUpdate.formModifier}"  />
 			</div>
 			<label for="formContents">내용</label>
 			<textarea th:text="${formUpdate.formContents}" class="form-control" name="formContents" id="formContents" style="height: 300px; width: 800px;"></textarea>
-			<button type="submit">등록</button>
-			<button type="button" onclick="location.href='/form/formList';">취소</button>
+			<label for="formContents">서식첨부</label>
+			<input type="file" name="uploadfile" multiple="multiple"/>
+			<div style="margin-top: 20px; margin-left: 300px; margin-bottom: 8px;">
+				<button type="submit" class="btn btn-outline-success">등록</button>
+				<a class="btn btn-outline-success" href="/form/formList">취소</a>
+			</div>
 		</form>
 	</th:block>
 </html>

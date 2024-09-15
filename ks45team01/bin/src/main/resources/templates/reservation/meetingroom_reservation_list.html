@@ -31,15 +31,20 @@
                       </tr>
                   </thead>
                   <tbody >
-                    <tr th:unless="${#lists.isEmpty(meetingroomList)}"
-					th:each="l : ${meetingroomList}">
-						<td th:text="${l.meetName}"></td>
-						<td th:text="${l.meetUsableStart}"></td>
-						<td th:text="${l.meetUsableEnd}"></td>
-						<td th:text="${l.meetLocation}"></td>
-						<td th:text="${l.meetCapacity}"></td> 
-						<td th:text="${l.meetDetail}"></td>
+						<th:block th:unless="${#lists.isEmpty(reservationList)}"
+					th:each="l : ${reservationList}" th:if="${lStat.index} < 1"> 
+                    <tr th:each="m : ${meetingroomList}">
+						<td th:text="${m.meetName}"></td>
+						<td th:text="${m.meetUsableStart}"></td>
+						<td th:text="${m.meetUsableEnd}"></td>
+						<td th:text="${m.meetLocation}"></td>
+						<td th:text="${m.meetCapacity}"></td> 
+						<td th:text="${m.meetDetail}"></td>
+						<td>
+							<a th:href="@{/reservation/meetingroomReservationInsert(meetNum=${m.meetNum})}"  href="javascript:void(0)" class="btn btn-round btn-outline-primary">예약</a>
+						<td>
 					</tr>
+						</th:block>
                   </tbody>
               </table>
 	</th:block>

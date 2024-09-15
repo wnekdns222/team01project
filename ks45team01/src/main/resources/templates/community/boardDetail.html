@@ -109,9 +109,8 @@
 						<tr>
 							<th>내용 <!-- <span class="es">필수 입력</span> --></th>
 							<td colspan="4">
-							<div id="summernote" class="summernote" >[[${boardDetail.boardContent}]] </div> 
-							<!-- <textarea class="form-control" id="content"
-									name="content" cols="50" rows="10" placeholder="내용을 입력해 주세요."></textarea> --></td>
+							<textarea class="form-control" id="BoardContent"
+										name="BoardContent" cols="50" rows="10" th:value="${boardDetail.boardContent}" th:text="${boardDetail.boardContent}" readonly></textarea> </td>
 						</tr>
 					</tbody>
 				</table>

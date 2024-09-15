@@ -178,7 +178,21 @@
 		<result property="positionNum" column="position_num"/>	
 		<result property="emergencyContact" column="emergency_contact"/>
 		<result property="replaceMember" column="replace_member"/>	
-		<result property="approvalDeadline" column="approval_deadline"/>	
+		<result property="approvalDeadline" column="approval_deadline"/>
+			<association property="memberList" javaType="MemberList">
+					<id property="memberNum" column="member_num"/>
+					<result property="memberPw" column="member_pw"/>
+					<result property="memberName" column="member_name"/>
+					<result property="memberGender" column="member_gender"/>
+					<result property="memberEmail" column="member_email"/>
+					<result property="memberBirth" column="member_birth"/>
+					<result property="memberPhone" column="member_phone"/>	
+					<result property="memberDormant" column="member_dormant"/>
+					<result property="memberDormantDate" column="member_dormant_date"/>	
+					<result property="departmentNum" column="department_num"/>	
+					<result property="positionNum" column="position_num"/>	
+					<result property="memberInsertDate" column="member_insert_date"/>
+			</association>	
 	</resultMap>
 	
 	<select id="getCommonNewCode" parameterType="String" resultType="String">
@@ -224,38 +238,6 @@
 		tb_vacation_standard
 		order by length(service_num);
 	</select>
-	<update id="updateVacationCategoryA" parameterType="String">
-		/* 휴가대분류 비동기 수정 */
-		UPDATE tb_vacation_category
-		SET
-		vacation_use=#{vacationUse}
-		WHERE 
-		vacation_category_num=#{vacationCategoryNum};
-	</update>
-	<update id="updateVacationStandardA" parameterType="String">
-		/* 휴가 기준 비동기 수정 */
-		UPDATE tb_vacation_standard
-		SET
-		vacation_standard_use=#{vacationStandardUse}
-		WHERE 
-		vacation_standard_num=#{vacationStandardNum};
-	</update>
-	<update id="updateVacationSortA" parameterType="String">
-		/* 휴가 중분류 비동기 수정 */
-		UPDATE tb_vacation_sort
-		SET
-		vacation_use=#{vacationUse}
-		WHERE 
-		vacation_sort_num=#{vacationSortNum};
-	</update>
-	<update id="updateVacationTypeA" parameterType="String">
-		/* 휴가 종류 비동기 수정 */
-		UPDATE tb_vacation_type
-		SET
-		vacation_use=#{vacationUse}
-		WHERE 
-		vacation_type_num=#{vacationTypeNum};
-	</update>
 	<insert id="addVacationType" parameterType="VacationType">
 		/* 휴가 종류 등록 */
 		INSERT INTO tb_vacation_type
@@ -538,5 +520,18 @@
 			tb_vacation_approval 
 		where
 			member_num = #{memberNum};	
+	</select>
+	<select id="getVacationApprovalByDepart" parameterType="String" resultType="List" resultMap="vacationApprovalMap">
+		/* 특정 부서 휴가 사용 조회 */
+		SELECT
+			*
+		FROM
+			tb_vacation_approval AS v
+			INNER join
+			tb_member AS m
+			on
+			v.member_num=m.member_num
+		where
+			m.member_department_num = #{departmentNum};	
 	</select>
 </mapper>

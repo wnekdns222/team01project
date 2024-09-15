@@ -50,7 +50,6 @@ public class FormBoardService {
 
 	/**
 	 * 서식 등록
-	 * 
 	 * @param formBoard
 	 */
 
@@ -84,21 +83,17 @@ public class FormBoardService {
 		// 페이지당 보여질 행의 갯수(rowPerPage)
 		int rowPerPage = 10;
 
-		// 로그인이력 테이블의 보여질 행의 시작점
 		int startRowNum = (currentPage - 1) * rowPerPage;
 
 		// 마지막페이지
-		// 1.로그인이력 테이블의 전체 행의 갯수
 		double rowCnt = formBoardMapper.formBoardCount();
 		// 2.마지막 페이지
 		int lastPage = (int) Math.ceil(rowCnt / rowPerPage);
 
-		// 로그인 이력 조회시 Limit 인수 파라미터 셋팅
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("startRowNum", startRowNum);
 		paramMap.put("rowPerPage", rowPerPage);
 
-		// 로그인 이력 data
 		List<FormBoard> formListPage = formBoardMapper.formList(paramMap);
 
 		// 보여질 페이지 번호 구현

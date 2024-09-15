@@ -32,8 +32,7 @@
 				<td style="font-family: 돋음; font-size: 12" height="16">
 					<div align="center">파일번호</div>
 				</td>
-				<td style="font-family: 돋음; font-size: 12">
-					[[${boardFileView.fileBoardNum}]]</td>
+				<td style="font-family: 돋음; font-size: 12" th:text="${boardFileView.fileBoardNum}"></td>
 			</tr>
 			<tr>
 				<td style="font-family: 돋음; font-size: 12" height="16">
@@ -48,6 +47,16 @@
 				</td>
 				<td style="font-family: 돋음; font-size: 12"><textarea
 						class="form-control" disabled="disabled" style="background-color: white;">[[${boardFileView.fileBoardContents}]]</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-family: 돋음; font-size: 12" height="16">
+					<div align="center">파일첨부</div>
+				</td>
+				<td>
+					<div th:each="f : ${fileList}">
+						<a th:href="@{/fileBoard/files/download(fileIdx=${f.fileIdx})}" th:text="${boardFileView.fileDto.fileOriginalName}"></a>
+					</div>
 				</td>
 			</tr>
 		</table>

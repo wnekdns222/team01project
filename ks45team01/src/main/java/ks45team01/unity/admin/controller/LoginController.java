@@ -112,29 +112,5 @@ public class LoginController {
 			}
 					
 			
-//			
-//			
-//			
-//			@GetMapping("/loginHistory")
-//			@SuppressWarnings("unchecked")
-//			public String getLoginHistory(Model model
-//													 ,@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage) {
-//				
-//				Map<String, Object> paramMap = LoginService.getLoginHistory(currentPage);
-//				int lastPage = (int) paramMap.get("lastPage");
-//				List<LoginHistory> loginHistory = (List<LoginHistory>) paramMap.get("loginHistory");
-//				int startPageNum = (int) paramMap.get("startPageNum");
-//				int endPageNum = (int) paramMap.get("endPageNum");
-//				
-//				model.addAttribute("title", "로그인이력");
-//				model.addAttribute("currentPage", currentPage);
-//				model.addAttribute("loginHistory", loginHistory);
-//				model.addAttribute("lastPage", lastPage);
-//				model.addAttribute("startPageNum", startPageNum);
-//				model.addAttribute("endPageNum", endPageNum);
-//				
-//				return "login/loginHistory";
-//			}
-//			
 
 }

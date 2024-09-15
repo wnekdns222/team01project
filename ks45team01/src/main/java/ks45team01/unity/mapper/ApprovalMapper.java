@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import ks45team01.unity.dto.Approval;
 import ks45team01.unity.dto.ApprovalLine;
+import ks45team01.unity.dto.VacationApproval;
+import ks45team01.unity.dto.WorkCorrectApproval;
 
 @Mapper
 public interface ApprovalMapper {
@@ -48,4 +50,10 @@ public interface ApprovalMapper {
 	
 	// 결재 상태 승인 등록
 	void approvalApprove(String draftDocNum, String processStatus);
+	
+	//연차신청서 등록
+	void addVacationApproval(VacationApproval vacationApproval);
+	
+	//근태정정신청서 등록
+	void addWorkCorrectApproval(WorkCorrectApproval workCorrectApproval);
 }

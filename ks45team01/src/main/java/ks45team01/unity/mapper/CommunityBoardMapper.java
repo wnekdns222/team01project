@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import ks45team01.unity.dto.CommunityBoard;
+import ks45team01.unity.dto.CommunityNotice;
 
 @Mapper
 public interface CommunityBoardMapper {
@@ -23,6 +24,9 @@ public interface CommunityBoardMapper {
 	// 자동증가 함수
 	String getCommonNewCode(String table, String column);
 	
+	// 커뮤니티 게시판 삭제
 	int communityBoardDelete(String boardCode);
 	
+	// 커뮤니티 게시판 목록 조회
+	public List<CommunityBoard> getBoardList(String searchKey, String searchValue);
 }

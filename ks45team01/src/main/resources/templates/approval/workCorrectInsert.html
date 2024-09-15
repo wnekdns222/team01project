@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/default}">
-	
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
 	<th:block layout:fragment="customCrumbbar">
 		<div class="breadcrumbbar">
 			<div class="row align-items-center">
 				<div class="col-md-8 col-lg-8">
-					<h4 class="page-title">근태정정</h4>
+					<h4 class="page-title">근태정정신청</h4>
 					<div class="breadcrumb-list">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="/">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">근태정정</li>
+							<li class="breadcrumb-item active" aria-current="page">근태정정신청</li>
 						</ol>
 					</div>
 				</div>
@@ -24,8 +24,46 @@
 				</div>
 			</div>
 		</div>
-	<th:block layout:fragment="customContents">
-		<h1>근태정정신청을 보여줄 화면입니다.</h1>
 	</th:block>
-</body>
+	<th:block layout:fragment="customContents">
+				<form id="vacationApproval" th:action="@{/approval/workCorrectInsert}" method="post">
+			<div style="width: 800px;">
+				<input style="margin-bottom:10px;" type="hidden" class="form-control" name="memberNum" th:value="${session.SID}"/>
+			</div>
+			<label for="memberNum" style="height:20px;">신청사원</label>
+			<div style="width: 800px;">
+				<input style="margin-bottom:10px;" type="text" class="form-control" th:value="${session.SNAME}"/>
+			</div>
+			<label for="attendanceDay" style="height:20px;">출근일</label>
+			<div style="width: 800px;">
+				<input style="margin-bottom:10px;" type="date" class="form-control" id="attendanceDay" name="attendanceDay"/>
+			</div>
+			<label for="workCorrectTitle" style="height:20px;">제목</label>
+			<div style="width: 800px;">
+				<input style="margin-bottom:10px;"  type="text" class="form-control" id="workCorrectTitle" name="workCorrectTitle"
+					placeholder="제목을 입력해주세요" />
+			</div>
+			<label for="correctAttendanceTime">정정출근시간</label>
+			<div style="width: 800px;">
+				<input style="margin-bottom:10px;"  type="time" class="form-control" id="correctAttendanceTime" name="correctAttendanceTime"/>
+			</div>
+			<label for="correctLeaveworkTime">정정퇴근시각</label>
+			<div style="width: 800px;">
+				<input style="margin-bottom:10px;"  type="time" class="form-control" id="correctLeaveworkTime" name="correctLeaveworkTime"/>
+			</div>
+			<div style="width: 800px;">
+				<label for="Contents">내용</label>
+				<textarea class="form-control" name="correctReason" id="correctReason" placeholder="내용을 입력해주세요" style="height: 150px; width: 800px; margin-bottom:10px;"></textarea>
+			</div>
+			<label for="approvalDeadline">기한시점</label>
+			<div style="width: 800px;">
+				<input style="margin-bottom:10px;"  type="date" class="form-control" id="replaceMember" name="replaceMember"
+					placeholder="서식명을 입력해주세요" />
+			</div>
+			<div style="margin-top: 20px; margin-left: 300px;">
+				<button type="submit" class="btn btn-primary">등록</button>
+				<button type="reset" class="btn btn-primary">취소</button>
+			</div>
+		</form>
+	</th:block>
 </html>

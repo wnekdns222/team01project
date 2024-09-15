@@ -53,6 +53,14 @@
 						<textarea class="form-control" th:text="${formView.formContents}" disabled="disabled" style="background-color: white;"></textarea>
 					</td>
 				</tr>
+				<tr>
+					<td style="font-family:돋음; font-size:12;">
+						<div align="center">첨부파일</div>
+					</td>
+					<td style="font-family:돋음; font-size:12">
+						<input type="file" class="form-control"disabled="disabled"/>
+					</td>
+				</tr>
 			</table>
 			<div style="text-align: center;">
 				<a class="btn btn-outline-success" th:href="@{/form/formUpdate(formNum=${formView.formNum})}">수정</a>

@@ -39,4 +39,31 @@ public interface WorkMapper {
 	
 	//외출 복귀 등록(수정)
 	public void updateComeBack(Work work);
+	
+	//특정사원 근태 조회
+	public List<Work> getWorkInfoById(String memberNum);
+	
+	//특정부서 사원 근태 조회
+	public List<Work> getWorkInfoByDepart(String departmentNum);
+	
+	//비정상 근태 등록
+	public void addWorkUnusual(WorkUnusual workUnusual);
+	
+	//특정 workNum 조회
+	public String getWorkNum(String memberNum, String attendanceDay);
+	
+	//특정 workUnusual 조회
+	public WorkUnusual getUnusualWorkByNum(String workNum);
+	
+	//퇴근시간 저장값 조회
+	public int getLeaveWorkTime(String workDate, String memberNum);
+	
+	//외출시간 저장값 조회
+	public int getGoOut(String memberNum, String workDate);
+	
+	//복귀시간 저장값 조회
+	public int getComeback(String memberNum, String workDate);
+	
+	//근태정정 신청서 입력시 수정
+	public void updateWorkUnusual(String workNum);
 }

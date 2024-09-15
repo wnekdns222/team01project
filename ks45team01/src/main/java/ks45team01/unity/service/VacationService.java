@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ks45team01.unity.dto.MemberList;
 import ks45team01.unity.dto.VacationApproval;
@@ -48,34 +51,7 @@ public class VacationService {
 		variety.put("standard", standard);
 		return variety;
 	}
-	/**
-	 * 휴가 대분류 비동기 수정
-	 */
-	public void updateVacationCategoryA(String vacationCategoryNum, String vacationUse) {
-		
-		vacationMapper.updateVacationCategoryA();
-	}
-	/**
-	 * 휴가 중분류 비동기 수정
-	 */
-	public void updateVacationSortA(String vacationSortNum, String vacationUse) {
-		
-		vacationMapper.updateVacationSortA();
-	}
-	/**
-	 * 휴가 종류 비동기 수정
-	 */
-	public void updateVacationTypeA(String vacationTypeNum, String vacationUse) {
-		
-		vacationMapper.updateVacationTypeA();
-	}
-	/**
-	 * 휴가 기준 비동기 수정
-	 */
-	public void updateVacationStandardA(String vacationStandardNum, String vacationStandardUse) {
-		
-		vacationMapper.updateVacationStandardA();
-	}
+	
 	/**
 	 * 휴가 종류 등록
 	 * 
@@ -232,6 +208,17 @@ public class VacationService {
 			vacationInfo.put("info", vacationInformation);
 			vacationInfo.put("approval", vacationApproval);
 		return vacationInfo;
+	}
+	/**
+	 * 특정 부서 연차 사용 조회
+	 * @param departmentNum
+	 * @return
+	 */
+	public List<VacationApproval> getVacationApprovalByDepart(String departmentNum){
+		
+		List<VacationApproval> vacationApproval = vacationMapper.getVacationApprovalByDepart(departmentNum);
+		
+		return vacationApproval;
 	}
 }	
 

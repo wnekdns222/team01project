@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ks45team01.unity.dto.CommunityBoard;
+import ks45team01.unity.dto.CommunityNotice;
 import ks45team01.unity.mapper.CommunityBoardMapper;
 
 @Service
@@ -50,5 +51,25 @@ public class CommunityBoardService {
 	public int communityBoardDelete(String boardCode) {
 		
 		return communityBoardMapper.communityBoardDelete(boardCode);
+	}
+	/**
+	 * 목록 조회
+	 * @return List<CommunityBoard>
+	 */
+	public List<CommunityBoard> getBoardCode(String searchKey, String searchValue){
+		
+		
+		if(searchKey != null) {
+			switch (searchKey) {
+			case "boardName":
+				searchKey = "board_name";
+				break;
+			case "memberNum":
+				searchKey = "member_num";
+				break;
+			}
+		}
+		return communityBoardMapper.getBoardList(searchKey, searchValue);
+		
 	}
 }

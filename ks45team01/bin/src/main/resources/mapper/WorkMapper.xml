@@ -108,9 +108,10 @@
 	</select>
 	<insert id="addWork" parameterType="Work">
 	/* 근태등록 */
-	INSERT INTO tb_work
+		INSERT INTO tb_work
 	(work_num, member_num, work_type_num, department_num, attendance_day, attendance_time, entrance, attendance_status, work_unusual)
-	VALUES (#{workNum}, #{memberNum},#{workTypeNum}, #{departmentNum}, #{attendanceDay}, #{attendanceTime}, '시스템정상입실', #{attendanceStatus}, 'N');
+	SELECT #{workNum}, #{memberNum},#{workTypeNum}, #{departmentNum}, #{attendanceDay}, #{attendanceTime}, '시스템정상입실', #{attendanceStatus}, 'N'
+	FROM DUAL where not EXISTS (SELECT work_num from tb_work WHERE work_type_num=#{workTypeNum}  LIMIT 1);
 	</insert>
 	<select id="getAllWorkInfo" resultType="List" resultMap="workResultMap">
 	/* 전사원 근태조회 */
@@ -219,4 +220,60 @@
 			and
 			attendance_day=#{attendanceDay};
 	</update>
+	<select id="getWorkInfoById" parameterType="String" resultType="List" resultMap="workResultMap">
+	/* 특정사원 근태 조회 */
+				SELECT
+		DISTINCT w.work_num,
+		w.member_num,
+		w.work_type_num,
+		w.attendance_day,
+		w.attendance_time,
+		w.leavework_time,
+		w.goout_workout_start_time,
+		w.goout_workout_comeback_time,
+		w.entrance,
+		w.`leave`,
+		w.attendance_status,
+		w.leavework_status,
+		w.outside_duty,
+		w.work_unusual,
+		t.work_name
+		FROM
+		tb_work AS w
+		INNER JOIN
+		tb_work_type AS t
+		ON
+		w.member_num = t.member_num
+		where
+		w.member_num=#{memberNum}
+		ORDER BY w.attendance_day;
+	</select>
+	<select id="getWorkInfoByDepart" parameterType="String" resultType="List" resultMap="workResultMap">
+	/* 특정부서 사원 근태 조회 */
+				SELECT
+		DISTINCT w.work_num,
+		w.member_num,
+		w.work_type_num,
+		w.attendance_day,
+		w.attendance_time,
+		w.leavework_time,
+		w.goout_workout_start_time,
+		w.goout_workout_comeback_time,
+		w.entrance,
+		w.`leave`,
+		w.attendance_status,
+		w.leavework_status,
+		w.outside_duty,
+		w.work_unusual,
+		t.work_name
+		FROM
+		tb_work AS w
+		INNER JOIN
+		tb_work_type AS t
+		ON
+		w.member_num = t.member_num
+		where
+		w.department_num=#{departmentNum}
+		ORDER BY w.attendance_day;
+	</select>
 </mapper>

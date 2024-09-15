@@ -201,11 +201,13 @@ public class CommunityController {
 		 * @return
 		 */
 		@GetMapping("/boardList")
-		public String getBoard(Model model) { 
+		public String getBoard(@RequestParam(value="searchKey", required = false) String searchKey
+   								,@RequestParam(value="searchValue", required = false, defaultValue = "") String searchValue
+								,Model model) { 
 			
-			List<CommunityBoard> communityBoardList = communityBoardService.communityBoardList();
+			List<CommunityBoard> communityBoardList = communityBoardService.getBoardCode(searchKey, searchValue);			
 			
-			model.addAttribute("title", "게시판 화면");
+			model.addAttribute("title", "공지사항 화면");
 			model.addAttribute("communityBoardList", communityBoardList);
 			
 			return "community/boardList";

@@ -39,14 +39,39 @@
 								</div>
 							</td>
 							<td>
-								<!-- (workTypeNum=${wt.workTypeNum}) --> <a
-								th:href="@{/settings/vacationSortModify(vacationSortNum=${s.vacationSortNum})}" href="javascript:void(0)" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i class="ti ti-pencil"></i></a>
+								<!-- (workTypeNum=${wt.workTypeNum}) --> 
+								<button type="submit" name="sortModifyBtn" th:value="${s.vacationSortNum}" class="btn btn-icon btn-outline-primary btn-round mr-2 mb-2 mb-sm-0 "><i class="ti ti-pencil"></i></button>
 							</td>
 						</tr>
 						<tr th:unless="${not #lists.isEmpty(category)}">
 						</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<div style="width: 50%; float: right;  margin-top: 40px;">
+			<div class="col-md-10 col-lg-10" style="margin-bottom:auto; margin-top:20px;">
+				<form th:action="@{/settings/vacationSortModify}" method="post" >
+					<input type="hidden" name="vacationSortNum" id="vacationSortNum">
+					<div class="form-group">
+						<label for="vacationSortName">휴가명</label>
+						<input type="text" class="form-control"  name="vacationSortName" id="vacationSortName" required>
+					</div>
+					<div class="form-group">
+						<label for="correctMemberNum">수정사원</label>
+						<input type="text" class="form-control" th:value=${session.SID} name="correctMemberNum" id="correctMemberNum" required>
+					</div>
+					<label class="d-block mb-2" style="margin-top:20px; margin-bottom:20px;">사용여부</label>
+						<div class="form-check mb-0 py-2">
+                             <input class="form-check-input" type="radio" name="vacationUse" id="warning" value="on">
+                             <label class="form-check-label" for="warning">사용</label>
+                         </div>
+                         <div class="form-check mb-0 py-2">
+                             <input class="form-check-input" type="radio" name="vacationUse" id="error" value="off">
+                             <label class="form-check-label" for="error">사용안함</label>
+                         </div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
 			</div>
 		</div>
 </th:block>

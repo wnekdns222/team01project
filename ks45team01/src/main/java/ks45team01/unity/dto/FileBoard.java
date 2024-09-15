@@ -20,6 +20,10 @@ public class FileBoard {
 	private MemberList memberList;
 
 	private MemberDepartmentList memberDepartmentList;
+	
+	private FileDto fileDto;
+	
+	private FileControl fileControl;
 
 	public String getFileBoardNum() {
 		return fileBoardNum;
@@ -133,6 +137,22 @@ public class FileBoard {
 		this.memberDepartmentList = memberDepartmentList;
 	}
 
+	public FileDto getFileDto() {
+		return fileDto;
+	}
+
+	public void setFileDto(FileDto fileDto) {
+		this.fileDto = fileDto;
+	}
+
+	public FileControl getFileControl() {
+		return fileControl;
+	}
+
+	public void setFileControl(FileControl fileControl) {
+		this.fileControl = fileControl;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -164,9 +184,13 @@ public class FileBoard {
 		builder.append(memberList);
 		builder.append(", memberDepartmentList=");
 		builder.append(memberDepartmentList);
+		builder.append(", fileDto=");
+		builder.append(fileDto);
+		builder.append(", fileControl=");
+		builder.append(fileControl);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 	
 }

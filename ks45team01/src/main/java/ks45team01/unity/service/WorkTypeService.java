@@ -98,13 +98,10 @@ public class WorkTypeService {
 	}
 	
 	/**
-	 * 근태유형 번호로 조회
-	 * return 
+	 *근태번호로 근태 유형 조회
 	 */
 	public WorkType getWorkTypeById(String workTypeNum) {
-		
 		WorkType workType = workTypeMapper.getWorkTypeById(workTypeNum);
-		
 		return workType;
 	}
 	

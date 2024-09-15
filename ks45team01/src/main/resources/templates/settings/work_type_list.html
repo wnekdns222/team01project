@@ -73,7 +73,7 @@
 				</td>
 				
 				<td>
-				<a th:href="@{/settings/workTypeModify(workTypeNum=${t.workTypeNum})}">수정</a>
+				<a class="btn btn-inverse-info" th:href="@{/settings/workTypeModify(workTypeNum=${t.workTypeNum})}">수정</a>
 				</td>
 			</tr>
 			<tr th:unless="${not #lists.isEmpty(workTypeList)}">

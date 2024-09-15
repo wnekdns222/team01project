@@ -117,8 +117,8 @@
 						class="nav-icon ti ti-timer"></i> <span
 						class="nav-title">예약</span></a>
 					<ul aria-expanded="false">
-						<li><a href="/reservation/meetingroomReservationInsert">회의실 예약</a></li>
-						<li><a href="/reservation/meetingroomReservationList">회의실 예약 목록</a></li>
+						<li><a href="/reservation/meetingroomReservationList">회의실 예약</a></li>
+						<li><a th:href="@{/reservation/meetingroomReservationAllList}">예약목록확인</a></li>
 						<li><a th:href="@{/reservation/meetingroomReservationMine(applicantMemberNum=${session.SID})}">내 예약관리</a></li>
 					</ul></li>
 				<li><a class="has-arrow" href="javascript:void(0)"

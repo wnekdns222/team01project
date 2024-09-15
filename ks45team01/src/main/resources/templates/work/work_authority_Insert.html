@@ -28,18 +28,18 @@
 </th:block>
 
 <th:block layout:fragment="customContents">
-	<form>
+		<form th:action="@{/work/workAuthorityInsert}" method="post">
 		<div class="form-group">
-			<label for="workNum">근태번호</label> <input type="text"
-				class="form-control" id="workNum" required>
-		</div>
-		<div class="form-group">
-			<label for="memberNum">사원번호</label> <input type="text"
-				class="form-control" id="memberNum" required>
+			<label for="memberNum">사원번호</label> 
+			<select class="form-control" name="memberNum" id="memberNum" required>
+				<th:block th:each="l:${memberList}" >
+					<option th:value="${l.memberNum}">[[${l.memberName}]]</option>
+				</th:block>
+			</select>
 		</div>
 		<div class="form-group">
 			<label for="writeAttendanceDay">근무일</label> <input type="date"
-				class="form-control" id="writeAttendanceDay" required>
+				class="form-control" name="writeAttendanceDay" required>
 		</div>
 		<div class="form-group">
 			<label for="writeAttendanceTime">출근시간</label> <input type="time"
@@ -58,24 +58,32 @@
 	                     </textarea>
 		</div>
 		<div class="form-group">
-			<label for="vacationCategoryNum">대분류</label> <select
-				class="form-control" name="vacationCategoryNum"
-				id="vacationCategoryNum" required>
-				<option value=""></option>
+			<label for="vacationCategoryNum">대분류</label> 
+			<select class="form-control" name="vacationCategoryNum" id="vacationCategoryNum" required>
+				<th:block th:each="c:${category}" >
+					<option th:value="${c.vacationCategoryNum}">[[${c.vacationCategoryName}]]</option>
+				</th:block>
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="vacationSortNum">중분류</label> <select class="form-control"
-				name="vacationSortNum" id="vacationSortNum" required>
-				<option value=""></option>
+			<label for="vacationSortNum">중분류</label>
+			 <select class="form-control" name="vacationSortNum" id="vacationSortNum" required>
+				<th:block th:each="s:${sort}" >
+					<option th:value="${s.vacationSortNum}">[[${s.vacationSortName}]]</option>
+				</th:block>
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="vacationTypeNum">휴가종류</label> <select
-				class="form-control" name="vacationTypeNum" id="vacationTypeNum"
-				required>
-				<option value=""></option>
+			<label for="vacationTypeNum">휴가종류</label>
+			<select class="form-control" name="vacationTypeNum" id="vacationTypeNum" required>
+				<th:block th:each="t:${type}" >
+					<option th:value="${t.vacationTypeNum}">[[${t.vacationName}]]</option>
+				</th:block>
 			</select>
+		</div>
+		<div class="form-group">
+			<label for="regMemberNum">등록사원</label> 
+			<input type="hidden" class="form-control" name="regMemberNum" id="regMemberNum" th:value="${session.SID}" required>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import ks45team01.unity.dto.FileBoard;
 import ks45team01.unity.dto.FileBoardCate;
+import ks45team01.unity.dto.FileDto;
 
 @Mapper
 public interface FileBoardMapper {
@@ -45,4 +46,10 @@ public interface FileBoardMapper {
 	List<FileBoard> fileBoardList();
 	
 	List<FileBoardCate> result(String fileCategoryCode);
+	
+	public int addFile(List<FileDto> fileList); 
+	
+	public List<FileDto> getFileList();
+	
+	public FileDto getFileInfoByIdx(String fileIdx);
 }

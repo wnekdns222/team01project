@@ -13,13 +13,33 @@
 		<result property="projectUnitUpdateDate"  column="project_unit_update_date" />
 	</resultMap>
 	
-	<select id="projectUnitList" resultMap="projectUnitResultMap">
-		SELECT
+	<select id="projectUnitList" resultMap="projectUnitResultMap" parameterType="String">
+	SELECT
 		*
 		FROM
-		tb_project_unit;
+		tb_project_unit AS pu
+		WHERE 
+		pu.project_num = #{projectNum}
 	</select>
 
-
+	<select id="projectUnitCode" parameterType="String" resultType="String">
+	/* 자동증가코드 */
+		SELECT
+			CASE
+			WHEN COUNT(1) = 0 THEN CONCAT('project_unit', '_1')
+			ELSE
+				CONCAT('project_unit','_', MAX(CAST(SUBSTRING_INDEX(${column}, CONCAT('project_unit', '_'), -1) AS UNSIGNED))+1)
+			END AS newCode
+		FROM
+			${table} ;
+	</select>
+	
+	<insert id="ProjectUnitInsert" parameterType="projectUnit">
+	INSERT INTO
+	 tb_project_unit
+	(project_unit_num, project_num, unit_contents, member_insert_num, project_unit_reg_date)
+	VALUES (#{projectUnitNum}, #{projectNum}, #{unitContents}, #{memberInsertNum}, NOW())
+	</insert>
+	
 	
 </mapper>

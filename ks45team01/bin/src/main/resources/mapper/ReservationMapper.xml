@@ -43,6 +43,35 @@
 			<result property="meetManager"  column="meet_manager" />
 		</association>		
 	</resultMap>
+	<delete id="deleteReservation" parameterType="String">
+		/* 회의실코드로 회의실 삭제*/
+		DELETE
+		FROM
+			tb_meet_reservation
+		WHERE
+			reservation_num = #{reservationNum};
+	</delete>
+	
+	<update id="modifyReservation" parameterType="Reservation">
+		/* 특정 회의실 수정 */
+		UPDATE tb_meet_reservation
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="reservationDate != null and reservationDate != '' ">
+				,reservation_date = #{reservationDate}
+			</if> 
+			<if test="reservationStartTime != null and reservationStartTime != '' ">
+				,reservation_start_time = #{reservationStartTime}
+			</if> 
+			<if test="reservationEndTime != null and reservationEndTime != '' ">
+				,reservation_end_time = #{reservationEndTime}
+			</if> 
+			<if test="reservationContents != null and reservationContents != '' ">
+				,reservation_contents = #{reservationContents}
+			</if> 
+		</trim>
+		 WHERE
+		 	reservation_num = #{reservationNum};
+	</update>
 	
 	<insert id="insertMeetingroomReservation" parameterType="Reservation">
 		/* 회의실 등록 */
@@ -52,7 +81,7 @@
 		(#{reservationNum}, #{meetNum}, #{reservationDate}, #{reservationStartTime}, #{reservationEndTime}, #{reservationContents}, now(), #{applicantMemberNum})
 	</insert>
 	<delete id="deleteMeetingroomReservation" parameterType="String">
-		/* 회의실코드로 회의실 삭제*/
+		/* 예약코드로 예약 삭제*/
 		DELETE
 		FROM
 			tb_meet_reservation
@@ -73,7 +102,6 @@
 		WHERE
 			applicant_member_num = #{applicantMemberNum}
 		ORDER BY r.reservation_insert_date DESC;
-
 	</select>
 	
 	<select id="getReservationNameList" resultMap="reservationResultMap">

@@ -28,6 +28,10 @@
 	<!-- end page title -->
 </th:block>
 
+<head>
+	<title th:text="${title}"></title>
+</head>
+
 <th:block layout:fragment="customContents">
 	<table class="table table-hover">
 		<thead>
@@ -55,7 +59,16 @@
                   <td th:text="${u.vacationType.vacationName}"></td>
                   <td th:text="${u.writeChangeReason}"></td>
               </tr>
-              <tr th:unless="${not #lists.isEmpty(unusualList)}">
+              <tr th:unless="${not #lists.isEmpty(unusualList)}" th:object="${workType}">
+              	<td th:text="*{workNum}"></td>
+                  <td th:text="*{memberNum}"></td>
+                  <td th:text="*{writeAttendanceDay}"></td>
+                  <td th:text="*{writeAttendanceTime}"></td>
+                  <td th:text="*{writeLeaveworkTime}"></td>
+                  <td th:text="*{vacationCategory.vacationCategoryName}"></td>
+                  <td th:text="*{vacationSort.vacationSortName}"></td>
+                  <td th:text="*{vacationType.vacationName}"></td>
+                  <td th:text="*{writeChangeReason}"></td>
               </tr>
 		</tbody>
 	</table>

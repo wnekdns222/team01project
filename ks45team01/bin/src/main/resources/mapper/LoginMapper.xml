@@ -62,21 +62,7 @@ VALUES
 		m.member_num=#{memberNum};
 	
 	</select>
-	<!-- <resultMap type="LoginHistory" id="loginResultMap">
-		<id 		property="loginNum" 		column="login_num"/>
-		<result 	property="loginId"   			column="login_num"/>
-		<result 	property="loginDate"   		column="login_Date"/>
-		<result 	property="logoutDate"   	column="logout_Date"/>
-		<association property="member" javaType="Member">
-			<id property="memberNum" column="m_num" />
-			<result property="memberPw" 				column="m_pw" />
-			<result property="memberLevel" 			column="m_level" />
-			<result property="memberLevelName" 	 column="level_name" />
-			<result property="memberName" 			column="m_name" />
-			<result property="memberEmail" 			column="m_email" />
-			<result property="memberAddr" 			column="m_addr" />
-		</association>
-	</resultMap>-->
+
 	<!-- 로그인 -->
 	<select id="checkPwById" parameterType="String" resultMap="memberResultMap">
 		SELECT 
@@ -100,6 +86,7 @@ VALUES
 	WHERE
 		m.member_num = #{memberNum};
 	</select>
+</mapper>
 	
 	<!-- <select id="getLoginHistory" parameterType="map" resultMap="loginResultMap">
 		/* 로그인 이력 조회 */
@@ -133,5 +120,20 @@ VALUES
 		FROM
 			tb_login;	
 	</select> -->
-	</mapper>
+		<!-- <resultMap type="LoginHistory" id="loginResultMap">
+		<id 		property="loginNum" 		column="login_num"/>
+		<result 	property="loginId"   			column="login_num"/>
+		<result 	property="loginDate"   		column="login_Date"/>
+		<result 	property="logoutDate"   	column="logout_Date"/>
+		<association property="member" javaType="Member">
+			<id property="memberNum" column="m_num" />
+			<result property="memberPw" 				column="m_pw" />
+			<result property="memberLevel" 			column="m_level" />
+			<result property="memberLevelName" 	 column="level_name" />
+			<result property="memberName" 			column="m_name" />
+			<result property="memberEmail" 			column="m_email" />
+			<result property="memberAddr" 			column="m_addr" />
+		</association>
+	</resultMap>-->
+
 	

@@ -36,7 +36,8 @@
 			<label for="vacationSortName">휴가명</label> <input type="text" class="form-control" name ="vacationSortName" id="vacationSortName" required>
 		</div>
 		<div class="form-group">
-			<label for="memberNum">등록 사원번호</label> <input type="text" class="form-control" name="memberNum" id="memberNum" required>
+			<label for="memberNum">등록 사원번호</label> 
+			<input type="text" class="form-control" name="memberNum" id="memberNum"  th:value ="${session.SID}" required>
 		</div>
 		<div class="form-check">
 			<input class="form-check-input" type="checkbox" id="use" name="vacationUse" required>

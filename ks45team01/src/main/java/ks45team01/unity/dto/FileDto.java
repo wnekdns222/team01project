@@ -7,7 +7,6 @@ public class FileDto {
 	private String fileNewName;
 	private String filePath;
 	private Long fileSize;
-	private String fileGroupCode;
 	public String getFileIdx() {
 		return fileIdx;
 	}
@@ -38,12 +37,6 @@ public class FileDto {
 	public void setFileSize(Long fileSize) {
 		this.fileSize = fileSize;
 	}
-	public String getFileGroupCode() {
-		return fileGroupCode;
-	}
-	public void setFileGroupCode(String fileGroupCode) {
-		this.fileGroupCode = fileGroupCode;
-	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -57,11 +50,8 @@ public class FileDto {
 		builder.append(filePath);
 		builder.append(", fileSize=");
 		builder.append(fileSize);
-		builder.append(", fileGroupCode=");
-		builder.append(fileGroupCode);
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	
 }

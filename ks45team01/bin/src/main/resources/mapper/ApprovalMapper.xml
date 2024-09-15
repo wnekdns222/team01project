@@ -71,6 +71,7 @@
 	    </foreach>
 	</insert>
 	<select id="rejectList" resultType="list" resultMap="approvalResultMap">
+	/* 반려 목록 조회 */
 		SELECT 
 			*
 		FROM 
